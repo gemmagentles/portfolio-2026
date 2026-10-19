@@ -1,0 +1,38 @@
+.contact {
+  display: grid;
+  gap: var(--space-large);
+  justify-items: start;
+  padding-block: var(--space-section-large) var(--space-section);
+
+  h1 {
+    font-size: var(--text-display);
+    font-weight: 400;
+  }
+
+  &__email {
+    font-size: var(--text-3xl);
+    text-underline-offset: 0.15em;
+    text-decoration-thickness: 2px;
+    overflow-wrap: anywhere;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-medium);
+    font-size: var(--text-large);
+
+    a {
+      text-underline-offset: 0.3em;
+
+      &:hover {
+        color: var(--accent-color);
+      }
+    }
+  }
+}

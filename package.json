@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Hand-coded portfolio: HTML, SCSS and vanilla JS on a small Vite starter.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "new": "node scripts/new-project.js",
+    "test:include": "node --test plugins/html-include.test.js"
+  },
+  "devDependencies": {
+    "sass": "^1.89.0",
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}

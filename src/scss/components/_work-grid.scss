@@ -1,0 +1,93 @@
+@use '../abstracts' as *;
+
+// A wall of darkened project screenshots filling the whole section edge to edge, with the heading and statement
+// centred on top. src/js/modules/workgrid.js repeats the screenshots until the wall is full.
+.work-grid {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(560px, 90vh, 900px);
+  padding-block: var(--space-section) calc(var(--space-section) + 20px); // 20px extra at the bottom
+  overflow: hidden;
+  background: var(--black);
+  color: var(--white);
+
+  // The wall: behind everything, the full size of the section. Extra rows are simply cut off at the bottom.
+  // Phones: 2 per row. Tablets: 3. From lg up: 6.
+  &__list {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: max-content; // rows as tall as the 4:3 tiles, so the gap shows between rows too
+    align-content: start;
+    gap: var(--space-xsmall);
+
+    @include mq(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include mq(lg) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  &__item {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid #3a3a3a;
+    background: var(--black);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: scale 0.6s var(--ease-out);
+    }
+
+    // Darkens the screenshot so the wall sits back behind the text.
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgb(0 0 0 / 0.7);
+    }
+
+    &:hover img {
+      scale: 1.04;
+    }
+  }
+
+  // The heading and statement, centred on top of the wall, with a soft dark glow behind them for readability.
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xsmall);
+    text-align: center;
+    pointer-events: none; // so the screenshots underneath still respond to hover
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -40% -10%;
+      z-index: -1;
+      background: radial-gradient(closest-side, rgb(0 0 0 / 0.85), transparent);
+    }
+  }
+
+  &__statement {
+    max-width: 30ch;
+    font-size: var(--text-l);
+    line-height: 1.25;
+  }
+
+  // The content box ignores the mouse so the screenshots stay hoverable; the button takes it back.
+  &__button {
+    margin-top: var(--space-medium);
+    pointer-events: auto;
+  }
+}

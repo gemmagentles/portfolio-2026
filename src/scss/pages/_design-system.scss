@@ -1,0 +1,357 @@
+@use '../abstracts' as *;
+
+// The design system page (design-system/index.html): white, with a numbered section per topic and
+// component examples on small stages (white, black or the brand gradient, whichever each one is built for).
+
+.ds {
+  padding-bottom: calc(var(--space-section-large) + 20px);
+  background: var(--white);
+  color: var(--text-color);
+
+  &__intro {
+    display: grid;
+    gap: var(--space-small);
+    padding-block: var(--space-section-large) var(--space-section);
+  }
+
+  &__title {
+    font-family: var(--font-heading--primary);
+    font-size: var(--text-3xl);
+    text-transform: none;
+  }
+
+  &__lead {
+    max-width: 52ch;
+    font-size: var(--text-large);
+    line-height: 1.5;
+    color: var(--muted-color);
+  }
+
+  // Jump links to each section, as outline pills.
+  &__toc ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: var(--space-small);
+
+    a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid #d9d9de;
+      border-radius: 999px;
+      font-family: var(--font-link);
+      font-size: var(--text-small);
+      font-weight: 400;
+      text-decoration: none;
+      transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  &__section {
+    padding-block: var(--space-section);
+    border-top: 1px solid #e4e4e8;
+    scroll-margin-top: $header-height;
+
+    > h2 {
+      margin-bottom: var(--space-small);
+    }
+  }
+
+  // The big gradient number above each section heading.
+  &__number {
+    font-family: var(--font-heading--primary);
+    font-size: clamp(2.5rem, 2rem + 1.5vw, 3.25rem);
+    font-weight: 500;
+    line-height: 1;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__note {
+    max-width: 62ch;
+    margin-bottom: var(--space-large);
+    color: var(--muted-color);
+  }
+
+  &__subhead {
+    margin: var(--space-large) 0 var(--space-small);
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--muted-color);
+  }
+
+  // ---- Colour ----
+  &__swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+    gap: var(--space-medium) var(--space-small);
+  }
+
+  &__swatch {
+    display: grid;
+    gap: 0.15rem;
+    font-size: var(--text-small);
+
+    &--wide {
+      grid-column: span 2;
+    }
+
+    span:last-child {
+      font-family: var(--font-mono);
+      color: var(--muted-color);
+    }
+  }
+
+  &__chip {
+    height: 5.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+
+    &--outlined {
+      box-shadow: inset 0 0 0 1px #d9d9de;
+    }
+  }
+
+  // ---- Typography ----
+  &__fonts {
+    display: grid;
+    gap: var(--space-medium);
+
+    li {
+      display: grid;
+      gap: 0.15rem;
+      padding-bottom: var(--space-medium);
+      border-bottom: 1px solid #e4e4e8;
+      font-size: var(--text-small);
+
+      > span:last-child {
+        color: var(--muted-color);
+      }
+    }
+  }
+
+  &__font-sample {
+    margin-bottom: 0.4rem;
+    font-size: var(--text-2xl);
+    line-height: 1.15;
+  }
+
+  &__scale li {
+    display: grid;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    padding-block: var(--space-small);
+    border-bottom: 1px solid #e4e4e8;
+
+    @include mq(md) {
+      grid-template-columns: 11rem 6rem 1fr;
+    }
+  }
+
+  &__scale-range {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    color: var(--muted-color);
+  }
+
+  &__scale-sample {
+    overflow: hidden;
+    font-family: var(--font-heading--primary);
+    font-weight: 500;
+    line-height: 1.1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &--body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      white-space: normal;
+    }
+  }
+
+  // ---- Spacing ----
+  &__spacing li {
+    display: grid;
+    grid-template-columns: 11rem 6rem 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 0.6rem;
+    font-size: var(--text-small);
+
+    > span:nth-child(2) {
+      font-family: var(--font-mono);
+      color: var(--muted-color);
+    }
+  }
+
+  &__bar {
+    height: 1rem;
+    border-radius: 2px;
+    background: var(--brand-gradient);
+  }
+
+  // ---- Shape, motion & layout ----
+  &__columns {
+    display: grid;
+    gap: var(--space-large);
+
+    @include mq(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  &__radii {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-medium);
+
+    li {
+      display: grid;
+      gap: 0.15rem;
+      font-size: var(--text-small);
+      color: var(--muted-color);
+    }
+
+    span {
+      height: 4.5rem;
+      margin-bottom: 0.4rem;
+      border: 2px solid var(--text-color);
+    }
+
+    strong {
+      color: var(--text-color);
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: var(--space-small);
+
+    div {
+      display: grid;
+      gap: 0.15rem;
+    }
+
+    dt {
+      font-weight: 600;
+    }
+
+    dd {
+      font-size: var(--text-small);
+      color: var(--muted-color);
+    }
+  }
+
+  // ---- Components ----
+  &__grid {
+    display: grid;
+    gap: var(--space-large) var(--space-medium);
+
+    @include mq(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include mq(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  &__specimen {
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+
+    &--wide {
+      @include mq(md) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    h3 {
+      margin-top: 0.6rem;
+      font-family: var(--font-heading--secondary);
+      font-size: var(--text-large);
+    }
+
+    > p {
+      font-size: var(--text-small);
+      color: var(--muted-color);
+    }
+  }
+
+  // The box each example sits on. White by default; black or gradient for components made for those backgrounds.
+  &__stage {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-small);
+    min-height: 11rem;
+    padding: var(--space-large) var(--space-medium);
+    border: 1px solid #e4e4e8;
+    border-radius: 8px;
+    background: var(--white);
+
+    &--dark {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    &--gradient {
+      border-color: transparent;
+      background: var(--brand-gradient);
+      color: var(--white);
+    }
+
+    // Two work cards side by side.
+    &--cards {
+      display: grid;
+      align-items: start;
+      gap: var(--space-medium);
+
+      @include mq(sm) {
+        grid-template-columns: repeat(2, minmax(0, 15rem));
+      }
+    }
+
+    > .eyebrow,
+    > p {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  &__heading-sample {
+    font-family: var(--font-heading--secondary);
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  // Strips a component's own outer spacing so it sits centred on its stage.
+  &__flush {
+    margin: 0;
+  }
+
+  &__flush.clients__list {
+    width: 100%;
+  }
+}

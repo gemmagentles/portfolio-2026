@@ -1,0 +1,30 @@
+# Dependencies and build output (recreated by npm install / npm run build)
+node_modules/
+dist/
+.vite/
+
+# Old backup copies from before Git; history replaces them
+*.bak
+*.bak.*
+*.bak.tar
+
+# Local environment files (never publish keys)
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating system clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor settings, keeping the shared extension recommendations
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Claude Code's personal settings for this project
+.claude/settings.local.json

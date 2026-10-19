@@ -1,0 +1,107 @@
+@use '../abstracts' as *;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: $header-height;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Font rules: all headings (h1, h2, h3) and the logo Oswald; sub headings (.eyebrow and labels) Space Mono;
+// paragraphs, links and lists Inter. Each sets its own family, so a heading in a list keeps its font.
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-3xl);
+  font-family: var(--font-heading--primary);
+}
+
+// Every heading that starts a section is an h2 (the hero and page titles are h1s, so they keep their own look).
+h2 {
+  font-size: 42px;
+  font-family: var(--font-heading--secondary);
+}
+
+h3 {
+  font-size: var(--text-large);
+  font-family: var(--font-heading--secondary);
+}
+
+// The last word of a section heading, wrapped in <span class="accent-word">: filled with the hero's
+// blue-to-pink gradient, clipped to the letters.
+.accent-word {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+p {
+  font-family: var(--font-body);
+  text-wrap: pretty;
+}
+
+ul,
+ol,
+dl {
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+// Plain bulleted lists (no class, e.g. in the case studies): a hexagon outline for each bullet (the hex-bullet mixin).
+ul:not([class]) {
+  padding-left: 0;
+  list-style: none;
+
+  > li {
+    position: relative;
+    padding-left: 1.4em;
+
+    &::before {
+      @include hex-bullet;
+    }
+  }
+}
+
+a {
+  color: inherit;
+  font-family: var(--font-link);
+  font-weight: 400;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+::selection {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.lead {
+  font-size: var(--text-large);
+  color: var(--muted-color);
+  max-width: 38ch;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}

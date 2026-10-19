@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <include
+      src="head.html"
+      title="Contact — Gemma Gentles"
+      description="Get in touch with Gemma Gentles about front end web developer roles."
+    ></include>
+  </head>
+  <body class="page-contact">
+    <include src="header.html"></include>
+
+    <main id="main">
+      <section class="contact container">
+        <h1 data-reveal>Let's talk</h1>
+        <p class="lead" data-reveal>
+          I'm looking for front end web developer roles. The quickest way to reach me is email.
+        </p>
+        <a class="contact__email" href="mailto:{{site.email}}" data-reveal>{{site.email}}</a>
+        <ul class="contact__links" data-reveal>
+          <li><a href="{{site.github}}" rel="me noopener" target="_blank">GitHub</a></li>
+          <li><a href="{{site.linkedin}}" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="/resume.pdf">Résumé (PDF)</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <include src="footer.html"></include>
+  </body>
+</html>

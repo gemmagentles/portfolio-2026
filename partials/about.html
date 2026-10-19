@@ -1,0 +1,54 @@
+<!--
+  About: heading, then four facts in a joined grid (styled after the stats row on webdesignawards.io).
+  Each fact has a small label, a big value and a short note.
+-->
+<section class="about" aria-labelledby="about-title">
+  <!-- Purple paint dripping down from the hero, in the left margin (src/js/modules/drips.js starts it).
+       Hidden for now: remove the "hidden" attribute to bring the drips back. -->
+  <div class="drips" aria-hidden="true" data-drips hidden>
+    <!-- Melts each drip's neck, stem and tip into one smooth shape: blur them together, then sharpen the edge. -->
+    <svg class="drips__filter" focusable="false">
+      <filter id="drip-goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </svg>
+    <span class="drips__drip"></span>
+    <span class="drips__drip"></span>
+    <span class="drips__drip"></span>
+    <span class="drips__drip"></span>
+  </div>
+
+  <div class="container about__inner" data-reveal>
+    <div>
+      <p class="eyebrow">Chapter I · Who I am</p>
+      <h2 class="about__title" id="about-title">The essentials about <span class="accent-word">me.</span></h2>
+    </div>
+
+    <dl class="about__facts">
+      <div class="about__fact">
+        <dt class="about__label">Based in</dt>
+        <dd class="about__value">Vancouver</dd>
+        <p class="about__note">Canada</p>
+      </div>
+      <div class="about__fact">
+        <dt class="about__label">Open to</dt>
+        <dd class="about__value">Remote</dd>
+        <p class="about__note">or on-site in Vancouver</p>
+      </div>
+      <div class="about__fact">
+        <dt class="about__label">Education</dt>
+        <dd class="about__value">Honours Degree</dd>
+        <p class="about__note">Multimedia Technology with Web Development</p>
+      </div>
+      <div class="about__fact">
+        <dt class="about__label">Experience</dt>
+        <!-- Counted from the year in data-years-since by src/js/modules/years.js, so it goes up by one every
+             January. The number written here is what shows without JavaScript. -->
+        <dd class="about__value"><span data-years-since="2012">14</span> years</dd>
+        <p class="about__note">Agencies, in-house and freelance, for small to large businesses</p>
+      </div>
+    </dl>
+  </div>
+</section>

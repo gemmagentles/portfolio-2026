@@ -1,0 +1,15 @@
+// Curved bottom edge added to each section by src/js/modules/wave.js, filled with the next section's colour.
+// (The hero has its own, .hero__wave, in pages/_home.scss.)
+.has-wave {
+  position: relative; // anchors the curve to the section's bottom edge
+}
+
+.section-wave {
+  position: absolute;
+  left: 0;
+  bottom: -1px; // overlaps by a pixel so no hairline shows at the seam
+  z-index: 1;
+  width: 100%;
+  height: clamp(40px, 6vw, 80px); // same as the hero's
+  pointer-events: none;
+}

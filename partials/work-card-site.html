@@ -1,0 +1,14 @@
+<!--
+  A website on the Work page: its screenshot in a browser-window frame, then its name and type.
+  Attributes: href, image (cropped from the top), name, type.
+-->
+<article class="work-card">
+  <a class="work-card__link" href="{{href}}">
+    <div class="work-card__frame work-card__frame--browser">
+      <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+      <img class="work-card__shot" src="{{image}}" alt="" width="1600" height="1000" loading="lazy" decoding="async" />
+    </div>
+    <h3 class="work-card__name">{{name}}</h3>
+    <p class="work-card__type">{{type}}</p>
+  </a>
+</article>

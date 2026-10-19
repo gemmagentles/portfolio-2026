@@ -1,0 +1,51 @@
+<!--
+  Every page of the LNDMRK site (Home, About and Contact, full-length desktop screenshots of lndmrk.co.uk), laid out
+  in upright columns of screens, staggered up and down, in a band the width of the container. The three pages repeat
+  to fill the columns; only the first of each has alt text. Styles: src/scss/components/_page-wall.scss.
+
+  Heading above the band, set on the include: eyebrow and title (the page's h1, e.g. "Featured project" and
+  "LNDMRK"). On a page that already has an h1, pass intro="hidden" (and empty eyebrow and title) to leave it out.
+-->
+<section class="page-wall" aria-label="The LNDMRK website, every page" data-reveal>
+  <div class="container">
+    <div class="page-wall__intro" {{intro}}>
+      <p class="eyebrow">{{eyebrow}}</p>
+      <h1 class="page-wall__title">{{title}}</h1>
+    </div>
+
+    <div class="page-wall__frame">
+      <div class="page-wall__stage">
+        <div class="page-wall__column">
+          <img src="/images/work/lndmrk/desktop-full.webp" alt="The LNDMRK Home page" width="1440" height="3851" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/about-full.webp" alt="The LNDMRK About page" width="1440" height="2920" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/contact-full.webp" alt="The LNDMRK Contact page" width="1440" height="1299" loading="lazy" decoding="async" />
+        </div>
+        <div class="page-wall__column page-wall__column--hero">
+          <!-- Their home page hero photo on its own, placed at the top of the band. -->
+          <img src="/images/work/lndmrk/hero.webp" alt="" width="1440" height="789" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/contact-full.webp" alt="" width="1440" height="1299" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/desktop-full.webp" alt="" width="1440" height="3851" loading="lazy" decoding="async" />
+        </div>
+        <div class="page-wall__column page-wall__column--whole">
+          <!-- The whole Home page in one screenshot, shrunk to fit the band top to bottom. -->
+          <img class="page-wall__shot" src="/images/work/lndmrk/desktop-full.webp" alt="" width="1440" height="3851" loading="lazy" decoding="async" />
+        </div>
+        <div class="page-wall__column">
+          <img src="/images/work/lndmrk/about-full.webp" alt="" width="1440" height="2920" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/about-full.webp" alt="" width="1440" height="2920" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/contact-full.webp" alt="" width="1440" height="1299" loading="lazy" decoding="async" />
+        </div>
+        <div class="page-wall__column">
+          <img src="/images/work/lndmrk/about-full.webp" alt="" width="1440" height="2920" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/contact-full.webp" alt="" width="1440" height="1299" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/desktop-full.webp" alt="" width="1440" height="3851" loading="lazy" decoding="async" />
+        </div>
+        <div class="page-wall__column">
+          <img src="/images/work/lndmrk/contact-full.webp" alt="" width="1440" height="1299" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/desktop-full.webp" alt="" width="1440" height="3851" loading="lazy" decoding="async" />
+          <img src="/images/work/lndmrk/about-full.webp" alt="" width="1440" height="2920" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

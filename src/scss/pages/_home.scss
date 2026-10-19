@@ -1,0 +1,379 @@
+@use '../abstracts' as *;
+
+// ---- Hero (from "Hero V15" in the design) ----
+// A diagonal pink-to-blue gradient filling the screen under the header, with the heading, line and buttons on the
+// left and, from lg up, a phone on the right (partials/hero-phone.html) over a hexagon of geometric facets
+// (partials/hero-hex.html).
+.hero__wrapper {
+  position: relative;
+  overflow: hidden; // crops the facets at the edges
+  // The header floats over the top of the hero (layout/_header.scss), so the hero starts at the top of the page.
+  padding-top: $header-height;
+  background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  // Fills the screen under the header on every device, with the content centred in it.
+  min-height: calc(100svh - #{$header-height});
+  padding-block: clamp(4rem, 3rem + 5vw, 7rem);
+
+  // From lg up: two columns. The text takes the width it needs and the phone sits centred in the rest of the row.
+  @include mq(lg) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding-block: 2.5rem;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 2; // above the facets
+    min-width: 0;
+  }
+
+  // "Open to work": a small green dot with a soft ring, then the line in tracked capitals.
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75em;
+    margin-bottom: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  &__dot {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgb(34 197 94 / 0.25);
+  }
+
+  // "FRONT END" in solid white, then "DEVELOPER" on its own line as a white outline, in Oswald capitals.
+  &__title {
+    font-family: var(--font-heading--primary);
+    font-size: clamp(3rem, 1rem + 6vw, 6.75rem); // 108px on wide screens
+    font-weight: 700;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--ink); // "FRONT END" in black; "DEVELOPER" stays a white outline
+  }
+
+  &__accent {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+  }
+
+  &__tagline {
+    max-width: 30ch; // three lines for the current line of text
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem); // 20px on wide screens
+    line-height: 1.4;
+    color: var(--white);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 2rem;
+  }
+
+  // "See my work": black, turning white on hover.
+  &__primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+
+    &:hover,
+    &:focus-visible {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--ink);
+    }
+  }
+
+  // The outline button, white like the rest of the text.
+  &__ghost {
+    border-color: rgb(255 255 255 / 0.8);
+    color: var(--white);
+  }
+}
+
+// ---- The phone and facets ----
+// The phone is 300 x 610 (its insides are laid out with inline styles in the partial); the facets are centred on it.
+// Hidden below lg.
+.hero__visual {
+  position: relative;
+  display: none;
+  width: 300px;
+  height: 610px;
+
+  @include mq(lg) {
+    display: block;
+    justify-self: center; // centred in the space to the right of the text
+  }
+
+  // On shorter screens the phone and facets shrink a little (zoom, which shrinks the space they take up too) so
+  // the phone and its label below still fit in the hero.
+  @media (max-height: 860px) {
+    zoom: 0.9;
+  }
+
+  @media (max-height: 780px) {
+    zoom: 0.8;
+  }
+
+  @media (max-height: 700px) {
+    zoom: 0.7;
+  }
+}
+
+.hero__hex {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1200px;
+  height: 1200px;
+  max-width: none;
+  margin: -600px 0 0 -600px;
+  overflow: visible; // lets the shards run out to the edges of the hero
+  pointer-events: none;
+}
+
+.hero__phone {
+  position: relative;
+  z-index: 1;
+  width: 300px;
+  height: 610px;
+}
+
+// The dashed outline turns slowly and the hexagon breathes, as in the design.
+@include motion-ok {
+  .hero__hex-spin {
+    transform-origin: 1190px 375px;
+    animation: hero-hex-spin 60s linear infinite;
+  }
+
+  .hero__hex-pulse {
+    transform-origin: 1190px 375px;
+    animation: hero-hex-pulse 6s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-hex-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-hex-pulse {
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+// The 9-second loop: wireframe (0-30%) with the cursor moving over it, the scan line sweeping down as the finished
+// screen is revealed (30-40%), the finished screen (40-88%), then back to the wireframe. Visitors who prefer reduced
+// motion see the finished screen, still.
+@include motion-ok {
+  .hero__phone-wf,
+  .hero__phone-wfo {
+    animation: hero-wf 9s ease-in-out infinite;
+  }
+
+  .hero__phone-bezel,
+  .hero__phone-live {
+    animation: hero-live 9s ease-in-out infinite;
+  }
+
+  .hero__phone-ui {
+    animation: hero-ui 9s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+
+  .hero__phone-scan {
+    animation: hero-scan 9s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  }
+
+  .hero__phone-cursor {
+    animation: hero-cursor 9s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__phone-wf,
+  .hero__phone-wfo,
+  .hero__phone-cursor,
+  .hero__phone-scan {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-wf {
+  0%,
+  30% {
+    opacity: 1;
+  }
+
+  40%,
+  88% {
+    opacity: 0;
+  }
+
+  96%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-live {
+  0%,
+  30% {
+    opacity: 0;
+  }
+
+  40%,
+  88% {
+    opacity: 1;
+  }
+
+  96%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-ui {
+  0%,
+  30% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 1;
+  }
+
+  40%,
+  88% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+
+  96% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
+  }
+
+  100% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-scan {
+  0%,
+  30% {
+    top: -60px;
+    opacity: 1;
+  }
+
+  40% {
+    top: 610px;
+    opacity: 1;
+  }
+
+  41%,
+  100% {
+    top: 610px;
+    opacity: 0;
+  }
+}
+
+@keyframes hero-cursor {
+  0% {
+    transform: translate(250px, 40px);
+    opacity: 0;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  10% {
+    transform: translate(150px, 200px);
+  }
+
+  17% {
+    transform: translate(230px, 350px);
+  }
+
+  24% {
+    transform: translate(120px, 470px);
+  }
+
+  29% {
+    transform: translate(160px, 570px);
+    opacity: 1;
+  }
+
+  33%,
+  100% {
+    transform: translate(160px, 570px);
+    opacity: 0;
+  }
+}
+
+.section-heading {
+  display: grid;
+  gap: var(--space-xsmall);
+  margin-bottom: var(--space-large);
+
+  p {
+    color: var(--muted-color);
+  }
+}
+
+.work {
+  padding-block: var(--space-section);
+
+  &__grid {
+    display: grid;
+    gap: var(--space-section) var(--space-large);
+
+    @include mq(md) {
+      grid-template-columns: repeat(2, 1fr);
+
+      // First project spans full width as the headline piece.
+      > :first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}
+
+.intro {
+  padding-block: var(--space-section);
+
+  &__grid {
+    display: grid;
+    gap: var(--space-medium);
+    padding-top: var(--space-large);
+    border-top: 1px solid var(--border-color);
+
+    @include mq(md) {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+
+  &__text {
+    display: grid;
+    gap: var(--space-medium);
+    justify-items: start;
+    font-size: var(--text-large);
+    max-width: 50ch;
+  }
+}

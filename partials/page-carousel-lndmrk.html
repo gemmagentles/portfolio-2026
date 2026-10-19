@@ -1,0 +1,70 @@
+<!--
+  LNDMRK's pages in the Work page's carousel (the same component and script as /work/: .work-showcase__carousel in
+  src/scss/pages/_work.scss, src/js/modules/showcase.js): Home, About and Contact as browser-window screens, one in
+  front and two angled behind. Clicking a screen behind brings it to the front; clicking the front one scrolls down
+  to the next section (data-showcase="scroll"). With "Featured project" and "LNDMRK" (the page's h1) above it.
+  Only one carousel can be on a page (the script picks up the first).
+-->
+<section class="page-carousel" aria-labelledby="page-carousel-title">
+  <div class="container">
+    <div class="page-wall__intro">
+      <p class="eyebrow">Featured project</p>
+      <h1 class="page-wall__title" id="page-carousel-title">LNDMRK</h1>
+    </div>
+
+    <div class="work-showcase__carousel" data-showcase="scroll" data-reveal>
+      <ul class="work-showcase__stage">
+        <li class="work-showcase__screen" data-pos="0">
+          <a href="/work/lndmrk/">
+            <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+            <img src="/images/work/lndmrk/desktop-full.webp" alt="The LNDMRK home page" width="1440" height="3851" decoding="async" />
+            <span class="work-showcase__caption">
+              <span class="work-showcase__label">LNDMRK</span>
+              <span class="work-showcase__name">Home</span>
+            </span>
+          </a>
+        </li>
+        <li class="work-showcase__screen" data-pos="1">
+          <a href="/work/lndmrk/">
+            <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+            <img src="/images/work/lndmrk/about-full.webp" alt="The LNDMRK about page" width="1440" height="2920" decoding="async" />
+            <span class="work-showcase__caption">
+              <span class="work-showcase__label">LNDMRK</span>
+              <span class="work-showcase__name">About</span>
+            </span>
+          </a>
+        </li>
+        <li class="work-showcase__screen" data-pos="2">
+          <a href="/work/lndmrk/">
+            <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+            <img src="/images/work/lndmrk/services.webp" alt="The LNDMRK services section" width="1440" height="724" decoding="async" />
+            <span class="work-showcase__caption">
+              <span class="work-showcase__label">LNDMRK</span>
+              <span class="work-showcase__name">Services</span>
+            </span>
+          </a>
+        </li>
+        <li class="work-showcase__screen" data-pos="-1">
+          <a href="/work/lndmrk/">
+            <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+            <img src="/images/work/lndmrk/contact-full.webp" alt="The LNDMRK contact page" width="1440" height="1299" decoding="async" />
+            <span class="work-showcase__caption">
+              <span class="work-showcase__label">LNDMRK</span>
+              <span class="work-showcase__name">Contact</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="work-showcase__controls">
+        <button class="work-showcase__arrow" type="button" aria-label="Previous page" data-showcase-prev>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+        </button>
+        <p class="work-showcase__status" aria-live="polite" data-showcase-status>Home · 1 of 4</p>
+        <button class="work-showcase__arrow" type="button" aria-label="Next page" data-showcase-next>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

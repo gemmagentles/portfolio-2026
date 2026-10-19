@@ -1,0 +1,17 @@
+<!--
+  Statement: a centred heading and paragraph, on white or black. Reusable: pass the copy in as attributes on the
+  include (see the two in index.html):
+
+  - id: unique per page (used to label the section)
+  - theme: "light" (white background) or "dark" (black background, white text)
+  - eyebrow, text: the small label above, and the paragraph
+  - title + accent: the heading, with accent as the gradient last word
+  Attributes can't contain ">" or double quotes, so keep the copy to plain text.
+-->
+<section class="statement statement--{{theme}}" aria-labelledby="{{id}}-title">
+  <div class="container statement__inner" data-reveal>
+    <p class="eyebrow">{{eyebrow}}</p>
+    <h2 id="{{id}}-title">{{title}} <span class="accent-word">{{accent}}.</span></h2>
+    <p class="statement__text">{{text}}</p>
+  </div>
+</section>

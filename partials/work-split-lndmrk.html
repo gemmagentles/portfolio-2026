@@ -1,0 +1,108 @@
+<!--
+  LNDMRK as alternating 50/50 rows: text on one side and a screenshot of their site on the other, swapping sides each
+  row. The screenshots are cropped to a 16:10 frame; --focus sets which part of a full-length page shows (0% top,
+  100% bottom). From md up the rows sit side by side; on phones the screenshot sits above its text.
+  Styles: src/scss/components/_work-split.scss.
+-->
+<section class="work-split work-split--full" aria-labelledby="work-split-title">
+  <div class="container">
+    <div class="work-split__row" data-reveal>
+      <div class="work-split__text">
+        <p class="eyebrow">Case study · LNDMRK</p>
+        <h2 class="work-split__title" id="work-split-title">WordPress website development</h2>
+        <p>A website for LNDMRK, a London marketing agency that works with brands everywhere. This was a full stack build, back end and front end, while I worked in an agency called Squadforce.</p>
+      </div>
+      <!-- The scrolling screen from work-v3 as an iMac, showing the LNDMRK home page (partials/work-laptop.html). -->
+      <div class="work-split__shot work-split__shot--laptop">
+        <include src="work-laptop.html" variant="work-laptop--imac" href="/work/lndmrk/" image="/images/work/lndmrk/desktop-full.webp" height="3851" address="lndmrk.co.uk" label="The LNDMRK website on a laptop: see the case study" priority="auto"></include>
+      </div>
+    </div>
+
+    <div class="work-split__row" data-reveal>
+      <div class="work-split__text">
+        <p class="eyebrow">What I achieved</p>
+        <h3 class="work-split__heading">This client's goals</h3>
+        <ul class="work-split__list">
+          <li>A CMS for the client to make their own changes</li>
+          <li>A contact form to attract new clients</li>
+        </ul>
+      </div>
+      <!-- The contact form on a phone, standing on the bottom edge with its lower part cut off by it. -->
+      <figure class="work-split__shot work-split__shot--mobile">
+        <div class="work-split__phone">
+          <div class="work-split__device">
+            <span class="work-split__glass" aria-hidden="true"></span>
+            <img src="/images/work/lndmrk/contact-form-mobile.webp" alt="The LNDMRK contact form on a phone" width="780" height="2302" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </figure>
+    </div>
+
+    <div class="work-split__row" data-reveal>
+      <div class="work-split__text">
+        <p class="eyebrow">Problem Solving</p>
+        <h3 class="work-split__heading">The challenges that came</h3>
+        <ul class="work-split__list">
+          <li>[A challenge on this project, e.g. setting up the CMS so the team can edit pages without breaking the design]</li>
+          <li>[Another challenge, and how you solved it]</li>
+        </ul>
+      </div>
+      <!-- The services section on an iPad in landscape (captured at iPad size, 1180 x 820, from lndmrk.co.uk). -->
+      <figure class="work-split__shot work-split__shot--tablet">
+        <div class="work-split__tablet">
+          <div class="work-split__tablet-device">
+            <span class="work-split__glass" aria-hidden="true"></span>
+            <img src="/images/work/lndmrk/services-tablet.webp" alt="The LNDMRK &quot;Everything your brand needs under one roof&quot; section on an iPad" width="2360" height="1640" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </figure>
+    </div>
+
+    <div class="work-split__row" data-reveal>
+      <div class="work-split__text">
+        <h3 class="work-split__heading">Built with</h3>
+        <p class="work-split__tags"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span> <span>WordPress</span></p>
+        <h3 class="work-split__heading">My role</h3>
+        <p class="work-split__tags"><span>Project manager</span> <span>Full stack development</span> <span>QA</span></p>
+      </div>
+      <!-- The LNDMRK brand guidelines board in place of a screenshot (its styles: .brand-board in _work-bento.scss). -->
+      <div class="work-split__shot work-split__shot--board">
+        <div class="brand-board brand-board--lndmrk">
+          <div class="brand-board__panel brand-board__panel--cover">
+            <p class="brand-board__wordmark">LNDMRK</p>
+            <p class="brand-board__meta"><span>Brand guidelines</span></p>
+          </div>
+          <div class="brand-board__panel brand-board__panel--type">
+            <p class="brand-board__label">Typography</p>
+            <p class="brand-board__specimen" aria-hidden="true">A<i>a</i></p>
+            <p class="brand-board__note">Didone serif</p>
+          </div>
+          <div class="brand-board__panel brand-board__panel--colours">
+            <p class="brand-board__label">Colours</p>
+            <ul class="brand-board__swatches">
+              <li style="--swatch: #0b0b0b">#0B0B0B</li>
+              <li style="--swatch: #f0efeb">#F0EFEB</li>
+              <li style="--swatch: #9a9893">#9A9893</li>
+              <li style="--swatch: #d9c9a8">#D9C9A8</li>
+            </ul>
+          </div>
+          <div class="brand-board__panel brand-board__marks">
+            <img class="brand-board__logo" src="/images/work/lndmrk/logo.png" alt="LNDMRK logo" width="570" height="120" loading="lazy" decoding="async" />
+            <img class="brand-board__favicon" src="/images/work/lndmrk/favicon.png" alt="LNDMRK favicon" width="64" height="64" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-split__row" data-reveal>
+      <div class="work-split__text">
+        <p class="eyebrow">lndmrk.co.uk</p>
+        <h3 class="work-split__heading">See the website live.</h3>
+        <a class="work-split__button" href="https://www.lndmrk.co.uk/" target="_blank" rel="noopener">Visit site <span class="visually-hidden">lndmrk.co.uk (opens in a new tab)</span><span aria-hidden="true">↗</span></a>
+      </div>
+      <figure class="work-split__shot work-split__shot--devices">
+        <img src="/images/work/lndmrk/devices.webp" alt="The LNDMRK website on an iMac, a MacBook, an iPad and an iPhone" width="1600" height="1246" loading="lazy" decoding="async" />
+      </figure>
+    </div>
+  </div>
+</section>

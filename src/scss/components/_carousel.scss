@@ -1,0 +1,189 @@
+@use '../abstracts' as *;
+
+// A slowly turning vertical 3D ring (like a drum) of project screenshot cards, angled a little so you see its depth.
+// Eight landscape cards sit around the ring (45deg apart, pushed out by --radius); the cards rise over the top and
+// come back round underneath, once every 40s.
+// Cards facing you show their screenshot; cards turned away show a frosted back, so the whole ring reads as a circle.
+// Hover pauses it, and visitors who prefer reduced motion get a still ring.
+.carousel {
+  --count: 8;
+  --card-w: clamp(150px, 15vw, 230px);
+  --card-h: calc(var(--card-w) * 0.75); // landscape 4:3 cards
+  --radius: calc(var(--card-h) * 1.35); // a little more than the 1.21x that just closes the ring, so cards don't touch
+  display: grid;
+  place-items: center;
+  height: calc(var(--card-h) * 3.6);
+  perspective: 1100px;
+
+  // From md up the ring is drawn much larger than its box and nudged right and down, so it runs off the right of
+  // the screen and is cut off by the bottom of the hero (.hero__wrapper hides the overflow). The box keeps a modest
+  // height so the oversized ring doesn't make the hero taller.
+  @include mq(md) {
+    --card-w: clamp(280px, 30vw, 460px);
+    height: 420px;
+    translate: 65% 30%;
+  }
+
+  &__tilt {
+    transform: rotateY(-16deg);
+    transform-style: preserve-3d;
+  }
+
+  &__ring {
+    position: relative;
+    width: var(--card-w);
+    aspect-ratio: 4 / 3;
+    transform-style: preserve-3d;
+    animation: carousel-spin 40s linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+
+  &:hover &__ring {
+    animation-play-state: paused;
+  }
+
+  // Each card holds two faces: the screenshot on the front and a frosted panel on the back (::after).
+  &__card {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--i) * 360deg / var(--count))) translateZ(var(--radius));
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgb(255 255 255 / 0.3);
+      border-radius: 10px;
+      background: rgb(255 255 255 / 0.12);
+      backface-visibility: hidden;
+      transform: rotateX(180deg);
+    }
+
+    @for $i from 1 through 8 {
+      &:nth-child(#{$i}) {
+        --i: #{$i - 1};
+      }
+    }
+  }
+
+  // The front face: a dark macOS browser window with the screenshot as its page.
+  &__browser {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 9px;
+    background: #1e1e21;
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.3),
+      0 12px 24px rgb(0 0 0 / 0.3),
+      0 28px 60px rgb(0 0 0 / 0.35);
+    backface-visibility: hidden;
+
+    img {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+      background: var(--white);
+      filter: brightness(0.5); // the same as a black overlay at 50% opacity over the page
+    }
+  }
+
+  // The toolbar, all sized in ems from one font size tied to the card, so it scales with the window:
+  // traffic lights, back/forward arrows, a centred address bar (padlock and a faint line for the address),
+  // and share / new tab icons on the right.
+  &__bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.9em;
+    height: 2.4em;
+    padding-inline: 0.8em;
+    font-size: calc(var(--card-h) * 0.045);
+    color: rgb(255 255 255 / 0.55);
+    background: linear-gradient(#36363b, #2b2b2f);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      0 1px 0 rgb(0 0 0 / 0.6);
+
+    svg {
+      display: block;
+      width: 0.95em;
+      height: 0.95em;
+      flex-shrink: 0;
+    }
+  }
+
+  // Close, minimise and zoom: each with a fine darker edge and a little shading, like the real thing.
+  &__lights {
+    display: flex;
+    gap: 0.45em;
+
+    i {
+      width: 0.75em;
+      height: 0.75em;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, var(--light-top), var(--light));
+      box-shadow: inset 0 0 0 0.06em rgb(0 0 0 / 0.25);
+
+      &:nth-child(1) { --light: #ff5f57; --light-top: #ff7a73; }
+      &:nth-child(2) { --light: #febc2e; --light-top: #ffcb57; }
+      &:nth-child(3) { --light: #28c840; --light-top: #4cd963; }
+    }
+  }
+
+  &__nav,
+  &__actions {
+    display: flex;
+    gap: 0.55em;
+
+    .is-dim {
+      opacity: 0.4; // forward is greyed out, as when there's no page to go forward to
+    }
+  }
+
+  // The address bar: a rounded field in the middle with a padlock and a faint line standing in for the address.
+  &__address {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    height: 1.55em;
+    margin-inline: 0.4em;
+    border-radius: 0.45em;
+    background: rgb(255 255 255 / 0.08);
+    box-shadow: inset 0 0 0 0.05em rgb(255 255 255 / 0.05);
+
+    svg {
+      width: 0.75em;
+      height: 0.75em;
+      opacity: 0.7;
+    }
+  }
+
+  &__url {
+    width: 40%;
+    height: 0.38em;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.35);
+  }
+}
+
+@keyframes carousel-spin {
+  from {
+    transform: rotateX(0deg);
+  }
+
+  to {
+    transform: rotateX(360deg);
+  }
+}

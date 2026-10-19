@@ -1,0 +1,60 @@
+.project-card {
+  // The whole card is one link, so its text goes back to the body font; only "View case study" uses the link font.
+  &__link {
+    display: grid;
+    gap: var(--space-small);
+    font-family: var(--font-body);
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  &__media {
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+
+    img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      transition: scale 0.6s var(--ease-out);
+    }
+  }
+
+  &__meta {
+    font-size: var(--text-small);
+    color: var(--muted-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  &__title {
+    font-size: var(--text-xl);
+    margin-block: var(--space-tiny) var(--space-xsmall);
+  }
+
+  &__summary {
+    color: var(--muted-color);
+    max-width: 45ch;
+  }
+
+  &__more {
+    display: inline-block;
+    margin-top: var(--space-xsmall);
+    font-family: var(--font-link);
+    font-weight: 200;
+    transition: translate 0.3s var(--ease-out), color 0.2s;
+  }
+
+  &__link:hover &__media img,
+  &__link:focus-visible &__media img {
+    scale: 1.04;
+  }
+
+  &__link:hover &__more,
+  &__link:focus-visible &__more {
+    color: var(--accent-color);
+    translate: 0.35rem 0;
+  }
+}

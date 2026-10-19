@@ -1,0 +1,20 @@
+<!--
+  An email campaign on the Work page: a mock inbox preview (subject, sender, then a simple email layout),
+  then its name. Attributes: name, subject, brand.
+  To show a real screenshot instead, swap the .work-card__email block for an <img class="work-card__shot">.
+-->
+<article class="work-card">
+  <div class="work-card__frame work-card__frame--email">
+    <div class="work-card__inbox">
+      <span class="work-card__subject">{{subject}}</span>
+      <span class="work-card__from">{{brand}} · to you</span>
+    </div>
+    <div class="work-card__email" aria-hidden="true">
+      <span class="work-card__email-logo">Logo</span>
+      <span class="work-card__email-hero"></span>
+      <span class="work-card__email-lines"><span></span><span></span><span></span><span class="work-card__email-cta"></span></span>
+    </div>
+  </div>
+  <h3 class="work-card__name">{{name}}</h3>
+  <p class="work-card__type">Email · responsive</p>
+</article>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <include
+      src="head.html"
+      title="__NAME__ — Case study — Gemma Gentles"
+      description="How I built the __NAME__ website: the brief, my role, key decisions and the result."
+    ></include>
+  </head>
+  <body class="page-case-study">
+    <include src="header.html"></include>
+
+    <main id="main">
+      <article class="case-study">
+        <header class="case-study__header container">
+          <a class="text-link case-study__back" href="/#work">&larr; All work</a>
+          <h1 class="case-study__title" data-reveal>__NAME__</h1>
+          <p class="lead" data-reveal>
+            Two sentences for skimmers: what the client needed and what you built for them.
+          </p>
+
+          <dl class="case-study__meta" data-reveal>
+            <div>
+              <dt>Role</dt>
+              <dd>Design &amp; front end development</dd>
+            </div>
+            <div>
+              <dt>Year</dt>
+              <dd>2026</dd>
+            </div>
+            <div>
+              <dt>Type</dt>
+              <dd>Client website</dd>
+            </div>
+            <div>
+              <dt>Tools</dt>
+              <dd>HTML, SCSS, JavaScript</dd>
+            </div>
+          </dl>
+
+          <a class="button" href="https://example.com" target="_blank" rel="noopener" data-reveal>
+            Visit live site <span class="visually-hidden">(opens in a new tab)</span>&nearr;
+          </a>
+        </header>
+
+        <figure class="case-study__hero container" data-reveal>
+          <img
+            src="/images/work/__SLUG__/cover.svg"
+            alt="The __NAME__ home page on a desktop screen"
+            width="1600"
+            height="1000"
+            fetchpriority="high"
+          />
+        </figure>
+
+        <div class="case-study__body container">
+          <section class="case-study__section" data-reveal>
+            <h2>The brief</h2>
+            <p>Who the client is, what they needed, and what was wrong with what they had before.</p>
+          </section>
+
+          <section class="case-study__section" data-reveal>
+            <h2>My role</h2>
+            <p>What you owned: design, build, content, launch. Mention anyone you worked with.</p>
+          </section>
+
+          <section class="case-study__section" data-reveal>
+            <h2>Approach</h2>
+            <p>Two or three decisions that show how you think. For each, say what you chose and why.</p>
+            <ul>
+              <li><strong>Decision one:</strong> what you chose and why it mattered.</li>
+              <li><strong>Decision two:</strong> what you chose and why it mattered.</li>
+              <li><strong>Decision three:</strong> what you chose and why it mattered.</li>
+            </ul>
+          </section>
+        </div>
+
+        <div class="case-study__gallery container">
+          <figure data-reveal>
+            <img
+              src="/images/work/__SLUG__/desktop.svg"
+              alt="A __NAME__ page on desktop"
+              width="1600"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Describe what this screen shows.</figcaption>
+          </figure>
+          <figure class="case-study__gallery-mobile" data-reveal>
+            <img
+              src="/images/work/__SLUG__/mobile.svg"
+              alt="The __NAME__ site on a phone"
+              width="780"
+              height="1688"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>The mobile layout.</figcaption>
+          </figure>
+        </div>
+
+        <div class="case-study__body container">
+          <section class="case-study__section" data-reveal>
+            <h2>The result</h2>
+            <p>What launched and what the client got out of it, in words. Add a short client quote if you have one.</p>
+          </section>
+        </div>
+
+        <nav class="case-study__next container" aria-label="Next project" data-reveal>
+          <p>Next project</p>
+          <a href="/#work">Back to all work &rarr;</a>
+        </nav>
+      </article>
+    </main>
+
+    <include src="footer.html"></include>
+  </body>
+</html>

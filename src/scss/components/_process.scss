@@ -1,0 +1,147 @@
+@use '../abstracts' as *;
+
+// Black band with a progress bar that lights up each stage in turn.
+// --progress (0 to 1) and the is-done / is-active classes are set by src/js/modules/process.js.
+.process {
+  // Bottom: just the curved edge's height (.section-wave) plus a little, so the curve clears the step labels.
+  padding-block: var(--space-section-large) calc(clamp(40px, 6vw, 80px) + var(--space-small));
+  background: var(--black);
+  color: var(--white);
+
+  &__title {
+    margin-bottom: var(--space-section);
+  }
+
+  // Phones: a vertical bar down the left. From md up: a horizontal bar across the top.
+  // (Spacing lives on the steps, not the list: the reset strips padding from lists with a class.)
+  &__steps {
+    --dot: 1rem;
+    --row: 2rem; // height of one stage on phones
+    --progress: 0;
+    --count: 7; // number of stages, updated by the script
+    position: relative;
+    display: grid;
+    gap: var(--space-small);
+
+    // The grey track, and the gradient fill that grows along it.
+    // Runs from the centre of the first dot to the centre of the last.
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: calc(var(--dot) / 2 - 2px);
+      top: calc(var(--row) / 2);
+      bottom: calc(var(--row) / 2);
+      width: 4px;
+      border-radius: 2px;
+      background: #2a2a2a;
+    }
+
+    &::after {
+      background: var(--brand-gradient);
+      transform-origin: top;
+      scale: 1 var(--progress);
+      transition: scale 0.6s var(--ease-out);
+    }
+
+    @include mq(md) {
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      gap: 0;
+
+      &::before,
+      &::after {
+        left: calc(100% / (2 * var(--count)));
+        right: calc(100% / (2 * var(--count)));
+        top: calc(var(--dot) / 2 - 2px);
+        bottom: auto;
+        width: auto;
+        height: 4px;
+      }
+
+      &::after {
+        transform-origin: left;
+        scale: var(--progress) 1;
+      }
+    }
+  }
+
+  &__step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xsmall);
+    min-height: var(--row);
+    padding-left: calc(var(--dot) + var(--space-medium));
+    line-height: 1.2;
+    color: #8a8a8a;
+    transition: color 0.4s var(--ease-out);
+
+    // The dot on the track.
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: calc(50% - var(--dot) / 2);
+      width: var(--dot);
+      height: var(--dot);
+      border-radius: 50%;
+      background: #2a2a2a;
+      transition: background-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), scale 0.4s var(--ease-out);
+    }
+
+    @include mq(md) {
+      flex-direction: column;
+      padding: calc(var(--dot) + var(--space-medium)) var(--space-xsmall) 0;
+      text-align: center;
+
+      &::before {
+        left: calc(50% - var(--dot) / 2);
+        top: 0;
+      }
+    }
+
+    &.is-done {
+      color: var(--white);
+
+      &::before {
+        background: var(--primary-color);
+      }
+    }
+
+    &.is-active {
+      color: var(--white);
+
+      &::before {
+        background: var(--secondary-color);
+        box-shadow: 0 0 0 6px rgb(255 102 196 / 0.25);
+        scale: 1.3;
+      }
+
+      .process__name {
+        color: var(--secondary-color);
+      }
+    }
+  }
+
+  &__number {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+  }
+
+  &__name {
+    // font-size: var(--text-large);
+    font-weight: 600;
+    transition: color 0.4s var(--ease-out);
+
+    // @include mq(md) {
+    //   font-size: var(--text-body);
+    // }
+
+    // @include mq(lg) {
+    //   font-size: var(--text-large);
+    // }
+  }
+}

@@ -1,0 +1,31 @@
+<!--
+  A laptop showing a site's home page in a Safari window (a full-length screenshot), scrolling through it on a loop.
+  The whole laptop links to the case study. Set on the include:
+  - href: the case study it links to
+  - image, height: the full-length screenshot (1440px wide) and its height in pixels
+  - address: the address shown in the Safari bar
+  - label: what screen readers hear for the link
+  - priority: "high" if it's at the top of the page, otherwise "auto"
+  - variant: "" for the laptop, or "work-laptop--imac" for an iMac (a chin, stand and foot instead of the base)
+  Used on work-v2 and work-v3 (Nueva Gold) and work-v4 (LNDMRK). Styles: .work-laptop in src/scss/pages/_work.scss.
+-->
+<a class="work-laptop {{variant}}" href="{{href}}" data-reveal>
+  <span class="work-laptop__screen">
+    <span class="work-laptop__camera" aria-hidden="true"></span>
+    <!-- A Safari window: traffic lights, back and forward, and the address bar. -->
+    <span class="work-laptop__safari" aria-hidden="true">
+      <span class="work-laptop__lights"><span></span><span></span><span></span></span>
+      <span class="work-laptop__nav">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6" /></svg>
+      </span>
+      <span class="work-laptop__address">
+        <svg viewBox="0 0 24 24" width="9" height="9" fill="currentColor"><path d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0z" /></svg>
+        {{address}}
+      </span>
+    </span>
+    <img class="work-laptop__page" src="{{image}}" alt="" width="1440" height="{{height}}" decoding="async" fetchpriority="{{priority}}" />
+  </span>
+  <span class="work-laptop__base" aria-hidden="true"></span>
+  <span class="visually-hidden">{{label}}</span>
+</a>

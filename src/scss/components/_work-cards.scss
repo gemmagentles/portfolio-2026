@@ -1,0 +1,56 @@
+@use '../abstracts' as *;
+
+// The bento tiles as full-width cards, stacked (partials/work-cards-lndmrk.html). The tiles keep their bento styles
+// (_work-bento.scss); here they drop their grid placement and fill the width.
+.work-cards {
+  padding-block: var(--space-large) var(--space-section-large);
+  color: var(--white);
+
+  &__list {
+    display: grid;
+    gap: 12px;
+
+    .work-bento__tile {
+      grid-area: auto;
+      min-height: 0;
+    }
+
+    // From md up: the case study and "Designed for every screen" span the width; Goals and Challenges sit on the left
+    // beside the brand guidelines and Built with; My role and See it live sit side by side at the end.
+    @include mq(md) {
+      // Ten columns, so Goals can take 6 and the two cards on its right 4, while My role and See it live share 5 each.
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      grid-template-areas:
+        'intro intro intro intro intro intro intro intro intro intro'
+        'goals goals goals goals goals goals brand brand brand brand'
+        'challenges challenges challenges challenges challenges challenges stack stack stack stack'
+        'desktop desktop desktop desktop desktop desktop desktop desktop desktop desktop'
+        'role role role role role cta cta cta cta cta';
+
+      @each $area in intro, goals, brand, stack, desktop, role, cta {
+        .work-bento__tile--#{$area} {
+          grid-area: #{$area};
+        }
+      }
+    }
+
+    // The brand board fills the card's width.
+    .work-bento__tile--brand .brand-board {
+      width: 100%;
+    }
+
+    // "Designed for every screen": tall enough to show the top of the phone properly.
+    .work-bento__tile--desktop {
+      @include mq(md) {
+        min-height: 22rem;
+      }
+    }
+  }
+}
+
+// Challenges reuses the Goals card styles; this puts it in its own grid area, below Goals.
+.work-cards__list .work-bento__tile--challenges {
+  @include mq(md) {
+    grid-area: challenges;
+  }
+}

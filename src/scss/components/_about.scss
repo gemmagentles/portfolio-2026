@@ -1,0 +1,64 @@
+@use '../abstracts' as *;
+
+// Heading on white, then four facts in boxes joined by hairlines.
+// The 1px gap shows the grid's grey background through, which draws the lines between the boxes.
+.about {
+  position: relative; // anchors the paint drips
+  padding-block: var(--space-section) calc(var(--space-section) + 20px); // 20px extra at the bottom
+  background: var(--white);
+  color: var(--text-color);
+
+  &__inner {
+    display: grid;
+    gap: var(--space-large);
+  }
+
+  // Phones: 1 column. From sm up: 2. From md up: 4.
+  &__facts {
+    display: grid;
+    gap: 1px;
+    background: #e4e2dc;
+    border: 1px solid #e4e2dc;
+    border-radius: var(--radius);
+    overflow: hidden;
+
+    @include mq(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mq(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__fact {
+    display: grid;
+    align-content: start;
+    padding: var(--space-medium);
+    background: var(--white);
+  }
+
+  &__label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-color);
+  }
+
+  &__value {
+    margin-top: var(--space-xsmall);
+    font-family: "Fraunces", serif;
+    // font-family: var(--font-heading--secondary);
+    font-size: clamp(1.75rem, 1.4rem + 1vw, 2.15rem);
+    // font-weight: 600;
+    line-height: 1.05;
+  }
+
+  &__note {
+    margin-top: var(--space-xsmall);
+    font-size: var(--text-small);
+    line-height: 1.45;
+    color: var(--muted-color);
+  }
+}

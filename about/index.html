@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <include
+      src="head.html"
+      title="About — Gemma Gentles"
+      description="About Gemma Gentles: front end web developer, skills and experience."
+    ></include>
+  </head>
+  <body class="page-about">
+    <include src="header.html"></include>
+
+    <main id="main">
+      <section class="page-intro container">
+        <h1 data-reveal>About</h1>
+        <p class="lead" data-reveal>
+          A short, confident paragraph: who you are, what you build, and what you're looking for next.
+        </p>
+      </section>
+
+      <section class="container about__section" aria-labelledby="skills-title">
+        <h2 id="skills-title" data-reveal>Skills</h2>
+        <ul class="skill-list" data-reveal>
+          <li>Semantic HTML</li>
+          <li>CSS &amp; SCSS</li>
+          <li>JavaScript (ES6+)</li>
+          <li>Responsive design</li>
+          <li>Accessibility (WCAG)</li>
+          <li>Web performance</li>
+          <li>Git &amp; GitHub</li>
+          <li>Vite</li>
+        </ul>
+      </section>
+
+      <section class="container about__section" aria-labelledby="experience-title">
+        <h2 id="experience-title" data-reveal>Experience</h2>
+        <ol class="timeline">
+          <li class="timeline__item" data-reveal>
+            <p class="timeline__date">2024 — Present</p>
+            <h3 class="timeline__role">Front End Web Developer</h3>
+            <p class="timeline__org">Company or Freelance</p>
+            <p>One or two lines on what you built and the tools you used.</p>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <p class="timeline__date">2022 — 2024</p>
+            <h3 class="timeline__role">Previous role</h3>
+            <p class="timeline__org">Company</p>
+            <p>One or two lines on what you built and the tools you used.</p>
+          </li>
+        </ol>
+        <a class="button button--ghost" href="/resume.pdf">Download résumé (PDF)</a>
+      </section>
+    </main>
+
+    <include src="footer.html"></include>
+  </body>
+</html>

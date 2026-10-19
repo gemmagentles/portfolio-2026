@@ -1,0 +1,40 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xsmall);
+  padding: 0.85em 1.5em;
+  background: var(--text-color);
+  color: var(--background-color);
+  border: 1px solid var(--text-color);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: var(--purple-color);
+    border-color: var(--purple-color);
+    color: var(--contrast-color);
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--text-color);
+    border-color: var(--border-color);
+  }
+
+  // White, for dark backgrounds.
+  &--light {
+    background: var(--white);
+    color: var(--ink);
+    border-color: var(--white);
+  }
+}
+
+.text-link {
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+
+  &:hover {
+    color: var(--purple-color);
+  }
+}

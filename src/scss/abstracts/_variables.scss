@@ -1,0 +1,12 @@
+// Sass-only values (things CSS custom properties can't do, like media query breakpoints).
+// Colours, fonts and spacing live as CSS custom properties in base/_root.scss so they can change at runtime.
+
+$breakpoints: (
+  'sm': 36em,   // 576px
+  'md': 48em,   // 768px
+  'lg': 64em,   // 1024px
+  'xl': 80em,   // 1280px
+);
+
+$container-max: 68rem;
+$header-height: 4.75rem; // 76px

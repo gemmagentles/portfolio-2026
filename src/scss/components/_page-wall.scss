@@ -1,0 +1,111 @@
+@use '../abstracts' as *;
+
+// A wall of a site's pages (partials/page-wall-lndmrk.html): upright columns of full-length screenshots,
+// staggered up and down, in a container-wide band that crops them.
+.page-wall {
+  padding-top: var(--space-section);
+
+  // The band: the width of the container, with rounded corners, cropping the tilted columns. A lighter charcoal than
+  // the page, with a light border, a fainter outline around that and a soft glow, so it reads as its own panel.
+  &__frame {
+    position: relative;
+    --wall-h: clamp(24rem, 16rem + 26vw, 40rem);
+    height: var(--wall-h);
+    overflow: hidden;
+    border-radius: 20px;
+    background: radial-gradient(ellipse at 50% 0%, #2a2a33, #16161c 70%);
+    box-shadow: 0 30px 60px -30px rgb(127 109 239 / 0.35);
+    // A second, fainter outline a little way outside the border, like a frame.
+    outline: 1px solid rgb(255 255 255 / 0.12);
+    outline-offset: 8px;
+
+    // The border, drawn on top so the screens can't cover it.
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.32), inset 0 2px 0 rgb(255 255 255 / 0.2);
+      pointer-events: none;
+    }
+  }
+
+  // The columns, upright, centred in the band (the outer ones run off its sides).
+  &__stage {
+    --col: clamp(9rem, 6rem + 12vw, 18rem); // column width
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    gap: calc(var(--col) * 0.12);
+    align-items: flex-start;
+    translate: -50% -50%;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--col) * 0.12);
+    width: var(--col);
+
+    // One column holds a whole page in one screenshot, shrunk to fit the band's height and centred in it, so every
+    // part of the page can be seen.
+    &--whole {
+      align-self: center;
+      align-items: center;
+      margin-top: 0 !important; // not staggered
+    }
+
+    &--whole .page-wall__shot {
+      width: auto;
+      max-width: none;
+      height: calc(var(--wall-h) - 2.5rem);
+    }
+
+    // The column that starts with the hero photo: placed so the photo touches the top of the band. The
+    // stage is 6.94 columns tall (the tallest column) and centred on the band, so the band's top edge is at
+    // (stage height - band height) / 2 from the stage's top.
+    &--hero {
+      margin-top: calc(var(--col) * 6.94 / 2 - var(--wall-h) / 2) !important;
+
+      // Square top corners, so it sits flush against the band's top edge.
+      img:first-of-type {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+
+    // Every other column sits lower, for the staggered look.
+    &:nth-child(even) {
+      margin-top: calc(var(--col) * 1.1);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: calc(var(--col) * 0.05);
+      box-shadow: 0 24px 48px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.06);
+    }
+  }
+}
+
+// The optional heading at the top of the component: an eyebrow, then the project name as the page's h1, in white
+// Oswald capitals.
+.page-wall__intro {
+  margin-bottom: var(--space-medium);
+  color: var(--white);
+
+  .eyebrow {
+    color: var(--white);
+  }
+}
+
+.page-wall__title {
+  font-family: var(--font-heading--primary);
+  font-size: clamp(3rem, 1rem + 6vw, 6.75rem); // 108px on wide screens, as on the home hero
+  font-weight: 700;
+  line-height: 0.95;
+  text-transform: uppercase;
+}

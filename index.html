@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <include
+      src="head.html"
+      title="Gemma Gentles — Front End Web Developer"
+      description="Portfolio of Gemma Gentles, a front end web developer building fast, accessible, hand-coded websites."
+    ></include>
+  </head>
+  <body class="page-home">
+    <include src="header.html"></include>
+
+    <main id="main">
+      <!--
+        Hero (from "Hero V15" in the design): a diagonal pink-to-blue gradient, with the heading, line and buttons on the
+        left and, from lg up, a phone on the right (partials/hero-phone.html) that loops between a wireframe and the
+        finished screen, over a hexagon of geometric facets (partials/hero-hex.html). Smaller screens get just the text.
+        Styles in src/scss/pages/_home.scss.
+        (.hero__wrapper is also how src/js/modules/header.js knows when the hero has scrolled away.)
+        data-header-over makes the header see-through over it (src/scss/layout/_header.scss).
+      -->
+      <section class="hero__wrapper" aria-labelledby="hero-title" data-wave="none" data-header-over>
+        <div class="hero container">
+          <div class="hero__text">
+            <!-- Hidden for now: remove the "hidden" attribute to bring the "Open to work" line back. -->
+            <p class="hero__status" hidden><span class="hero__dot" aria-hidden="true"></span>Open to work · Vancouver / Remote</p>
+            <h1 class="hero__title" id="hero-title">Front End <span class="hero__accent">Developer</span></h1>
+            <p class="hero__tagline">Turning designs into pixel&#8209;perfect, responsive and accessible user interfaces.</p>
+            <div class="hero__actions">
+              <a class="button hero__primary" href="/work/">See my work</a>
+              <a class="button button--ghost hero__ghost" href="/contact/">Get in touch</a>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-hidden="true">
+            <include src="hero-hex.html"></include>
+            <include src="hero-phone.html"></include>
+          </div>
+        </div>
+      </section>
+
+      <include
+        src="statement.html"
+        id="intro"
+        theme="dark"
+        eyebrow="Prologue · Hi, I'm Gemma"
+        title="Designer turned"
+        accent="developer"
+        text="I'm a front end developer based in Vancouver with over a decade of experience turning designs into fast, accessible websites. I started out designing and building sites for a startup agency, so I understand both sides of the handoff. Today I work with agencies, in-house teams and businesses of every size, building interfaces that look right, work everywhere and are easy to maintain."
+      ></include>
+
+      <include src="about.html"></include>
+
+      <include src="work-grid.html"></include>
+
+      <include
+        src="statement.html"
+        id="skills"
+        theme="light"
+        eyebrow="Chapter III · What I offer"
+        title="Design, build and"
+        accent="deliver"
+        text="I design and build responsive websites, email campaigns (EDMs), CMS builds and API-driven components. You get clean, accessible front-end code in semantic HTML, modular SCSS and vanilla JavaScript, tested across browsers and devices and easy for your team to maintain."
+      ></include>
+
+      <include src="tools-icon-grid.html"></include>
+
+      <include src="work-browser.html"></include>
+
+      <include src="clients.html"></include>
+
+      <include
+        src="statement.html"
+        id="craft"
+        theme="light"
+        eyebrow="Chapter VII · My Craft"
+        title="From pixels to"
+        accent="production"
+        text="I started out as a web designer and developer for a startup agency. I worked in several capacities like; talking to clients, planning, designing, developing and testing. Then I specialized in Front End Web Development for bigger clients."
+      ></include>
+
+      <include src="process.html"></include>
+
+      <include src="what-you-get.html"></include>
+
+      <include src="why-it-matters.html"></include>
+
+      <include
+        src="cta.html"
+        eyebrow="Now booking new projects"
+        title="Your brand"
+        title2="could be"
+        accent="next."
+        ghost="Next"
+        button="Start a project"
+        href="/contact/"
+        target="_self"
+        note=""
+      ></include>
+    </main>
+
+    <include src="footer.html"></include>
+  </body>
+</html>

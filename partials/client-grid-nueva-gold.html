@@ -1,0 +1,79 @@
+<!--
+  Nueva Gold at a glance: six numbered cards under the statement on work-v3, in the style of the Why it matters
+  cards (light grey, rounded, soft shadow): the client, a mini brand guidelines board (their Cormorant serif, navy,
+  gold and cream), my role, the goals, the challenges and a "designed for every screen" card with a phone in it.
+  The link to the live site is in the call to action below.
+  Two per row from md up; stacked on phones. Styles: src/scss/components/_client-grid.scss.
+-->
+<section class="client-grid" aria-label="Nueva Gold at a glance">
+  <div class="container">
+    <ol class="client-grid__cards" data-reveal>
+      <li class="client-card">
+        <h3 class="client-card__label"><span aria-hidden="true">01</span> The client</h3>
+        <p class="client-card__title">Medieval mastery, modern marketing</p>
+        <p class="client-card__text">Nueva Gold is an all-in-one agency that acts as an in-house marketing team for global brands that refuse to settle for ordinary.</p>
+      </li>
+
+      <li class="client-card">
+        <h3 class="client-card__label"><span aria-hidden="true">02</span> Brand guidelines</h3>
+        <div class="brand-board brand-board--nueva">
+          <div class="brand-board__panel brand-board__panel--cover">
+            <p class="brand-board__wordmark">Nueva Gold</p>
+            <p class="brand-board__meta"><span>Brand guidelines</span> <span>2026</span></p>
+          </div>
+          <div class="brand-board__panel brand-board__panel--type">
+            <p class="brand-board__label">Typography</p>
+            <p class="brand-board__specimen" aria-hidden="true">A<i>a</i></p>
+            <p class="brand-board__note">Cormorant &amp; Inter</p>
+          </div>
+          <div class="brand-board__panel brand-board__panel--colours">
+            <p class="brand-board__label">Colours</p>
+            <ul class="brand-board__swatches">
+              <li style="--swatch: #1c2343">#1C2343</li>
+              <li style="--swatch: #c2973b">#C2973B</li>
+              <li style="--swatch: #f8f5ef">#F8F5EF</li>
+            </ul>
+          </div>
+          <p class="brand-board__panel brand-board__panel--tagline">Turning ambition into legacy</p>
+        </div>
+      </li>
+
+      <li class="client-card">
+        <h3 class="client-card__label"><span aria-hidden="true">03</span> My role</h3>
+        <ul class="client-card__list">
+          <li>Project manager</li>
+          <li>Front end development</li>
+          <li>QA</li>
+        </ul>
+      </li>
+
+      <li class="client-card">
+        <h3 class="client-card__label"><span aria-hidden="true">04</span> Goals</h3>
+        <ul class="client-card__list client-card__list--goals">
+          <li>A CMS for the client to make their own changes</li>
+          <li>A contact form to attract new clients</li>
+        </ul>
+      </li>
+
+      <li class="client-card">
+        <h3 class="client-card__label"><span aria-hidden="true">05</span> Challenges</h3>
+        <ul class="client-card__list client-card__list--goals">
+          <li>[A challenge on this project, e.g. keeping the medieval look fast on mobile]</li>
+          <li>[Another challenge, and how you solved it]</li>
+        </ul>
+      </li>
+
+      <li class="client-card client-card--screens">
+        <div class="client-card__promo">
+          <h3 class="client-card__label"><span aria-hidden="true">06</span> Mobile</h3>
+          <p class="client-card__title">Designed for every screen</p>
+          <p class="client-card__text">The navy hero, gold stars and "Transform my brand" button stay front and centre, from phone to desktop.</p>
+        </div>
+        <!-- A phone in the bottom right, cut off by the bottom of the card, showing the top of the Nueva Gold home page. -->
+        <div class="work-bento__phone" aria-hidden="true">
+          <img src="/images/work/nueva-gold/mobile.webp" alt="" width="780" height="1688" loading="lazy" decoding="async" />
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>

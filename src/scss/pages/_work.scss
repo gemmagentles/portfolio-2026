@@ -1,0 +1,1222 @@
+@use '../abstracts' as *;
+
+// The Work page (work/index.html), on black: the showcase (on the home hero's gradient), category links, then one row
+// per category.
+// From lg up each row puts the category's number, name and blurb in a column on the left and its cards on the right.
+
+.work-page {
+  overflow-x: clip; // the carousel's side screens can reach past the edge on narrow screens
+  padding-bottom: calc(var(--space-section-large) + 20px);
+  background: var(--black);
+  color: var(--white);
+
+  // Outlined pills that jump to each category.
+  &__filters {
+    margin-block: var(--space-section) var(--space-large);
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      border: 1px solid #3a3a44;
+      border-radius: 999px;
+      font-family: var(--font-link);
+      font-size: 1.05rem;
+      color: #b7b7c2;
+      text-decoration: none;
+      transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        border-color: var(--white);
+        color: var(--white);
+      }
+    }
+
+    span {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #8a8a96;
+    }
+  }
+}
+
+// The showcase at the top: heading, then the three featured projects as screens in a carousel.
+// Each screen sits at the centre of the stage and is moved into place by its data-pos (set by
+// src/js/modules/showcase.js): 0 front and centre, 1 back right, -1 back left, 2 hidden behind (with four screens).
+// Changing data-pos animates it.
+// The home page hero's background: the pink-to-blue gradient, with the hexagon facets centred behind the carousel.
+.work-showcase {
+  position: relative;
+  overflow: hidden; // crops the facets
+  margin-bottom: var(--space-large);
+  // The header floats over the top (layout/_header.scss), so leave its height clear above the content.
+  padding-block: calc($header-height + var(--space-section-large) * 0.6) var(--space-section-large);
+  background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+
+  &__facets {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    // Smaller on phones, where the screens are smaller too.
+    @include mq-down(md) {
+      zoom: 0.6;
+    }
+  }
+
+  &__inner {
+    position: relative; // above the facets
+  }
+
+  // Like the home page hero's heading: "FEATURED" in solid black and "PROJECTS" as a white outline, in Oswald
+  // capitals, on one line.
+  .accent-word {
+    background: none;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+  }
+
+  &__title {
+    margin-bottom: var(--space-large);
+    font-family: var(--font-heading--primary);
+    font-size: clamp(3rem, 1rem + 6vw, 6.75rem); // 108px on wide screens, as on the home hero
+    font-weight: 700;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  // Exactly as tall as the front screen (62% or 52% wide at 16:10), so the drawer can tuck straight under it.
+  // The perspective gives the side screens their 3D angle. Sits above the drawer.
+  &__stage {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 16 / 6.2;
+    perspective: 1400px;
+
+    @include mq(md) {
+      aspect-ratio: 16 / 5.2;
+    }
+
+    // A soft black glow behind the screens: black in the middle, fading out to transparent.
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -45% -12%;
+      z-index: -1; // behind the screens (the stage's z-index keeps it above the gradient and facets)
+      background: radial-gradient(closest-side, rgb(0 0 0 / 0.75), transparent);
+      pointer-events: none;
+    }
+  }
+
+  // How far the side screens sit from the centre, and how small they are. Closer in on phones.
+  &__carousel {
+    --side-x: 42%;
+    --side-scale: 0.72;
+    --side-turn: 22deg;
+
+    @include mq(md) {
+      --side-x: 62%;
+      --side-scale: 0.78;
+    }
+  }
+
+  // The drawer under the front screen: same width, tucked 14px up behind it, and unfolding downwards
+  // (grid rows 0fr to 1fr) just after the screen drops. It pushes the arrows and quote down as it opens.
+  &__drawer {
+    position: relative;
+    display: grid;
+    grid-template-rows: 0fr;
+    width: 62%;
+    margin: -14px auto 0;
+    transition: grid-template-rows 0.45s var(--ease-out);
+
+    @include mq(md) {
+      width: 52%;
+    }
+
+    &.is-open {
+      grid-template-rows: 1fr;
+      transition-duration: 0.7s;
+      transition-delay: 0.2s;
+    }
+  }
+
+  &__drawer-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  // The box itself, sliding down into view as the drawer opens.
+  &__details {
+    padding: calc(14px + 1.25rem) 1.5rem 1.5rem;
+    background: #121218;
+    border: 1px solid #2a2a30;
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    translate: 0 -1.5rem;
+    transition: opacity 0.3s ease-in-out, translate 0.45s var(--ease-out);
+
+    .is-open & {
+      opacity: 1;
+      translate: 0 0;
+      transition-duration: 0.5s, 0.7s;
+      transition-delay: 0.3s, 0.2s;
+    }
+
+    p {
+      max-width: 60ch;
+      line-height: 1.6;
+      color: #d0d0d8;
+    }
+  }
+
+  &__details-meta {
+    margin-bottom: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    // Overrides the paragraph colour above.
+    .work-showcase__details & {
+      color: #8a8a96;
+    }
+  }
+
+  &__screen {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 62%;
+    aspect-ratio: 16 / 10;
+    translate: -50% 0;
+    transition:
+      translate 0.8s var(--ease-out),
+      scale 0.8s var(--ease-out),
+      rotate 0.8s var(--ease-out),
+      filter 0.8s var(--ease-out),
+      opacity 0.8s var(--ease-out);
+
+    @include mq(md) {
+      width: 52%;
+    }
+
+    &[data-pos='0'] {
+      z-index: 3;
+    }
+
+    // Clicking the front screen: it drops back into the page, dims a little, then springs forward again
+    // (src/js/modules/showcase.js adds .is-dropping). Uses transform, so it stacks on top of translate/scale.
+    &.is-dropping {
+      @include motion-ok {
+        animation: work-showcase-drop 0.7s both;
+      }
+    }
+
+    &[data-pos='1'],
+    &[data-pos='-1'] {
+      z-index: 1;
+      scale: var(--side-scale);
+      filter: brightness(0.45);
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(0.7);
+      }
+    }
+
+    &[data-pos='1'] {
+      translate: calc(-50% + var(--side-x)) 4%;
+      rotate: y calc(var(--side-turn) * -1);
+    }
+
+    &[data-pos='-1'] {
+      translate: calc(-50% - var(--side-x)) 4%;
+      rotate: y var(--side-turn);
+    }
+
+    // With four or more screens, the rest wait hidden behind the front one (data-pos 2 or -2 and beyond), small and
+    // faded out, and slide out to the sides as they come round.
+    &[data-pos='2'],
+    &[data-pos='-2'] {
+      z-index: 0;
+      scale: calc(var(--side-scale) * 0.8);
+      translate: -50% 6%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    // A browser window: a bar of three dots, then the screenshot filling the rest.
+    a {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid #2a2a30;
+      border-radius: 8px;
+      background: #101014;
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 30px 60px rgb(0 0 0 / 0.6);
+      transition: border-color 0.3s ease-in-out;
+    }
+
+    &[data-pos='0'] a:hover,
+    a:focus-visible {
+      border-color: var(--accent-color);
+    }
+
+    img {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  &__bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding-inline: 10px;
+    background: #1a1a20;
+    border-bottom: 1px solid #2a2a30;
+
+    span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3a3a44;
+    }
+  }
+
+  // Name and "Featured project" in a full-width black box at 80% opacity along the bottom of the screen.
+  // Only the front screen shows it.
+  &__caption {
+    position: absolute;
+    inset: auto 0 0;
+    display: grid;
+    gap: 0.4rem;
+    padding: 1rem 1.25rem 1.1rem;
+    background: rgb(0 0 0 / 0.8);
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+
+    [data-pos='0'] & {
+      opacity: 1;
+      transition-delay: 0.3s;
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+
+    &::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      background: var(--brand-gradient);
+    }
+  }
+
+  &__name {
+    font-family: var(--font-heading--secondary);
+    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.6rem);
+    line-height: 1.1;
+  }
+
+  // Previous / next arrows either side of "Fraser Valley · 1 of 3".
+  &__controls {
+    position: relative;
+    z-index: 3; // above the front screen's shadow, which would grey them out on the gradient
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-medium);
+    margin-top: var(--space-medium);
+  }
+
+  &__arrow {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: 50%;
+    background: none;
+    color: var(--white);
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    // White on the gradient, like the hero's buttons.
+    &:hover,
+    &:focus-visible {
+      border-color: var(--white);
+      background: var(--white);
+      color: var(--ink);
+    }
+  }
+
+  &__status {
+    min-width: 12rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  &__quote {
+    max-width: 32ch;
+    margin: var(--space-large) auto 0;
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.75rem); // 28px on wide screens
+    line-height: 1.3;
+    text-align: center;
+  }
+}
+
+.work-category {
+  display: grid;
+  gap: var(--space-medium);
+  padding-block: var(--space-large);
+  border-top: 1px solid #26262c;
+  scroll-margin-top: $header-height; // so the category links don't land under the sticky header
+
+  @include mq(lg) {
+    grid-template-columns: 15.5rem minmax(0, 1fr);
+    gap: var(--space-large);
+  }
+
+  &__intro {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+  }
+
+  &__number {
+    font-family: var(--font-heading--secondary);
+    font-size: clamp(2.5rem, 2rem + 1.5vw, 3.25rem); // 52px on wide screens
+    font-weight: 500;
+    line-height: 1;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1.75rem, 1.4rem + 1vw, 2.1rem); // 34px on wide screens
+    line-height: 1.05;
+  }
+
+  &__text {
+    max-width: 40ch;
+    color: #b7b7c2;
+    line-height: 1.5;
+  }
+
+  // Phones: 1 card per row. From sm: 2. From lg: 3 (or 4 for the emails, which are narrower).
+  &__grid {
+    display: grid;
+    gap: 1.25rem;
+
+    @include mq(sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include mq(lg) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    &--four {
+      @include mq(lg) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  }
+}
+
+// One project: a framed preview, then its name and type.
+.work-card {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+
+  &__link {
+    display: grid;
+    gap: 0.25rem;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover .work-card__frame,
+    &:focus-visible .work-card__frame {
+      border-color: var(--accent-color);
+    }
+
+    &:hover .work-card__shot {
+      scale: 1.03;
+    }
+  }
+
+  &__frame {
+    display: flex;
+    flex-direction: column;
+    height: 13.75rem; // 220px
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    border: 1px solid #2a2a30;
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease-in-out;
+
+    &--browser {
+      background: linear-gradient(160deg, #1c1c22, #101014);
+    }
+  }
+
+  // Browser chrome: three dots and an empty address bar.
+  &__bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding-inline: 10px;
+    background: #1a1a20;
+    border-bottom: 1px solid #2a2a30;
+
+    span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3a3a44;
+    }
+
+    &::after {
+      content: '';
+      flex: 1;
+      height: 14px;
+      margin-left: 8px;
+      border-radius: 7px;
+      background: #24242c;
+    }
+  }
+
+  &__shot {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: scale 0.6s ease-in-out;
+  }
+
+  &__placeholder {
+    display: grid;
+    flex: 1;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__name {
+    margin: 0;
+    font-family: var(--font-heading--secondary);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--white);
+  }
+
+  &__type {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a8a96;
+  }
+
+  // ---- Email mock: an inbox preview over a simple email layout ----
+  &__frame--email {
+    height: 18.75rem; // 300px
+    background: #ededf1;
+  }
+
+  &__inbox {
+    display: grid;
+    gap: 3px;
+    padding: 9px 12px;
+    background: var(--white);
+    border-bottom: 1px solid #dcdce3;
+    font-family: var(--font-body);
+  }
+
+  &__subject {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #1f1f24;
+  }
+
+  &__from {
+    font-size: 0.6rem;
+    color: #8a8a96;
+  }
+
+  &__email {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 10px 18px 0;
+    background: var(--white);
+  }
+
+  &__email-logo {
+    display: grid;
+    place-items: center;
+    height: 22px;
+    border-bottom: 1px solid #eee;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #3a3a44;
+  }
+
+  &__email-hero {
+    height: 92px;
+    background: var(--brand-gradient);
+  }
+
+  &__email-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+
+    > span {
+      height: 6px;
+      border-radius: 3px;
+      background: #d9d9de;
+
+      &:nth-child(1) {
+        width: 70%;
+        background: #1f1f24;
+      }
+
+      &:nth-child(2) {
+        width: 90%;
+      }
+
+      &:nth-child(3) {
+        width: 80%;
+      }
+    }
+  }
+
+  &__email-lines > &__email-cta {
+    width: 78px;
+    height: 18px;
+    margin-top: 4px;
+    background: var(--ink);
+  }
+
+  // ---- API mock: an endpoint label, then a chart, list or stat ----
+  &__frame--api {
+    gap: 14px;
+    padding: 16px 18px;
+    background: #121218;
+  }
+
+  &__endpoint {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: #8a8a96;
+
+    > span:first-child {
+      color: #6be39b;
+    }
+  }
+
+  &__live {
+    margin-left: auto;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #1f3d2b;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    color: #6be39b;
+  }
+
+  // Bar chart: each bar's height comes from --h. The tallest (5th) is pink.
+  &__chart {
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    gap: 6px;
+    max-height: 70px;
+    margin-block: auto;
+
+    span {
+      flex: 1;
+      height: var(--h);
+      border-radius: 3px 3px 0 0;
+      background: var(--primary-color);
+
+      &:nth-child(5) {
+        background: var(--secondary-color);
+      }
+    }
+  }
+
+  // List: each row is an icon square, two text lines (widths set inline) and a green status dot.
+  &__rows {
+    display: grid;
+    gap: 8px;
+    margin-block: auto;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+      content: '';
+      flex: 0 0 22px;
+      height: 22px;
+      border-radius: 5px;
+      background: #24242c;
+    }
+
+    &::after {
+      content: '';
+      flex: 0 0 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6be39b;
+    }
+  }
+
+  &__lines {
+    display: grid;
+    flex: 1;
+    gap: 4px;
+
+    span {
+      height: 5px;
+      border-radius: 3px;
+      background: #3a3a44;
+
+      &:last-child {
+        height: 4px;
+        background: #26262c;
+      }
+    }
+  }
+
+  // Stat: a big number, two text lines and a progress bar (filled to --w).
+  &__stat {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px 14px;
+    margin-block: auto;
+  }
+
+  &__stat-value {
+    font-family: var(--font-heading--secondary);
+    font-size: 2.75rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  &__stat-lines {
+    display: grid;
+    gap: 5px;
+
+    span {
+      height: 5px;
+      border-radius: 3px;
+      background: #3a3a44;
+
+      &:first-child {
+        width: 80%;
+      }
+
+      &:last-child {
+        width: 60%;
+        height: 4px;
+        background: #26262c;
+      }
+    }
+  }
+
+  &__stat-bar {
+    grid-column: 1 / -1;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: #24242c;
+
+    span {
+      display: block;
+      width: var(--w);
+      height: 100%;
+      background: var(--brand-gradient);
+    }
+  }
+}
+
+// Down fast, then back up with a slight overshoot so it lands with a little bounce.
+@keyframes work-showcase-drop {
+  0% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.6, 1);
+  }
+
+  35% {
+    transform: translateZ(-120px) translateY(2%);
+    filter: brightness(0.75);
+    animation-timing-function: cubic-bezier(0.2, 1.4, 0.4, 1);
+  }
+
+  100% {
+    transform: none;
+    filter: none;
+  }
+}
+
+// ---- Work page version 2 (work-v2/index.html): a laptop in the showcase hero instead of the carousel ----
+// The Nueva Gold website in a black-framed screen on a thin base, centred, with the same soft black glow behind it as
+// the carousel. The whole laptop links to the case study and lifts a little on hover.
+.work-laptop {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  width: min(100%, 56rem);
+  margin: var(--space-medium) auto 0;
+  transition: translate 0.4s var(--ease-out);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -20% -15%;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 0.6), transparent);
+    pointer-events: none;
+  }
+
+  @include motion-ok {
+    &:hover {
+      translate: 0 -6px;
+    }
+  }
+
+  &__screen {
+    position: relative;
+    display: block;
+    container-type: inline-size; // the Safari bar sizes itself from the screen's width (cqw)
+    width: 88%;
+    margin-inline: auto;
+    padding: 2.2% 2.2% 3%;
+    border-radius: 18px 18px 4px 4px;
+    background: var(--ink);
+    box-shadow: inset 0 0 0 1.5px #3a3a46, 0 30px 60px rgb(0 0 0 / 0.45);
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 0 0 4px 4px;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  // The Safari toolbar along the top of the screen, light grey like macOS. Sized in cqw (1% of the screen's width),
+  // so it stays in proportion on any size of laptop.
+  &__safari {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    height: max(14px, 3.2cqw);
+    padding-inline: max(6px, 1.4cqw);
+    border-radius: 4px 4px 0 0;
+    background: #ececee;
+    border-bottom: 1px solid #d5d5da;
+    color: #8e8e95;
+  }
+
+  &__lights {
+    display: flex;
+    gap: max(3px, 0.7cqw);
+
+    span {
+      width: max(5px, 1.05cqw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #ff5f57;
+
+      &:nth-child(2) {
+        background: #febc2e;
+      }
+
+      &:nth-child(3) {
+        background: #28c840;
+      }
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    left: max(28px, 7cqw);
+    display: flex;
+    gap: max(3px, 0.8cqw);
+
+    svg {
+      width: max(6px, 1.1cqw);
+      height: auto;
+    }
+  }
+
+  // The address bar, centred.
+  &__address {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+    width: 36cqw;
+    padding: max(1px, 0.3cqw) 0;
+    border-radius: max(3px, 0.6cqw);
+    background: var(--white);
+    font-size: max(6px, 1.25cqw);
+    color: #3c3c43;
+    white-space: nowrap;
+
+    svg {
+      width: 0.85em;
+      height: auto;
+      color: #8e8e95;
+    }
+  }
+
+  &__camera {
+    position: absolute;
+    top: 0.9%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    border-radius: 50%;
+    background: #2a2a33;
+  }
+
+  // The base: wider than the screen, with a notch in the middle of its front edge.
+  &__base {
+    position: relative;
+    display: block;
+    height: clamp(10px, 1.6vw, 18px);
+    border-radius: 2px 2px 14px 14px / 2px 2px 60% 60%;
+    background: linear-gradient(to bottom, #d9d9df, #a9a9b3 60%, #7d7d88);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 0.4);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 16%;
+      height: 45%;
+      translate: -50% 0;
+      border-radius: 0 0 8px 8px;
+      background: #8f8f99;
+    }
+  }
+}
+
+// Versions 2 and 3 (a single featured client): nothing after the last section, so no space before the footer.
+.work-page--feature {
+  padding-bottom: 0;
+
+  .work-showcase {
+    margin-bottom: 0;
+  }
+
+  // A smaller heading than the main Work page's, so the laptop gets the attention.
+  .work-showcase__title {
+    font-size: clamp(2.25rem, 1rem + 3.5vw, 4.25rem); // 68px on wide screens
+  }
+}
+
+// The laptop's screen scrolls through the whole Nueva Gold home page on a loop: a pause at the top, a slow scroll
+// down, a pause at the footer, then a quicker scroll back up. Visitors who prefer reduced motion see the top, still.
+@include motion-ok {
+  .work-laptop__page {
+    animation: work-laptop-scroll 30s ease-in-out infinite;
+  }
+}
+
+@keyframes work-laptop-scroll {
+  0%,
+  6% {
+    object-position: 50% 0;
+  }
+
+  62%,
+  70% {
+    object-position: 50% 100%;
+  }
+
+  94%,
+  100% {
+    object-position: 50% 0;
+  }
+}
+
+// Version 3: a short hero with just the eyebrow and heading.
+.work-showcase--short {
+  padding-block: calc($header-height + var(--space-section)) var(--space-section);
+
+  .work-showcase__title {
+    margin-bottom: 0;
+  }
+
+  // The quote under the heading, kept narrow so it stays clear of the laptop beside it.
+  .work-showcase__lede {
+    max-width: 22ch;
+    margin-top: var(--space-medium);
+    font-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.6rem);
+    line-height: 1.35;
+  }
+
+  // Phones and tablets: the laptop under the quote. From lg up: on the right, its top level with the top of the
+  // heading (the eyebrow, heading and quote are the rows of the left column).
+  .work-showcase__laptop {
+    margin-top: var(--space-large);
+
+    .work-laptop {
+      margin-top: 0;
+    }
+  }
+
+  @include mq(lg) {
+    .work-showcase__inner {
+      display: grid;
+      grid-template-columns: 1fr 54%;
+      grid-template-rows: auto auto 1fr;
+      column-gap: var(--space-large);
+    }
+
+    // The eyebrow, heading and quote stack in the left column.
+    .work-showcase__inner > :not(.work-showcase__laptop) {
+      grid-column: 1;
+    }
+
+    .work-showcase__laptop {
+      grid-column: 2;
+      grid-row: 2 / span 2;
+      margin-top: 0;
+
+      .work-laptop {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Version 3: white under the hero (the statement under it is black; the cards are on white).
+.work-page--light {
+  background: var(--white);
+  color: var(--ink);
+  // How tall the hero's curved bottom edge is (see below).
+  --curve: clamp(5rem, 14vw, 14rem);
+
+  // The hero stays white text on the gradient.
+  .work-showcase {
+    color: var(--white);
+  }
+
+  // The hero's bottom edge as one big curve: low on the left, rising to the right and levelling out, so it runs
+  // diagonally behind the laptop. A black SVG shape (.work-showcase__curve), the same black as the statement under it, covers the
+  // part below the curve. From lg up the hero has almost no bottom padding, so the curve rises up through the middle
+  // of the laptop.
+  .work-showcase--short {
+    padding-bottom: calc(var(--space-section) + var(--curve));
+
+    @include mq(lg) {
+      padding-bottom: var(--space-small); // the curve's height overlaps the laptop, so it passes through its middle
+    }
+
+    .work-showcase__inner {
+      z-index: 1; // above the black shape
+    }
+
+    .work-showcase__curve {
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      max-width: none;
+      height: var(--curve);
+      fill: var(--ink);
+      pointer-events: none;
+    }
+  }
+
+  // Less space between the hero and the statement below it.
+  .work-showcase--short + .statement {
+    padding-top: var(--space-large);
+  }
+}
+
+// The iMac version (variant="work-laptop--imac"), drawn to look like a real one: the screen behind a thin black glass
+// bezel with a faint sheen, a brushed aluminium chin, a flat aluminium stand catching the light down its middle (and
+// shaded where it tucks under the chin), and the foot seen slightly from above. Sizes are in % of the width so it
+// scales as one piece (chin 7.5%, stand 12.5%, foot 2.5% tall). The chin's bottom margin (15% of the iMac's width)
+// makes room for the stand and foot, so the foot sits on the iMac's bottom edge.
+.work-laptop--imac {
+  filter: drop-shadow(0 18px 24px rgb(11 11 15 / 0.18));
+
+  // No glow behind it, and no lift on hover: it stands on the line below.
+  &::before {
+    display: none;
+  }
+
+  @include motion-ok {
+    &:hover {
+      translate: none;
+    }
+  }
+
+  // The chin, stand and foot hang off __base (below); nothing on the link itself.
+  &::after {
+    display: none;
+  }
+
+  // The foot: a thin aluminium slab seen slightly from above, its top face lit and its front edge in shade. Placed
+  // 12.5% of the width below the chin (the stand's height: 12.5 / 7.5 of the chin's height = 166.67%).
+  .work-laptop__base::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 166.667%);
+    left: 50%;
+    width: 32%;
+    aspect-ratio: 32 / 2.5;
+    translate: -50% 0;
+    border-radius: 6px 6px 2px 2px;
+    background: linear-gradient(to bottom, #f6f6f8 0%, #e2e2e7 58%, #b4b4bc 60%, #9c9ca5 100%);
+    box-shadow: inset 0 1px 0 var(--white), inset 1px 0 0 rgb(0 0 0 / 0.06), inset -1px 0 0 rgb(0 0 0 / 0.06);
+  }
+
+  .work-laptop__screen {
+    width: 100%;
+    padding: 1.8% 1.8% 1.4%;
+    border-radius: 12px 12px 0 0;
+    background: #0b0b0d;
+    box-shadow: inset 0 0 0 1px #2c2c33;
+
+    // A faint diagonal reflection across the glass.
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+      background: linear-gradient(115deg, rgb(255 255 255 / 0.1) 0%, rgb(255 255 255 / 0.03) 32%, transparent 33%);
+      pointer-events: none;
+    }
+  }
+
+  // Square bottom corners: the picture runs right to the bezel.
+  .work-laptop__screen img {
+    border-radius: 0;
+  }
+
+  .work-laptop__camera {
+    width: 4px;
+    height: 4px;
+    margin-left: -2px;
+    top: 0.6%;
+    background: #1f1f26;
+    box-shadow: 0 0 0 1px #2a2a32;
+  }
+
+  // The chin: brushed aluminium, with a fine dark seam where it meets the glass.
+  .work-laptop__base {
+    height: auto;
+    aspect-ratio: 100 / 7.5;
+    margin-bottom: 15%; // room for the stand and foot (% of the iMac's width)
+    border-radius: 0 0 12px 12px;
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 0.04), transparent 20%, transparent 80%, rgb(0 0 0 / 0.04)),
+      linear-gradient(to bottom, #ececef, #dedee3 60%, #cfcfd5);
+    box-shadow: inset 0 1px 0 rgb(0 0 0 / 0.35), inset 0 -1px 0 rgb(255 255 255 / 0.6);
+
+    // The stand: flat and straight, lit down the middle, shaded at the top where it sits in the chin's shadow.
+    &::before {
+      top: 100%;
+      width: 20%;
+      height: auto;
+      aspect-ratio: 20 / 12.5;
+      border-radius: 0;
+      background:
+        linear-gradient(to bottom, rgb(0 0 0 / 0.28), rgb(0 0 0 / 0.06) 22%, transparent 45%),
+        linear-gradient(90deg, #a9a9b1, #d9d9de 18%, #f3f3f5 48%, #e0e0e5 70%, #b3b3bb);
+      clip-path: none;
+    }
+  }
+}
+
+// work-v4: LNDMRK's pages in the carousel (partials/page-carousel-lndmrk.html), on the page's black.
+.page-carousel {
+  // No padding at the bottom, so the next section (with its own top padding) follows closer.
+  padding-block: var(--space-section) 0;
+  color: var(--white);
+
+  // The heading centred, with 60px more space between it and the carousel.
+  .page-wall__intro {
+    margin-bottom: calc(var(--space-medium) + 60px);
+    text-align: center;
+  }
+
+  // No caption box over the screenshots. (The captions stay in the HTML: the script reads the page name from them for
+  // the "Home · 1 of 3" line.)
+  .work-showcase__caption {
+    display: none;
+  }
+}

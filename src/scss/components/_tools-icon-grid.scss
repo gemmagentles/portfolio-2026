@@ -1,0 +1,49 @@
+@use '../abstracts' as *;
+
+// Logos of the tools I use in grey-outlined squares on a black band, across the full content width.
+.tools-icon-grid {
+  padding-block: var(--space-section) calc(var(--space-section) + 20px); // 20px extra at the bottom
+  background: var(--black);
+  color: var(--white);
+
+  &__title {
+    margin-bottom: var(--space-large);
+  }
+
+  // Phones: 4 per row. From md up: 8 per row, so 16 tiles make two rows.
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-small);
+
+    @include mq(md) {
+      grid-template-columns: repeat(8, 1fr);
+    }
+  }
+
+  &__item {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    padding: 18%;
+    border: 1px solid #3a3a3a;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    // The SVG logos fill their whole image, while the ones taken from the animation have some empty space
+    // built in. A little extra padding makes them all look the same size.
+    &:has(img[src$='.svg']) {
+      padding: 23%;
+    }
+
+    // The VS Code icon fills its square edge to edge, so it gets a little more room to match the others.
+    &:has(img[src*='vscode']) {
+      padding: 28%;
+    }
+
+  }
+}

@@ -1,0 +1,8 @@
+// Small label above a section heading, e.g. "Chapter VI · Why it matters". Takes the section's text colour.
+.eyebrow {
+  margin-bottom: var(--space-xsmall);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

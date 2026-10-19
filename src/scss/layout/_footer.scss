@@ -1,0 +1,123 @@
+@use '../abstracts' as *;
+
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-section) var(--space-large);
+  background: var(--black);
+  color: var(--contrast-color);
+
+  &__inner {
+    position: relative;
+    display: grid;
+    gap: var(--space-large);
+
+    @include mq(md) {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+  }
+
+  &__cta {
+    margin-bottom: var(--space-xsmall);
+  }
+
+  &__email {
+    font-size: var(--text-xl);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    overflow-wrap: anywhere;
+    transition: color 0.3s var(--ease-out);
+
+    &:hover {
+      color: var(--purple-color);
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-medium);
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      text-underline-offset: 0.3em;
+      transition: color 0.3s var(--ease-out);
+
+      &:hover {
+        color: var(--purple-color);
+      }
+    }
+
+    // GitHub and LinkedIn: the arrow sits tighter to the name.
+    a[target='_blank'] {
+      gap: 0.3em;
+    }
+  }
+
+  // Small arrow after GitHub and LinkedIn (opens in a new tab) and a download arrow after the résumé, each in a
+  // thin outlined box that fills with the purple blue on hover.
+  &__icon {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 1em; // the height of the text
+    height: 1em;
+    padding: 0.15em;
+    border: 1px solid currentColor;
+    border-radius: 0.2em;
+    // A gentle, even fade: --ease-out gets to full blue almost straight away, so the fill looked like it snapped on.
+    transition: background-color 0.45s ease-in-out, border-color 0.45s ease-in-out, color 0.45s ease-in-out;
+
+    a:hover &,
+    a:focus-visible & {
+      background: var(--purple-color);
+      border-color: var(--purple-color);
+      color: var(--white);
+    }
+  }
+
+  // On hover or focus the arrow nudges in its direction and settles back: up and right for GitHub and
+  // LinkedIn, down for the résumé (the tray line under it stays put).
+  @include motion-ok {
+    a:hover &__arrow--out,
+    a:focus-visible &__arrow--out {
+      animation: footer-arrow-out 0.5s var(--ease-out);
+    }
+
+    a:hover &__arrow--down,
+    a:focus-visible &__arrow--down {
+      animation: footer-arrow-down 0.5s var(--ease-out);
+    }
+  }
+
+  &__legal {
+    grid-column: 1 / -1;
+    font-size: var(--text-small);
+
+    // The "Design system" link after the copyright.
+    a {
+      text-underline-offset: 0.3em;
+      transition: color 0.3s ease-in-out;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--purple-color);
+      }
+    }
+  }
+}
+
+// Distances are in the icon's 24-unit viewBox: a small nudge that stays inside the box.
+@keyframes footer-arrow-out {
+  50% {
+    translate: 3px -3px;
+  }
+}
+
+@keyframes footer-arrow-down {
+  50% {
+    translate: 0 3px;
+  }
+}

@@ -1,0 +1,43 @@
+// Entry point. Add new partials here in this order: base → layout → components → pages.
+
+@use 'base/root';
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/motion';
+
+@use 'layout/container';
+@use 'layout/header';
+@use 'layout/footer';
+
+@use 'components/button';
+@use 'components/skip-link';
+@use 'components/reveal';
+@use 'components/eyebrow';
+@use 'components/drips';
+@use 'components/section-wave';
+@use 'components/carousel';
+@use 'components/project-card';
+@use 'components/work-browser';
+@use 'components/about' as about-section; // aliased: pages/about already uses the name "about"
+@use 'components/clients';
+@use 'components/work-grid';
+@use 'components/statement';
+@use 'components/logo';
+@use 'components/cta';
+@use 'components/tools-icon-grid';
+@use 'components/what-you-get';
+@use 'components/process';
+@use 'components/why-it-matters';
+@use 'components/work-bento';
+@use 'components/page-wall';
+@use 'components/work-cards';
+@use 'components/work-split';
+@use 'components/page-spread';
+@use 'components/client-grid';
+
+@use 'pages/home';
+@use 'pages/about';
+@use 'pages/contact';
+@use 'pages/case-study';
+@use 'pages/work';
+@use 'pages/design-system';

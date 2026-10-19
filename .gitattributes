@@ -1,0 +1,14 @@
+# Keep Unix line endings (matches .editorconfig) so files look the same on any computer
+* text=auto eol=lf
+
+# Images and archives are binary: never touch their line endings
+*.webp binary
+*.png binary
+*.PNG binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary

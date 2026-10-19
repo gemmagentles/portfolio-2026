@@ -1,0 +1,306 @@
+@use '../abstracts' as *;
+
+// The header (Nav C from the design). On the home page it has no bar: it floats over the top of the hero's gradient,
+// which runs up behind it. Pages without that hero get a dark bar so the white logo and links stay readable.
+.site-header {
+  position: relative; // anchors the mobile menu (add "position: sticky" here to make it sticky)
+  top: 0;
+  z-index: 10;
+  background: var(--header-background-color);
+  color: var(--header-text-color);
+
+  // Over a gradient top section (one marked data-header-over: the home hero and the Work page showcase): see-through,
+  // and lifted out of the flow so that section starts at the top of the page
+  // (each gives itself matching room at the top: pages/_home.scss, pages/_work.scss).
+  body:has([data-header-over]) & {
+    position: absolute;
+    inset: 0 0 auto;
+    background: transparent;
+  }
+
+  // Pages without a gradient top section can still have the gradient on the bar: add nav-gradient to the body.
+  .nav-gradient & {
+    background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-small);
+    min-height: $header-height;
+
+    @include mq(md) {
+      position: relative; // anchors the centred capsule (on phones the menu spans the whole header instead)
+    }
+  }
+
+  &__logo {
+    margin-right: auto;
+  }
+}
+
+// Mobile: the links, icons and button drop down under the header. From md up: the links in a centred frosted-glass
+// capsule and the icons and button on the right (from "Nav C" in the design).
+.site-nav {
+  position: absolute;
+  inset: 100% 0 auto 0;
+  display: grid;
+  gap: var(--space-medium);
+  padding: var(--space-medium);
+  background: var(--header-background-color);
+  visibility: hidden;
+  opacity: 0;
+  translate: 0 -0.5rem;
+  transition: opacity 0.25s var(--ease-out), translate 0.25s var(--ease-out), visibility 0s 0.25s;
+
+  &.is-open {
+    visibility: visible;
+    opacity: 1;
+    translate: 0 0;
+    transition-delay: 0s;
+  }
+
+  &__list {
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    a {
+      display: block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-family: var(--font-link);
+      font-size: var(--text-large);
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover,
+      &:focus-visible {
+        background: rgb(255 255 255 / 0.14);
+      }
+
+      // The current page: a white pill.
+      &[aria-current] {
+        background: var(--white);
+        color: var(--ink);
+      }
+    }
+  }
+
+  // GitHub, LinkedIn and the résumé download.
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__icon {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  // Icon links: a comfortable 44px tap target around the 18px icon.
+  &__icon-link {
+    display: grid;
+    place-items: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    color: rgb(255 255 255 / 0.85);
+    transition: color 0.2s;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--white);
+    }
+
+    @include mq(md) {
+      min-width: 2rem;
+      min-height: 2rem;
+    }
+  }
+
+  // "Résumé" (downloads the PDF): a white pill on dark backgrounds (the phone menu, and the bar on pages without the
+  // hero). From md up over a gradient top section (data-header-over) it's black, as in the design.
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--white);
+    font-family: var(--font-link);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+
+    @include mq(md) {
+      body:has([data-header-over]) & {
+        background: var(--ink);
+        color: var(--white);
+      }
+    }
+  }
+
+  @include mq(md) {
+    position: static;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    visibility: visible;
+    opacity: 1;
+    translate: none;
+    transition: none;
+
+    // The capsule, centred in the header.
+    &__list {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      flex-direction: row;
+      align-items: center;
+      height: 48px;
+      border-radius: 999px;
+      background: rgb(255 255 255 / 0.14);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.28), 0 8px 30px rgb(20 10 60 / 0.18);
+
+      // The same space at each end as above and below the pills. (ul[class] in the reset strips list padding, so this
+      // needs the extra specificity of the nav's class.)
+      .site-nav & {
+        padding: 0 3px;
+      }
+
+      a {
+        font-size: 15px;
+      }
+
+      // The gliding hover pill (src/js/modules/navglide.js): it slides to the hovered link and stretches or shrinks to
+      // its width, with a slight overshoot so it seems to morph from one word into the next. While it's on (has-glide),
+      // the links' own hover background is turned off; the current page keeps its white pill on top.
+      &.has-glide a:hover,
+      &.has-glide a:focus-visible {
+        background: none;
+      }
+
+      &.has-glide a[aria-current] {
+        background: var(--white);
+      }
+
+      li {
+        position: relative;
+        z-index: 1; // the links sit above the pill
+      }
+
+      .site-nav__glide {
+        position: absolute;
+        top: 3px;
+        bottom: 3px;
+        left: 0;
+        z-index: 0;
+        display: block;
+        width: 0;
+        border-radius: 999px;
+        background: rgb(255 255 255 / 0.22);
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.2);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform 0.45s cubic-bezier(0.34, 1.4, 0.64, 1),
+          width 0.45s cubic-bezier(0.34, 1.4, 0.64, 1),
+          opacity 0.2s ease;
+      }
+
+      &.is-gliding .site-nav__glide {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// Without JavaScript the toggle can't work, so show the links instead.
+html:not(.js) .site-nav {
+  position: static;
+  visibility: visible;
+  opacity: 1;
+  translate: none;
+  padding: 0;
+  border: 0;
+  background: none;
+
+  .site-nav__list {
+    flex-direction: row;
+    gap: var(--space-small);
+  }
+}
+
+html:not(.js) .nav-toggle {
+  display: none;
+}
+
+.nav-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+
+  &__bar,
+  &__bar::before,
+  &__bar::after {
+    display: block;
+    width: 1.4rem;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.25s var(--ease-out), background-color 0.25s;
+  }
+
+  &__bar {
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+    }
+
+    &::before {
+      top: -0.45rem;
+    }
+
+    &::after {
+      top: 0.45rem;
+    }
+  }
+
+  &[aria-expanded='true'] &__bar {
+    background: transparent;
+
+    &::before {
+      transform: translateY(0.45rem) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(-0.45rem) rotate(-45deg);
+    }
+  }
+
+  @include mq(md) {
+    display: none;
+  }
+}
+
+// The gliding pill only exists in the desktop capsule.
+.site-nav__glide {
+  display: none;
+}

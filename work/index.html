@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <include
+      src="head.html"
+      title="Work — Gemma Gentles"
+      description="What Gemma Gentles has built: CMS websites, custom-coded front ends, email campaigns and API components."
+    ></include>
+  </head>
+  <body class="page-work">
+    <include src="header.html"></include>
+
+    <!--
+      Work: everything I've built, in four categories (from "What I have built" in the V5 Studio design).
+      Each category is a row: number, name and blurb on the left, its projects on the right.
+      Cards: partials/work-card-site.html (a website screenshot) and partials/work-card-email.html (an email).
+      Anything in [square brackets] is a placeholder to replace with a real project.
+    -->
+    <main id="main" class="work-page">
+      <!--
+        Showcase: the three featured projects as browser-window screens in a carousel. One sits in front with the
+        other two angled behind it. Clicking a screen behind brings it to the front; clicking the front one drops it
+        and unfolds a drawer with its description (src/js/modules/showcase.js). data-pos is each screen's place:
+        0 front, 1 right, -1 left.
+        The quote is from "Chapter IV · My Work" in the V5 Studio design.
+        The background is the home page hero's: the pink-to-blue gradient and the hexagon facets (partials/hero-hex.html).
+        data-header-over makes the header see-through over it, like the home page (src/scss/layout/_header.scss).
+      -->
+      <section class="work-showcase" aria-labelledby="work-title" data-header-over>
+        <div class="work-showcase__facets" aria-hidden="true">
+          <include src="hero-hex.html"></include>
+        </div>
+
+        <div class="container work-showcase__inner">
+          <p class="eyebrow" data-reveal>My Work</p>
+          <h1 class="work-showcase__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
+
+          <div class="work-showcase__carousel" data-showcase data-reveal>
+            <ul class="work-showcase__stage">
+              <li class="work-showcase__screen" data-pos="0">
+                <a href="/work/lndmrk/">
+                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                  <img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" />
+                  <span class="work-showcase__caption">
+                    <span class="work-showcase__label">Featured project</span>
+                    <span class="work-showcase__name">LNDMRK</span>
+                  </span>
+                </a>
+              </li>
+              <li class="work-showcase__screen" data-pos="1">
+                <a href="/work/fraser-valley/">
+                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                  <img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" />
+                  <span class="work-showcase__caption">
+                    <span class="work-showcase__label">Featured project</span>
+                    <span class="work-showcase__name">Fraser Valley</span>
+                  </span>
+                </a>
+              </li>
+              <li class="work-showcase__screen" data-pos="-1">
+                <a href="/work/nueva-gold/">
+                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                  <img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" />
+                  <span class="work-showcase__caption">
+                    <span class="work-showcase__label">Featured project</span>
+                    <span class="work-showcase__name">Nueva Gold</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- The drawer that unfolds from under the front screen when it's clicked: one description per screen,
+                 in the same order as the screens above. Only the front screen's one shows. -->
+            <div class="work-showcase__drawer" id="work-showcase-drawer" data-showcase-drawer>
+              <div class="work-showcase__drawer-inner">
+                <div class="work-showcase__details" data-details>
+                  <p class="work-showcase__details-meta">LNDMRK · CMS website</p>
+                  <p>[Two or three sentences about LNDMRK: who the client is, what they needed, what you designed and built, and the result.]</p>
+                </div>
+                <div class="work-showcase__details" data-details hidden>
+                  <p class="work-showcase__details-meta">Fraser Valley · CMS website</p>
+                  <p>[Two or three sentences about Fraser Valley: who the client is, what they needed, what you designed and built, and the result.]</p>
+                </div>
+                <div class="work-showcase__details" data-details hidden>
+                  <p class="work-showcase__details-meta">Nueva Gold · CMS website</p>
+                  <p>[Two or three sentences about Nueva Gold: who the client is, what they needed, what you designed and built, and the result.]</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="work-showcase__controls">
+              <button class="work-showcase__arrow" type="button" aria-label="Previous project" data-showcase-prev>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+              </button>
+              <p class="work-showcase__status" aria-live="polite" data-showcase-status>LNDMRK · 1 of 3</p>
+              <button class="work-showcase__arrow" type="button" aria-label="Next project" data-showcase-next>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <p class="work-showcase__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
+        </div>
+      </section>
+
+      <include src="page-wall-lndmrk.html" intro="hidden" eyebrow="" title=""></include>
+
+      <include src="work-bento.html"></include>
+
+      <include src="work-cards-lndmrk.html"></include>
+
+      <div class="container">
+        <nav class="work-page__filters" aria-label="Work categories" data-reveal>
+          <ul>
+            <li><a href="#cms-websites"><span>01</span>CMS Websites</a></li>
+            <li><a href="#custom-coded"><span>02</span>Custom Coded</a></li>
+            <li><a href="#custom-edms"><span>03</span>Custom EDMs</a></li>
+            <li><a href="#api-components"><span>04</span>API Components</a></li>
+          </ul>
+        </nav>
+
+        <!-- 01 · CMS Websites -->
+        <section class="work-category" id="cms-websites" aria-labelledby="cms-websites-title" data-reveal>
+          <div class="work-category__intro">
+            <p class="work-category__number" aria-hidden="true">01</p>
+            <h2 class="work-category__title" id="cms-websites-title">CMS Websites</h2>
+            <p class="work-category__text">Sites your team can update themselves, built on a CMS that's easy to use.</p>
+          </div>
+          <div class="work-category__grid">
+            <include src="work-card-site.html" href="/work/fraser-valley/" image="/images/work/fraser-valley/cover.webp" name="Fraser Valley" type="Website"></include>
+            <include src="work-card-site.html" href="/work/nueva-gold/" image="/images/work/nueva-gold/cover.webp" name="Nueva Gold" type="Website"></include>
+            <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" name="LNDMRK" type="Website"></include>
+          </div>
+        </section>
+
+        <!-- 02 · Custom Coded: placeholders. Swap each for a work-card-site include once you have the screenshot. -->
+        <section class="work-category" id="custom-coded" aria-labelledby="custom-coded-title" data-reveal>
+          <div class="work-category__intro">
+            <p class="work-category__number" aria-hidden="true">02</p>
+            <h2 class="work-category__title" id="custom-coded-title">Custom Coded</h2>
+            <p class="work-category__text">Hand-built front ends with no templates, written for speed and accessibility.</p>
+          </div>
+          <div class="work-category__grid">
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="work-card__placeholder" aria-hidden="true">&lt;/&gt;</span>
+              </div>
+              <h3 class="work-card__name">[Project name]</h3>
+              <p class="work-card__type">Custom build</p>
+            </article>
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="work-card__placeholder" aria-hidden="true">&lt;/&gt;</span>
+              </div>
+              <h3 class="work-card__name">[Project name]</h3>
+              <p class="work-card__type">Custom build</p>
+            </article>
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="work-card__placeholder" aria-hidden="true">&lt;/&gt;</span>
+              </div>
+              <h3 class="work-card__name">[Project name]</h3>
+              <p class="work-card__type">Custom build</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 03 · Custom EDMs: four across on wide screens. -->
+        <section class="work-category" id="custom-edms" aria-labelledby="custom-edms-title" data-reveal>
+          <div class="work-category__intro">
+            <p class="work-category__number" aria-hidden="true">03</p>
+            <h2 class="work-category__title" id="custom-edms-title">Custom EDMs</h2>
+            <p class="work-category__text">Email campaigns coded to render cleanly in every inbox, on every screen.</p>
+          </div>
+          <div class="work-category__grid work-category__grid--four">
+            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
+            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
+            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
+            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
+          </div>
+        </section>
+
+        <!-- 04 · API Components: each card is a small mock of a live-data widget (a chart, a list, a stat). -->
+        <section class="work-category" id="api-components" aria-labelledby="api-components-title" data-reveal>
+          <div class="work-category__intro">
+            <p class="work-category__number" aria-hidden="true">04</p>
+            <h2 class="work-category__title" id="api-components-title">API Components</h2>
+            <p class="work-category__text">Front-end components wired to live data from APIs and headless CMSs.</p>
+          </div>
+          <div class="work-category__grid">
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--api" aria-hidden="true">
+                <span class="work-card__endpoint"><span>GET</span> /api/[endpoint]<span class="work-card__live">Live</span></span>
+                <span class="work-card__chart">
+                  <span style="--h: 40%"></span><span style="--h: 62%"></span><span style="--h: 48%"></span><span style="--h: 75%"></span><span style="--h: 92%"></span><span style="--h: 58%"></span><span style="--h: 70%"></span>
+                </span>
+              </div>
+              <h3 class="work-card__name">[Component name]</h3>
+              <p class="work-card__type">Component · live data</p>
+            </article>
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--api" aria-hidden="true">
+                <span class="work-card__endpoint"><span>GET</span> /api/[endpoint]<span class="work-card__live">Live</span></span>
+                <span class="work-card__rows">
+                  <span class="work-card__row"><span class="work-card__lines"><span style="width: 70%"></span><span style="width: 50%"></span></span></span>
+                  <span class="work-card__row"><span class="work-card__lines"><span style="width: 55%"></span><span style="width: 65%"></span></span></span>
+                  <span class="work-card__row"><span class="work-card__lines"><span style="width: 80%"></span><span style="width: 45%"></span></span></span>
+                </span>
+              </div>
+              <h3 class="work-card__name">[Component name]</h3>
+              <p class="work-card__type">Component · live data</p>
+            </article>
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--api" aria-hidden="true">
+                <span class="work-card__endpoint"><span>GET</span> /api/[endpoint]<span class="work-card__live">Live</span></span>
+                <span class="work-card__stat">
+                  <span class="work-card__stat-value">[00]</span>
+                  <span class="work-card__stat-lines"><span></span><span></span></span>
+                  <span class="work-card__stat-bar"><span style="--w: 64%"></span></span>
+                </span>
+              </div>
+              <h3 class="work-card__name">[Component name]</h3>
+              <p class="work-card__type">Component · live data</p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <include src="footer.html"></include>
+  </body>
+</html>

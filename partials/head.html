@@ -1,0 +1,33 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{title}}</title>
+<meta name="description" content="{{description}}" />
+<meta name="author" content="{{site.name}}" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{title}}" />
+<meta property="og:description" content="{{description}}" />
+<meta property="og:image" content="{{site.url}}/images/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta name="color-scheme" content="light" />
+<!-- Favicon: a white "G" on a triangle in the hero's pink-to-blue gradient. (The "gg" sticker version is saved as
+     favicon-32.png, favicon-192.png and apple-touch-icon.png in public/, unused.) -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+<!-- Fonts: Oswald (all headings, logo), Inter (paragraphs, links, lists), Space Mono (sub headings), plus Fraunces (the About facts),
+     Bodoni Moda and Cormorant (client brand boards). The rules for which goes where are at the top of src/scss/base/_typography.scss; names in _root.scss. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Cormorant:ital,wght@0,600;0,700;1,600&family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@300..700&family=Oswald:wght@200..700&family=Space+Mono:wght@400;700&display=swap"
+/>
+
+<!-- Runs before paint: marks JS as available. -->
+<script>
+  document.documentElement.classList.add('js');
+</script>
+
+<link rel="stylesheet" href="/src/scss/main.scss" />
+<script type="module" src="/src/js/main.js"></script>

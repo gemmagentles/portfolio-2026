@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <include
+      src="head.html"
+      title="Work (version 3) — Gemma Gentles"
+      description="What Gemma Gentles has built: CMS websites, custom-coded front ends, email campaigns and API components."
+    ></include>
+  </head>
+  <body class="page-work">
+    <include src="header.html"></include>
+
+    <!--
+      Work: everything I've built, in four categories (from "What I have built" in the V5 Studio design).
+      Each category is a row: number, name and blurb on the left, its projects on the right.
+      Cards: partials/work-card-site.html (a website screenshot) and partials/work-card-email.html (an email).
+      Anything in [square brackets] is a placeholder to replace with a real project.
+    -->
+    <main id="main" class="work-page work-page--feature work-page--light">
+      <!--
+        Work page, version 3: a short hero with the heading and quote on the left and the laptop with the Nueva Gold
+        website on the right, its top level with the heading (partials/work-laptop.html), over a curved bottom edge.
+        The quote is from "Chapter IV · My Work" in the V5 Studio design.
+        The background is the home page hero's pink-to-blue gradient, without the hexagon facets.
+        data-header-over makes the header see-through over it, like the home page (src/scss/layout/_header.scss).
+      -->
+      <section class="work-showcase work-showcase--short" aria-labelledby="work-title" data-header-over>
+        <!-- The curved bottom edge: black below the curve (styles: .work-showcase__curve in src/scss/pages/_work.scss). -->
+        <svg class="work-showcase__curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M100 0C55 0 25 35 0 100H100Z" /></svg>
+
+        <div class="container work-showcase__inner">
+          <p class="eyebrow" data-reveal>Featured Client</p>
+          <h1 class="work-showcase__title" id="work-title" data-reveal>Nueva <span class="accent-word">Gold</span></h1>
+          <p class="work-showcase__lede" data-reveal>Functional art for every user and ease for every client CMS.</p>
+          <div class="work-showcase__laptop">
+            <include src="work-laptop.html" variant="" href="/work/nueva-gold/" image="/images/work/nueva-gold/home-full.webp" height="5482" address="nuevagold.com" label="The Nueva Gold website on a laptop: see the case study" priority="high"></include>
+          </div>
+        </div>
+      </section>
+
+      <include
+        src="statement.html"
+        id="nueva-project"
+        theme="dark"
+        eyebrow="The project"
+        title="Turning ambition into"
+        accent="legacy"
+        text="I managed the project, built the front end and tested it across browsers and devices, giving Nueva Gold a site their team can update themselves through the CMS, with a contact form to bring in new clients."
+      ></include>
+
+      <include src="client-grid-nueva-gold.html"></include>
+
+      <include
+        src="cta.html"
+        eyebrow="nuevagold.com"
+        title="See it"
+        title2=""
+        accent="live."
+        ghost="Live"
+        button="Visit site"
+        href="https://nuevagold.com/"
+        target="_blank"
+        note=" (opens in a new tab)"
+      ></include>
+    </main>
+
+    <include src="footer.html"></include>
+  </body>
+</html>

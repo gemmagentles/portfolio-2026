@@ -1,0 +1,34 @@
+@use '../abstracts' as *;
+
+// A centred heading and paragraph, on white (--light) or black (--dark).
+.statement {
+  padding-block: var(--space-section) calc(var(--space-section) + 20px); // 20px extra at the bottom
+  background: var(--white);
+  color: var(--text-color);
+
+  &__inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: var(--space-small);
+  }
+
+  &__text {
+    max-width: 55ch;
+    font-size: var(--text-large);
+    line-height: 1.6;
+  }
+}
+
+// Black, with white text. The heading's last word keeps its gradient.
+.statement--dark {
+  background: var(--ink);
+  color: var(--white);
+
+  .statement__text {
+    color: rgb(255 255 255 / 0.85);
+  }
+}

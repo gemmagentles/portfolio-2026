@@ -1,0 +1,58 @@
+// Site-wide CSS variables. Change the look of the whole site from here.
+
+:root {
+  // Brand colours
+  --primary-color: #5170ff;
+  --secondary-color: #ff66c4;
+  --purple-color: #A66BE3; // the purple where the hero gradient meets its bottom-left edge (accent words, paint drips)
+  --accent-color: var(--primary-color);
+  --contrast-color: #ffffff; // text on primary, secondary or accent backgrounds
+  --brand-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+  // Neutrals used across components (one source of truth for each).
+  --white: #fff;
+  --black: #000; // page and section backgrounds
+  --ink: #0b0b0f; // near-black: dark text on light, buttons, device bezels, dark panels
+  --paper: #f0efeb; // LNDMRK's off-white, behind their screenshots and devices
+
+  --header-background-color: var(--black);
+  --header-text-color: var(--white);
+
+  // Neutral colours
+  --background-color: #f6f3ec;
+  --surface-color: #ffffff; // cards and image frames
+  --text-color: #1f1d1a;
+  --muted-color: #625d55;
+  --border-color: #1f1d1a;
+
+  // Type
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; // paragraphs, links and lists
+  --font-mono: 'Space Mono', ui-monospace, monospace; // sub headings (eyebrows, labels)
+  --font-link: var(--font-body); // all links
+  --font-heading--primary: 'Oswald', 'Arial Narrow', sans-serif; // all headings (h1, h2, h3) and the logo
+  --font-heading--secondary: var(--font-heading--primary); // section headings (h2) and h3: Oswald too (was Fraunces)
+
+  // Fluid type scale: min size at 360px wide, max at 1280px wide
+  --text-small: clamp(0.83rem, 0.8rem + 0.15vw, 0.94rem); // captions, labels
+  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.15rem); // paragraphs
+  --text-large: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem); // h3, intro text
+  --text-xl: clamp(1.45rem, 1.25rem + 0.9vw, 2rem); // card titles, taglines
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.8rem); // h2
+  --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 4.5rem); // h1
+  --text-display: clamp(2.8rem, 1.6rem + 5.5vw, 7rem); // hero and page titles
+
+  // Space scale: use these for all padding, margins and gaps
+  --space-tiny: 0.25rem; // 4px
+  --space-xsmall: 0.5rem; // 8px
+  --space-small: 1rem; // 16px
+  --space-medium: 1.5rem; // 24px
+  --space-large: 2.5rem; // 40px
+  --space-section: clamp(3rem, 2rem + 4vw, 5rem); // between sections: 48px to 80px
+  --space-section-large: clamp(4.5rem, 3rem + 7vw, 9rem); // big breaks, e.g. above the footer: 72px to 144px
+
+  // Padding down the sides of the page: 1.5rem on phones, up to 4rem on large screens
+  --gutter: clamp(1.5rem, 1rem + 4vw, 4rem);
+
+  --radius: 0.75rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

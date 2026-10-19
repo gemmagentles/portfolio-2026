@@ -1,0 +1,19 @@
+@use '../abstracts' as *;
+
+// Smooth cross-fade between pages in browsers that support cross-document view transitions.
+@include motion-ok {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+// Belt and braces: kill animation for anyone who asked for reduced motion.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

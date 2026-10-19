@@ -1,0 +1,127 @@
+@use '../abstracts' as *;
+
+.case-study {
+  &__header {
+    display: grid;
+    gap: var(--space-medium);
+    justify-items: start;
+    padding-block: var(--space-section) var(--space-large);
+  }
+
+  &__back {
+    font-size: var(--text-small);
+  }
+
+  &__title {
+    font-size: var(--text-display);
+    font-weight: 400;
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-medium);
+    width: 100%;
+    padding-block: var(--space-medium);
+    border-block: 1px solid var(--border-color);
+
+    @include mq(md) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    dt {
+      font-size: var(--text-small);
+      color: var(--muted-color);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    dd {
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+
+  &__hero img,
+  &__gallery img {
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+  }
+
+  &__body {
+    display: grid;
+    gap: var(--space-section);
+    padding-block: var(--space-section);
+  }
+
+  &__section {
+    display: grid;
+    gap: var(--space-small);
+
+    @include mq(md) {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-large);
+
+      > :not(h2) {
+        grid-column: 2;
+      }
+    }
+
+
+    p,
+    ul {
+      max-width: 60ch;
+    }
+
+    ul {
+      display: grid;
+      gap: var(--space-xsmall);
+      padding-left: 1.2em;
+    }
+  }
+
+  &__gallery {
+    display: grid;
+    gap: var(--space-large);
+    align-items: start;
+
+    @include mq(md) {
+      grid-template-columns: 3fr 1fr;
+    }
+
+    figcaption {
+      margin-top: var(--space-xsmall);
+      font-size: var(--text-small);
+      color: var(--muted-color);
+    }
+  }
+
+  &__gallery-mobile img {
+    border-radius: calc(var(--radius) * 2);
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+
+  &__next {
+    display: grid;
+    gap: var(--space-xsmall);
+    padding-top: var(--space-large);
+    border-top: 1px solid var(--border-color);
+
+    p {
+      color: var(--muted-color);
+    }
+
+    a {
+      font-size: var(--text-3xl);
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--accent-color);
+      }
+    }
+  }
+}

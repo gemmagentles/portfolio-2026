@@ -1,0 +1,550 @@
+@use '../abstracts' as *;
+
+// Alternating 50/50 rows of text and a site screenshot (partials/work-split-lndmrk.html). Phones: the screenshot
+// above its text. From md up: side by side, the screenshot on the right in odd rows and on the left in even ones.
+.work-split {
+  padding-block: var(--space-section) 0; // the last row runs straight into the footer
+  color: var(--white);
+
+  // The rows sit flush against each other, with square corners and no gaps. From md up every row is the same height:
+  // --row-h (the image panels are at least that tall and set nothing taller), or more if a row's text needs it, with
+  // the text and images centred. Phones stack, so the rule doesn't apply there.
+  --row-h: clamp(16rem, calc(40px + 29.3vw), 29rem); // 462px on a 1440px screen
+
+  .container {
+    display: grid;
+
+    @include mq(md) {
+      grid-auto-rows: 1fr;
+    }
+  }
+
+  &__row {
+    display: grid;
+    align-items: stretch; // the text box and the screenshot are always the same height
+
+    @include mq(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      // Even rows: the screenshot on the left.
+      &:nth-child(even) .work-split__shot {
+        order: -1;
+      }
+    }
+  }
+
+  // The screenshot fills its half of the row: at least 16:10 (the ::before props it open), and taller if the text
+  // beside it is, cropped to fit. Phones: the screenshot first.
+  &__shot {
+    position: relative;
+    order: -1;
+    margin: 0;
+    overflow: hidden;
+
+    @include mq(md) {
+      order: 0;
+      min-height: var(--row-h);
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 62.5%; // 16:10
+
+      // From md up the row height (--row-h) sets the size instead.
+      @include mq(md) {
+        display: none;
+      }
+    }
+
+    > img {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% var(--focus, 0%);
+    }
+  }
+
+  // The brand guidelines board in place of a screenshot, centred on a sand-coloured panel.
+  &__shot--board {
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+    background: #d6d4cd;
+
+    &::before {
+      display: none;
+    }
+
+    .brand-board {
+      width: 100%;
+    }
+  }
+
+  // The scrolling screen (partials/work-laptop.html, as an iMac) on LNDMRK's off-white, centred across and standing
+  // on the bottom edge of the row (no padding below it).
+  &__shot--laptop {
+    display: grid;
+    justify-items: center;
+    align-items: end;
+    padding: clamp(1.25rem, 0.5rem + 3vw, 3.5rem) clamp(1.5rem, 0.5rem + 3vw, 3.5rem) 0;
+    background: var(--paper);
+
+    &::before {
+      display: none;
+    }
+
+    // Half the width of its panel (a little bigger on phones, where the panel is narrower).
+    .work-laptop {
+      width: 70%;
+      margin: 0;
+
+      @include mq(md) {
+        width: 50%;
+      }
+    }
+  }
+
+  // A phone (the contact form) on LNDMRK's off-white, centred and sitting on the bottom edge of the row, with its lower
+  // 20% cut off by it: it's sized so the 80% that shows fills the panel's height less some space at the top, then moved
+  // down by 20% of its own height. The panel hides what hangs below.
+  &__shot--mobile {
+    background: var(--paper);
+
+    &::before {
+      padding-top: 120%; // phones: room for the phone
+
+      @include mq(md) {
+        display: none;
+      }
+    }
+  }
+
+  // The phone, drawn to look like a real one (sized in cqw, 1% of its own width, so it scales as one piece): a thin
+  // titanium rim catching the light, a slim black bezel round the screen, the Dynamic Island with its camera lens,
+  // the buttons on the sides, and a faint reflection across the glass (__glass).
+  &__phone {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    container-type: size; // so the device inside can size everything in cqw, % of the phone's width
+    height: calc((100% - clamp(1.5rem, 1rem + 2vw, 3rem)) / 0.8 * 0.8); // 20% smaller than filling the panel
+    aspect-ratio: 9 / 19.5;
+    translate: -50% 20%;
+  }
+
+  &__device {
+    position: absolute;
+    inset: 0;
+    padding: 1.6cqw; // the rim
+    border-radius: 15cqw;
+    background: linear-gradient(135deg, #a3a3aa 0%, #4a4a52 18%, #2c2c33 40%, #6e6e76 62%, #34343b 80%, #9a9aa1 100%);
+    box-shadow:
+      inset 0 0 0 0.4cqw rgb(255 255 255 / 0.25),
+      0 2px 4px rgb(11 11 15 / 0.25),
+      0 30px 60px -24px rgb(11 11 15 / 0.5);
+
+    // The Dynamic Island, with the camera lens in its right end.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 5.2cqw;
+      left: 50%;
+      z-index: 2;
+      width: 31cqw;
+      height: 9cqw;
+      translate: -50% 0;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 82% 50%, #2b3a55 0 1.3cqw, #12141c 1.4cqw 2.3cqw, transparent 2.4cqw),
+        #050506;
+    }
+
+    // The buttons: action and volume on the left, power on the right (one bar, copied by its shadows).
+    &::after {
+      content: '';
+      position: absolute;
+      top: 22cqw;
+      left: -0.9cqw;
+      z-index: -1;
+      width: 1.2cqw;
+      height: 8cqw;
+      border-radius: 1cqw 0 0 1cqw;
+      background: #5d5d65;
+      box-shadow:
+        0 15cqw 0 0 #5d5d65,
+        0 15cqw 0 0 #5d5d65,
+        0 30cqw 0 0 #5d5d65,
+        101.4cqw 18cqw 0 0 #5d5d65;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 3.4cqw solid #050506; // the bezel
+      border-radius: 13.6cqw;
+      background: #050506;
+      object-fit: cover;
+      object-position: 50% var(--focus, 0%);
+    }
+  }
+
+  // An iPad in landscape (the services section), centred on LNDMRK's off-white. Like the phone, the outer box sets the
+  // size and the device inside draws it in cqw (1% of its width): a thin aluminium edge, an even black bezel, the
+  // front camera centred on the top edge, the top button, and the glass reflection (__glass).
+  &__shot--tablet {
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 0.5rem + 2.5vw, 3rem);
+    background: var(--paper);
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &__tablet {
+    position: relative;
+    container-type: inline-size;
+    width: 62%; // 20% smaller than it was (78%)
+    aspect-ratio: 1180 / 820;
+  }
+
+  &__tablet-device {
+    position: absolute;
+    inset: 0;
+    padding: 0.7cqw; // the aluminium edge
+    border-radius: 4.2cqw;
+    background: linear-gradient(135deg, #d9d9de 0%, #9c9ca4 30%, #cfcfd4 55%, #8d8d95 80%, #c4c4ca 100%);
+    box-shadow:
+      inset 0 0 0 0.25cqw rgb(255 255 255 / 0.4),
+      0 2px 4px rgb(11 11 15 / 0.2),
+      0 30px 60px -28px rgb(11 11 15 / 0.45);
+
+    // The front camera, on the long top edge.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1.7cqw;
+      left: 50%;
+      z-index: 2;
+      width: 0.9cqw;
+      aspect-ratio: 1;
+      translate: -50% 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2b3a55 30%, #111319 60%);
+    }
+
+    // The top button, near the right end of the top edge.
+    &::after {
+      content: '';
+      position: absolute;
+      top: -0.45cqw;
+      right: 8cqw;
+      z-index: -1;
+      width: 6cqw;
+      height: 0.7cqw;
+      border-radius: 0.4cqw 0.4cqw 0 0;
+      background: #a3a3aa;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border: 2.6cqw solid #050506; // the bezel
+      border-radius: 3.6cqw;
+      background: #050506;
+      object-fit: cover;
+    }
+
+    // The reflection, with the tablet's corners.
+    .work-split__glass {
+      inset: 0.7cqw;
+      border-radius: 3.6cqw;
+    }
+  }
+
+  // A faint diagonal reflection across the glass.
+  &__glass {
+    position: absolute;
+    inset: 1.6cqw;
+    z-index: 1;
+    border-radius: 13.6cqw;
+    background: linear-gradient(120deg, rgb(255 255 255 / 0.14) 0%, rgb(255 255 255 / 0.04) 30%, transparent 31%);
+    pointer-events: none;
+  }
+
+  // The first screenshots, framed as a browser window (a Safari-style toolbar with its address) on LNDMRK's off-white.
+  &__shot--browser {
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 0.5rem + 2.5vw, 3rem);
+    background: var(--paper);
+
+    &::before {
+      display: none;
+    }
+  }
+
+  // 70% of its panel's width (30% smaller than filling it).
+  &__browser {
+    width: 70%;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: 0 0 0 1px rgb(11 11 15 / 0.08), 0 24px 48px -20px rgb(11 11 15 / 0.35);
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: 50% var(--focus, 0%);
+    }
+  }
+
+  // The buttons on the left, then the address centred in the space after them (so they never overlap).
+  &__bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 2rem;
+    padding-inline: 0.75rem;
+    background: #ececee;
+    border-bottom: 1px solid #dcdce0;
+  }
+
+  &__dots {
+    flex-shrink: 0;
+    display: flex;
+    gap: 6px;
+
+    span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ff5f57;
+
+      &:nth-child(2) {
+        background: #febc2e;
+      }
+
+      &:nth-child(3) {
+        background: #28c840;
+      }
+    }
+  }
+
+  &__address {
+    flex: 0 1 18rem;
+    min-width: 0;
+    margin-inline: auto;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: var(--white);
+    font-size: 0.7rem;
+    text-align: center;
+    color: #3c3c43;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // The device mockup (iMac, MacBook, iPad and iPhone): shown whole, centred on LNDMRK's off-white.
+  &__shot--devices {
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+    background: var(--paper);
+
+    &::before {
+      padding-top: 78%; // phones: the mockup's own shape (1600 x 1246) sets the height
+
+      @include mq(md) {
+        display: none;
+      }
+    }
+
+    // Fitted inside the panel (inset by its padding) rather than setting the row's height.
+    > img {
+      --pad: clamp(1rem, 0.5rem + 2vw, 2.5rem);
+      inset: var(--pad);
+      width: calc(100% - 2 * var(--pad));
+      height: calc(100% - 2 * var(--pad));
+      object-fit: contain;
+    }
+  }
+
+  // A phone screenshot: shown whole and narrow, centred in a black phone frame on LNDMRK's off-white.
+  &__shot--phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--space-large);
+    background: var(--paper);
+
+    &::before {
+      display: none;
+    }
+
+    > img {
+      position: static;
+      width: min(60%, 16rem);
+      height: auto;
+      aspect-ratio: 9 / 19.5;
+      padding: 7px;
+      border-radius: 2.25rem; // the phone keeps its rounded corners
+      background: var(--ink);
+      box-shadow: inset 0 0 0 1.5px #3a3a46, 0 30px 60px -30px rgb(11 11 15 / 0.4);
+      clip-path: inset(0 round 2.25rem);
+    }
+  }
+
+  // The text side: a white card with dark text.
+  &__text {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: var(--space-small);
+    padding: calc(clamp(1.5rem, 1rem + 2vw, 2.5rem) + 30px); // 30px more on every side
+    background: var(--white);
+    color: var(--ink);
+
+    p {
+      max-width: 48ch;
+      line-height: 1.6;
+      color: #3c3c46;
+    }
+
+    .eyebrow {
+      margin-bottom: 0;
+      color: var(--ink);
+    }
+  }
+
+  &__title {
+    font-size: var(--text-2xl);
+  }
+
+  &__heading {
+    font-family: var(--font-heading--secondary);
+    font-size: var(--text-xl);
+    font-weight: 500;
+    line-height: 1.15;
+
+    // Extra space above a heading that follows other content (e.g. "My role" after the Built with tags), but not
+    // after an eyebrow label: there the gap matches the first box's (the text box's own gap).
+    &:not(:first-child, .eyebrow + &) {
+      margin-top: var(--space-small);
+    }
+  }
+
+  // Goals and challenges, each with a small dot (the reset strips list bullets from lists with a class).
+  &__list {
+    display: grid;
+    gap: 0.6rem;
+    max-width: 48ch;
+    line-height: 1.5;
+    color: #3c3c46;
+
+    li {
+      position: relative;
+      padding-left: 1.4em; // room for the hexagon, in step with the text size
+
+      &::before {
+        @include hex-bullet;
+      }
+    }
+  }
+
+  // Tools and roles as outlined pills.
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    span {
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgb(11 11 15 / 0.2);
+      border-radius: 999px;
+      font-size: var(--text-small);
+      color: var(--ink);
+    }
+  }
+
+  &__url {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    letter-spacing: 0.04em;
+  }
+}
+
+// Full width (work-split--full on the section): the rows run edge to edge, each half filling its side of the screen.
+// The text lines up with the page's container: on its outer side it gets the same space the container leaves (--edge).
+// Remove the class to go back to container width.
+.work-split--full {
+  --edge: max(var(--gutter), (100vw - #{$container-max}) / 2);
+
+  .container {
+    width: 100%;
+  }
+
+  @include mq(md) {
+    // The text as a block centred across its half (equal space either side), with the text inside it left-aligned.
+    // The block is as wide as its longest line allows, up to 30rem.
+    .work-split__text {
+      grid-template-columns: fit-content(30rem);
+      justify-content: center;
+    }
+
+    // The brand guidelines board, centred across its half like the text blocks, at a set width.
+    .work-split__shot--board .brand-board {
+      max-width: 32rem;
+    }
+  }
+
+  // Phones: everything stacked, so the text just lines up with the container on both sides.
+  @include mq-down(md) {
+    .work-split__text {
+      padding-inline: calc(var(--gutter) + 30px);
+    }
+
+    .work-split__shot--board {
+      padding-inline: var(--gutter);
+    }
+  }
+}
+
+
+// The "Visit site" button: a black pill, purple on hover. After a heading it sits 50px below it (the text box's own
+// gap is var(--space-small), so the margin makes up the rest).
+.work-split__button {
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 0.5rem;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  background: var(--ink);
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--purple-color);
+  }
+
+  .work-split__heading + & {
+    margin-top: calc(50px - var(--space-small));
+  }
+}
