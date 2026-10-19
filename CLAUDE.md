@@ -55,8 +55,21 @@ front-end developer and designer; explain changes in plain words and check them 
   `npm run build` then `npx vite preview --port 4173 --strictPort`, and stop the server and delete the temp folder after.
 - **Screenshots of client sites** are captured from the live sites with headless Chrome and saved as WebP in
   `public/images/work/<client>/` (e.g. `*-full.webp` full-length pages, `services-tablet.webp`).
-- **Version control:** once Git is set up, commit when Gemma asks (clear messages), push when asked. Stop making
-  `.bak` copies; Git history replaces them.
+- **Version control:** Git, pushed to github.com/gemmagentles/portfolio-2026 (public). Commit when Gemma asks
+  (clear messages), push when asked. Never make `.bak` copies; Git history replaces them.
+- **Gitflow (always):** `main` only holds released, live-ready code; `develop` is where finished work collects.
+  Never commit straight to `main` or `develop`. Plain `git` commands (the `git flow` helper isn't installed).
+  - New work: `feature/<short-name>` from `develop`, merged back into `develop` with `--no-ff`, then deleted.
+  - Release: `release/<version>` from `develop`, final checks/version bump, merged into `main` with `--no-ff`,
+    tagged `v<version>` (e.g. `v1.1.0`), then merged back into `develop`.
+  - Urgent fix to the live site: `hotfix/<version>` from `main`, merged into `main` (tagged) and into `develop`.
+  - Before starting work, check which branch is checked out and create the right one if needed. Ask before
+    merging into `main` or tagging a release.
+- **Changelog (every merge):** `CHANGELOG.md` (Keep a Changelog layout) is updated for every merge. Add the entry
+  as the last commit on the branch before merging, so it arrives with the merge and nothing is committed straight
+  to `develop`/`main`. Features and fixes go under `[Unreleased]` (Added / Changed / Fixed / Removed), in plain
+  words about what changed on the site. A release moves `[Unreleased]` under `[x.y.z] - YYYY-MM-DD`, bumps
+  `version` in `package.json` to match, and updates the compare links at the bottom.
 
 ## Open to-dos
 
@@ -68,5 +81,4 @@ front-end developer and designer; explain changes in plain words and check them 
 - `site.config.json` still has placeholder GitHub and LinkedIn addresses (`your-username`).
 - On phones, the `/work/` category links show stray bullets; at about 800px wide the header capsule overlaps the logo
   and Résumé button.
-- Delete the `.bak` files and `src-scss-before-tokens.bak.tar` once the project is in Git.
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).
