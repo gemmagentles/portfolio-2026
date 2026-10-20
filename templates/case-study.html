@@ -20,9 +20,12 @@
       src/scss/components/_work-split.scss.
     -->
     <main id="main" class="work-page work-page--feature">
-      <!-- The hero: the project's name, and three of its pages as browser windows (partials/showcase-screen.html).
-           Clicking the front one scrolls down to the rows; clicking one behind brings it to the front. Add or remove
-           screens to suit (pos: 0 front, 1 right, -1 left, 2 waiting behind) and keep the count in status right. -->
+      <!-- The hero: the project's name, and its pages as browser windows (partials/showcase-screen.html). Clicking
+           the front one scrolls down to the rows; clicking one behind brings it to the front.
+           npm run capture (or npm run new with the site's address) screenshots every page of the live site and
+           rewrites the screens between the two "carousel screens" markers, with the line under the carousel, so
+           leave the markers in. To do it by hand: one screen per page, pos 0 front, 1 right, -1 left, 2 waiting
+           behind, and keep the count in status right. -->
       <section class="page-carousel" aria-labelledby="page-carousel-title">
         <div class="container">
           <div class="page-wall__intro">
@@ -32,9 +35,11 @@
 
           <div class="work-showcase__carousel" data-showcase="scroll" data-reveal>
             <ul class="work-showcase__stage">
+              <!-- carousel screens: start -->
               <include src="showcase-screen.html" pos="0" href="#work-split-title" image="/images/work/__SLUG__/home-full.svg" width="1440" height="3600" alt="The __NAME__ home page" label="__NAME__" name="Home"></include>
               <include src="showcase-screen.html" pos="1" href="#work-split-title" image="/images/work/__SLUG__/about-full.svg" width="1440" height="3000" alt="The __NAME__ about page" label="__NAME__" name="About"></include>
               <include src="showcase-screen.html" pos="-1" href="#work-split-title" image="/images/work/__SLUG__/contact-full.svg" width="1440" height="2000" alt="The __NAME__ contact page" label="__NAME__" name="Contact"></include>
+              <!-- carousel screens: end -->
             </ul>
 
             <include src="showcase-controls.html" status="Home · 1 of 3"></include>

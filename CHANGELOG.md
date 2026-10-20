@@ -42,6 +42,10 @@ version number and date.
   rows ending with "Visit site" and "View code"), with placeholder pictures for every slot. The carousel screens,
   pictures and buttons are shared partials, so a design change to them updates work-v4 and every new case study
   at once. The three existing case studies keep the older simple layout for now.
+- `npm run capture -- slug https://site/` (and `npm run new` given the live site's address) screenshots every page
+  linked in the client site's menus and puts them all in the case study's hero carousel, one screen per page, so a
+  four-page site gets four screens without editing anything. Floating buttons and cookie banners are left out of
+  the screenshots.
 
 ### Fixed
 

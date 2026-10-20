@@ -2,19 +2,25 @@
 // placeholder images from templates/case-study.html.
 //
 //   npm run new -- "Project Name"
+//   npm run new -- "Project Name" https://www.client-site.com/
 //
 // Result: work/project-name/index.html and public/images/work/project-name/*.svg
+// With the live site's address it also fills in the "Visit site" links and screenshots every page of the site into
+// the hero carousel (scripts/capture-pages.js, the same as npm run capture).
 // Then add a card for it on the home page (index.html), write the case study and replace the placeholder images.
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { capturePages } from './capture-pages.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const name = process.argv.slice(2).join(' ').trim();
+const args = process.argv.slice(2);
+const site = args.find((arg) => /^https?:\/\//.test(arg));
+const name = args.filter((arg) => arg !== site).join(' ').trim();
 
 if (!name) {
-  console.error('Give the project a name, e.g.  npm run new -- "Nueva Gold"');
+  console.error('Give the project a name, e.g.  npm run new -- "Nueva Gold"  (and its live site after it, if it has one)');
   process.exit(1);
 }
 
@@ -41,7 +47,13 @@ if (fs.existsSync(pageFile)) {
 }
 
 const template = fs.readFileSync(path.join(root, 'templates', 'case-study.html'), 'utf8');
-const page = template.replaceAll('__NAME__', name).replaceAll('__SLUG__', slug);
+let page = template.replaceAll('__NAME__', name).replaceAll('__SLUG__', slug);
+
+// The live site's address in the "Visit site" links and the iMac's address bar (e.g. "fraservalleygaels.com").
+if (site) {
+  const address = new URL(site).hostname.replace(/^www\./, '');
+  page = page.replaceAll('https://example.com', site).replaceAll('[example.com]', address);
+}
 
 fs.mkdirSync(pageDir, { recursive: true });
 fs.writeFileSync(pageFile, page);
@@ -81,8 +93,25 @@ for (const [file, w, h, label] of images) {
 console.log(`
 Created:
   work/${slug}/index.html
-  public/images/work/${slug}/ (${images.map(([file]) => file).join(', ')})
+  public/images/work/${slug}/ (${images.map(([file]) => file).join(', ')})`);
 
+// Screenshot every page of the live site into the carousel, then drop the placeholders it replaced.
+if (site) {
+  console.log(`\nCapturing every page of ${site} for the carousel:`);
+  try {
+    const shots = await capturePages(slug, site);
+    const html = fs.readFileSync(pageFile, 'utf8');
+    for (const file of ['home-full.svg', 'about-full.svg', 'contact-full.svg']) {
+      if (!html.includes(`/${slug}/${file}`)) fs.rmSync(path.join(imageDir, file), { force: true });
+    }
+    console.log(`The carousel shows ${shots.length} pages: ${shots.map((s) => s.name).join(', ')} (in public/images/work/${slug}/pages/).`);
+  } catch (error) {
+    console.log(`Couldn't capture the site (${error.message}). The carousel keeps its placeholders; try again with:
+  npm run capture -- ${slug} ${site}`);
+  }
+}
+
+console.log(`
 Next:
   1. Add a card to index.html:
      <include src="project-card.html" slug="${slug}" image="/images/work/${slug}/cover.svg" name="${name}" meta="Client website · 2026" summary="..."></include>

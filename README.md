@@ -20,7 +20,8 @@ npm run dev      # starts the site at http://localhost:5173 and reloads as you e
 | `npm run dev` | Local dev server with live reload |
 | `npm run build` | Production build into `dist/` (this is the folder you deploy) |
 | `npm run preview` | Serves the built `dist/` so you can check it before deploying |
-| `npm run new -- "Project Name"` | Creates a new case study page and placeholder images |
+| `npm run new -- "Project Name"` | Creates a new case study page and placeholder images (add the live site's address to capture its pages too) |
+| `npm run capture -- slug https://site/` | Screenshots every page of a live site into a case study's hero carousel |
 | `npm run test:include` | Tests the partials plugin |
 
 ## Where things live
@@ -75,7 +76,10 @@ Nav links written as `<a href="/about/" data-nav="/about/">` get `aria-current` 
 
 ```bash
 npm run new -- "Project Name"
+npm run new -- "Project Name" https://www.client-site.com/
 ```
+
+With the live site's address, it also fills in the "Visit site" links and screenshots every page of the site (the pages linked in its header and menus) into the hero carousel, one screen per page. To re-capture later, for example after the client adds a page: `npm run capture -- project-name https://www.client-site.com/`.
 
 This creates `work/project-name/index.html` in the work-v4 layout (a carousel of the project's pages, then 50/50 rows of text and pictures, ending with "Visit site" and "View code") plus placeholder images. The carousel screens, pictures and buttons are shared partials, so their look stays the same on every case study. Then:
 

@@ -8,7 +8,13 @@ front-end developer and designer; explain changes in plain words and check them 
 - `npm run dev` (port 5173), `npm run build` (into `dist/`), `npm run preview` (serves `dist/`, port 4173)
 - `npm run test:include` tests the partials plugin (8 tests; run after touching `plugins/html-include.js`)
 - `npm run new -- "Project Name"` creates a case study in the work-v4 layout from `templates/case-study.html`, with
-  placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`)
+  placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live
+  site's address after the name to fill in the "Visit site" links and capture the carousel in one go.
+- `npm run capture -- <slug> <site>` (`scripts/capture-pages.js`, uses `puppeteer-core` and the installed Chrome):
+  screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
+  `public/images/work/<slug>/pages/`), then rewrites the case study's carousel screens between its
+  `carousel screens` markers, the "1 of N" line, and the iMac if it still shows the placeholder. Re-run it when the
+  client's site changes.
 
 ## How the site is put together
 
