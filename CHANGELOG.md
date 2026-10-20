@@ -36,6 +36,8 @@ version number and date.
 - Work page v4: the hero builds in on page load: the heading rises in, then the front page screenshot slowly slides
   up into place, the left and then the right screenshot behind it follow one at a time, and the arrows fade in
   last (it used to fade up as one block).
+- Work page v4: clicking the front screen in the hero now scrolls further, so the 50/50 section starts right at
+  the top of the screen, and more smoothly: a gentle ease in and out that stops if you scroll yourself.
 
 ### Fixed
 
