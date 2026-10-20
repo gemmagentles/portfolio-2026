@@ -2,49 +2,41 @@
 
 // "View code" for a project whose repo is private (partials/work-split-lndmrk.html). When clicked
 // (src/js/modules/private-repo.js):
-//   1. .is-working: it tries to open. The arrow flies up and out of its box and comes back in from below, twice.
-//   2. .is-private: it gives up. The arrow shrinks away and a padlock pops up from the same spot and settles beside
-//      "Repo private", while "View code" slides up and out and "Repo private" slides up in.
+//   1. .is-working: it tries to open. The arrow pushes up and right in one smooth motion and eases back.
+//   2. .is-private: it gives up. The arrow's lines reshape into a padlock (an SVG animation in the HTML, started by
+//      the JS), "View code" slides up and out as "Repo private" slides up in, and the padlock settles with a small
+//      turn as it "locks".
 // It takes its look from the button it's mixed with (e.g. work-split__button--ghost). Without motion it simply swaps.
 //
-// The two faces ("View code ↗" and "Repo private" with the padlock) are stacked in one spot, each centred, so the
-// button is always as wide as the longer one: it doesn't change size, and nothing around it (such as a centred text
-// block) shifts.
+// The button keeps one width throughout (the JS fixes it at the "Repo private" size), so nothing around it shifts.
+// Inside, the text's box eases from the width of "View code" to the width of "Repo private", carrying the icon
+// along with it, so the text and icon always sit the same distance apart.
 .repo-button {
-  display: inline-grid;
-  place-items: center;
-  overflow: hidden; // clips the texts as they slide out
+  justify-content: center;
   border: 0; // a <button>: drop the browser's default border so it matches the link buttons
 
-  &__face {
-    grid-area: 1 / 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  // The arrow's box: a square the size of the text, so the arrow can fly out of it and back in.
-  &__icon {
+  &__text {
     display: inline-grid;
-    place-items: center;
-    width: 1em;
-    height: 1em;
-    overflow: hidden;
+    justify-items: start; // each text keeps its own width, so the JS can measure it
+    min-width: 0; // let the width the JS sets win over the longer text's width
+    overflow: hidden; // clips the texts as they slide in and out
+    transition: width 0.55s cubic-bezier(0.65, 0, 0.35, 1);
   }
 
-  &__arrow {
-    line-height: 1;
+  &__label,
+  &__message {
+    grid-area: 1 / 1;
   }
 
-  &__lock {
+  &__message {
+    visibility: hidden;
+  }
+
+  &__icon {
     flex-shrink: 0;
     width: 1em;
     height: 1em;
-  }
-
-  &__message,
-  &__lock {
-    visibility: hidden;
+    overflow: visible; // the padlock's loop reaches the top of the box
   }
 
   // While it tries and once it's private, it stays outlined: no purple fill on hover, as there's nothing to click.
@@ -60,50 +52,40 @@
     }
   }
 
-  // Private: "Repo private" and the padlock show in place of "View code" and the arrow.
   &.is-private {
-    .repo-button__label,
-    .repo-button__arrow {
+    .repo-button__label {
       visibility: hidden;
     }
 
-    .repo-button__message,
-    .repo-button__lock {
+    .repo-button__message {
       visibility: visible;
     }
   }
 
   @include motion-ok {
-    &.is-working .repo-button__arrow {
-      animation: repo-button-try 0.45s ease-in-out 2;
+    &.is-working .repo-button__icon {
+      animation: repo-button-try 0.5s cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     &.is-private .repo-button__label {
-      animation: repo-button-text-out 0.35s var(--ease-out);
+      animation: repo-button-text-out 0.45s cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     &.is-private .repo-button__message {
-      animation: repo-button-text-in 0.45s var(--ease-out);
+      animation: repo-button-text-in 0.55s cubic-bezier(0.65, 0, 0.35, 1);
     }
 
-    &.is-private .repo-button__arrow {
-      animation: repo-button-arrow-out 0.25s ease-in;
-    }
-
-    &.is-private .repo-button__lock {
-      animation: repo-button-lock-in 0.6s var(--ease-out);
+    // The settle starts as the lines finish becoming the padlock.
+    &.is-private .repo-button__icon {
+      animation: repo-button-settle 0.5s ease-in-out 0.45s;
     }
   }
 }
 
-// The arrow flies up and right out of its box (the way it points), then comes back in from below and left.
+// One push up and right (the way the arrow points), easing back to where it started.
 @keyframes repo-button-try {
-  45% {
-    translate: 1em -1em;
-  }
-
-  46% {
-    translate: -1em 1em;
+  50% {
+    translate: 0.3em -0.3em;
   }
 }
 
@@ -114,55 +96,24 @@
 
   to {
     opacity: 0;
-    translate: 0 -150%;
+    translate: 0 -110%;
   }
 }
 
 @keyframes repo-button-text-in {
   from {
     opacity: 0;
-    translate: 0 150%;
+    translate: 0 110%;
   }
 }
 
-@keyframes repo-button-arrow-out {
-  from {
-    visibility: visible;
-  }
-
-  to {
-    opacity: 0;
-    scale: 0.2;
-    rotate: 45deg;
-  }
-}
-
-// The padlock pops up where the arrow was (--lock-from, measured by the JS), a little too big, then glides to its
-// place beside the text and settles with a small wobble as it "locks".
-@keyframes repo-button-lock-in {
-  0% {
-    opacity: 0;
-    scale: 0.2;
-    translate: var(--lock-from, 0) 0;
-  }
-
-  40% {
-    opacity: 1;
-    scale: 1.1;
-    translate: var(--lock-from, 0) 0;
+// A small turn back and forth as the padlock "locks".
+@keyframes repo-button-settle {
+  35% {
+    rotate: -8deg;
   }
 
   70% {
-    scale: 1;
-    translate: 0 0;
-    rotate: -10deg;
-  }
-
-  85% {
-    rotate: 6deg;
-  }
-
-  100% {
-    rotate: 0deg;
+    rotate: 4deg;
   }
 }

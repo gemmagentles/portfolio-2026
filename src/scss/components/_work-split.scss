@@ -540,6 +540,7 @@
 .work-split__button {
   align-self: flex-start;
   display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.7rem 1.3rem;
   border-radius: 999px;
@@ -567,4 +568,12 @@
       box-shadow: inset 0 0 0 1.5px var(--purple-color);
     }
   }
+}
+
+// The ↗ arrow on "Visit site" and "View code", drawn as lines (so the private-repo button can reshape it into a
+// padlock, src/scss/components/_repo-button.scss), at the size of the text.
+.work-split__arrow {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
 }
