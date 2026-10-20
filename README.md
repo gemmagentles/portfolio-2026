@@ -84,7 +84,7 @@ With the live site's address, it also fills in the "Visit site" links and screen
 This creates `work/project-name/index.html` in the work-v4 layout (a carousel of the project's pages, then 50/50 rows of text and pictures, ending with "Visit site" and "View code") plus placeholder images. The carousel screens, pictures and buttons are shared partials, so their look stays the same on every case study. Then:
 
 1. Add a card for it in `index.html` (the command prints the line to paste).
-2. Write the case study text: replace everything in [square brackets], and the live site address (`https://example.com`). If the code is in a repo you can link to, swap `view-code-private.html` for `view-code.html` with `repo="..."`.
+2. Write the case study text: replace everything in [square brackets], and the live site address (`https://example.com`). "View code" is set up for you: if your GitHub account has a public repo named after the client (spaces, dashes and capitals ignored), it links there; if not, it shows "Repo private". To change it, swap `view-code-private.html` for `view-code.html` with `repo="..."` (or back).
 3. Replace the placeholder images in `public/images/work/project-name/` with real screenshots as `.webp`: full-length pages captured 1440 wide (`home-full`, `about-full`, `contact-full`), a phone screenshot 780 wide (`mobile`), an iPad one at 2360×1640 (`tablet`), a 1600×1000 screenshot, a devices mockup (`devices`) and a 1600×1000 `cover` for the home page card. Then update the `image` (and `width`/`height`) on each include in the page, and on the home page card.
 4. Add the page to `public/sitemap.xml`.
 

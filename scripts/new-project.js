@@ -5,6 +5,8 @@
 //   npm run new -- "Project Name" https://www.client-site.com/
 //
 // Result: work/project-name/index.html and public/images/work/project-name/*.svg
+// It also checks the GitHub account in site.config.json for a repo named after the client for the "View code"
+// button (a link if there is one, "Repo private" if not).
 // With the live site's address it also fills in the "Visit site" links and screenshots every page of the site into
 // the hero carousel (scripts/capture-pages.js, the same as npm run capture).
 // Then add a card for it on the home page (index.html), write the case study and replace the placeholder images.
@@ -55,6 +57,48 @@ if (site) {
   page = page.replaceAll('https://example.com', site).replaceAll('[example.com]', address);
 }
 
+// "View code": look for a public repo named after the client on the GitHub account in site.config.json. A match
+// makes the button a link to it (view-code.html); otherwise it stays the "Repo private" button the template has.
+// Names are compared ignoring case, spaces and dashes: an exact match first, then a repo whose name contains the
+// client's ("lndmrk-website" for LNDMRK) or is contained in it ("fraser-valley" for Fraser Valley Gaels).
+const compact = (text) => text.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+async function findRepo() {
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'site.config.json'), 'utf8'));
+  const user = config.github?.match(/github\.com\/([^/]+)/)?.[1];
+  if (!user) return { note: 'no GitHub address in site.config.json' };
+
+  const response = await fetch(`https://api.github.com/users/${user}/repos?per_page=100`, {
+    headers: { Accept: 'application/vnd.github+json', 'User-Agent': 'portfolio-new-project' },
+  });
+  if (!response.ok) return { note: `GitHub answered ${response.status}` };
+
+  const repos = await response.json();
+  const client = compact(name);
+  const exact = repos.find((repo) => compact(repo.name) === client);
+  const close = repos
+    .filter((repo) => {
+      const repoName = compact(repo.name);
+      return repoName.includes(client) || (repoName.length >= 4 && client.includes(repoName));
+    })
+    .sort((a, b) => a.name.length - b.name.length)[0];
+  const repo = exact || close;
+  return repo ? { url: repo.html_url } : { note: `no repo on github.com/${user} matches "${name}"` };
+}
+
+let codeNote;
+try {
+  const { url, note } = await findRepo();
+  if (url) {
+    page = page.replace('<include src="view-code-private.html"></include>', `<include src="view-code.html" repo="${url}"></include>`);
+    codeNote = `"View code" links to ${url}`;
+  } else {
+    codeNote = `"View code" shows "Repo private" (${note})`;
+  }
+} catch (error) {
+  codeNote = `"View code" shows "Repo private" (couldn't reach GitHub: ${error.message})`;
+}
+
 fs.mkdirSync(pageDir, { recursive: true });
 fs.writeFileSync(pageFile, page);
 
@@ -93,7 +137,9 @@ for (const [file, w, h, label] of images) {
 console.log(`
 Created:
   work/${slug}/index.html
-  public/images/work/${slug}/ (${images.map(([file]) => file).join(', ')})`);
+  public/images/work/${slug}/ (${images.map(([file]) => file).join(', ')})
+
+${codeNote}.`);
 
 // Screenshot every page of the live site into the carousel, then drop the placeholders it replaced.
 if (site) {

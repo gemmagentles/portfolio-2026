@@ -9,7 +9,9 @@ front-end developer and designer; explain changes in plain words and check them 
 - `npm run test:include` tests the partials plugin (8 tests; run after touching `plugins/html-include.js`)
 - `npm run new -- "Project Name"` creates a case study in the work-v4 layout from `templates/case-study.html`, with
   placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live
-  site's address after the name to fill in the "Visit site" links and capture the carousel in one go.
+  site's address after the name to fill in the "Visit site" links and capture the carousel in one go. It also
+  looks for a public repo named after the client on the GitHub account in `site.config.json`: "View code" links to
+  it if found (`view-code.html`), otherwise shows "Repo private" (`view-code-private.html`).
 - `npm run capture -- <slug> <site>` (`scripts/capture-pages.js`, uses `puppeteer-core` and the installed Chrome):
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
   `public/images/work/<slug>/pages/`), then rewrites the case study's carousel screens between its

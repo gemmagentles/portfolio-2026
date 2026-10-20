@@ -46,6 +46,8 @@ version number and date.
   linked in the client site's menus and puts them all in the case study's hero carousel, one screen per page, so a
   four-page site gets four screens without editing anything. Floating buttons and cookie banners are left out of
   the screenshots.
+- `npm run new` looks for a public repo named after the client on your GitHub account: if there is one, "View
+  code" links to it; if not, it becomes the "Repo private" button.
 
 ### Fixed
 
