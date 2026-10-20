@@ -22,6 +22,7 @@ version number and date.
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
 - The GitHub and LinkedIn links in the header, footer and contact page now go to the real profiles
   (github.com/gemmagentles and ca.linkedin.com/in/gemmagentles) instead of placeholders.
+- The favicon is now a square in the pink-to-blue gradient with a white "G" (it was a triangle).
 
 ### Removed
 
