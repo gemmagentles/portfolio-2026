@@ -16,6 +16,8 @@ version number and date.
 - Gitflow branching rules in `CLAUDE.md`: work happens on `feature/`, `release/` and `hotfix/` branches, never
   straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
+- On hover and keyboard focus, the header's Résumé button turns white with dark text, and its download arrow
+  nudges down and settles back like the footer's résumé link (no movement for visitors who prefer reduced motion).
 
 ### Changed
 
@@ -23,6 +25,11 @@ version number and date.
 - The GitHub and LinkedIn links in the header, footer and contact page now go to the real profiles
   (github.com/gemmagentles and ca.linkedin.com/in/gemmagentles) instead of placeholders.
 - The favicon is now a square in the pink-to-blue gradient with a white "G" (it was a triangle).
+
+### Fixed
+
+- The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
+  plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
 
 ### Removed
 
