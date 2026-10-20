@@ -24,6 +24,10 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Reusable components with settings** (set on the include): `statement.html` (`theme="light|dark"`), `cta.html`
   (eyebrow, title, title2, accent, ghost, button, href, target, note), `work-laptop.html` (href, image, height,
   address, label, priority, `variant="work-laptop--imac"`), `page-wall-lndmrk.html` (`intro`, eyebrow, title).
+- **"View code" buttons** (work-v4 50/50): a link (`work-split__button--ghost`, href = the repo) when there is a repo
+  to show, or for a private repo a `<button data-private-repo>` mixed with `repo-button`, which turns into "Repo
+  private" when clicked (`private-repo.js`, `_repo-button.scss`). Both versions are written out in
+  `partials/work-split-lndmrk.html`.
 - **SCSS** (`src/scss`, all imported in `main.scss`): `abstracts/` (Sass-only: breakpoints, `$container-max`,
   `$header-height`, mixins), `base/` (`_root.scss` CSS variables, reset, typography), `layout/`, `components/` (one
   partial per component), `pages/`. Start partials with `@use '../abstracts' as *;`.

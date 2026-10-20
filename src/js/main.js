@@ -8,6 +8,7 @@ import { initWorkGrid } from './modules/workgrid.js';
 // import { initWave } from './modules/wave.js'; // curved, animated edges between sections: switched off
 import { initYears } from './modules/years.js';
 import { initShowcase } from './modules/showcase.js';
+import { initPrivateRepo } from './modules/private-repo.js';
 
 initNav();
 initNavGlide();
@@ -18,3 +19,4 @@ initWorkGrid();
 // initWave();
 initYears();
 initShowcase();
+initPrivateRepo();
