@@ -16,6 +16,8 @@ version number and date.
 - Gitflow branching rules in `CLAUDE.md`: work happens on `feature/`, `release/` and `hotfix/` branches, never
   straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
+- Work page v4: a "View code" button (outlined) beside "Visit site" in the 50/50 section. It links to the GitHub
+  profile for now.
 
 ### Changed
 
