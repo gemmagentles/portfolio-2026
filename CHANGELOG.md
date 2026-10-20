@@ -13,8 +13,8 @@ version number and date.
 
 ### Added
 
-- Gitflow branching rules in `CLAUDE.md`: work happens on `feature/`, `release/` and `hotfix/` branches, never
-  straight on `main` or `develop`.
+- Gitflow branching rules in `CLAUDE.md`: work happens in batches on `feature/` branches (one per batch, not per
+  change), plus `release/` and `hotfix/` branches, never straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
 - On hover and keyboard focus, the header's Résumé button turns white with dark text, and its download arrow
   nudges down and settles back like the footer's résumé link (no movement for visitors who prefer reduced motion).
