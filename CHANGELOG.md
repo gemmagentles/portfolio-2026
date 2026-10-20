@@ -38,6 +38,9 @@ version number and date.
 
 - The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
   plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
+- Sections that fade in as you scroll could stay invisible if you scrolled past them quickly (a fast flick, the
+  End key, or reloading halfway down a page): on the home page this hid the work browser, clients and "why it
+  matters" sections. `reveal.js` now reveals anything that has passed its start point, whatever the scroll speed.
 
 ### Removed
 
