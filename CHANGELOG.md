@@ -20,6 +20,7 @@ version number and date.
 ### Changed
 
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
+- The logo reads "Gemma Gentles" in title case instead of all capitals (still Oswald).
 
 ### Removed
 
