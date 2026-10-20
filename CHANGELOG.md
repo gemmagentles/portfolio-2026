@@ -27,12 +27,12 @@ version number and date.
 - The GitHub and LinkedIn links in the header, footer and contact page now go to the real profiles
   (github.com/gemmagentles and ca.linkedin.com/in/gemmagentles) instead of placeholders.
 - The favicon is now a square in the pink-to-blue gradient with a white "G" (it was a triangle).
+- The logo reads "Gemma Gentles" in title case instead of all capitals (still Oswald).
 
 ### Fixed
 
 - The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
   plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
-- The logo reads "Gemma Gentles" in title case instead of all capitals (still Oswald).
 
 ### Removed
 
