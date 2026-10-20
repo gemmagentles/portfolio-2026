@@ -33,6 +33,8 @@ version number and date.
 - Work page v4: the 50/50 rows no longer slide up into place as they scroll in (which opened a gap between rows).
   They stay put, and once a row is well on screen the text rises in line by line and the pictures fade in slightly
   enlarged and slowly settle (`data-reveal="late"` in `reveal.js` starts them later).
+- Work page v4: the hero builds in on page load: the heading rises in, the front page screenshot slides up into
+  place, the two behind it follow a beat later, and the arrows fade in last (it used to fade up as one block).
 
 ### Fixed
 
