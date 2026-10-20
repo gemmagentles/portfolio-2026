@@ -20,6 +20,7 @@ version number and date.
 ### Changed
 
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
+- The favicon is now a square in the pink-to-blue gradient with a white "G" (it was a triangle).
 
 ### Removed
 
