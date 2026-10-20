@@ -524,8 +524,19 @@
 }
 
 
-// The "Visit site" button: a black pill, purple on hover. After a heading it sits 50px below it (the text box's own
-// gap is var(--space-small), so the margin makes up the rest).
+// "Visit site" and "View code" side by side (wrapping onto two lines if there isn't room). After a heading they sit
+// 50px below it (the text box's own gap is var(--space-small), so the margin makes up the rest).
+.work-split__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  .work-split__heading + & {
+    margin-top: calc(50px - var(--space-small));
+  }
+}
+
+// The "Visit site" button: a black pill, purple on hover.
 .work-split__button {
   align-self: flex-start;
   display: inline-flex;
@@ -544,7 +555,16 @@
     background: var(--purple-color);
   }
 
-  .work-split__heading + & {
-    margin-top: calc(50px - var(--space-small));
+  // "View code": the same pill outlined, so the live site stays the main action. Fills purple on hover like the other.
+  &--ghost {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--white);
+      box-shadow: inset 0 0 0 1.5px var(--purple-color);
+    }
   }
 }
