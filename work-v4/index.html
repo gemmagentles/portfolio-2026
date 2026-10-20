@@ -25,25 +25,5 @@
     </main>
 
     <include src="footer.html"></include>
-
-    <!-- TEMPORARY: a picker for comparing the 50/50 rows' scroll-in options (work-split--reveal-* in
-         _work-split.scss). Each choice reloads the page with ?reveal=name and puts that class on the section.
-         Delete this block once one is chosen and its class is written into partials/work-split-lndmrk.html. -->
-    <nav aria-label="Scroll-in options (temporary)" style="position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-wrap: wrap; gap: 6px; max-width: calc(100vw - 32px); padding: 8px; border-radius: 14px; background: rgb(11 11 15 / 0.85); font: 600 13px/1 var(--font-body)">
-      <a style="color: #fff; padding: 8px 10px; border-radius: 8px" href="?reveal=current">Current</a>
-      <a style="color: #fff; padding: 8px 10px; border-radius: 8px" href="?reveal=fade">1 Fade</a>
-      <a style="color: #fff; padding: 8px 10px; border-radius: 8px" href="?reveal=rise">2 Rise</a>
-      <a style="color: #fff; padding: 8px 10px; border-radius: 8px" href="?reveal=wipe">3 Wipe</a>
-      <a style="color: #fff; padding: 8px 10px; border-radius: 8px" href="?reveal=zoom">4 Zoom</a>
-    </nav>
-    <script>
-      {
-        const choice = new URLSearchParams(location.search).get('reveal');
-        if (choice && choice !== 'current') document.querySelector('.work-split').classList.add(`work-split--reveal-${choice}`);
-        document.querySelectorAll('nav[aria-label^="Scroll-in"] a').forEach((link) => {
-          if (link.search === `?reveal=${choice}`) link.style.background = 'var(--purple-color)';
-        });
-      }
-    </script>
   </body>
 </html>

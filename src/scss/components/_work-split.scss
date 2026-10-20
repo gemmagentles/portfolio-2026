@@ -578,100 +578,44 @@
   height: 1em;
 }
 
-// How the rows appear as they scroll in (a setting on the section; without one, rows use the site-wide fade-up from
-// _reveal.scss). Every option keeps the rows where they are, so no gap opens between them.
-//   work-split--reveal-fade: the row fades in where it sits, slowly.
-//   work-split--reveal-rise: the card and panel are there at once; the text, then the picture, rise gently into place.
-//   work-split--reveal-wipe: the text fades in while the picture panel is uncovered from the middle of the row outwards.
-//   work-split--reveal-zoom: the text fades in while the picture settles from slightly enlarged to its normal size.
-// reveal.js adds .is-visible to each row; the movement uses transform and scale (the phone and tablet already use
-// translate to position themselves). Only with motion OK, like the site-wide one.
+// Zoom (work-split--reveal-zoom on the section): how the rows appear as they scroll in, in place of the site-wide
+// fade-up from _reveal.scss. The rows stay where they are (so no gap opens between them); inside each, the text's
+// lines rise and fade in one after another while the picture fades in slightly enlarged and slowly settles to its
+// normal size (the panel clips what's outside it). It waits a moment after the row arrives and moves slowly, so it
+// plays out as you scroll rather than finishing first. reveal.js adds .is-visible to each row. The movement uses
+// transform and scale, as the phone and tablet already use translate to position themselves. Only with motion OK.
 @include motion-ok {
-  // The row (and anything inside it with its own fade-up, like the iMac) stays put: the option does the animating.
-  .js :is(.work-split--reveal-fade, .work-split--reveal-rise, .work-split--reveal-wipe, .work-split--reveal-zoom) :is(.work-split__row[data-reveal], .work-split__row [data-reveal]) {
-    opacity: 1;
-    translate: none;
-    transition: none;
-  }
-
-  .js .work-split--reveal-fade .work-split__row[data-reveal] {
-    opacity: 0;
-    transition: opacity 1.4s var(--ease-out);
-
-    &.is-visible {
+  .js .work-split--reveal-zoom {
+    // The row, and anything inside it with its own fade-up (like the iMac), stays put: the zoom does the animating.
+    :is(.work-split__row[data-reveal], .work-split__row [data-reveal]) {
       opacity: 1;
+      translate: none;
+      transition: none;
     }
-  }
 
-  // Rise, wipe and zoom: the text's contents rise and fade in on their (still) white card.
-  .js .work-split:is(.work-split--reveal-rise, .work-split--reveal-wipe, .work-split--reveal-zoom) {
     .work-split__row[data-reveal] .work-split__text > * {
       opacity: 0;
       transform: translateY(1rem);
-      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
-    }
-
-    .work-split__row.is-visible .work-split__text > * {
-      opacity: 1;
-      transform: none;
+      transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out);
+      transition-delay: 0.3s;
     }
 
     // Each line of the text a moment after the last.
     @for $i from 2 through 6 {
-      .work-split__text > :nth-child(#{$i}) {
-        transition-delay: #{($i - 1) * 80}ms;
-      }
-    }
-  }
-
-  // Rise: the picture rises after the text has started.
-  .js .work-split--reveal-rise {
-    .work-split__row[data-reveal] .work-split__shot > * {
-      opacity: 0;
-      transform: translateY(1.5rem);
-      transition: opacity 1s var(--ease-out) 0.2s, transform 1s var(--ease-out) 0.2s;
-    }
-
-    .work-split__row.is-visible .work-split__shot > * {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  // Wipe: the picture panel is uncovered from its edge nearest the text (the middle of the row) outwards: left to
-  // right when it's on the right, right to left when it's on the left (even rows from md up; on phones it's above
-  // the text, so it opens top to bottom).
-  .js .work-split--reveal-wipe {
-    .work-split__row[data-reveal] .work-split__shot {
-      clip-path: inset(0 0 100% 0);
-      transition: clip-path 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.1s;
-
-      @include mq(md) {
-        clip-path: inset(0 100% 0 0);
+      .work-split__row[data-reveal] .work-split__text > :nth-child(#{$i}) {
+        transition-delay: #{300 + ($i - 1) * 100}ms;
       }
     }
 
-    @include mq(md) {
-      .work-split__row[data-reveal]:nth-child(even) .work-split__shot {
-        clip-path: inset(0 0 0 100%);
-      }
-    }
-
-    .work-split__row[data-reveal].is-visible .work-split__shot { // as specific as the even-row start, and later
-      clip-path: inset(0);
-    }
-  }
-
-  // Zoom: the picture fades in from slightly enlarged and settles (the panel clips what's outside it).
-  .js .work-split--reveal-zoom {
     .work-split__row[data-reveal] .work-split__shot > * {
       opacity: 0;
       scale: 1.08;
-      transition: opacity 1s var(--ease-out) 0.1s, scale 1.6s var(--ease-out) 0.1s;
+      transition: opacity 1.3s var(--ease-out) 0.4s, scale 2.2s var(--ease-out) 0.4s;
     }
 
-    .work-split__row.is-visible .work-split__shot > * {
+    .work-split__row.is-visible :is(.work-split__text, .work-split__shot) > * {
       opacity: 1;
+      transform: none;
       scale: 1;
     }
   }
