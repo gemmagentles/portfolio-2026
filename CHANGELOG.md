@@ -31,8 +31,8 @@ version number and date.
 - The favicon is now a square in the pink-to-blue gradient with a white "G" (it was a triangle).
 - The logo reads "Gemma Gentles" in title case instead of all capitals (still Oswald).
 - Work page v4: the 50/50 rows no longer slide up into place as they scroll in (which opened a gap between rows).
-  They stay put; after a short pause the text rises in line by line and the pictures fade in slightly enlarged and
-  slowly settle.
+  They stay put, and once a row is well on screen the text rises in line by line and the pictures fade in slightly
+  enlarged and slowly settle (`data-reveal="late"` in `reveal.js` starts them later).
 
 ### Fixed
 

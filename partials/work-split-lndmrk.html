@@ -2,12 +2,13 @@
   LNDMRK as alternating 50/50 rows: text on one side and a screenshot of their site on the other, swapping sides each
   row. The screenshots are cropped to a 16:10 frame; --focus sets which part of a full-length page shows (0% top,
   100% bottom). From md up the rows sit side by side; on phones the screenshot sits above its text.
-  As they scroll in, the text rises in and the pictures settle from slightly enlarged (work-split--reveal-zoom).
+  As they scroll in (data-reveal="late": once a row is well on screen), the text rises in and the pictures settle
+  from slightly enlarged (work-split--reveal-zoom).
   Styles: src/scss/components/_work-split.scss.
 -->
 <section class="work-split work-split--full work-split--reveal-zoom" aria-labelledby="work-split-title">
   <div class="container">
-    <div class="work-split__row" data-reveal>
+    <div class="work-split__row" data-reveal="late">
       <div class="work-split__text">
         <p class="eyebrow">Case study · LNDMRK</p>
         <h2 class="work-split__title" id="work-split-title">WordPress website development</h2>
@@ -19,7 +20,7 @@
       </div>
     </div>
 
-    <div class="work-split__row" data-reveal>
+    <div class="work-split__row" data-reveal="late">
       <div class="work-split__text">
         <p class="eyebrow">What I achieved</p>
         <h3 class="work-split__heading">This client's goals</h3>
@@ -39,7 +40,7 @@
       </figure>
     </div>
 
-    <div class="work-split__row" data-reveal>
+    <div class="work-split__row" data-reveal="late">
       <div class="work-split__text">
         <p class="eyebrow">Problem Solving</p>
         <h3 class="work-split__heading">The challenges that came</h3>
@@ -59,7 +60,7 @@
       </figure>
     </div>
 
-    <div class="work-split__row" data-reveal>
+    <div class="work-split__row" data-reveal="late">
       <div class="work-split__text">
         <h3 class="work-split__heading">Built with</h3>
         <p class="work-split__tags"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span> <span>WordPress</span></p>
@@ -95,7 +96,7 @@
       </div>
     </div>
 
-    <div class="work-split__row" data-reveal>
+    <div class="work-split__row" data-reveal="late">
       <div class="work-split__text">
         <p class="eyebrow">lndmrk.co.uk</p>
         <h3 class="work-split__heading">See the website live.</h3>
