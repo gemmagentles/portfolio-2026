@@ -7,7 +7,7 @@
 // animations load), then saves a full-length screenshot 1440 wide as WebP in public/images/work/<slug>/pages/.
 // Then it rewrites the carousel screens in work/<slug>/index.html (between the "carousel screens" markers) with one
 // screen per page, named after its menu link, updates the "Home · 1 of N" line, and points the iMac in the first
-// 50/50 row at the home page screenshot if it still shows the placeholder.
+// 50/50 row at the home page screenshot (unless you've given it a picture of your own).
 // Run it again whenever the client's site changes. npm run new runs it for you when given the site's address.
 //
 // Uses the Chrome installed on this computer (set CHROME_PATH if it's somewhere else).
@@ -128,9 +128,10 @@ export async function capturePages(slug, site) {
   html = html.replace(new RegExp(`${START}[\\s\\S]*?${END}`), [START, ...screens, END].join(`\n${indent}`));
   html = html.replace(/(<include src="showcase-controls\.html" status=")[^"]*(")/, `$1${shots[0].name} · 1 of ${count}$2`);
 
-  // The iMac in the first 50/50 row: the home page, if it's still the placeholder.
+  // The iMac in the first 50/50 row scrolls through the home page: swap in the new screenshot and its height (which
+  // sets how far it scrolls) if it shows the placeholder or an earlier capture, but leave a picture you chose.
   html = html.replace(
-    /(<include src="work-split-laptop\.html"[^>]*?)image="\/images\/work\/[^"]*\/home-full\.svg" height="\d+"/,
+    /(<include src="work-split-laptop\.html"[^>]*?)image="\/images\/work\/[^"]*\/(?:home-full\.svg|pages\/[^"]+)" height="\d+"/,
     `$1image="/images/work/${slug}/pages/${shots[0].file}" height="${shots[0].height}"`,
   );
 
