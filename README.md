@@ -34,7 +34,7 @@ work/<project>/index.html  Case studies       → gemmagentles.dev/work/<project
 
 site.config.json           Your name, tagline, email, GitHub, LinkedIn (used on every page)
 partials/                  Shared HTML: head, header, footer, project card
-templates/case-study.html  The template `npm run new` copies
+templates/case-study.html  The template `npm run new` copies (the work-v4 layout)
 
 src/scss/
   abstracts/               Sass-only tools: breakpoints, mixins (no CSS output)
@@ -77,13 +77,12 @@ Nav links written as `<a href="/about/" data-nav="/about/">` get `aria-current` 
 npm run new -- "Project Name"
 ```
 
-This creates `work/project-name/index.html` plus placeholder images. Then:
+This creates `work/project-name/index.html` in the work-v4 layout (a carousel of the project's pages, then 50/50 rows of text and pictures, ending with "Visit site" and "View code") plus placeholder images. The carousel screens, pictures and buttons are shared partials, so their look stays the same on every case study. Then:
 
 1. Add a card for it in `index.html` (the command prints the line to paste).
-2. Write the case study text.
-3. Replace the placeholder images in `public/images/work/project-name/` with real screenshots as `.webp` (about 1600×1000 for the cover, 1600×900 or 1600×1000 for desktop, 780×1688 for mobile). Then update the `src` (and `width`/`height`) in the case study page, and the `image` attribute on the home page card.
-4. Update the "Next project" link at the bottom of each case study so they loop.
-5. Add the page to `public/sitemap.xml`.
+2. Write the case study text: replace everything in [square brackets], and the live site address (`https://example.com`). If the code is in a repo you can link to, swap `view-code-private.html` for `view-code.html` with `repo="..."`.
+3. Replace the placeholder images in `public/images/work/project-name/` with real screenshots as `.webp`: full-length pages captured 1440 wide (`home-full`, `about-full`, `contact-full`), a phone screenshot 780 wide (`mobile`), an iPad one at 2360×1640 (`tablet`), a 1600×1000 screenshot, a devices mockup (`devices`) and a 1600×1000 `cover` for the home page card. Then update the `image` (and `width`/`height`) on each include in the page, and on the home page card.
+4. Add the page to `public/sitemap.xml`.
 
 ## Before launch checklist
 

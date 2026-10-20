@@ -1,9 +1,10 @@
-// Creates a new case study page and placeholder images from templates/case-study.html.
+// Creates a new case study page (in the work-v4 layout: a carousel of the project's pages, then 50/50 rows) and
+// placeholder images from templates/case-study.html.
 //
 //   npm run new -- "Project Name"
 //
 // Result: work/project-name/index.html and public/images/work/project-name/*.svg
-// Then add a card for it on the home page (index.html) and replace the placeholder images.
+// Then add a card for it on the home page (index.html), write the case study and replace the placeholder images.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -14,6 +15,12 @@ const name = process.argv.slice(2).join(' ').trim();
 
 if (!name) {
   console.error('Give the project a name, e.g.  npm run new -- "Nueva Gold"');
+  process.exit(1);
+}
+
+// The name goes into partial settings (e.g. alt="The Name home page"), which can't hold these characters.
+if (/["<>]/.test(name)) {
+  console.error('The project name can\'t contain " < or >. Leave them out (you can add them to the page text later).');
   process.exit(1);
 }
 
@@ -39,7 +46,8 @@ const page = template.replaceAll('__NAME__', name).replaceAll('__SLUG__', slug);
 fs.mkdirSync(pageDir, { recursive: true });
 fs.writeFileSync(pageFile, page);
 
-// Placeholder images so the page looks finished until real screenshots go in.
+// Placeholder images so the page looks finished until real screenshots go in. The label sits near the top of tall
+// full-length pages (where it's seen first) and in the middle of the rest.
 const placeholder = (width, height, label) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -48,15 +56,22 @@ const placeholder = (width, height, label) => `<svg xmlns="http://www.w3.org/200
     </linearGradient>
   </defs>
   <rect width="100%" height="100%" fill="url(#g)"/>
-  <text x="50%" y="50%" fill="#4a4640" font-family="system-ui, sans-serif" font-size="${Math.round(width / 22)}" text-anchor="middle" dominant-baseline="middle">${name} · ${label}</text>
+  <text x="50%" y="${Math.min(height / 2, width / 3)}" fill="#4a4640" font-family="system-ui, sans-serif" font-size="${Math.round(width / 22)}" text-anchor="middle" dominant-baseline="middle">${name} · ${label}</text>
 </svg>
 `;
 
+// One for each picture in the template (the full-length pages are 1440 wide, as captured from a desktop browser),
+// plus cover.svg for the project's card on the home page.
 fs.mkdirSync(imageDir, { recursive: true });
 const images = [
   ['cover.svg', 1600, 1000, 'cover'],
-  ['desktop.svg', 1600, 1000, 'desktop'],
-  ['mobile.svg', 780, 1688, 'mobile'],
+  ['home-full.svg', 1440, 3600, 'home page, full length'],
+  ['about-full.svg', 1440, 3000, 'about page, full length'],
+  ['contact-full.svg', 1440, 2000, 'contact page, full length'],
+  ['mobile.svg', 780, 1688, 'phone'],
+  ['tablet.svg', 2360, 1640, 'iPad'],
+  ['screenshot.svg', 1600, 1000, 'screenshot'],
+  ['devices.svg', 1600, 1246, 'devices mockup'],
 ];
 for (const [file, w, h, label] of images) {
   const target = path.join(imageDir, file);
@@ -66,11 +81,11 @@ for (const [file, w, h, label] of images) {
 console.log(`
 Created:
   work/${slug}/index.html
-  public/images/work/${slug}/cover.svg, desktop.svg, mobile.svg
+  public/images/work/${slug}/ (${images.map(([file]) => file).join(', ')})
 
 Next:
   1. Add a card to index.html:
      <include src="project-card.html" slug="${slug}" image="/images/work/${slug}/cover.svg" name="${name}" meta="Client website · 2026" summary="..."></include>
-  2. Write the case study in work/${slug}/index.html
-  3. Swap the placeholder images for real screenshots (update the file names in the page if you use .webp)
+  2. Write the case study in work/${slug}/index.html (replace everything in [square brackets])
+  3. Swap the placeholder images for real screenshots (update the file names and sizes in the page if you use .webp)
 `);

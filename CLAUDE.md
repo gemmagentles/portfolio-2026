@@ -7,14 +7,16 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - `npm run dev` (port 5173), `npm run build` (into `dist/`), `npm run preview` (serves `dist/`, port 4173)
 - `npm run test:include` tests the partials plugin (8 tests; run after touching `plugins/html-include.js`)
-- `npm run new -- "Project Name"` creates a case study from `templates/case-study.html`
+- `npm run new -- "Project Name"` creates a case study in the work-v4 layout from `templates/case-study.html`, with
+  placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`)
 
 ## How the site is put together
 
 - **Pages:** every `.html` file is built automatically (`findPages` in `plugins/html-include.js`), except files in
   `node_modules`, `dist`, `partials`, `templates`, `public`, `src`, `plugins`, `scripts`. Current pages: `/`, `about/`,
-  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`), `design-system/`,
-  and the Work page experiments `work-v2/`, `work-v3/`, `work-v4/` (v4 is the current favourite).
+  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, still in the older
+  simple layout styled by `pages/_case-study.scss`), `design-system/`, and the Work page experiments `work-v2/`,
+  `work-v3/`, `work-v4/` (v4 is the current favourite, and the layout new case studies use).
 - **Partials:** `<include src="x.html" name="..."></include>` pulls in `partials/x.html`; attributes become `{{name}}`,
   `site.config.json` is `{{site.*}}`, and `{{year}}` is the year. Gotchas:
   - attribute values can't contain `>` or `"`; an unset `{{var}}` stays in the output literally;
@@ -24,10 +26,13 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Reusable components with settings** (set on the include): `statement.html` (`theme="light|dark"`), `cta.html`
   (eyebrow, title, title2, accent, ghost, button, href, target, note), `work-laptop.html` (href, image, height,
   address, label, priority, `variant="work-laptop--imac"`), `page-wall-lndmrk.html` (`intro`, eyebrow, title).
-- **"View code" buttons** (work-v4 50/50): a link (`work-split__button--ghost`, href = the repo) when there is a repo
-  to show, or for a private repo a `<button data-private-repo>` mixed with `repo-button`, which turns into "Repo
-  private" when clicked (`private-repo.js`, `_repo-button.scss`). Both versions are written out in
-  `partials/work-split-lndmrk.html`.
+- **Case study pieces** (work-v4 and new case studies share them, so changing one changes every page; the text is
+  written in each page): hero carousel `showcase-screen.html` (pos, href, image, width, height, alt, label, name) and
+  `showcase-controls.html` (status); 50/50 pictures `work-split-laptop.html` (as `work-laptop.html`),
+  `work-split-phone.html`, `-tablet.html`, `-devices.html` (image, width, height, alt) and `-screenshot.html` (+ focus);
+  buttons `visit-site.html` (href, address), `view-code.html` (repo) for a repo you can link to, or
+  `view-code-private.html` for a private one (turns into "Repo private" when clicked: `private-repo.js`,
+  `_repo-button.scss`). LNDMRK's own content stays in `page-carousel-lndmrk.html` and `work-split-lndmrk.html`.
 - **SCSS** (`src/scss`, all imported in `main.scss`): `abstracts/` (Sass-only: breakpoints, `$container-max`,
   `$header-height`, mixins), `base/` (`_root.scss` CSS variables, reset, typography), `layout/`, `components/` (one
   partial per component), `pages/`. Start partials with `@use '../abstracts' as *;`.

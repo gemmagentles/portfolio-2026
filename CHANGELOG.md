@@ -38,6 +38,10 @@ version number and date.
   last (it used to fade up as one block).
 - Work page v4: clicking the front screen in the hero now scrolls further, so the 50/50 section starts right at
   the top of the screen, and more smoothly: a gentle ease in and out that stops if you scroll yourself.
+- `npm run new` now creates case studies in the work-v4 layout (the carousel of the project's pages, then 50/50
+  rows ending with "Visit site" and "View code"), with placeholder pictures for every slot. The carousel screens,
+  pictures and buttons are shared partials, so a design change to them updates work-v4 and every new case study
+  at once. The three existing case studies keep the older simple layout for now.
 
 ### Fixed
 

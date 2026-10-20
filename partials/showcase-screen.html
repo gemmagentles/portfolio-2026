@@ -1,0 +1,19 @@
+<!--
+  One screen in a case study's hero carousel: a page of the site as a browser window. Goes inside the carousel's
+  <ul class="work-showcase__stage"> (see templates/case-study.html). Set on the include:
+  - pos: where it starts: "0" in front, "1" right, "-1" left, "2" waiting behind (with four screens)
+  - href: where the link goes without JavaScript (with it, clicking scrolls down or brings the screen to the front)
+  - image, width, height: a full-length screenshot of the page; alt: what it shows
+  - label: the project name; name: the page's name (shown under the carousel, e.g. "Home · 1 of 3")
+  Styles: .work-showcase in src/scss/pages/_work.scss; script: src/js/modules/showcase.js.
+-->
+<li class="work-showcase__screen" data-pos="{{pos}}">
+  <a href="{{href}}">
+    <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+    <img src="{{image}}" alt="{{alt}}" width="{{width}}" height="{{height}}" decoding="async" />
+    <span class="work-showcase__caption">
+      <span class="work-showcase__label">{{label}}</span>
+      <span class="work-showcase__name">{{name}}</span>
+    </span>
+  </a>
+</li>
