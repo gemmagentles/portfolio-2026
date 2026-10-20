@@ -53,7 +53,10 @@ version number and date.
   in the carousel. LNDMRK has its full write-up, pictures and brand board (shared with work-v4); Nueva Gold has its
   intro, goals and role; Fraser Valley still needs its text. The capture also takes the home page on an iPad and a
   phone for those rows.
-- Work page (/work/): the carousel is gone from the hero (each project now has its own in its case study), and the
+- Work page (/work/): a new black hero: "Featured Projects" left-aligned (with "Projects" in a thin gradient
+  weight) and, beside it, an angled browser window of project screenshots in the style of the home page's "My
+  Work" wall, fading into the black. The carousel is gone from the hero (each project now has its own in its case
+  study), and the
   two LNDMRK bento grids are hidden (their partials are kept, to bring back any time).
 
 ### Fixed

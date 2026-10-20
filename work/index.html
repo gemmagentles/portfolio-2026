@@ -18,22 +18,35 @@
     -->
     <main id="main" class="work-page">
       <!--
-        Showcase: the page heading and a quote (it used to hold a carousel of the featured projects; each now has
-        its own case study with one).
+        The hero, on black: the heading and quote on the left, and on the right a browser window full of project
+        screenshots (the same ones as the home page's "My Work" wall), angled and fading into the black behind the
+        text. On phones the window sits under the text. The window is decoration (the projects are listed below), so
+        screen readers skip it. Styles: src/scss/components/_work-intro.scss.
         The quote is from "Chapter IV · My Work" in the V5 Studio design.
-        The background is the home page hero's: the pink-to-blue gradient and the hexagon facets (partials/hero-hex.html).
-        data-header-over makes the header see-through over it, like the home page (src/scss/layout/_header.scss).
       -->
-      <section class="work-showcase" aria-labelledby="work-title" data-header-over>
-        <div class="work-showcase__facets" aria-hidden="true">
-          <include src="hero-hex.html"></include>
+      <section class="work-intro" aria-labelledby="work-title">
+        <div class="container work-intro__content">
+          <p class="eyebrow" data-reveal>My Work</p>
+          <h1 class="work-intro__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
+          <p class="work-intro__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
         </div>
 
-        <div class="container work-showcase__inner">
-          <p class="eyebrow" data-reveal>My Work</p>
-          <h1 class="work-showcase__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
-
-          <p class="work-showcase__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
+        <div class="work-intro__window" aria-hidden="true">
+          <div class="work-intro__bar"><span></span><span></span><span></span><span class="work-intro__address">gemmagentles.dev/work</span></div>
+          <ul class="work-intro__grid">
+            <li class="work-intro__tile"><img src="/images/projects/harveys-thumbnail.jpg" alt="" width="740" height="496" decoding="async" /><span class="work-intro__name">Harveys</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">LNDMRK</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Nueva Gold</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/kathmandu.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Kathmandu</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/nandos.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Nando's</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Fraser Valley Gaels</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/signal.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Signal</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/scottish-friendly.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Scottish Friendly</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/andersontreesurgeryMedium2.jpg" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Anderson Tree Surgery</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/ABCofHealthLtd_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">ABC of Health</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/smudge-digital.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Smudge Digital</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/Decorhom_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">Decorhom</span><span class="work-intro__type">Website</span></li>
+          </ul>
         </div>
       </section>
 
