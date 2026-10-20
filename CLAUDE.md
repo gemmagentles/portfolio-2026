@@ -55,7 +55,7 @@ front-end developer and designer; explain changes in plain words and check them 
   - `motion-ok` mixin wraps animation; respect `prefers-reduced-motion`. `hex-bullet` mixin draws the hexagon bullets.
 - **JS:** `src/js/main.js` starts one module per feature from `src/js/modules/`. `wave.js` is switched off.
   `showcase.js` drives the carousel (only one per page); `data-showcase="scroll"` makes the front screen scroll to the
-  next section instead of opening a drawer.
+  next section (otherwise its link is followed).
 
 ## Rules and preferences
 
@@ -103,7 +103,7 @@ front-end developer and designer; explain changes in plain words and check them 
 - Build-time "years of experience" number (currently counted in the browser by `years.js` from 2012) plus a yearly
   rebuild, so search engines see the right number.
 - Replace the placeholder text in [square brackets]: Challenges lists (work-v4, work-v3, `/work/` cards), case study
-  pages, the `/work/` carousel drawer and the Custom Coded / EDM placeholders on `/work/`.
+  pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
 - On phones, the `/work/` category links show stray bullets; at about 800px wide the header capsule overlaps the logo
   and Résumé button.

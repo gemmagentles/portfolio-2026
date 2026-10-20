@@ -18,10 +18,8 @@
     -->
     <main id="main" class="work-page">
       <!--
-        Showcase: the three featured projects as browser-window screens in a carousel. One sits in front with the
-        other two angled behind it. Clicking a screen behind brings it to the front; clicking the front one drops it
-        and unfolds a drawer with its description (src/js/modules/showcase.js). data-pos is each screen's place:
-        0 front, 1 right, -1 left.
+        Showcase: the page heading and a quote (it used to hold a carousel of the featured projects; each now has
+        its own case study with one).
         The quote is from "Chapter IV · My Work" in the V5 Studio design.
         The background is the home page hero's: the pink-to-blue gradient and the hexagon facets (partials/hero-hex.html).
         data-header-over makes the header see-through over it, like the home page (src/scss/layout/_header.scss).
@@ -35,79 +33,14 @@
           <p class="eyebrow" data-reveal>My Work</p>
           <h1 class="work-showcase__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
 
-          <div class="work-showcase__carousel" data-showcase data-reveal>
-            <ul class="work-showcase__stage">
-              <li class="work-showcase__screen" data-pos="0">
-                <a href="/work/lndmrk/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">LNDMRK</span>
-                  </span>
-                </a>
-              </li>
-              <li class="work-showcase__screen" data-pos="1">
-                <a href="/work/fraser-valley/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">Fraser Valley</span>
-                  </span>
-                </a>
-              </li>
-              <li class="work-showcase__screen" data-pos="-1">
-                <a href="/work/nueva-gold/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">Nueva Gold</span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-
-            <!-- The drawer that unfolds from under the front screen when it's clicked: one description per screen,
-                 in the same order as the screens above. Only the front screen's one shows. -->
-            <div class="work-showcase__drawer" id="work-showcase-drawer" data-showcase-drawer>
-              <div class="work-showcase__drawer-inner">
-                <div class="work-showcase__details" data-details>
-                  <p class="work-showcase__details-meta">LNDMRK · CMS website</p>
-                  <p>[Two or three sentences about LNDMRK: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-                <div class="work-showcase__details" data-details hidden>
-                  <p class="work-showcase__details-meta">Fraser Valley · CMS website</p>
-                  <p>[Two or three sentences about Fraser Valley: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-                <div class="work-showcase__details" data-details hidden>
-                  <p class="work-showcase__details-meta">Nueva Gold · CMS website</p>
-                  <p>[Two or three sentences about Nueva Gold: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="work-showcase__controls">
-              <button class="work-showcase__arrow" type="button" aria-label="Previous project" data-showcase-prev>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
-              </button>
-              <p class="work-showcase__status" aria-live="polite" data-showcase-status>LNDMRK · 1 of 3</p>
-              <button class="work-showcase__arrow" type="button" aria-label="Next project" data-showcase-next>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </button>
-            </div>
-          </div>
-
           <p class="work-showcase__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
         </div>
       </section>
 
       <include src="page-wall-lndmrk.html" intro="hidden" eyebrow="" title=""></include>
 
-      <include src="work-bento.html"></include>
-
-      <include src="work-cards-lndmrk.html"></include>
+      <!-- Hidden for now: the LNDMRK bento grid (partials/work-bento.html) and the same tiles as full-width cards
+           (partials/work-cards-lndmrk.html). Include either here again to bring it back. -->
 
       <div class="container">
         <nav class="work-page__filters" aria-label="Work categories" data-reveal>
