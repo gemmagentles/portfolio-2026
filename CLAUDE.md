@@ -56,24 +56,32 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Before saying a visual change is done,** build and check it in headless Chrome at 1440px and 390px wide (plus
   other widths when layout depends on it), measuring with `getBoundingClientRect` where spacing matters. Chrome is at
   `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`; install `puppeteer-core` in a temp folder, run
-  `npm run build` then `npx vite preview --port 4173 --strictPort`, and stop the server and delete the temp folder after.
+  `npm run build` then `npx vite preview --port 4173 --strictPort`. Stop the server after each check; delete the temp
+  folder once the batch is merged.
 - **Screenshots of client sites** are captured from the live sites with headless Chrome and saved as WebP in
   `public/images/work/<client>/` (e.g. `*-full.webp` full-length pages, `services-tablet.webp`).
 - **Version control:** Git, pushed to github.com/gemmagentles/portfolio-2026 (public). Commit when Gemma asks
   (clear messages), push when asked. Never make `.bak` copies; Git history replaces them.
 - **Gitflow (always):** `main` only holds released, live-ready code; `develop` is where finished work collects.
   Never commit straight to `main` or `develop`. Plain `git` commands (the `git flow` helper isn't installed).
-  - New work: `feature/<short-name>` from `develop`, merged back into `develop` with `--no-ff`, then deleted.
+  - New work: one `feature/<short-name>` branch from `develop` per batch of work (a session's tweaks and fixes),
+    not one per change: a commit for each change, merged back into `develop` with `--no-ff` once Gemma is happy
+    with the batch, then deleted. Keep using the open batch branch for new requests until it's merged.
+  - A separate branch only for an experiment that may be thrown away (e.g. trying several design options).
+  - Checks: while working, build and screenshot just what changed (at 1440px and 390px). The full every-page check
+    (every page at both widths: errors, missing files, sideways scroll, scroll-in content all revealed) runs once,
+    before merging a batch or making a release.
   - Release: `release/<version>` from `develop`, final checks/version bump, merged into `main` with `--no-ff`,
     tagged `v<version>` (e.g. `v1.1.0`), then merged back into `develop`.
   - Urgent fix to the live site: `hotfix/<version>` from `main`, merged into `main` (tagged) and into `develop`.
   - Before starting work, check which branch is checked out and create the right one if needed. Ask before
     merging into `main` or tagging a release.
-- **Changelog (every merge):** `CHANGELOG.md` (Keep a Changelog layout) is updated for every merge. Add the entry
-  as the last commit on the branch before merging, so it arrives with the merge and nothing is committed straight
-  to `develop`/`main`. Features and fixes go under `[Unreleased]` (Added / Changed / Fixed / Removed), in plain
-  words about what changed on the site. A release moves `[Unreleased]` under `[x.y.z] - YYYY-MM-DD`, bumps
-  `version` in `package.json` to match, and updates the compare links at the bottom.
+- **Changelog (every merge):** `CHANGELOG.md` (Keep a Changelog layout) is updated for every merge. Add each
+  change's entry on the batch branch (with the change, or all together as the last commit before merging), so it
+  arrives with the merge and nothing is committed straight to `develop`/`main`. Features and fixes go under
+  `[Unreleased]` (Added / Changed / Fixed / Removed), in plain words about what changed on the site. A release moves
+  `[Unreleased]` under `[x.y.z] - YYYY-MM-DD`, bumps `version` in `package.json` to match, and updates the compare
+  links at the bottom.
 
 ## Open to-dos
 

@@ -3,7 +3,8 @@
 // (src/scss/pages/_work.scss). Clicking the front screen either:
 // - drops it and unfolds a drawer underneath with a description of the project (clicking again folds it away), when
 //   the carousel has a [data-showcase-drawer] (as on /work/), or
-// - scrolls down to the section after the carousel, when the carousel has data-showcase="scroll" (as on work-v4).
+// - scrolls down so the section after the carousel starts at the top of the screen, when the carousel has
+//   data-showcase="scroll" (as on work-v4).
 // (It doesn't open the case study yet.)
 export function initShowcase() {
   const carousel = document.querySelector('[data-showcase]');
@@ -50,10 +51,45 @@ export function initShowcase() {
     screen.classList.add('is-dropping');
   };
 
-  // The section after the carousel's own one (the page's smooth scrolling and header offset apply).
+  // Scrolls so the content of the section after the carousel's own one (its first child: on work-v4, the 50/50
+  // section's rows, past its top padding) sits at the very top of the screen. A gentle ease in and out that takes
+  // longer the further it goes (rather than the browser's quicker smooth scroll); scrolling or touching the page
+  // meanwhile stops it, so it never fights the visitor. Without motion it jumps straight there.
   const scrollToNext = () => {
     const next = carousel.closest('section')?.nextElementSibling;
-    if (next) next.scrollIntoView({ block: 'start' });
+    const target = next?.firstElementChild || next;
+    if (!target) return;
+
+    const from = window.scrollY;
+    const to = Math.min(target.getBoundingClientRect().top + from, document.documentElement.scrollHeight - window.innerHeight);
+    const distance = to - from;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.scrollTo({ top: to, behavior: 'instant' });
+      return;
+    }
+
+    const duration = Math.min(1600, Math.max(900, Math.abs(distance) * 1.2));
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2); // ease in and out
+    const start = performance.now();
+    let stopped = false;
+
+    const stop = () => {
+      stopped = true;
+    };
+    const stopEvents = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+    stopEvents.forEach((type) => window.addEventListener(type, stop, { once: true, passive: true }));
+
+    const step = (now) => {
+      const progress = Math.min(1, (now - start) / duration);
+      if (!stopped) window.scrollTo({ top: from + distance * ease(progress), behavior: 'instant' });
+      if (progress < 1 && !stopped) {
+        requestAnimationFrame(step);
+      } else {
+        stopEvents.forEach((type) => window.removeEventListener(type, stop));
+      }
+    };
+    requestAnimationFrame(step);
   };
 
   screens.forEach((screen, i) => {

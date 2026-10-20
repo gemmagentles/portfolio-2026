@@ -1,31 +1,47 @@
-// Adds .is-visible to [data-reveal] elements as they scroll into view.
-// Siblings revealed together get a small stagger. Styles live in src/scss/components/_reveal.scss.
-// data-reveal="late" waits until the element's top is about a third of the way up the screen, so more of it is in
-// view first (used by the work-v4 50/50 rows, whose animation is meant to play out as you arrive).
+// Adds .is-visible to [data-reveal] elements as they scroll into view. Styles live in src/scss/components/_reveal.scss.
+//
+// An element is revealed once its top passes a line on the screen: 90% of the way down for most things, or 65% for
+// data-reveal="late" (the work-v4 50/50 rows, whose animation is meant to play out as you arrive). Anything already
+// above its line is revealed too, so content scrolled past quickly (a fast flick, the End key, reloading halfway
+// down) never stays hidden. Elements revealed together get a small stagger.
 export function initReveal() {
-  const items = document.querySelectorAll('[data-reveal]');
+  const items = [...document.querySelectorAll('[data-reveal]')];
   if (!items.length) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion || !('IntersectionObserver' in window)) {
+  if (reduceMotion) {
     items.forEach((item) => item.classList.add('is-visible'));
     return;
   }
 
-  const watch = (options) => {
-    const observer = new IntersectionObserver((entries) => {
-      const entering = entries.filter((entry) => entry.isIntersecting);
-      entering.forEach((entry, index) => {
-        entry.target.style.setProperty('--reveal-delay', `${index * 90}ms`);
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, options);
-    return observer;
+  const pending = new Set(items);
+  let queued = false;
+
+  const check = () => {
+    queued = false;
+    let index = 0;
+    pending.forEach((item) => {
+      const line = window.innerHeight * (item.dataset.reveal === 'late' ? 0.65 : 0.9);
+      if (item.getBoundingClientRect().top > line) return;
+      item.style.setProperty('--reveal-delay', `${index++ * 90}ms`);
+      item.classList.add('is-visible');
+      pending.delete(item);
+    });
+
+    if (!pending.size) {
+      window.removeEventListener('scroll', queue);
+      window.removeEventListener('resize', queue);
+    }
   };
 
-  const normal = watch({ rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-  const late = watch({ rootMargin: '0px 0px -35% 0px', threshold: 0 });
+  // At most one check per frame, however fast the scroll events come.
+  const queue = () => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(check);
+  };
 
-  items.forEach((item) => (item.dataset.reveal === 'late' ? late : normal).observe(item));
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue, { passive: true });
+  check();
 }

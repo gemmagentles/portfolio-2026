@@ -1219,4 +1219,56 @@
   .work-showcase__caption {
     display: none;
   }
+
+  // On page load the hero builds in order: the heading rises in, then once it has landed the front screen slides
+  // slowly up into place, the left and then the right screen behind it follow one at a time, each clearly after the
+  // last, and the arrows fade in once all three are in. It's the browser window inside each
+  // screen (the link) that moves, so the screen's own position (set by data-pos) is untouched and the carousel works
+  // as normal afterwards. This replaces the carousel's usual scroll-in fade.
+  @include motion-ok {
+    .js & .work-showcase__carousel[data-reveal] {
+      opacity: 1;
+      translate: none;
+      transition: none;
+    }
+
+    .page-wall__intro > * {
+      animation: page-carousel-rise 1s var(--ease-out) both;
+    }
+
+    .page-wall__title {
+      animation-delay: 0.1s;
+    }
+
+    .work-showcase__screen a {
+      --rise: 5rem;
+      animation: page-carousel-rise 1.6s var(--ease-out) 0.6s both;
+    }
+
+    // The screens behind come up after the front one: the left (last in the HTML), then the right (second).
+    .work-showcase__screen:last-child a {
+      animation-delay: 1.1s;
+    }
+
+    .work-showcase__screen:nth-child(2) a {
+      animation-delay: 1.4s;
+    }
+
+    .work-showcase__controls {
+      animation: page-carousel-fade 0.8s ease-out 2.1s both;
+    }
+  }
+}
+
+@keyframes page-carousel-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 1rem));
+  }
+}
+
+@keyframes page-carousel-fade {
+  from {
+    opacity: 0;
+  }
 }

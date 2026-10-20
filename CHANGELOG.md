@@ -13,8 +13,8 @@ version number and date.
 
 ### Added
 
-- Gitflow branching rules in `CLAUDE.md`: work happens on `feature/`, `release/` and `hotfix/` branches, never
-  straight on `main` or `develop`.
+- Gitflow branching rules in `CLAUDE.md`: work happens in batches on `feature/` branches (one per batch, not per
+  change), plus `release/` and `hotfix/` branches, never straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
 - On hover and keyboard focus, the header's Résumé button turns white with dark text, and its download arrow
   nudges down and settles back like the footer's résumé link (no movement for visitors who prefer reduced motion).
@@ -33,11 +33,19 @@ version number and date.
 - Work page v4: the 50/50 rows no longer slide up into place as they scroll in (which opened a gap between rows).
   They stay put, and once a row is well on screen the text rises in line by line and the pictures fade in slightly
   enlarged and slowly settle (`data-reveal="late"` in `reveal.js` starts them later).
+- Work page v4: the hero builds in on page load: the heading rises in, then the front page screenshot slowly slides
+  up into place, the left and then the right screenshot behind it follow one at a time, and the arrows fade in
+  last (it used to fade up as one block).
+- Work page v4: clicking the front screen in the hero now scrolls further, so the 50/50 section starts right at
+  the top of the screen, and more smoothly: a gentle ease in and out that stops if you scroll yourself.
 
 ### Fixed
 
 - The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
   plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
+- Sections that fade in as you scroll could stay invisible if you scrolled past them quickly (a fast flick, the
+  End key, or reloading halfway down a page): on the home page this hid the work browser, clients and "why it
+  matters" sections. `reveal.js` now reveals anything that has passed its start point, whatever the scroll speed.
 
 ### Removed
 
