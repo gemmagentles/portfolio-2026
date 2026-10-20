@@ -32,6 +32,7 @@ version number and date.
 
 - The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
   plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
+- The logo reads "Gemma Gentles" in title case instead of all capitals (still Oswald).
 
 ### Removed
 

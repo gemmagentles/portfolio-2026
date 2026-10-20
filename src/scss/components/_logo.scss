@@ -1,12 +1,11 @@
 @use '../abstracts' as *;
 
-// The logo: just the name, in white Oswald capitals (the font of the main headings).
+// The logo: just the name, in white Oswald (the font of the main headings), in title case as written in the HTML.
 .logo {
   font-family: var(--font-heading--primary);
   font-size: 21px;
   font-weight: 600;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
   color: var(--white);
   text-decoration: none;
   white-space: nowrap;
