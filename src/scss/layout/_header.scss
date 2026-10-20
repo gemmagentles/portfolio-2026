@@ -122,8 +122,9 @@
     }
   }
 
-  // "Résumé" (downloads the PDF): a white pill on dark backgrounds (the phone menu, and the bar on pages without the
-  // hero). From md up over a gradient top section (data-header-over) it's black, as in the design.
+  // "Résumé" (downloads the PDF): a white pill in the phone menu. From md up it's always a black pill, as on the home
+  // page; on the plain black bar (pages without a gradient) a faint white outline, like the nav capsule's, keeps it
+  // visible.
   &__cta {
     display: inline-flex;
     align-items: center;
@@ -139,9 +140,11 @@
     text-decoration: none;
 
     @include mq(md) {
-      body:has([data-header-over]) & {
-        background: var(--ink);
-        color: var(--white);
+      background: var(--ink);
+      color: var(--white);
+
+      body:not(:has([data-header-over]), .nav-gradient) & {
+        box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.28);
       }
     }
   }

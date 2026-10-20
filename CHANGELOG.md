@@ -21,6 +21,11 @@ version number and date.
 
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
 
+### Fixed
+
+- The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
+  plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
+
 ### Removed
 
 - The old `.bak` backup files and `src-scss-before-tokens.bak.tar` (Git history replaces them).
