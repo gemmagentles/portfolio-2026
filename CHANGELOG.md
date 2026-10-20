@@ -16,6 +16,8 @@ version number and date.
 - Gitflow branching rules in `CLAUDE.md`: work happens on `feature/`, `release/` and `hotfix/` branches, never
   straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
+- The download arrow on the header's Résumé button nudges down and settles back on hover and keyboard focus, like
+  the footer's résumé link (skipped for visitors who prefer reduced motion).
 
 ### Changed
 

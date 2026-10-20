@@ -149,6 +149,15 @@
     }
   }
 
+  // On hover or focus the download arrow nudges down and settles back (the tray line under it stays put), like the
+  // résumé link in the footer.
+  @include motion-ok {
+    &__cta:hover &__cta-arrow,
+    &__cta:focus-visible &__cta-arrow {
+      animation: site-nav-arrow-down 0.5s var(--ease-out);
+    }
+  }
+
   @include mq(md) {
     position: static;
     display: flex;
@@ -306,4 +315,11 @@ html:not(.js) .nav-toggle {
 // The gliding pill only exists in the desktop capsule.
 .site-nav__glide {
   display: none;
+}
+
+// The Résumé button's download arrow: a small nudge down, in the icon's 24-unit viewBox.
+@keyframes site-nav-arrow-down {
+  50% {
+    translate: 0 3px;
+  }
 }
