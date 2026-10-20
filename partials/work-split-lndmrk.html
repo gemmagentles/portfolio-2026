@@ -101,13 +101,20 @@
         <!-- The live site, and the code beside it. "View code" comes in two versions; use one:
              - Repo you can link to: a link, with the repo's address in href:
                <a class="work-split__button work-split__button--ghost" href="https://github.com/..." target="_blank" rel="noopener">View code <span class="visually-hidden">on GitHub (opens in a new tab)</span><span aria-hidden="true">↗</span></a>
-             - Private repo, no link (used here): the button below. Clicking it morphs it into "Repo private"
+             - Private repo, no link (used here): the button below. Clicking it tries to open (the arrow flies up
+               and round), then turns into "Repo private" with the arrow becoming a padlock
                (src/js/modules/private-repo.js, src/scss/components/_repo-button.scss). -->
         <div class="work-split__buttons">
           <a class="work-split__button" href="https://www.lndmrk.co.uk/" target="_blank" rel="noopener">Visit site <span class="visually-hidden">lndmrk.co.uk (opens in a new tab)</span><span aria-hidden="true">↗</span></a>
           <button class="work-split__button work-split__button--ghost repo-button" type="button" data-private-repo>
-            <span class="repo-button__label">View code <span aria-hidden="true">↗</span></span>
-            <span class="repo-button__message"><svg class="repo-button__lock" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>Repo private</span>
+            <span class="repo-button__face">
+              <span class="repo-button__label">View code</span>
+              <span class="repo-button__icon" aria-hidden="true"><span class="repo-button__arrow">↗</span></span>
+            </span>
+            <span class="repo-button__face">
+              <span class="repo-button__message">Repo private</span>
+              <svg class="repo-button__lock" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+            </span>
           </button>
         </div>
       </div>

@@ -19,8 +19,8 @@ version number and date.
 - On hover and keyboard focus, the header's Résumé button turns white with dark text, and its download arrow
   nudges down and settles back like the footer's résumé link (no movement for visitors who prefer reduced motion).
 - Work page v4: a "View code" button (outlined) beside "Visit site" in the 50/50 section. It links to the
-  project's repo, or, when the repo is private (as for LNDMRK), it turns into "Repo private" with a padlock when
-  clicked, the label sliding out as the message slides in.
+  project's repo, or, when the repo is private (as for LNDMRK), clicking it makes it try to open (the arrow flies
+  up and round twice), then the arrow turns into a padlock and the text changes to "Repo private".
 
 ### Changed
 
