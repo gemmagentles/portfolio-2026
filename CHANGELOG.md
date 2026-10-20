@@ -20,6 +20,8 @@ version number and date.
 ### Changed
 
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
+- The GitHub and LinkedIn links in the header, footer and contact page now go to the real profiles
+  (github.com/gemmagentles and ca.linkedin.com/in/gemmagentles) instead of placeholders.
 
 ### Removed
 
