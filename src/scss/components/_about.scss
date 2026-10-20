@@ -3,7 +3,6 @@
 // Heading on white, then four facts in boxes joined by hairlines.
 // The 1px gap shows the grid's grey background through, which draws the lines between the boxes.
 .about {
-  position: relative; // anchors the paint drips
   padding-block: var(--space-section) calc(var(--space-section) + 20px); // 20px extra at the bottom
   background: var(--white);
   color: var(--text-color);
