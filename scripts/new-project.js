@@ -147,7 +147,7 @@ if (site) {
   try {
     const shots = await capturePages(slug, site);
     const html = fs.readFileSync(pageFile, 'utf8');
-    for (const file of ['home-full.svg', 'about-full.svg', 'contact-full.svg']) {
+    for (const file of ['home-full.svg', 'about-full.svg', 'contact-full.svg', 'mobile.svg', 'tablet.svg']) {
       if (!html.includes(`/${slug}/${file}`)) fs.rmSync(path.join(imageDir, file), { force: true });
     }
     console.log(`The carousel shows ${shots.length} pages: ${shots.map((s) => s.name).join(', ')} (in public/images/work/${slug}/pages/).`);

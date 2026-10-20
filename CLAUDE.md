@@ -14,17 +14,18 @@ front-end developer and designer; explain changes in plain words and check them 
   it if found (`view-code.html`), otherwise shows "Repo private" (`view-code-private.html`).
 - `npm run capture -- <slug> <site>` (`scripts/capture-pages.js`, uses `puppeteer-core` and the installed Chrome):
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
-  `public/images/work/<slug>/pages/`), then rewrites the case study's carousel screens between its
-  `carousel screens` markers, the "1 of N" line, and the iMac if it still shows the placeholder. Re-run it when the
-  client's site changes.
+  `public/images/work/<slug>/pages/`) plus the home page on an iPad and a phone, then rewrites the case study's
+  carousel screens between its `carousel screens` markers and the "1 of N" line, and swaps the iMac, iPad and phone
+  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). Re-run it
+  when the client's site changes.
 
 ## How the site is put together
 
 - **Pages:** every `.html` file is built automatically (`findPages` in `plugins/html-include.js`), except files in
   `node_modules`, `dist`, `partials`, `templates`, `public`, `src`, `plugins`, `scripts`. Current pages: `/`, `about/`,
-  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, still in the older
-  simple layout styled by `pages/_case-study.scss`), `design-system/`, and the Work page experiments `work-v2/`,
-  `work-v3/`, `work-v4/` (v4 is the current favourite, and the layout new case studies use).
+  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, all in the work-v4
+  layout from the template), `design-system/`, and the Work page experiments `work-v2/`, `work-v3/`, `work-v4/` (v4 is
+  the current favourite, and the layout the case studies use).
 - **Partials:** `<include src="x.html" name="..."></include>` pulls in `partials/x.html`; attributes become `{{name}}`,
   `site.config.json` is `{{site.*}}`, and `{{year}}` is the year. Gotchas:
   - attribute values can't contain `>` or `"`; an unset `{{var}}` stays in the output literally;
@@ -68,9 +69,10 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Comments** explain what something is and why, in plain words, like the existing ones. Keep that density.
 - **Before saying a visual change is done,** build and check it in headless Chrome at 1440px and 390px wide (plus
   other widths when layout depends on it), measuring with `getBoundingClientRect` where spacing matters. Chrome is at
-  `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`; install `puppeteer-core` in a temp folder, run
-  `npm run build` then `npx vite preview --port 4173 --strictPort`. Stop the server after each check; delete the temp
-  folder once the batch is merged.
+  `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`; `puppeteer-core` is a dev dependency, so
+  check scripts in the scratchpad load it from the project (`createRequire(<project>/package.json)`). Run `npm run build`
+  then `npx vite preview --port 4173 --strictPort`. Stop the server after each check; delete temp
+  files once the batch is merged.
 - **Screenshots of client sites** are captured from the live sites with headless Chrome and saved as WebP in
   `public/images/work/<client>/` (e.g. `*-full.webp` full-length pages, `services-tablet.webp`).
 - **Version control:** Git, pushed to github.com/gemmagentles/portfolio-2026 (public). Commit when Gemma asks

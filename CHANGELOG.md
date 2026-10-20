@@ -41,7 +41,7 @@ version number and date.
 - `npm run new` now creates case studies in the work-v4 layout (the carousel of the project's pages, then 50/50
   rows ending with "Visit site" and "View code"), with placeholder pictures for every slot. The carousel screens,
   pictures and buttons are shared partials, so a design change to them updates work-v4 and every new case study
-  at once. The three existing case studies keep the older simple layout for now.
+  at once.
 - `npm run capture -- slug https://site/` (and `npm run new` given the live site's address) screenshots every page
   linked in the client site's menus and puts them all in the case study's hero carousel, one screen per page, so a
   four-page site gets four screens without editing anything. The iMac in the first 50/50 row scrolls through the
@@ -49,6 +49,10 @@ version number and date.
   the screenshots.
 - `npm run new` looks for a public repo named after the client on your GitHub account: if there is one, "View
   code" links to it; if not, it becomes the "Repo private" button.
+- The LNDMRK, Fraser Valley and Nueva Gold case studies now use the new layout, each with its own site's pages
+  in the carousel. LNDMRK has its full write-up, pictures and brand board (shared with work-v4); Nueva Gold has its
+  intro, goals and role; Fraser Valley still needs its text. The capture also takes the home page on an iPad and a
+  phone for those rows.
 
 ### Fixed
 
@@ -60,6 +64,7 @@ version number and date.
 
 ### Removed
 
+- The old case study layout's styles (`_case-study.scss`), no longer used by any page.
 - The old `.bak` backup files and `src-scss-before-tokens.bak.tar` (Git history replaces them).
 - The unused purple paint drips animation on the home page About section (its markup, `drips.js` and
   `_drips.scss`). The page looks the same; it had been hidden.

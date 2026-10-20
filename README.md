@@ -85,7 +85,7 @@ This creates `work/project-name/index.html` in the work-v4 layout (a carousel of
 
 1. Add a card for it in `index.html` (the command prints the line to paste).
 2. Write the case study text: replace everything in [square brackets], and the live site address (`https://example.com`). "View code" is set up for you: if your GitHub account has a public repo named after the client (spaces, dashes and capitals ignored), it links there; if not, it shows "Repo private". To change it, swap `view-code-private.html` for `view-code.html` with `repo="..."` (or back).
-3. Replace the placeholder images in `public/images/work/project-name/` with real screenshots as `.webp`: full-length pages captured 1440 wide (`home-full`, `about-full`, `contact-full`), a phone screenshot 780 wide (`mobile`), an iPad one at 2360×1640 (`tablet`), a 1600×1000 screenshot, a devices mockup (`devices`) and a 1600×1000 `cover` for the home page card. Then update the `image` (and `width`/`height`) on each include in the page, and on the home page card.
+3. Pictures: with the site's address, the carousel, the iMac, the iPad and the phone are captured for you (in `public/images/work/project-name/pages/`). Replace the rest by hand as `.webp`: the 1600×1000 screenshot, the devices mockup (`devices`) and a 1600×1000 `cover` for the home page card. Then update the `image` (and `width`/`height`) on each include in the page, and on the home page card. A picture you set by hand is never overwritten by a re-capture.
 4. Add the page to `public/sitemap.xml`.
 
 ## Before launch checklist

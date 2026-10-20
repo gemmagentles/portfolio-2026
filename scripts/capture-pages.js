@@ -7,7 +7,9 @@
 // animations load), then saves a full-length screenshot 1440 wide as WebP in public/images/work/<slug>/pages/.
 // Then it rewrites the carousel screens in work/<slug>/index.html (between the "carousel screens" markers) with one
 // screen per page, named after its menu link, updates the "Home · 1 of N" line, and points the iMac in the first
-// 50/50 row at the home page screenshot (unless you've given it a picture of your own).
+// 50/50 row at the home page screenshot. It also takes the home page as it looks on an iPad and on a phone for the
+// rows' iPad and phone pictures. Pictures you've chosen yourself are left alone: only placeholders and earlier
+// captures are replaced.
 // Run it again whenever the client's site changes. npm run new runs it for you when given the site's address.
 //
 // Uses the Chrome installed on this computer (set CHROME_PATH if it's somewhere else).
@@ -23,6 +25,12 @@ const WIDTH = 1440;
 const MAX_PAGES = 8; // the carousel stays easy to click through
 const MAX_HEIGHT = 12000; // very long pages are cut off here (the carousel and iMac show the top anyway)
 
+// The home page on an iPad (landscape) and a phone, for the 50/50 rows' pictures (sizes in CSS pixels, saved at 2x).
+const DEVICES = [
+  { label: 'an iPad', file: 'tablet.webp', width: 1180, height: 820, partial: 'work-split-tablet\\.html', placeholder: 'tablet\\.svg' },
+  { label: 'a phone', file: 'phone.webp', width: 390, height: 844, partial: 'work-split-phone\\.html', placeholder: 'mobile\\.svg' },
+];
+
 // Text that's safe inside a partial setting (no " < or >) and on one line.
 const clean = (text) => text.replace(/["<>]/g, '').replace(/\s+/g, ' ').trim();
 
@@ -34,7 +42,9 @@ async function findPages(page, site) {
     for (const a of document.querySelectorAll('header a[href], nav a[href]')) {
       const url = new URL(a.href, location.href);
       if (url.origin !== origin || /\.(pdf|jpe?g|png|gif|webp|svg|zip)$/i.test(url.pathname)) continue;
-      found.push({ url: url.origin + url.pathname, path: url.pathname.replace(/\/+$/, '') || '/', name: a.textContent });
+      // "/home" and "/index.html" (often the logo's link) are the home page under another address.
+      const path = url.pathname.replace(/\/+$/, '').replace(/^\/(home|index\.(html?|php))$/i, '') || '/';
+      found.push({ url: url.origin + url.pathname, path, name: a.textContent });
     }
     return found;
   }, origin);
@@ -50,8 +60,8 @@ async function findPages(page, site) {
   return pages.slice(0, MAX_PAGES);
 }
 
-// Loads a page, scrolls through it so everything has loaded and played, and saves it full length.
-async function screenshot(page, url, file) {
+// Loads a page and scrolls through it so everything has loaded and played, then back to the top.
+async function prepare(page, url) {
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
   await page.evaluate(async () => {
     for (let y = 0; y < document.documentElement.scrollHeight; y += 400) {
@@ -69,7 +79,11 @@ async function screenshot(page, url, file) {
     }
   });
   await new Promise((resolve) => setTimeout(resolve, 1000));
+}
 
+// A page saved full length, 1440 wide.
+async function screenshot(page, url, file) {
+  await prepare(page, url);
   const height = Math.min(MAX_HEIGHT, await page.evaluate(() => document.documentElement.scrollHeight));
   await page.screenshot({ path: file, type: 'webp', quality: 80, clip: { x: 0, y: 0, width: WIDTH, height }, captureBeyondViewport: true });
   return height;
@@ -93,6 +107,7 @@ export async function capturePages(slug, site) {
 
   const browser = await puppeteer.launch({ executablePath: CHROME });
   const shots = [];
+  const devices = [];
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: WIDTH, height: 900 });
@@ -105,6 +120,23 @@ export async function capturePages(slug, site) {
       try {
         const height = await screenshot(page, url, path.join(outDir, file));
         shots.push({ name, file, height });
+        console.log('saved');
+      } catch (error) {
+        console.log(`skipped (${error.message.split('\n')[0]})`);
+      }
+    }
+
+    // The home page as it looks on an iPad in landscape and on a phone (the top screenful, at 2x), for the 50/50
+    // rows' iPad and phone pictures. Set as touch devices, so the site shows its tablet and mobile layouts.
+    for (const device of DEVICES) {
+      process.stdout.write(`  Home on ${device.label} ... `);
+      try {
+        const screen = await browser.newPage();
+        await screen.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+        await prepare(screen, pages[0].url);
+        await screen.screenshot({ path: path.join(outDir, device.file), type: 'webp', quality: 80 });
+        await screen.close();
+        devices.push(device);
         console.log('saved');
       } catch (error) {
         console.log(`skipped (${error.message.split('\n')[0]})`);
@@ -134,6 +166,16 @@ export async function capturePages(slug, site) {
     /(<include src="work-split-laptop\.html"[^>]*?)image="\/images\/work\/[^"]*\/(?:home-full\.svg|pages\/[^"]+)" height="\d+"/,
     `$1image="/images/work/${slug}/pages/${shots[0].file}" height="${shots[0].height}"`,
   );
+
+  // The iPad and phone pictures, the same way: only over the placeholder or an earlier capture.
+  // Its description too, if it's still the [placeholder] one.
+  for (const { partial, placeholder, file, width, height, label } of devices) {
+    html = html.replace(
+      new RegExp(`(<include src="${partial}"[^>]*?)image="/images/work/[^"]*/(?:${placeholder}|pages/${file})" width="\\d+" height="\\d+"([^>]*?)alt="(\\[[^"]*\\])?`),
+      (match, before, between, placeholderAlt) =>
+        `${before}image="/images/work/${slug}/pages/${file}" width="${width * 2}" height="${height * 2}"${between}alt="${placeholderAlt ? `The ${project} home page on ${label}` : ''}`,
+    );
+  }
 
   fs.writeFileSync(pageFile, html);
   return shots;
