@@ -46,7 +46,7 @@ src/scss/
 
 src/js/
   main.js                  Starts each module
-  modules/                 One file per feature: nav, navline, reveal, header, process, tools, workgrid, cards, wave, drips
+  modules/                 One file per feature: nav, navline, reveal, header, process, tools, workgrid, cards, wave
 
 public/                    Copied as-is: images, favicon, robots.txt, sitemap.xml, resume.pdf
 plugins/html-include.js    The small plugin that powers partials (no extra dependencies)

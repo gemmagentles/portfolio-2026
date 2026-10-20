@@ -6,7 +6,6 @@ import { initHeader } from './modules/header.js';
 import { initProcess } from './modules/process.js';
 import { initWorkGrid } from './modules/workgrid.js';
 // import { initWave } from './modules/wave.js'; // curved, animated edges between sections: switched off
-import { initDrips } from './modules/drips.js';
 import { initYears } from './modules/years.js';
 import { initShowcase } from './modules/showcase.js';
 
@@ -17,6 +16,5 @@ initHeader();
 initProcess();
 initWorkGrid();
 // initWave();
-initDrips();
 initYears();
 initShowcase();

@@ -34,6 +34,8 @@ version number and date.
 ### Removed
 
 - The old `.bak` backup files and `src-scss-before-tokens.bak.tar` (Git history replaces them).
+- The unused purple paint drips animation on the home page About section (its markup, `drips.js` and
+  `_drips.scss`). The page looks the same; it had been hidden.
 
 ## [1.0.0] - 2026-10-19
 
