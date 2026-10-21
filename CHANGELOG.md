@@ -22,6 +22,10 @@ version number and date.
   project's repo, or, when the repo is private (as for LNDMRK), clicking it makes it try to open (the arrow
   pushes up and back), then the arrow's lines reshape into a padlock as the text changes to "Repo private".
   The arrows on "Visit site" and "View code" are now drawn as lines so the two match.
+- Home page hero: a giant outlined "PORTFOLIO" in the background, in the same style as "NEXT" in the call to
+  action. It runs along the bottom behind the text and phone, cropped by the edges; on phones it stands on end up
+  the right-hand side. It fades and rises in gently on page load (still for visitors who prefer reduced motion),
+  and screen readers skip it.
 
 ### Changed
 
