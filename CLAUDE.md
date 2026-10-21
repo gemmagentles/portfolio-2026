@@ -19,7 +19,11 @@ front-end developer and designer; explain changes in plain words and check them 
   pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). It also
   writes a brand guidelines board, `partials/brand-board-<slug>.html` (`scripts/brand-board.js`: name, heading font
   from Google Fonts when it's there, main colours, logo and favicon), for the 4th row; a board without the "made by
-  npm run capture" note is hand-made and left alone. The site's own font files are never copied (licensing). Re-run
+  npm run capture" note is hand-made and left alone. And it makes the last row's devices mockup,
+  `pages/devices.webp` (`scripts/devices-mockup.js`: an iMac, MacBook, upright iPad and iPhone drawn in HTML/CSS
+  like LNDMRK's, filled with the screenshots, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
+  capture only; `node scripts/devices-mockup.js <slug>` remakes just the mockup. The site's own font files are
+  never copied (licensing). Re-run
   it when the client's site changes.
 
 ## How the site is put together
