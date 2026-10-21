@@ -9,7 +9,8 @@
 // screen per page, named after its menu link, updates the "Home · 1 of N" line, and points the iMac in the first
 // 50/50 row at the home page screenshot. It also takes the home page as it looks on an iPad and on a phone for the
 // rows' iPad and phone pictures, and makes a brand guidelines board from the site (scripts/brand-board.js) for the
-// fourth row. Pictures and boards you've chosen or made yourself are left alone: only placeholders and earlier
+// fourth row, and a mockup of the site on an iMac, a MacBook, an iPad and an iPhone (scripts/devices-mockup.js) for
+// the last row. Pictures and boards you've chosen or made yourself are left alone: only placeholders and earlier
 // captures are replaced.
 // Run it again whenever the client's site changes. npm run new runs it for you when given the site's address.
 //
@@ -20,6 +21,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import puppeteer from 'puppeteer-core';
 import { makeBrandBoard } from './brand-board.js';
+import { makeDevicesMockup, WIDTH as MOCKUP_WIDTH, HEIGHT as MOCKUP_HEIGHT, FILE as MOCKUP_FILE } from './devices-mockup.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe';
@@ -27,10 +29,12 @@ const WIDTH = 1440;
 const MAX_PAGES = 8; // the carousel stays easy to click through
 const MAX_HEIGHT = 12000; // very long pages are cut off here (the carousel and iMac show the top anyway)
 
-// The home page on an iPad (landscape) and a phone, for the 50/50 rows' pictures (sizes in CSS pixels, saved at 2x).
+// The home page on an iPad (landscape) and a phone, for the 50/50 rows' pictures (sizes in CSS pixels, saved at 2x),
+// and on an upright iPad for the devices mockup only (it has no row of its own, so no partial).
 const DEVICES = [
   { label: 'an iPad', file: 'tablet.webp', width: 1180, height: 820, partial: 'work-split-tablet\\.html', placeholder: 'tablet\\.svg' },
   { label: 'a phone', file: 'phone.webp', width: 390, height: 844, partial: 'work-split-phone\\.html', placeholder: 'mobile\\.svg' },
+  { label: 'an upright iPad', file: 'tablet-portrait.webp', width: 820, height: 1180 },
 ];
 
 // Text that's safe inside a partial setting (no " < or >) and on one line.
@@ -111,6 +115,7 @@ export async function capturePages(slug, site) {
   const shots = [];
   const devices = [];
   let board = null;
+  let mockup = null;
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: WIDTH, height: 900 });
@@ -130,7 +135,7 @@ export async function capturePages(slug, site) {
     }
 
     // The home page as it looks on an iPad in landscape and on a phone (the top screenful, at 2x), for the 50/50
-    // rows' iPad and phone pictures. Set as touch devices, so the site shows its tablet and mobile layouts.
+    // rows' iPad and phone pictures (and on an upright iPad for the devices mockup). Set as touch devices, so the site shows its tablet and mobile layouts.
     for (const device of DEVICES) {
       process.stdout.write(`  Home on ${device.label} ... `);
       try {
@@ -152,6 +157,15 @@ export async function capturePages(slug, site) {
       await prepare(page, pages[0].url);
       board = await makeBrandBoard(page, slug, project);
       console.log(board ? 'made' : 'kept yours (made by hand)');
+    } catch (error) {
+      console.log(`skipped (${error.message.split('\n')[0]})`);
+    }
+
+    // The iMac, MacBook, iPad and iPhone mockup, made from the screenshots just taken (scripts/devices-mockup.js).
+    process.stdout.write('  Devices mockup ... ');
+    try {
+      mockup = await makeDevicesMockup(browser, outDir);
+      console.log(mockup ? 'made' : 'skipped (screenshots missing)');
     } catch (error) {
       console.log(`skipped (${error.message.split('\n')[0]})`);
     }
@@ -182,11 +196,20 @@ export async function capturePages(slug, site) {
 
   // The iPad and phone pictures, the same way: only over the placeholder or an earlier capture.
   // Its description too, if it's still the [placeholder] one.
-  for (const { partial, placeholder, file, width, height, label } of devices) {
+  for (const { partial, placeholder, file, width, height, label } of devices.filter((device) => device.partial)) {
     html = html.replace(
       new RegExp(`(<include src="${partial}"[^>]*?)image="/images/work/[^"]*/(?:${placeholder}|pages/${file})" width="\\d+" height="\\d+"([^>]*?)alt="(\\[[^"]*\\])?`),
       (match, before, between, placeholderAlt) =>
         `${before}image="/images/work/${slug}/pages/${file}" width="${width * 2}" height="${height * 2}"${between}alt="${placeholderAlt ? `The ${project} home page on ${label}` : ''}`,
+    );
+  }
+
+  // The devices mockup in the last row, over the devices.svg placeholder or an earlier capture (a picture you chose,
+  // like LNDMRK's devices.webp, stays), with a description of what's on it.
+  if (mockup) {
+    html = html.replace(
+      /(<include src="work-split-devices\.html"[^>]*?)image="\/images\/work\/[^"]*\/(?:devices\.svg|pages\/devices\.webp)" width="\d+" height="\d+"([^>]*?)alt="[^"]*"/,
+      `$1image="/images/work/${slug}/pages/${mockup}" width="${MOCKUP_WIDTH}" height="${MOCKUP_HEIGHT}"$2alt="The ${project} website on an iMac, a MacBook, an iPad and an iPhone"`,
     );
   }
 
