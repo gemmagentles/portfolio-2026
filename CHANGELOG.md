@@ -56,7 +56,8 @@ version number and date.
 - Work page (/work/): a new black hero: "Featured Projects" left-aligned (with "Projects" in a thin gradient
   weight) and, beside it, an angled browser window of project screenshots in the style of the home page's "My
   Work" wall, fading into the black. The carousel is gone from the hero (each project now has its own in its case
-  study), and the two LNDMRK bento grids are hidden (their partials are kept, to bring back any time).
+  study), and the wall of LNDMRK pages and the two LNDMRK bento grids are hidden (their partials are kept, to bring
+  back any time).
 
 ### Fixed
 
