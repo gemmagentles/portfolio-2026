@@ -57,10 +57,12 @@ version number and date.
   weight) and, beside it, an angled browser window of project screenshots in the style of the home page's "My
   Work" wall, fading into the black. The carousel is gone from the hero (each project now has its own in its case
   study), and the wall of LNDMRK pages and the two LNDMRK bento grids are hidden (their partials are kept, to bring
-  back any time).
+  back any time). Its nav bar now has the gradient, like the other work pages.
 
 ### Fixed
 
+- The category links on the Work page (and the design system page's contents and pill example) showed stray
+  hexagon bullets; their lists now have their own class, so the plain-list bullets don't apply.
 - The Résumé button in the header is now black on every page (it was white on the work pages and pages with the
   plain black bar). On the black bar it has a faint outline so it still stands out. The phone menu is unchanged.
 - Sections that fade in as you scroll could stay invisible if you scrolled past them quickly (a fast flick, the

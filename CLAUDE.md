@@ -105,6 +105,5 @@ front-end developer and designer; explain changes in plain words and check them 
 - Replace the placeholder text in [square brackets]: Challenges lists (work-v4, work-v3, `/work/` cards), case study
   pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
-- On phones, the `/work/` category links show stray bullets; at about 800px wide the header capsule overlaps the logo
-  and Résumé button.
+- From about 800px to 1024px wide the header capsule overlaps the logo, the profile icons and the Résumé button.
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).

@@ -14,7 +14,8 @@
   &__filters {
     margin-block: var(--space-section) var(--space-large);
 
-    ul {
+    // Their own class, so the plain-list hexagon bullets (base/_typography.scss) don't apply.
+    .work-page__filter-list {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
