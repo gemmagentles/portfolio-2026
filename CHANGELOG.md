@@ -68,6 +68,8 @@ version number and date.
 
 ### Fixed
 
+- Case study screenshots (carousel, iMac, devices mockup) cut the top off some sites' headers, such as Fraser
+  Valley's crest: the capture now takes a plain screenshot of a page-tall window instead of a cropped one.
 - The category links on the Work page (and the design system page's contents and pill example) showed stray
   hexagon bullets; their lists now have their own class, so the plain-list bullets don't apply.
 - The Résumé button in the header is now black on every page (it was white on the work pages and pages with the

@@ -66,7 +66,33 @@ async function findPages(page, site) {
   return pages.slice(0, MAX_PAGES);
 }
 
-// Loads a page and scrolls through it so everything has loaded and played, then back to the top.
+// Hides things pinned to the screen below the top, such as cart and chat buttons or cookie banners: in a
+// full-length screenshot they'd float over one spot of the page. A pinned header at the top stays.
+async function hidePinned(page) {
+  await page.evaluate(() => {
+    for (const element of document.querySelectorAll('body *')) {
+      if (getComputedStyle(element).position === 'fixed' && element.getBoundingClientRect().top > 150) {
+        element.style.setProperty('visibility', 'hidden', 'important');
+      }
+    }
+  });
+}
+
+// Waits until every picture on the page has finished loading (or 10 seconds, whichever comes first).
+async function picturesLoaded(page) {
+  await page.waitForFunction(() => [...document.images].every((image) => image.complete), { timeout: 10000 }).catch(() => {});
+}
+
+// Loads a page fresh, as a visitor first sees it.
+async function load(page, url) {
+  await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+  await page.evaluate(() => document.fonts.ready);
+  await hidePinned(page);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
+// Loads a page and scrolls through it so everything has loaded and played, then back to the top (for reading its
+// colours for the brand board; screenshots don't scroll, see below).
 async function prepare(page, url) {
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
   await page.evaluate(async () => {
@@ -75,23 +101,34 @@ async function prepare(page, url) {
       await new Promise((resolve) => setTimeout(resolve, 150));
     }
     window.scrollTo(0, 0);
-
-    // Hide things pinned to the screen below the top, such as cart and chat buttons or cookie banners: in a
-    // full-length screenshot they'd float over one spot of the page. A pinned header at the top stays.
-    for (const element of document.querySelectorAll('body *')) {
-      if (getComputedStyle(element).position === 'fixed' && element.getBoundingClientRect().top > 150) {
-        element.style.setProperty('visibility', 'hidden', 'important');
-      }
-    }
   });
   await new Promise((resolve) => setTimeout(resolve, 1000));
 }
 
-// A page saved full length, 1440 wide.
+// A page saved full length, 1440 wide. The window is made as tall as the page, so everything is on screen at once:
+// lazy pictures load and scroll-in animations play without the page scrolling. Then it's a plain screenshot of the
+// whole window. (Puppeteer's cropped "beyond the screen" capture shifted some sites' headers up, cutting the top
+// off Fraser Valley's crest.) Sections sized to the window's height grow when it's made tall, so the height is
+// measured again until it settles. Then the window goes back to its normal height.
 async function screenshot(page, url, file) {
-  await prepare(page, url);
-  const height = Math.min(MAX_HEIGHT, await page.evaluate(() => document.documentElement.scrollHeight));
-  await page.screenshot({ path: file, type: 'webp', quality: 80, clip: { x: 0, y: 0, width: WIDTH, height }, captureBeyondViewport: true });
+  await load(page, url);
+  let height = 0;
+  for (let tries = 0; tries < 3; tries++) {
+    const pageHeight = Math.min(MAX_HEIGHT, await page.evaluate(() => document.documentElement.scrollHeight));
+    if (pageHeight === height) break;
+    height = pageHeight;
+    await page.setViewport({ width: WIDTH, height });
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event('scroll')); // scroll-in scripts check what's on screen when the page scrolls
+    });
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  await picturesLoaded(page);
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await hidePinned(page);
+  await page.screenshot({ path: file, type: 'webp', quality: 80, captureBeyondViewport: false });
+  await page.setViewport({ width: WIDTH, height: 900 });
   return height;
 }
 
@@ -141,8 +178,8 @@ export async function capturePages(slug, site) {
       try {
         const screen = await browser.newPage();
         await screen.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
-        await prepare(screen, pages[0].url);
-        await screen.screenshot({ path: path.join(outDir, device.file), type: 'webp', quality: 80 });
+        await load(screen, pages[0].url);
+        await screen.screenshot({ path: path.join(outDir, device.file), type: 'webp', quality: 80, captureBeyondViewport: false });
         await screen.close();
         devices.push(device);
         console.log('saved');
