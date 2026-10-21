@@ -1,0 +1,32 @@
+<!--
+  The Nueva Gold brand guidelines board as a 50/50 row's picture: their wordmark, the font of their headings,
+  their main colours, logo and favicon, read from their live site (made by npm run capture, scripts/brand-board.js).
+  Re-capturing rewrites it; to keep your own changes, delete the "made by npm run capture" words in this note.
+  Styles: .brand-board in src/scss/components/_work-bento.scss, the panel in _work-split.scss.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@700&display=swap" />
+<div class="work-split__shot work-split__shot--board">
+  <div class="brand-board brand-board--bars" style="--board-ink: #1c2343; --board-paper: #f8f5ef; --serif: 'Cormorant', sans-serif">
+    <div class="brand-board__panel brand-board__panel--cover">
+      <p class="brand-board__wordmark">Nueva Gold</p>
+      <p class="brand-board__meta"><span>Brand guidelines</span></p>
+    </div>
+    <div class="brand-board__panel brand-board__panel--type">
+      <p class="brand-board__label">Typography</p>
+      <p class="brand-board__specimen" aria-hidden="true" style="font-weight: 700">A<i>a</i></p>
+      <p class="brand-board__note">Cormorant (bold)</p>
+    </div>
+    <div class="brand-board__panel brand-board__panel--colours">
+      <p class="brand-board__label">Colours</p>
+      <ul class="brand-board__swatches">
+        <li style="--swatch: #1c2343; color: #fff">#1C2343</li>
+        <li style="--swatch: #f8f5ef; color: #111">#F8F5EF</li>
+        <li style="--swatch: #c2973b; color: #111">#C2973B</li>
+      </ul>
+    </div>
+    <div class="brand-board__panel brand-board__marks" style="background: #f8f5ef">
+      <img class="brand-board__logo" src="/images/work/nueva-gold/brand/logo.webp" alt="Nueva Gold logo" style="height: 22px" loading="lazy" decoding="async" />
+      <img class="brand-board__favicon" src="/images/work/nueva-gold/brand/favicon.ico" alt="Nueva Gold favicon" width="64" height="64" loading="lazy" decoding="async" />
+    </div>
+  </div>
+</div>

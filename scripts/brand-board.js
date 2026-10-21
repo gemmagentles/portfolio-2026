@@ -1,5 +1,5 @@
-// Makes a brand guidelines board for a case study from the client's live site, in the style of LNDMRK's
-// (partials/brand-board-lndmrk.html): their name as the wordmark, their heading font as a big "Aa", their main
+// Makes a brand guidelines board for a case study from the client's live site, in the bars layout
+// (.brand-board--bars in _work-bento.scss): their name as the wordmark, their heading font as a big "Aa", their main
 // colours as stacked bars, and their logo and favicon. Used by scripts/capture-pages.js (npm run capture).
 //
 // From the home page it reads:

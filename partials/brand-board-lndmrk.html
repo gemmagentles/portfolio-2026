@@ -1,31 +1,30 @@
 <!--
-  The LNDMRK brand guidelines board as a 50/50 row's picture: their wordmark, Didone type, colours, logo and favicon
-  (captured from lndmrk.co.uk), on a sand-coloured panel. Used in the LNDMRK case study and work-v4's 50/50 rows.
+  The LNDMRK brand guidelines board as a 50/50 row's picture: their wordmark, the font of their headings,
+  their main colours, logo and favicon, read from their live site (made by npm run capture, scripts/brand-board.js).
+  Re-capturing rewrites it; to keep your own changes, delete the "made by npm run capture" words in this note.
   Styles: .brand-board in src/scss/components/_work-bento.scss, the panel in _work-split.scss.
 -->
 <div class="work-split__shot work-split__shot--board">
-  <div class="brand-board brand-board--bars">
+  <div class="brand-board brand-board--bars" style="--board-ink: #0e0f11; --board-paper: #f1efea; --serif: sans-serif">
     <div class="brand-board__panel brand-board__panel--cover">
       <p class="brand-board__wordmark">LNDMRK</p>
       <p class="brand-board__meta"><span>Brand guidelines</span></p>
     </div>
     <div class="brand-board__panel brand-board__panel--type">
       <p class="brand-board__label">Typography</p>
-      <p class="brand-board__specimen" aria-hidden="true">A<i>a</i></p>
-      <p class="brand-board__note">Didone serif</p>
+      <p class="brand-board__specimen" aria-hidden="true" style="font-weight: 500">A<i>a</i></p>
+      <p class="brand-board__note">Warbler Banner (bold)</p>
     </div>
     <div class="brand-board__panel brand-board__panel--colours">
       <p class="brand-board__label">Colours</p>
       <ul class="brand-board__swatches">
-        <li style="--swatch: #0b0b0b">#0B0B0B</li>
-        <li style="--swatch: #f0efeb">#F0EFEB</li>
-        <li style="--swatch: #9a9893">#9A9893</li>
-        <li style="--swatch: #d9c9a8">#D9C9A8</li>
+        <li style="--swatch: #0e0f11; color: #fff">#0E0F11</li>
+        <li style="--swatch: #f1efea; color: #111">#F1EFEA</li>
       </ul>
     </div>
-    <div class="brand-board__panel brand-board__marks">
-      <img class="brand-board__logo" src="/images/work/lndmrk/logo.png" alt="LNDMRK logo" width="570" height="120" loading="lazy" decoding="async" />
-      <img class="brand-board__favicon" src="/images/work/lndmrk/favicon.png" alt="LNDMRK favicon" width="64" height="64" loading="lazy" decoding="async" />
+    <div class="brand-board__panel brand-board__marks" style="background: #f1efea">
+      <p class="brand-board__wordmark">LNDMRK</p>
+      <img class="brand-board__favicon" src="/images/work/lndmrk/brand/favicon.ico" alt="LNDMRK favicon" width="64" height="64" loading="lazy" decoding="async" />
     </div>
   </div>
 </div>

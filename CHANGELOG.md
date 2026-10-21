@@ -51,7 +51,8 @@ version number and date.
   code" links to it; if not, it becomes the "Repo private" button.
 - Case studies made with the live site's address now get a brand guidelines board like LNDMRK's, read from the site:
   its name, the font its headings use (loaded from Google Fonts when it's there), its main colours, logo and
-  favicon. LNDMRK's board layout is now a shared `brand-board--bars` style.
+  favicon. All three case studies (and work-v4) now use generated boards, so every project is set up the same way;
+  LNDMRK's board layout is now a shared `brand-board--bars` style.
 - The LNDMRK, Fraser Valley and Nueva Gold case studies now use the new layout, each with its own site's pages
   in the carousel. LNDMRK has its full write-up, pictures and brand board (shared with work-v4); Nueva Gold has its
   intro, goals and role; Fraser Valley still needs its text. The capture also takes the home page on an iPad and a
