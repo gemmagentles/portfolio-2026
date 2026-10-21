@@ -8,7 +8,8 @@
 //   aren't copied, as they're often paid fonts licensed only to the client's site)
 // - the colours: every colour on the page, weighted by how much of it they cover (backgrounds by area, text by size
 //   and length), with bright colours counted more, as an accent button covers little but matters; then the four most
-//   used that look clearly different from each other
+//   used that look clearly different from each other. Colours that only appear on hover or focus (read from the
+//   site's stylesheets) count as accents too
 // - the logo: the first image or SVG in the site's header (the home link's if there is one), and the favicon
 // It saves the logo and favicon in public/images/work/<slug>/brand/ and writes partials/brand-board-<slug>.html.
 // A board without the "made by npm run capture" line at its top is one you've made or edited by hand: it's left alone.
@@ -61,6 +62,35 @@ function readPage() {
     if (text) add(style.color, text.length * parseFloat(style.fontSize) ** 2);
     if (parseFloat(style.borderTopWidth) >= 2) add(style.borderTopColor, box.width * parseFloat(style.borderTopWidth) * 4);
   }
+
+  // Colours that only show on hover or focus (a link that turns red, say) aren't on screen at rest, so they're read
+  // from the site's own stylesheets instead and counted as accents. (WordPress's screen-reader styles are skipped,
+  // and stylesheets from other sites can't be read.)
+  const probe = document.createElement('i');
+  document.body.append(probe);
+  const accentWeight = innerWidth * 900 * 0.05;
+  const readRules = (rules) => {
+    for (const rule of rules) {
+      if (rule.cssRules && !(rule instanceof CSSStyleRule)) readRules(rule.cssRules);
+      if (!(rule instanceof CSSStyleRule) || !/:(hover|focus|active)/.test(rule.selectorText) || /screen-reader/.test(rule.selectorText)) continue;
+      for (const property of ['color', 'background-color', 'border-color', 'border-bottom-color', 'text-decoration-color']) {
+        const value = rule.style.getPropertyValue(property);
+        if (!value || /^(initial|inherit|unset|currentcolor|transparent)$/i.test(value.trim())) continue;
+        probe.style.color = '';
+        // The last colour of a shorthand like "currentcolor currentcolor rgb(143, 29, 44)".
+        probe.style.color = (value.match(/(rgba?\([^)]*\)|hsla?\([^)]*\)|#[0-9a-f]{3,8}|[a-z]+)\s*$/i) || [value])[0];
+        if (probe.style.color) add(getComputedStyle(probe).color, accentWeight);
+      }
+    }
+  };
+  for (const sheet of document.styleSheets) {
+    try {
+      readRules(sheet.cssRules);
+    } catch {
+      // another site's stylesheet: not readable
+    }
+  }
+  probe.remove();
 
   const heading = document.querySelector('h1') || document.querySelector('h2') || document.body;
   const header = document.querySelector('header') || document.querySelector('nav') || document.body;
