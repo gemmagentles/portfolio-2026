@@ -7,7 +7,11 @@
 // animations load), then saves a full-length screenshot 1440 wide as WebP in public/images/work/<slug>/pages/.
 // Then it rewrites the carousel screens in work/<slug>/index.html (between the "carousel screens" markers) with one
 // screen per page, named after its menu link, updates the "Home · 1 of N" line, and points the iMac in the first
-// 50/50 row at the home page screenshot (unless you've given it a picture of your own).
+// 50/50 row at the home page screenshot. It also takes the home page as it looks on an iPad and on a phone for the
+// rows' iPad and phone pictures, and makes a brand guidelines board from the site (scripts/brand-board.js) for the
+// fourth row, and a mockup of the site on an iMac, a MacBook, an iPad and an iPhone (scripts/devices-mockup.js) for
+// the last row. Pictures and boards you've chosen or made yourself are left alone: only placeholders and earlier
+// captures are replaced.
 // Run it again whenever the client's site changes. npm run new runs it for you when given the site's address.
 //
 // Uses the Chrome installed on this computer (set CHROME_PATH if it's somewhere else).
@@ -16,12 +20,22 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import puppeteer from 'puppeteer-core';
+import { makeBrandBoard } from './brand-board.js';
+import { makeDevicesMockup, WIDTH as MOCKUP_WIDTH, HEIGHT as MOCKUP_HEIGHT, FILE as MOCKUP_FILE } from './devices-mockup.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe';
 const WIDTH = 1440;
 const MAX_PAGES = 8; // the carousel stays easy to click through
 const MAX_HEIGHT = 12000; // very long pages are cut off here (the carousel and iMac show the top anyway)
+
+// The home page on an iPad (landscape) and a phone, for the 50/50 rows' pictures (sizes in CSS pixels, saved at 2x),
+// and on an upright iPad for the devices mockup only (it has no row of its own, so no partial).
+const DEVICES = [
+  { label: 'an iPad', file: 'tablet.webp', width: 1180, height: 820, partial: 'work-split-tablet\\.html', placeholder: 'tablet\\.svg' },
+  { label: 'a phone', file: 'phone.webp', width: 390, height: 844, partial: 'work-split-phone\\.html', placeholder: 'mobile\\.svg' },
+  { label: 'an upright iPad', file: 'tablet-portrait.webp', width: 820, height: 1180 },
+];
 
 // Text that's safe inside a partial setting (no " < or >) and on one line.
 const clean = (text) => text.replace(/["<>]/g, '').replace(/\s+/g, ' ').trim();
@@ -34,7 +48,9 @@ async function findPages(page, site) {
     for (const a of document.querySelectorAll('header a[href], nav a[href]')) {
       const url = new URL(a.href, location.href);
       if (url.origin !== origin || /\.(pdf|jpe?g|png|gif|webp|svg|zip)$/i.test(url.pathname)) continue;
-      found.push({ url: url.origin + url.pathname, path: url.pathname.replace(/\/+$/, '') || '/', name: a.textContent });
+      // "/home" and "/index.html" (often the logo's link) are the home page under another address.
+      const path = url.pathname.replace(/\/+$/, '').replace(/^\/(home|index\.(html?|php))$/i, '') || '/';
+      found.push({ url: url.origin + url.pathname, path, name: a.textContent });
     }
     return found;
   }, origin);
@@ -50,8 +66,34 @@ async function findPages(page, site) {
   return pages.slice(0, MAX_PAGES);
 }
 
-// Loads a page, scrolls through it so everything has loaded and played, and saves it full length.
-async function screenshot(page, url, file) {
+// Hides things pinned to the screen below the top, such as cart and chat buttons or cookie banners: in a
+// full-length screenshot they'd float over one spot of the page. A pinned header at the top stays.
+async function hidePinned(page) {
+  await page.evaluate(() => {
+    for (const element of document.querySelectorAll('body *')) {
+      if (getComputedStyle(element).position === 'fixed' && element.getBoundingClientRect().top > 150) {
+        element.style.setProperty('visibility', 'hidden', 'important');
+      }
+    }
+  });
+}
+
+// Waits until every picture on the page has finished loading (or 10 seconds, whichever comes first).
+async function picturesLoaded(page) {
+  await page.waitForFunction(() => [...document.images].every((image) => image.complete), { timeout: 10000 }).catch(() => {});
+}
+
+// Loads a page fresh, as a visitor first sees it.
+async function load(page, url) {
+  await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
+  await page.evaluate(() => document.fonts.ready);
+  await hidePinned(page);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
+// Loads a page and scrolls through it so everything has loaded and played, then back to the top (for reading its
+// colours for the brand board; screenshots don't scroll, see below).
+async function prepare(page, url) {
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
   await page.evaluate(async () => {
     for (let y = 0; y < document.documentElement.scrollHeight; y += 400) {
@@ -59,19 +101,34 @@ async function screenshot(page, url, file) {
       await new Promise((resolve) => setTimeout(resolve, 150));
     }
     window.scrollTo(0, 0);
-
-    // Hide things pinned to the screen below the top, such as cart and chat buttons or cookie banners: in a
-    // full-length screenshot they'd float over one spot of the page. A pinned header at the top stays.
-    for (const element of document.querySelectorAll('body *')) {
-      if (getComputedStyle(element).position === 'fixed' && element.getBoundingClientRect().top > 150) {
-        element.style.setProperty('visibility', 'hidden', 'important');
-      }
-    }
   });
   await new Promise((resolve) => setTimeout(resolve, 1000));
+}
 
-  const height = Math.min(MAX_HEIGHT, await page.evaluate(() => document.documentElement.scrollHeight));
-  await page.screenshot({ path: file, type: 'webp', quality: 80, clip: { x: 0, y: 0, width: WIDTH, height }, captureBeyondViewport: true });
+// A page saved full length, 1440 wide. The window is made as tall as the page, so everything is on screen at once:
+// lazy pictures load and scroll-in animations play without the page scrolling. Then it's a plain screenshot of the
+// whole window. (Puppeteer's cropped "beyond the screen" capture shifted some sites' headers up, cutting the top
+// off Fraser Valley's crest.) Sections sized to the window's height grow when it's made tall, so the height is
+// measured again until it settles. Then the window goes back to its normal height.
+async function screenshot(page, url, file) {
+  await load(page, url);
+  let height = 0;
+  for (let tries = 0; tries < 3; tries++) {
+    const pageHeight = Math.min(MAX_HEIGHT, await page.evaluate(() => document.documentElement.scrollHeight));
+    if (pageHeight === height) break;
+    height = pageHeight;
+    await page.setViewport({ width: WIDTH, height });
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event('resize'));
+      window.dispatchEvent(new Event('scroll')); // scroll-in scripts check what's on screen when the page scrolls
+    });
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  await picturesLoaded(page);
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  await hidePinned(page);
+  await page.screenshot({ path: file, type: 'webp', quality: 80, captureBeyondViewport: false });
+  await page.setViewport({ width: WIDTH, height: 900 });
   return height;
 }
 
@@ -93,6 +150,9 @@ export async function capturePages(slug, site) {
 
   const browser = await puppeteer.launch({ executablePath: CHROME });
   const shots = [];
+  const devices = [];
+  let board = null;
+  let mockup = null;
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: WIDTH, height: 900 });
@@ -109,6 +169,42 @@ export async function capturePages(slug, site) {
       } catch (error) {
         console.log(`skipped (${error.message.split('\n')[0]})`);
       }
+    }
+
+    // The home page as it looks on an iPad in landscape and on a phone (the top screenful, at 2x), for the 50/50
+    // rows' iPad and phone pictures (and on an upright iPad for the devices mockup). Set as touch devices, so the site shows its tablet and mobile layouts.
+    for (const device of DEVICES) {
+      process.stdout.write(`  Home on ${device.label} ... `);
+      try {
+        const screen = await browser.newPage();
+        await screen.setViewport({ width: device.width, height: device.height, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+        await load(screen, pages[0].url);
+        await screen.screenshot({ path: path.join(outDir, device.file), type: 'webp', quality: 80, captureBeyondViewport: false });
+        await screen.close();
+        devices.push(device);
+        console.log('saved');
+      } catch (error) {
+        console.log(`skipped (${error.message.split('\n')[0]})`);
+      }
+    }
+
+    // The brand guidelines board, read from the home page (scripts/brand-board.js).
+    process.stdout.write('  Brand board ... ');
+    try {
+      await prepare(page, pages[0].url);
+      board = await makeBrandBoard(page, slug, project);
+      console.log(board ? 'made' : 'kept yours (made by hand)');
+    } catch (error) {
+      console.log(`skipped (${error.message.split('\n')[0]})`);
+    }
+
+    // The iMac, MacBook, iPad and iPhone mockup, made from the screenshots just taken (scripts/devices-mockup.js).
+    process.stdout.write('  Devices mockup ... ');
+    try {
+      mockup = await makeDevicesMockup(browser, outDir);
+      console.log(mockup ? 'made' : 'skipped (screenshots missing)');
+    } catch (error) {
+      console.log(`skipped (${error.message.split('\n')[0]})`);
     }
   } finally {
     await browser.close();
@@ -134,6 +230,30 @@ export async function capturePages(slug, site) {
     /(<include src="work-split-laptop\.html"[^>]*?)image="\/images\/work\/[^"]*\/(?:home-full\.svg|pages\/[^"]+)" height="\d+"/,
     `$1image="/images/work/${slug}/pages/${shots[0].file}" height="${shots[0].height}"`,
   );
+
+  // The iPad and phone pictures, the same way: only over the placeholder or an earlier capture.
+  // Its description too, if it's still the [placeholder] one.
+  for (const { partial, placeholder, file, width, height, label } of devices.filter((device) => device.partial)) {
+    html = html.replace(
+      new RegExp(`(<include src="${partial}"[^>]*?)image="/images/work/[^"]*/(?:${placeholder}|pages/${file})" width="\\d+" height="\\d+"([^>]*?)alt="(\\[[^"]*\\])?`),
+      (match, before, between, placeholderAlt) =>
+        `${before}image="/images/work/${slug}/pages/${file}" width="${width * 2}" height="${height * 2}"${between}alt="${placeholderAlt ? `The ${project} home page on ${label}` : ''}`,
+    );
+  }
+
+  // The devices mockup in the last row, over the devices.svg placeholder or an earlier capture (a picture you chose,
+  // like LNDMRK's devices.webp, stays), with a description of what's on it.
+  if (mockup) {
+    html = html.replace(
+      /(<include src="work-split-devices\.html"[^>]*?)image="\/images\/work\/[^"]*\/(?:devices\.svg|pages\/devices\.webp)" width="\d+" height="\d+"([^>]*?)alt="[^"]*"/,
+      `$1image="/images/work/${slug}/pages/${mockup}" width="${MOCKUP_WIDTH}" height="${MOCKUP_HEIGHT}"$2alt="The ${project} website on an iMac, a MacBook, an iPad and an iPhone"`,
+    );
+  }
+
+  // The brand board in place of the screenshot placeholder in the 50/50 rows (a picture you chose stays).
+  if (board) {
+    html = html.replace(new RegExp(`<include src="work-split-screenshot\\.html" image="/images/work/${slug}/screenshot\\.svg"[^>]*></include>`), `<include src="${board}"></include>`);
+  }
 
   fs.writeFileSync(pageFile, html);
   return shots;

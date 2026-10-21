@@ -28,7 +28,8 @@
   }
 
   // Jump links to each section, as outline pills.
-  &__toc ul {
+  // A class of its own, so the plain-list hexagon bullets (base/_typography.scss) don't apply.
+  &__toc-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;

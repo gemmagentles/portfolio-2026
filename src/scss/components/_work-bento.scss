@@ -446,9 +446,10 @@
   }
 }
 
-// LNDMRK's board: the colours as full-width bars stacked flush in their panel (touching each other and the panel's
-// sides and bottom), and a bottom panel with their logo and favicon.
-.brand-board--lndmrk {
+// The bars layout (the boards npm run capture makes, and the hidden LNDMRK bento tiles): the colours as full-width bars
+// stacked flush in their panel (touching each other and the panel's sides and bottom), and a bottom panel with the
+// logo and favicon.
+.brand-board--bars {
   .brand-board__meta {
     justify-content: flex-start;
   }
