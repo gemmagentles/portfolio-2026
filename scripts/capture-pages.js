@@ -8,7 +8,8 @@
 // Then it rewrites the carousel screens in work/<slug>/index.html (between the "carousel screens" markers) with one
 // screen per page, named after its menu link, updates the "Home · 1 of N" line, and points the iMac in the first
 // 50/50 row at the home page screenshot. It also takes the home page as it looks on an iPad and on a phone for the
-// rows' iPad and phone pictures. Pictures you've chosen yourself are left alone: only placeholders and earlier
+// rows' iPad and phone pictures, and makes a brand guidelines board from the site (scripts/brand-board.js) for the
+// fourth row. Pictures and boards you've chosen or made yourself are left alone: only placeholders and earlier
 // captures are replaced.
 // Run it again whenever the client's site changes. npm run new runs it for you when given the site's address.
 //
@@ -18,6 +19,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import puppeteer from 'puppeteer-core';
+import { makeBrandBoard } from './brand-board.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe';
@@ -108,6 +110,7 @@ export async function capturePages(slug, site) {
   const browser = await puppeteer.launch({ executablePath: CHROME });
   const shots = [];
   const devices = [];
+  let board = null;
   try {
     const page = await browser.newPage();
     await page.setViewport({ width: WIDTH, height: 900 });
@@ -142,6 +145,16 @@ export async function capturePages(slug, site) {
         console.log(`skipped (${error.message.split('\n')[0]})`);
       }
     }
+
+    // The brand guidelines board, read from the home page (scripts/brand-board.js).
+    process.stdout.write('  Brand board ... ');
+    try {
+      await prepare(page, pages[0].url);
+      board = await makeBrandBoard(page, slug, project);
+      console.log(board ? 'made' : 'kept yours (made by hand)');
+    } catch (error) {
+      console.log(`skipped (${error.message.split('\n')[0]})`);
+    }
   } finally {
     await browser.close();
   }
@@ -175,6 +188,11 @@ export async function capturePages(slug, site) {
       (match, before, between, placeholderAlt) =>
         `${before}image="/images/work/${slug}/pages/${file}" width="${width * 2}" height="${height * 2}"${between}alt="${placeholderAlt ? `The ${project} home page on ${label}` : ''}`,
     );
+  }
+
+  // The brand board in place of the screenshot placeholder in the 50/50 rows (a picture you chose stays).
+  if (board) {
+    html = html.replace(new RegExp(`<include src="work-split-screenshot\\.html" image="/images/work/${slug}/screenshot\\.svg"[^>]*></include>`), `<include src="${board}"></include>`);
   }
 
   fs.writeFileSync(pageFile, html);

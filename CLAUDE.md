@@ -16,8 +16,11 @@ front-end developer and designer; explain changes in plain words and check them 
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
   `public/images/work/<slug>/pages/`) plus the home page on an iPad and a phone, then rewrites the case study's
   carousel screens between its `carousel screens` markers and the "1 of N" line, and swaps the iMac, iPad and phone
-  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). Re-run it
-  when the client's site changes.
+  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). It also
+  writes a brand guidelines board, `partials/brand-board-<slug>.html` (`scripts/brand-board.js`: name, heading font
+  from Google Fonts when it's there, main colours, logo and favicon), for the 4th row; a board without the "made by
+  npm run capture" note is hand-made and left alone. The site's own font files are never copied (licensing). Re-run
+  it when the client's site changes.
 
 ## How the site is put together
 
