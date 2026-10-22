@@ -110,9 +110,9 @@
 
 // ---- The giant word ----
 // A giant outlined "PORTFOLIO" behind the hero, in the same style as "NEXT" in the call to action
-// (components/_cta.scss). It runs centred across the hero just below the nav bar (cropped by the sides on narrower screens), so it
-// reads as a backdrop for the text and phone rather than another heading. Decoration only (hidden from screen
-// readers in index.html), and it lets clicks through.
+// (components/_cta.scss). It runs centred across the hero just below the nav bar (cropped by the sides on narrower
+// screens), so it reads as a backdrop for the text and phone rather than another heading. Decoration only (hidden
+// from screen readers in index.html), and it lets clicks through.
 .hero__backdrop {
   position: absolute;
   inset: 0;
