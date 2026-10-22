@@ -13,6 +13,12 @@ version number and date.
 
 ### Added
 
+- Home page: a sticky "On this page" bar (About, Tools, Clients, Process) that appears once you scroll past the hero.
+  Its links jump smoothly to each section (instantly for visitors who prefer reduced motion), and the section you're
+  reading is highlighted as you scroll. On phones the row of links scrolls sideways if it doesn't fit.
+- Case studies: "← All work" at the top, then a "Next case study" link (the last leads back to the first, in the
+  order set in `case-studies.json`, which `npm run new` adds to) and a "Let's build something together" prompt to
+  Contact at the end.
 - Gitflow branching rules in `CLAUDE.md`: work happens in batches on `feature/` branches (one per batch, not per
   change), plus `release/` and `hotfix/` branches, never straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
@@ -32,6 +38,9 @@ version number and date.
 
 ### Changed
 
+- The header links to pages only: Home, Work and Contact (plus the GitHub, LinkedIn and Résumé links). Home is
+  marked on the home page and Work on the Work page and every case study. With fewer links, the full header shows
+  again from 768px wide (the menu button is for phones only).
 - Home page hero: the heading, the phone and the hexagons are 20% smaller.
 - Home page hero on phones and tablets (below 1024px): the phone and hexagons now show, centred below the buttons
   (they used to be hidden there).
@@ -92,6 +101,9 @@ version number and date.
 
 ### Removed
 
+- The About page (its placeholder content is covered by the home page's About section).
+- The Work page experiments work-v2, work-v3 and work-v4, and the partials and styles only they used. Everything
+  they shared with the case studies stays.
 - The old case study layout's styles (`_case-study.scss`), no longer used by any page.
 - The Work page carousel's drawer and "drop" animation (styles and script), only used by the carousel removed from
   /work/.

@@ -28,11 +28,13 @@ npm run dev      # starts the site at http://localhost:5173 and reloads as you e
 
 ```
 index.html                 Home page
+work/index.html            Work page          → gemmagentles.dev/work/
 contact/index.html         Contact page       → gemmagentles.dev/contact/
 work/<project>/index.html  Case studies       → gemmagentles.dev/work/<project>/
 404.html                   Not-found page
 
 site.config.json           Your name, tagline, email, GitHub, LinkedIn (used on every page)
+case-studies.json          The case studies in order (each one's "Next case study" link; the last loops back)
 partials/                  Shared HTML: head, header, footer, project card
 templates/case-study.html  The template `npm run new` copies (every case study's layout)
 
@@ -85,7 +87,7 @@ This creates `work/project-name/index.html` in the case study layout (a carousel
 1. Add a card for it in `index.html` (the command prints the line to paste).
 2. Write the case study text: replace everything in [square brackets], and the live site address (`https://example.com`). "View code" is set up for you: if your GitHub account has a public repo named after the client (spaces, dashes and capitals ignored), it links there; if not, it shows "Repo private". To change it, swap `view-code-private.html` for `view-code.html` with `repo="..."` (or back).
 3. Pictures: with the site's address, the carousel, the iMac, the iPad, the phone, a brand guidelines board (their name, font, colours, logo and favicon) and the last row's devices mockup (the site on an iMac, a MacBook, an iPad and an iPhone, like LNDMRK's) are made for you (in `public/images/work/project-name/pages/`). Replace the rest by hand as `.webp`: a 1600×1000 `cover` for the home page card. Then update the `image` (and `width`/`height`) on each include in the page, and on the home page card. A picture you set by hand is never overwritten by a re-capture.
-4. Add the page to `public/sitemap.xml`.
+4. Add the page to `public/sitemap.xml`. (It's added to the end of `case-studies.json` for you, so the "Next case study" links run through it; reorder that file to change the order.)
 
 ## Before launch checklist
 
