@@ -13,7 +13,7 @@
 }
 
 .hero {
-  position: relative; // above the giant word
+  --title-size: clamp(3rem, 1rem + 6vw, 6.75rem); // the heading's size (108px on wide screens), also used by the word
   display: flex;
   align-items: center;
   // Fills the screen under the header on every device, with the content centred in it.
@@ -59,7 +59,7 @@
   // "FRONT END" in solid white, then "DEVELOPER" on its own line as a white outline, in Oswald capitals.
   &__title {
     font-family: var(--font-heading--primary);
-    font-size: clamp(3rem, 1rem + 6vw, 6.75rem); // 108px on wide screens
+    font-size: var(--title-size);
     font-weight: 700;
     line-height: 0.95;
     text-transform: uppercase;
@@ -108,34 +108,25 @@
   }
 }
 
-// ---- The giant word ----
-// A giant outlined "PORTFOLIO" behind the hero, in the same style as "NEXT" in the call to action
-// (components/_cta.scss). It runs centred across the hero just below the nav bar (cropped by the sides on narrower
-// screens), so it reads as a backdrop for the text and phone rather than another heading. Decoration only (hidden
-// from screen readers in index.html), and it lets clicks through.
-.hero__backdrop {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
+// ---- The word above the heading ----
+// "PORTFOLIO" as a faint outline, in the same style as "NEXT" in the call to action (components/_cta.scss), sitting
+// just above the heading and exactly as wide as it: "PORTFOLIO" and "DEVELOPER" (the heading's widest line) are both
+// nine Oswald capitals, so at 0.982 of the heading's size it matches its width at every screen size. It's placed
+// above the text column without taking up room, so the heading stays where it was. (If the "Open to work" line comes
+// back, it sits above that instead.) Decoration only: hidden from screen readers in index.html.
 .hero__word {
   position: absolute;
-  top: calc(#{$header-height} - 0.08em); // just below the nav bar (the letters' tops sit a little below the line box)
-  left: 50%;
-  translate: -50% 0; // centred across the hero, so both ends are cropped equally
+  bottom: 100%; // just above the first line of the text column: the heading
+  left: 0;
   font-family: var(--font-heading--primary);
-  // Sized to the screen's width (a little wider on narrower screens, so both ends are cropped), but capped by its
-  // height so on wide, short screens it doesn't reach down behind the heading (it then fits, centred).
-  font-size: min(25.3vw, 36svh);
+  font-size: calc(var(--title-size) * 0.982);
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  line-height: 0.95;
   text-transform: uppercase;
   white-space: nowrap;
   color: transparent;
   -webkit-text-stroke: 2px rgb(255 255 255 / 0.22);
+  pointer-events: none;
 }
 
 // On page load the word fades in as it rises a little into place, a moment after the page appears. Visitors

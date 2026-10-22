@@ -18,13 +18,12 @@
         Styles in src/scss/pages/_home.scss.
         (.hero__wrapper is also how src/js/modules/header.js knows when the hero has scrolled away.)
         data-header-over makes the header see-through over it (src/scss/layout/_header.scss).
-        A giant outlined "PORTFOLIO" sits behind it all, like "NEXT" in the call to action (partials/cta.html).
+        An outlined "PORTFOLIO", like "NEXT" in the call to action (partials/cta.html), sits just above the heading.
       -->
       <section class="hero__wrapper" aria-labelledby="hero-title" data-wave="none" data-header-over>
-        <div class="hero__backdrop" aria-hidden="true"><span class="hero__word">Portfolio</span></div>
-
         <div class="hero container">
           <div class="hero__text">
+            <span class="hero__word" aria-hidden="true">Portfolio</span>
             <!-- Hidden for now: remove the "hidden" attribute to bring the "Open to work" line back. -->
             <p class="hero__status" hidden><span class="hero__dot" aria-hidden="true"></span>Open to work · Vancouver / Remote</p>
             <h1 class="hero__title" id="hero-title">Front End <span class="hero__accent">Developer</span></h1>
