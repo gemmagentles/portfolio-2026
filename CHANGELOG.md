@@ -33,6 +33,8 @@ version number and date.
 ### Changed
 
 - Home page hero: the heading, the phone and the hexagons are 20% smaller.
+- Home page hero on phones and tablets (below 1024px): the phone and hexagons now show, centred below the buttons
+  (they used to be hidden there).
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
 - The GitHub and LinkedIn links in the header, footer and contact page now go to the real profiles
   (github.com/gemmagentles and ca.linkedin.com/in/gemmagentles) instead of placeholders.

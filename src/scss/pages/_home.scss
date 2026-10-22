@@ -25,6 +25,14 @@
   min-height: calc(100svh - #{$header-height});
   padding-block: clamp(4rem, 3rem + 5vw, 7rem);
 
+  // Below lg: the text, then the phone centred underneath it.
+  @include mq-down(lg) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-large);
+  }
+
   // From lg up: two columns. The text takes the width it needs and the phone sits centred in the rest of the row.
   @include mq(lg) {
     display: grid;
@@ -154,16 +162,16 @@
 
 // ---- The phone and facets ----
 // The phone is 300 x 610 (its insides are laid out with inline styles in the partial); the facets are centred on it.
-// Both are shown at 80% (zoom, which shrinks the space they take up too). Hidden below lg.
+// Both are shown at 80% (zoom, which shrinks the space they take up too). Below lg they sit under the text, centred,
+// at 70% (see the end of this rule).
 .hero__visual {
   position: relative;
-  display: none;
   width: 300px;
   height: 610px;
   zoom: 0.8;
+  align-self: center; // below lg: centred under the text
 
   @include mq(lg) {
-    display: block;
     justify-self: center; // centred in the space to the right of the text
   }
 
@@ -179,6 +187,11 @@
 
   @media (max-height: 700px) {
     zoom: 0.56;
+  }
+
+  // Below lg, under the text: a set 70%, whatever the screen's height (it scrolls, so it doesn't need to fit).
+  @include mq-down(lg) {
+    zoom: 0.7;
   }
 }
 
