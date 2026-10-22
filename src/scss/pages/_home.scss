@@ -10,10 +10,10 @@
   position: relative;
   overflow: hidden; // crops the facets (and the giant word) at the edges
   // The header floats over the top of the hero (layout/_header.scss), so the hero starts at the top of the page.
-  // At the bottom, room for the visible part of the giant word (0.545 of its size) plus a gap, so the phone and the
-  // text always sit above it.
+  // At the bottom, room for the visible part of the giant word (0.545 of its size plus 20px) and a gap, so the
+  // phone and the text always sit above it.
   padding-top: $header-height;
-  padding-bottom: calc(var(--word-size) * 0.545 + 1.5rem);
+  padding-bottom: calc(var(--word-size) * 0.545 + 20px + 1.5rem);
   background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
 }
 
@@ -118,11 +118,12 @@
 // (components/_cta.scss): a little wider than the screen, so the P and the O run off the sides, with the bottom of
 // the letters cropped by the hero's bottom edge. The hero keeps room for it at the bottom (its padding-bottom
 // above), so it sits below the phone and text rather than behind them. Oswald's capitals run from 0.105em to 0.93em
-// down the 0.95em line box (measured); with the box 0.3em below the edge, 0.545em of the letters shows.
+// down the 0.95em line box (measured); with the box 0.3em (less 20px) below the edge, 0.545em + 20px of the
+// letters shows.
 // Decoration only: hidden from screen readers in index.html, behind the hero's content, and it lets clicks through.
 .hero__word {
   position: absolute;
-  bottom: -0.3em; // the bottom of the letters runs off the hero
+  bottom: calc(-0.3em + 20px); // the bottom of the letters runs off the hero
   left: -0.09em; // the P runs off the left edge
   font-family: var(--font-heading--primary);
   font-size: var(--word-size);
