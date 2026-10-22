@@ -13,7 +13,8 @@ version number and date.
 
 ### Added
 
-- Home page: a sticky "On this page" bar (About, Tools, Clients, Process) that appears once you scroll past the hero.
+- Home page: a sticky, see-through "On this page" bar (I About, II My Work, IV Tools, VI Clients, VIII My Process,
+  IX My Values, each with its chapter number) that appears once you scroll past the hero.
   Its links jump smoothly to each section (instantly for visitors who prefer reduced motion), and the section you're
   reading is highlighted as you scroll. On phones the row of links scrolls sideways if it doesn't fit.
 - Case studies: "← All work" at the top, then a "Next case study" link (the last leads back to the first, in the

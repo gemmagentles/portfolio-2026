@@ -14,7 +14,7 @@
   z-index: 9; // above the page's sections, below the header's menu (10)
   height: var(--page-nav-height);
   margin-bottom: calc(var(--page-nav-height) * -1);
-  background: rgb(11 11 15 / 0.88);
+  background: rgb(11 11 15 / 0.6); // see-through: the blur keeps the white links readable over light sections
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.1), 0 8px 24px rgb(0 0 0 / 0.18);
@@ -51,7 +51,7 @@
     height: 100%;
   }
 
-  // "On this page", in small mono capitals. From md up only: on phones the links need all the room.
+  // "On this page", in small mono capitals. From lg up only: on phones and tablets the links need all the room.
   &__label {
     display: none;
     flex-shrink: 0;
@@ -61,12 +61,12 @@
     text-transform: uppercase;
     color: rgb(255 255 255 / 0.55);
 
-    @include mq(md) {
+    @include mq(lg) {
       display: block;
     }
   }
 
-  // The links in a row. If they don't fit (small phones), the row scrolls sideways, with the edges fading out to show
+  // The links in a row. If they don't fit (phones), the row scrolls sideways, with the edges fading out to show
   // there's more. The padding gives the focus ring room inside the scrolling row.
   &__list {
     display: flex;
@@ -81,8 +81,12 @@
       display: none;
     }
 
-    // From md up there's always room, so no fade at the edges.
-    @include mq(md) {
+    // Room at each end as wide as the fades, so the first and last links can scroll clear of them.
+    padding-inline: 12px;
+
+    // From lg up there's always room, so no fade at the edges (and no extra room for them).
+    @include mq(lg) {
+      padding-inline: 4px;
       mask-image: none;
     }
   }
@@ -113,6 +117,15 @@
       background: var(--white);
       color: var(--ink);
     }
+  }
+
+  // The section's chapter number (I, II, IV...) before its name, in small mono like the eyebrows, a little fainter.
+  &__number {
+    margin-right: 0.45em;
+    font-family: var(--font-mono);
+    font-size: 0.75em;
+    letter-spacing: 0.04em;
+    opacity: 0.65;
   }
 }
 

@@ -36,7 +36,8 @@ front-end developer and designer; explain changes in plain words and check them 
   - The header (`header.html`, `aria-label="Main"`) has the pages only: Home, Work, Contact, plus the GitHub and
     LinkedIn icons and the Résumé button. It scrolls away with the page (not sticky); below md it's a menu button.
   - The home page has a sticky "On this page" bar (`page-nav.html`, `aria-label="On this page"`) linking to its
-    About, Tools, Clients and Process sections. It shows once the hero has gone, and `page-nav.js` marks the section
+    About, My Work, Tools, Clients, My Process and My Values (Why it matters) sections, each with its chapter
+    number. It shows once the hero has gone, and `page-nav.js` marks the section
     being read with `aria-current="location"` (IntersectionObserver). To add a section: give it an `id` and
     `data-page-section` (which sets its `scroll-margin-top` below the bar), and add a link in page order.
   - Each case study has "← All work" (`case-study-back.html`) at the top, and after its rows "Next case study"
