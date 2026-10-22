@@ -75,6 +75,9 @@ version number and date.
 
 ### Fixed
 
+- The header's links capsule overlapped the logo, icons and Résumé button between about 768px and 1100px wide. Below
+  1024px the header now uses the menu button (the full nav doesn't fit), and from 1024px the capsule sits between
+  the logo and the icons, centred when there's room, instead of pinned to the middle regardless.
 - Case study screenshots (carousel, iMac, devices mockup) cut the top off some sites' headers, such as Fraser
   Valley's crest: the capture now takes a plain screenshot of a page-tall window instead of a cropped one.
 - The category links on the Work page (and the design system page's contents and pill example) showed stray
