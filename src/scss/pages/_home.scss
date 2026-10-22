@@ -7,13 +7,13 @@
 .hero__wrapper {
   --title-size: clamp(2.4rem, 0.8rem + 4.8vw, 5.4rem); // the heading's size (86px on wide screens)
   --word-size: 25.3vw; // the giant word's size (see "The giant word" below)
+  --word-room: calc(var(--word-size) * 0.545 + 1.5rem); // the visible part of the word (0.545 of its size) plus a gap
   position: relative;
   overflow: hidden; // crops the facets (and the giant word) at the edges
   // The header floats over the top of the hero (layout/_header.scss), so the hero starts at the top of the page.
-  // At the bottom, room for the visible part of the giant word (0.545 of its size) plus a gap, so the phone and the
-  // text always sit above it.
+  // At the bottom, room for the giant word, so the phone and the text always sit above it.
   padding-top: $header-height;
-  padding-bottom: calc(var(--word-size) * 0.545 + 1.5rem);
+  padding-bottom: var(--word-room);
   background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
 }
 
@@ -21,8 +21,9 @@
   position: relative; // in front of the word
   display: flex;
   align-items: center;
-  // Fills the screen under the header on every device, with the content centred in it.
-  min-height: calc(100svh - #{$header-height});
+  // Fills the screen between the header and the giant word on every device, with the content centred in it, so the
+  // word shows at the bottom of the first screen. (On a screen too short for everything, the hero grows instead.)
+  min-height: calc(100svh - #{$header-height} - var(--word-room));
   padding-block: clamp(4rem, 3rem + 5vw, 7rem);
 
   // From lg up: two columns. The text takes the width it needs and the phone sits centred in the rest of the row.
