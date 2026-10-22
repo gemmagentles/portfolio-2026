@@ -14,17 +14,25 @@ front-end developer and designer; explain changes in plain words and check them 
   it if found (`view-code.html`), otherwise shows "Repo private" (`view-code-private.html`).
 - `npm run capture -- <slug> <site>` (`scripts/capture-pages.js`, uses `puppeteer-core` and the installed Chrome):
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
-  `public/images/work/<slug>/pages/`), then rewrites the case study's carousel screens between its
-  `carousel screens` markers, the "1 of N" line, and the iMac if it still shows the placeholder. Re-run it when the
-  client's site changes.
+  `public/images/work/<slug>/pages/`) plus the home page on an iPad and a phone, then rewrites the case study's
+  carousel screens between its `carousel screens` markers and the "1 of N" line, and swaps the iMac, iPad and phone
+  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). It also
+  writes a brand guidelines board, `partials/brand-board-<slug>.html` (`scripts/brand-board.js`: name, heading font
+  from Google Fonts when it's there, main colours, logo and favicon), for the 4th row; a board without the "made by
+  npm run capture" note is hand-made and left alone. And it makes the last row's devices mockup,
+  `pages/devices.webp` (`scripts/devices-mockup.js`: an iMac, MacBook, upright iPad and iPhone drawn in HTML/CSS
+  like LNDMRK's, filled with the screenshots, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
+  capture only; `node scripts/devices-mockup.js <slug>` remakes just the mockup. The site's own font files are
+  never copied (licensing). Re-run
+  it when the client's site changes.
 
 ## How the site is put together
 
 - **Pages:** every `.html` file is built automatically (`findPages` in `plugins/html-include.js`), except files in
   `node_modules`, `dist`, `partials`, `templates`, `public`, `src`, `plugins`, `scripts`. Current pages: `/`, `about/`,
-  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, still in the older
-  simple layout styled by `pages/_case-study.scss`), `design-system/`, and the Work page experiments `work-v2/`,
-  `work-v3/`, `work-v4/` (v4 is the current favourite, and the layout new case studies use).
+  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, all in the work-v4
+  layout from the template), `design-system/`, and the Work page experiments `work-v2/`, `work-v3/`, `work-v4/` (v4 is
+  the current favourite, and the layout the case studies use).
 - **Partials:** `<include src="x.html" name="..."></include>` pulls in `partials/x.html`; attributes become `{{name}}`,
   `site.config.json` is `{{site.*}}`, and `{{year}}` is the year. Gotchas:
   - attribute values can't contain `>` or `"`; an unset `{{var}}` stays in the output literally;
@@ -54,7 +62,7 @@ front-end developer and designer; explain changes in plain words and check them 
   - `motion-ok` mixin wraps animation; respect `prefers-reduced-motion`. `hex-bullet` mixin draws the hexagon bullets.
 - **JS:** `src/js/main.js` starts one module per feature from `src/js/modules/`. `wave.js` is switched off.
   `showcase.js` drives the carousel (only one per page); `data-showcase="scroll"` makes the front screen scroll to the
-  next section instead of opening a drawer.
+  next section (otherwise its link is followed).
 
 ## Rules and preferences
 
@@ -68,9 +76,10 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Comments** explain what something is and why, in plain words, like the existing ones. Keep that density.
 - **Before saying a visual change is done,** build and check it in headless Chrome at 1440px and 390px wide (plus
   other widths when layout depends on it), measuring with `getBoundingClientRect` where spacing matters. Chrome is at
-  `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`; install `puppeteer-core` in a temp folder, run
-  `npm run build` then `npx vite preview --port 4173 --strictPort`. Stop the server after each check; delete the temp
-  folder once the batch is merged.
+  `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`; `puppeteer-core` is a dev dependency, so
+  check scripts in the scratchpad load it from the project (`createRequire(<project>/package.json)`). Run `npm run build`
+  then `npx vite preview --port 4173 --strictPort`. Stop the server after each check; delete temp
+  files once the batch is merged.
 - **Screenshots of client sites** are captured from the live sites with headless Chrome and saved as WebP in
   `public/images/work/<client>/` (e.g. `*-full.webp` full-length pages, `services-tablet.webp`).
 - **Version control:** Git, pushed to github.com/gemmagentles/portfolio-2026 (public). Commit when Gemma asks
@@ -101,8 +110,7 @@ front-end developer and designer; explain changes in plain words and check them 
 - Build-time "years of experience" number (currently counted in the browser by `years.js` from 2012) plus a yearly
   rebuild, so search engines see the right number.
 - Replace the placeholder text in [square brackets]: Challenges lists (work-v4, work-v3, `/work/` cards), case study
-  pages, the `/work/` carousel drawer and the Custom Coded / EDM placeholders on `/work/`.
+  pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
-- On phones, the `/work/` category links show stray bullets; at about 800px wide the header capsule overlaps the logo
-  and Résumé button.
+- From about 800px to 1024px wide the header capsule overlaps the logo, the profile icons and the Résumé button.
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).

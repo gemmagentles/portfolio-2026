@@ -7,7 +7,7 @@
       description="What Gemma Gentles has built: CMS websites, custom-coded front ends, email campaigns and API components."
     ></include>
   </head>
-  <body class="page-work">
+  <body class="page-work nav-gradient">
     <include src="header.html"></include>
 
     <!--
@@ -18,100 +18,45 @@
     -->
     <main id="main" class="work-page">
       <!--
-        Showcase: the three featured projects as browser-window screens in a carousel. One sits in front with the
-        other two angled behind it. Clicking a screen behind brings it to the front; clicking the front one drops it
-        and unfolds a drawer with its description (src/js/modules/showcase.js). data-pos is each screen's place:
-        0 front, 1 right, -1 left.
+        The hero, on black: the heading and quote on the left, and on the right a browser window full of project
+        screenshots (the same ones as the home page's "My Work" wall), angled and fading into the black behind the
+        text. On phones the window sits under the text. The window is decoration (the projects are listed below), so
+        screen readers skip it. Styles: src/scss/components/_work-intro.scss.
         The quote is from "Chapter IV · My Work" in the V5 Studio design.
-        The background is the home page hero's: the pink-to-blue gradient and the hexagon facets (partials/hero-hex.html).
-        data-header-over makes the header see-through over it, like the home page (src/scss/layout/_header.scss).
       -->
-      <section class="work-showcase" aria-labelledby="work-title" data-header-over>
-        <div class="work-showcase__facets" aria-hidden="true">
-          <include src="hero-hex.html"></include>
+      <section class="work-intro" aria-labelledby="work-title">
+        <div class="container work-intro__content">
+          <p class="eyebrow" data-reveal>My Work</p>
+          <h1 class="work-intro__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
+          <p class="work-intro__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
         </div>
 
-        <div class="container work-showcase__inner">
-          <p class="eyebrow" data-reveal>My Work</p>
-          <h1 class="work-showcase__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
-
-          <div class="work-showcase__carousel" data-showcase data-reveal>
-            <ul class="work-showcase__stage">
-              <li class="work-showcase__screen" data-pos="0">
-                <a href="/work/lndmrk/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">LNDMRK</span>
-                  </span>
-                </a>
-              </li>
-              <li class="work-showcase__screen" data-pos="1">
-                <a href="/work/fraser-valley/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">Fraser Valley</span>
-                  </span>
-                </a>
-              </li>
-              <li class="work-showcase__screen" data-pos="-1">
-                <a href="/work/nueva-gold/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">Nueva Gold</span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-
-            <!-- The drawer that unfolds from under the front screen when it's clicked: one description per screen,
-                 in the same order as the screens above. Only the front screen's one shows. -->
-            <div class="work-showcase__drawer" id="work-showcase-drawer" data-showcase-drawer>
-              <div class="work-showcase__drawer-inner">
-                <div class="work-showcase__details" data-details>
-                  <p class="work-showcase__details-meta">LNDMRK · CMS website</p>
-                  <p>[Two or three sentences about LNDMRK: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-                <div class="work-showcase__details" data-details hidden>
-                  <p class="work-showcase__details-meta">Fraser Valley · CMS website</p>
-                  <p>[Two or three sentences about Fraser Valley: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-                <div class="work-showcase__details" data-details hidden>
-                  <p class="work-showcase__details-meta">Nueva Gold · CMS website</p>
-                  <p>[Two or three sentences about Nueva Gold: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="work-showcase__controls">
-              <button class="work-showcase__arrow" type="button" aria-label="Previous project" data-showcase-prev>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
-              </button>
-              <p class="work-showcase__status" aria-live="polite" data-showcase-status>LNDMRK · 1 of 3</p>
-              <button class="work-showcase__arrow" type="button" aria-label="Next project" data-showcase-next>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </button>
-            </div>
-          </div>
-
-          <p class="work-showcase__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
+        <div class="work-intro__window" aria-hidden="true">
+          <div class="work-intro__bar"><span></span><span></span><span></span><span class="work-intro__address">gemmagentles.dev/work</span></div>
+          <ul class="work-intro__grid">
+            <li class="work-intro__tile"><img src="/images/projects/harveys-thumbnail.jpg" alt="" width="740" height="496" decoding="async" /><span class="work-intro__name">Harveys</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">LNDMRK</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Nueva Gold</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/kathmandu.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Kathmandu</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/nandos.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Nando's</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Fraser Valley Gaels</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/signal.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Signal</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/scottish-friendly.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Scottish Friendly</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/andersontreesurgeryMedium2.jpg" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Anderson Tree Surgery</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/ABCofHealthLtd_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">ABC of Health</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/smudge-digital.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Smudge Digital</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/Decorhom_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">Decorhom</span><span class="work-intro__type">Website</span></li>
+          </ul>
         </div>
       </section>
 
-      <include src="page-wall-lndmrk.html" intro="hidden" eyebrow="" title=""></include>
-
-      <include src="work-bento.html"></include>
-
-      <include src="work-cards-lndmrk.html"></include>
+      <!-- Hidden for now: the wall of LNDMRK pages (partials/page-wall-lndmrk.html, with intro="hidden" and empty
+           eyebrow and title), the LNDMRK bento grid (partials/work-bento.html) and the same tiles as full-width cards
+           (partials/work-cards-lndmrk.html). Include any of them here again to bring it back. -->
 
       <div class="container">
         <nav class="work-page__filters" aria-label="Work categories" data-reveal>
-          <ul>
+          <ul class="work-page__filter-list">
             <li><a href="#cms-websites"><span>01</span>CMS Websites</a></li>
             <li><a href="#custom-coded"><span>02</span>Custom Coded</a></li>
             <li><a href="#custom-edms"><span>03</span>Custom EDMs</a></li>

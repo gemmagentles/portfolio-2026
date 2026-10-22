@@ -4,114 +4,115 @@
     <include
       src="head.html"
       title="LNDMRK — Case study — Gemma Gentles"
-      description="How I built the LNDMRK website: the brief, my role, key decisions and the result."
+      description="How I built the LNDMRK website: a full stack WordPress build for a London marketing agency, with a CMS and a contact form."
     ></include>
   </head>
-  <body class="page-case-study">
+  <body class="page-work nav-gradient">
     <include src="header.html"></include>
 
-    <main id="main">
-      <article class="case-study">
-        <header class="case-study__header container">
-          <a class="text-link case-study__back" href="/#work">&larr; All work</a>
-          <h1 class="case-study__title" data-reveal>LNDMRK</h1>
-          <p class="lead" data-reveal>
-            Two sentences for skimmers: what the client needed and what you built for them.
-          </p>
+    <!--
+      A case study in the work-v4 layout (made by npm run new from templates/case-study.html): the project's pages in
+      a carousel at the top, then alternating 50/50 rows of text and pictures, ending with the live site.
+      Write the text here; the pictures, carousel screens and buttons are shared partials, so their look changes in
+      one place for every case study. Replace everything in [square brackets], and swap the placeholder .svg
+      pictures in public/images/work/lndmrk/ for real screenshots (update the file names and sizes here if you use
+      .webp). Styles: .page-carousel and .work-showcase in src/scss/pages/_work.scss, .work-split in
+      src/scss/components/_work-split.scss.
+    -->
+    <main id="main" class="work-page work-page--feature">
+      <!-- The hero: the project's name, and its pages as browser windows (partials/showcase-screen.html). Clicking
+           the front one scrolls down to the rows; clicking one behind brings it to the front.
+           npm run capture (or npm run new with the site's address) screenshots every page of the live site and
+           rewrites the screens between the two "carousel screens" markers, with the line under the carousel, so
+           leave the markers in. To do it by hand: one screen per page, pos 0 front, 1 right, -1 left, 2 waiting
+           behind, and keep the count in status right. -->
+      <section class="page-carousel" aria-labelledby="page-carousel-title">
+        <div class="container">
+          <div class="page-wall__intro">
+            <p class="eyebrow">Case study</p>
+            <h1 class="page-wall__title" id="page-carousel-title">LNDMRK</h1>
+          </div>
 
-          <dl class="case-study__meta" data-reveal>
-            <div>
-              <dt>Role</dt>
-              <dd>Design &amp; front end development</dd>
-            </div>
-            <div>
-              <dt>Year</dt>
-              <dd>2026</dd>
-            </div>
-            <div>
-              <dt>Type</dt>
-              <dd>Client website</dd>
-            </div>
-            <div>
-              <dt>Tools</dt>
-              <dd>HTML, SCSS, JavaScript</dd>
-            </div>
-          </dl>
-
-          <a class="button" href="https://www.lndmrk.co.uk/" target="_blank" rel="noopener" data-reveal>
-            Visit live site <span class="visually-hidden">(opens in a new tab)</span>&nearr;
-          </a>
-        </header>
-
-        <figure class="case-study__hero container" data-reveal>
-          <img
-            src="/images/work/lndmrk/cover.webp"
-            alt="The LNDMRK home page on a desktop screen"
-            width="1600"
-            height="1000"
-            fetchpriority="high"
-          />
-        </figure>
-
-        <div class="case-study__body container">
-          <section class="case-study__section" data-reveal>
-            <h2>The brief</h2>
-            <p>Who the client is, what they needed, and what was wrong with what they had before.</p>
-          </section>
-
-          <section class="case-study__section" data-reveal>
-            <h2>My role</h2>
-            <p>What you owned: design, build, content, launch. Mention anyone you worked with.</p>
-          </section>
-
-          <section class="case-study__section" data-reveal>
-            <h2>Approach</h2>
-            <p>Two or three decisions that show how you think. For each, say what you chose and why.</p>
-            <ul>
-              <li><strong>Decision one:</strong> what you chose and why it mattered.</li>
-              <li><strong>Decision two:</strong> what you chose and why it mattered.</li>
-              <li><strong>Decision three:</strong> what you chose and why it mattered.</li>
+          <div class="work-showcase__carousel" data-showcase="scroll" data-reveal>
+            <ul class="work-showcase__stage">
+              <!-- carousel screens: start -->
+              <include src="showcase-screen.html" pos="0" href="#work-split-title" image="/images/work/lndmrk/pages/01-home.webp" width="1440" height="3851" alt="The LNDMRK Home page" label="LNDMRK" name="Home"></include>
+              <include src="showcase-screen.html" pos="1" href="#work-split-title" image="/images/work/lndmrk/pages/02-about.webp" width="1440" height="2920" alt="The LNDMRK About page" label="LNDMRK" name="About"></include>
+              <include src="showcase-screen.html" pos="-1" href="#work-split-title" image="/images/work/lndmrk/pages/03-contact.webp" width="1440" height="1299" alt="The LNDMRK Contact page" label="LNDMRK" name="Contact"></include>
+              <!-- carousel screens: end -->
             </ul>
-          </section>
-        </div>
 
-        <div class="case-study__gallery container">
-          <figure data-reveal>
-            <img
-              src="/images/work/lndmrk/desktop.webp"
-              alt="A LNDMRK page on desktop"
-              width="1600"
-              height="900"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Describe what this screen shows.</figcaption>
-          </figure>
-          <figure class="case-study__gallery-mobile" data-reveal>
-            <img
-              src="/images/work/lndmrk/mobile.webp"
-              alt="The LNDMRK site on a phone"
-              width="780"
-              height="1688"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>The mobile layout.</figcaption>
-          </figure>
+            <include src="showcase-controls.html" status="Home · 1 of 3"></include>
+          </div>
         </div>
+      </section>
 
-        <div class="case-study__body container">
-          <section class="case-study__section" data-reveal>
-            <h2>The result</h2>
-            <p>What launched and what the client got out of it, in words. Add a short client quote if you have one.</p>
-          </section>
+      <!-- The story in 50/50 rows (text on one side, a picture on the other, swapping sides each row). Each picture is
+           a partial: work-split-laptop (the home page scrolling in an iMac), -phone, -tablet, -screenshot or
+           -devices; any of them can go in any row. -->
+      <section class="work-split work-split--full work-split--reveal-zoom" aria-labelledby="work-split-title">
+        <div class="container">
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">Case study · LNDMRK</p>
+              <h2 class="work-split__title" id="work-split-title">WordPress website development</h2>
+              <p>A website for LNDMRK, a London marketing agency that works with brands everywhere. This was a full stack build, back end and front end, while I worked in an agency called Squadforce.</p>
+            </div>
+            <include src="work-split-laptop.html" href="https://www.lndmrk.co.uk/" image="/images/work/lndmrk/pages/01-home.webp" height="3851" address="lndmrk.co.uk" label="The LNDMRK website on an iMac: visit the live site" priority="auto"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">What I achieved</p>
+              <h3 class="work-split__heading">This client's goals</h3>
+              <ul class="work-split__list">
+                <li>A CMS for the client to make their own changes</li>
+                <li>A contact form to attract new clients</li>
+              </ul>
+            </div>
+            <!-- The contact form (chosen by hand, so npm run capture leaves it alone). -->
+            <include src="work-split-phone.html" image="/images/work/lndmrk/contact-form-mobile.webp" width="780" height="2302" alt="The LNDMRK contact form on a phone"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">Problem solving</p>
+              <h3 class="work-split__heading">The challenges that came</h3>
+              <ul class="work-split__list">
+                <li>[A challenge on this project, and how you solved it]</li>
+                <li>[Another challenge, and how you solved it]</li>
+              </ul>
+            </div>
+            <!-- The services section, captured at iPad size from lndmrk.co.uk (chosen by hand). -->
+            <include src="work-split-tablet.html" image="/images/work/lndmrk/services-tablet.webp" width="2360" height="1640" alt="The LNDMRK &quot;Everything your brand needs under one roof&quot; section on an iPad"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <h3 class="work-split__heading">Built with</h3>
+              <p class="work-split__tags"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span> <span>WordPress</span></p>
+              <h3 class="work-split__heading">My role</h3>
+              <p class="work-split__tags"><span>Project manager</span> <span>Full stack development</span> <span>QA</span></p>
+            </div>
+            <!-- The client's brand guidelines board, made from their live site by npm run capture (scripts/brand-board.js). -->
+            <include src="brand-board-lndmrk.html"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">lndmrk.co.uk</p>
+              <h3 class="work-split__heading">See the website live.</h3>
+              <!-- "View code": if the code is in a repo you can link to, swap view-code-private.html for view-code.html
+                   with repo="https://github.com/..." on it. -->
+              <div class="work-split__buttons">
+                <include src="visit-site.html" href="https://www.lndmrk.co.uk/" address="lndmrk.co.uk"></include>
+                <include src="view-code-private.html"></include>
+              </div>
+            </div>
+            <include src="work-split-devices.html" image="/images/work/lndmrk/devices.webp" width="1600" height="1246" alt="The LNDMRK website on an iMac, a MacBook, an iPad and an iPhone"></include>
+          </div>
         </div>
-
-        <nav class="case-study__next container" aria-label="Next project" data-reveal>
-          <p>Next project</p>
-          <a href="/work/fraser-valley/">Fraser Valley &rarr;</a>
-        </nav>
-      </article>
+      </section>
     </main>
 
     <include src="footer.html"></include>
