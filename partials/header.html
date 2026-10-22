@@ -17,17 +17,15 @@
     </button>
 
     <!--
-      Nav C (from the design): the page links in a centred frosted-glass capsule (the current page is a white pill),
-      then the profile icons and a "Résumé" download button on the right. On phones and tablets (below 1024px) it all
+      Nav C (from the design): the page links (pages only: sections of the home page are in its "On this page" bar,
+      partials/page-nav.html) in a centred frosted-glass capsule (the current page is a white pill),
+      then the profile icons and a "Résumé" download button on the right. On phones (below 768px) it all
       drops down from the menu button.
     -->
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="site-nav__list">
         <li><a href="/" data-nav="/">Home</a></li>
-        <li><a href="/about/" data-nav="/about/">About</a></li>
-        <li><a href="/#work" data-nav="/work">Work</a></li>
-        <li><a href="/#tools" data-nav="/tools/">Tools</a></li>
-        <li><a href="/#clients" data-nav="/clients/">Clients</a></li>
+        <li><a href="/work/" data-nav="/work/">Work</a></li>
         <li><a href="/contact/" data-nav="/contact/">Contact</a></li>
       </ul>
       <!-- Profile links (addresses come from site.config.json) and the résumé download (public/resume.pdf). -->

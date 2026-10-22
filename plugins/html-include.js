@@ -7,7 +7,7 @@
 // - Any other attribute becomes a variable inside that partial: {{title}}, {{description}}.
 // - Everything in site.config.json is available everywhere as {{site.name}}, {{site.email}}, etc.
 // - {{year}} is always the current year.
-// - Nav links written as <a href="/about/" data-nav="/about/"> get aria-current set automatically
+// - Nav links written as <a href="/contact/" data-nav="/contact/"> get aria-current set automatically
 //   when you're on that page (or inside that section).
 
 import fs from 'node:fs';

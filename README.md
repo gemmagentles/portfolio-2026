@@ -28,7 +28,6 @@ npm run dev      # starts the site at http://localhost:5173 and reloads as you e
 
 ```
 index.html                 Home page
-about/index.html           About page         → gemmagentles.dev/about/
 contact/index.html         Contact page       → gemmagentles.dev/contact/
 work/<project>/index.html  Case studies       → gemmagentles.dev/work/<project>/
 404.html                   Not-found page
@@ -64,7 +63,7 @@ Any page can pull in a partial:
 
 Attributes become variables inside the partial (`{{name}}`, `{{summary}}`). Everything in `site.config.json` works anywhere as `{{site.name}}`, `{{site.email}}` and so on, and `{{year}}` is the current year.
 
-Nav links written as `<a href="/about/" data-nav="/about/">` get `aria-current` automatically on the matching page, which the CSS uses to underline the current link.
+Nav links written as `<a href="/contact/" data-nav="/contact/">` get `aria-current` automatically on the matching page, which the CSS uses to underline the current link.
 
 ## Changing the look
 

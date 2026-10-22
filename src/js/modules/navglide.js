@@ -1,12 +1,12 @@
 // The nav capsule's hover highlight: one pill that glides from link to link as the cursor (or keyboard focus) moves
 // along the links, stretching and shrinking to fit each word on the way, then fades out when the cursor leaves.
-// Only in the desktop capsule (lg up), and not for visitors who prefer reduced motion: they keep the plain hover on
+// Only in the desktop capsule (md up), and not for visitors who prefer reduced motion: they keep the plain hover on
 // each link (src/scss/layout/_header.scss).
 export function initNavGlide() {
   const list = document.querySelector('.site-nav__list');
   if (!list) return;
 
-  const desktop = window.matchMedia('(min-width: 64em)'); // the lg breakpoint, where the header shows the capsule
+  const desktop = window.matchMedia('(min-width: 48em)'); // the md breakpoint, where the header shows the capsule
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   // The pill itself: an empty list item, hidden from screen readers, positioned under the hovered link.
