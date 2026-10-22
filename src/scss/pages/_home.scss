@@ -5,6 +5,7 @@
 // left and, from lg up, a phone on the right (partials/hero-phone.html) over a hexagon of geometric facets
 // (partials/hero-hex.html).
 .hero__wrapper {
+  --title-size: clamp(3rem, 1rem + 6vw, 6.75rem); // the heading's size (108px on wide screens), also used by the word
   position: relative;
   overflow: hidden; // crops the facets at the edges
   // The header floats over the top of the hero (layout/_header.scss), so the hero starts at the top of the page.
@@ -13,7 +14,7 @@
 }
 
 .hero {
-  --title-size: clamp(3rem, 1rem + 6vw, 6.75rem); // the heading's size (108px on wide screens), also used by the word
+  position: relative; // in front of the word
   display: flex;
   align-items: center;
   // Fills the screen under the header on every device, with the content centred in it.
@@ -108,16 +109,18 @@
   }
 }
 
-// ---- The word above the heading ----
-// "PORTFOLIO" as a faint outline, in the same style as "NEXT" in the call to action (components/_cta.scss), sitting
-// just above the heading and exactly as wide as it: "PORTFOLIO" and "DEVELOPER" (the heading's widest line) are both
-// nine Oswald capitals, so at 0.982 of the heading's size it matches its width at every screen size. It's placed
-// above the text column without taking up room, so the heading stays where it was. (If the "Open to work" line comes
-// back, it sits above that instead.) Decoration only: hidden from screen readers in index.html.
+// ---- The word under the nav ----
+// "PORTFOLIO" as a faint outline, in the same style as "NEXT" in the call to action (components/_cta.scss), centred
+// across the hero with the tops of its letters touching the bottom of the nav bar. It's as wide as the heading:
+// "PORTFOLIO" and "DEVELOPER" (the heading's widest line) are both nine Oswald capitals, so at 0.982 of the heading's
+// size it matches its width at every screen size. Oswald's capitals start 0.105em below the top of the line box
+// (measured), so the box sits that much above the nav's bottom edge. Decoration only: hidden from screen readers in
+// index.html, behind the hero's content, and it lets clicks through.
 .hero__word {
   position: absolute;
-  bottom: 100%; // just above the first line of the text column: the heading
-  left: 0;
+  top: calc(#{$header-height} - 0.105em); // the letters' tops on the nav's bottom edge
+  left: 50%;
+  translate: -50% 0; // centred across the hero
   font-family: var(--font-heading--primary);
   font-size: calc(var(--title-size) * 0.982);
   font-weight: 700;
