@@ -23,7 +23,7 @@ version number and date.
   pushes up and back), then the arrow's lines reshape into a padlock as the text changes to "Repo private".
   The arrows on "Visit site" and "View code" are now drawn as lines so the two match.
 - Home page hero: a giant outlined "PORTFOLIO" in the background, in the same style as "NEXT" in the call to
-  action. It runs the full width just below the nav bar, cropped at both sides, behind the text and phone, and fades
+  action. It runs centred across the hero just below the nav bar, behind the text and phone, and fades
   and rises in gently on page load (still for visitors who prefer reduced motion). Screen readers skip it.
 - Every case study now ends with a real "all devices" mockup like LNDMRK's: the client's site on an iMac, a
   MacBook, an iPad and an iPhone, made from its own screenshots by `npm run capture` (it replaces the placeholder,

@@ -110,7 +110,7 @@
 
 // ---- The giant word ----
 // A giant outlined "PORTFOLIO" behind the hero, in the same style as "NEXT" in the call to action
-// (components/_cta.scss). It runs the full width just below the nav bar, with both ends cropped by the sides, so it
+// (components/_cta.scss). It runs centred across the hero just below the nav bar (cropped by the sides on narrower screens), so it
 // reads as a backdrop for the text and phone rather than another heading. Decoration only (hidden from screen
 // readers in index.html), and it lets clicks through.
 .hero__backdrop {
@@ -123,10 +123,11 @@
 .hero__word {
   position: absolute;
   top: calc(#{$header-height} - 0.08em); // just below the nav bar (the letters' tops sit a little below the line box)
-  left: -0.09em; // the P runs off the left edge
+  left: 50%;
+  translate: -50% 0; // centred across the hero, so both ends are cropped equally
   font-family: var(--font-heading--primary);
-  // A little wider than the screen, so both ends are cropped. Capped by the screen height so on wide, short
-  // screens it doesn't reach down behind the heading (it then stops short of the right edge).
+  // Sized to the screen's width (a little wider on narrower screens, so both ends are cropped), but capped by its
+  // height so on wide, short screens it doesn't reach down behind the heading (it then fits, centred).
   font-size: min(25.3vw, 36svh);
   font-weight: 700;
   line-height: 1;
