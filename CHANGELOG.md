@@ -23,9 +23,9 @@ version number and date.
   pushes up and back), then the arrow's lines reshape into a padlock as the text changes to "Repo private".
   The arrows on "Visit site" and "View code" are now drawn as lines so the two match.
 - Home page hero: a giant outlined "PORTFOLIO" (the style of "NEXT" in the call to action) along the bottom,
-  full width with its ends and the bottom of its letters cropped. The hero content sits higher to make room, so
-  the word shows at the bottom of the first screen, below the phone and text rather than behind them. It fades
-  and rises in gently on page load (still for visitors who prefer reduced motion). Screen readers skip it.
+  full width with its ends and the bottom of its letters cropped. The hero has room for it at the bottom, so it sits
+  below the phone and text, not behind them. It fades and rises in gently on page load (still for visitors who
+  prefer reduced motion). Screen readers skip it.
 - Every case study now ends with a real "all devices" mockup like LNDMRK's: the client's site on an iMac, a
   MacBook, an iPad and an iPhone, made from its own screenshots by `npm run capture` (it replaces the placeholder,
   but never a picture chosen by hand). Fraser Valley and Nueva Gold have theirs.
