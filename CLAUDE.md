@@ -33,13 +33,13 @@ front-end developer and designer; explain changes in plain words and check them 
   (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, all from the template), `contact/`,
   `design-system/` and `404.html`. (No About page: the home page's About section replaced it.)
 - **Navigation:**
-  - The header (`header.html`, `aria-label="Main"`) has the pages only: Home, Work, Contact, plus the GitHub and
+  - The header (`header.html`, `aria-label="Main"`) has the pages only: Home, All Work, Contact Me, plus the GitHub and
     LinkedIn icons and the Résumé button. It scrolls away with the page (not sticky); below md it's a menu button.
-  - The home page has a sticky "On this page" bar (`page-nav.html`, `aria-label="On this page"`) linking to its
-    About, My Work, Tools, Clients, My Process and My Values (Why it matters) sections, each with its chapter
-    number. It shows once the hero has gone, and `page-nav.js` marks the section
-    being read with `aria-current="location"` (IntersectionObserver). To add a section: give it an `id` and
-    `data-page-section` (which sets its `scroll-margin-top` below the bar), and add a link in page order.
+  - The home page has an "On this page" bar fixed to the bottom of the screen (`page-nav.html`,
+    `aria-label="On this page"`) linking to its About, My Work, Tools, Clients, My Process and My Values (Why it
+    matters) sections, each with its chapter number. It shows once the hero has gone, and `page-nav.js` marks the
+    section being read with `aria-current="location"` (IntersectionObserver). To add a section: give it an `id` and
+    `data-page-section` (the hook for its `scroll-margin-top` in `_page-nav.scss`), and add a link in page order.
   - Each case study has "← All work" (`case-study-back.html`) at the top, and after its rows "Next case study"
     (`case-study-next.html`: the build fills in `{{next.href}}`/`{{next.name}}` from `case-studies.json`, the last
     leading back to the first) and a `cta.html` to Contact.

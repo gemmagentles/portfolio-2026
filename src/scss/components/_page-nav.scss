@@ -1,30 +1,29 @@
 @use '../abstracts' as *;
 
-// "On this page" (partials/page-nav.html): a slim dark bar of links to the home page's sections. It sits straight after
-// the hero and sticks to the top of the screen once the hero has gone. It takes up no room in the page (the negative
-// margin cancels its height), so the section under it doesn't move when it shows; it just slides down over its top.
-// src/js/modules/page-nav.js adds .is-visible once the hero has scrolled away and marks the current section's link.
+// "On this page" (partials/page-nav.html): a slim dark bar of links to the home page's sections, fixed to the bottom
+// of the screen (within thumb reach on phones). It's out of the page's flow, so nothing moves when it shows; it slides
+// up into view once the hero has gone. src/js/modules/page-nav.js adds .is-visible once the hero has scrolled away
+// and marks the current section's link.
 :root {
   --page-nav-height: 2.75rem; // 44px
 }
 
 .page-nav {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: auto 0 0;
   z-index: 9; // above the page's sections, below the header's menu (10)
   height: var(--page-nav-height);
-  margin-bottom: calc(var(--page-nav-height) * -1);
   background: rgb(11 11 15 / 0.6); // see-through: the blur keeps the white links readable over light sections
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.1), 0 8px 24px rgb(0 0 0 / 0.18);
+  box-shadow: 0 -1px 0 rgb(255 255 255 / 0.1), 0 -8px 24px rgb(0 0 0 / 0.18);
   color: var(--white);
 
   // Hidden until the hero has scrolled away (only when the script is running, so without it the bar is always there).
   .js & {
     visibility: hidden;
     opacity: 0;
-    translate: 0 -100%;
+    translate: 0 100%;
   }
 
   .js &.is-visible {
@@ -33,7 +32,7 @@
     translate: none;
   }
 
-  // Slides down into place (not for visitors who prefer reduced motion: they see it appear).
+  // Slides up into place (not for visitors who prefer reduced motion: they see it appear).
   @include motion-ok {
     .js & {
       transition: opacity 0.3s var(--ease-out), translate 0.3s var(--ease-out), visibility 0s 0.3s;
@@ -59,7 +58,7 @@
     font-size: 0.7rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgb(255 255 255 / 0.55);
+    color: rgb(255 255 255 / 0.75);
 
     @include mq(lg) {
       display: block;
@@ -129,12 +128,21 @@
   }
 }
 
-// The sections the bar links to stop just below it when jumped to, so their headings aren't hidden under it.
-// (The page's scroll-padding-top, set for the header, is cleared on the home page: the header scrolls away there.)
+// On the home page: jumping to a section puts its top at the top of the screen (the page's scroll-padding-top, set
+// for the header, is cleared: the header scrolls away there), and anything brought into view by tabbing or a jump
+// stays clear of the bar at the bottom.
 html:has(.page-nav) {
   scroll-padding-top: 0;
+  scroll-padding-bottom: var(--page-nav-height);
 }
 
+// The sections the bar links to. Nothing is fixed at the top now, so they need no space above them when jumped to;
+// if a bar is ever fixed at the top again, set its height here so headings don't land under it.
 [data-page-section] {
-  scroll-margin-top: var(--page-nav-height);
+  scroll-margin-top: 0;
+}
+
+// Room under the footer for the bar, so the last lines aren't hidden behind it at the very bottom of the page.
+body:has(.page-nav) .site-footer {
+  padding-bottom: calc(var(--space-large) + var(--page-nav-height));
 }

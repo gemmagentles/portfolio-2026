@@ -13,10 +13,10 @@ version number and date.
 
 ### Added
 
-- Home page: a sticky, see-through "On this page" bar (I About, II My Work, IV Tools, VI Clients, VIII My Process,
-  IX My Values, each with its chapter number) that appears once you scroll past the hero.
-  Its links jump smoothly to each section (instantly for visitors who prefer reduced motion), and the section you're
-  reading is highlighted as you scroll. On phones the row of links scrolls sideways if it doesn't fit.
+- Home page: a see-through "On this page" bar along the bottom of the screen (I About, II My Work, IV Tools,
+  VI Clients, VIII My Process, IX My Values, each with its chapter number) that slides up once you scroll past the
+  hero. Its links jump smoothly to each section (instantly for visitors who prefer reduced motion), and the section
+  you're reading is highlighted as you scroll. On phones the row of links scrolls sideways if it doesn't fit.
 - Case studies: "← All work" at the top, then a "Next case study" link (the last leads back to the first, in the
   order set in `case-studies.json`, which `npm run new` adds to) and a "Let's build something together" prompt to
   Contact at the end.
@@ -39,8 +39,8 @@ version number and date.
 
 ### Changed
 
-- The header links to pages only: Home, Work and Contact (plus the GitHub, LinkedIn and Résumé links). Home is
-  marked on the home page and Work on the Work page and every case study. With fewer links, the full header shows
+- The header links to pages only: Home, All Work and Contact Me (plus the GitHub, LinkedIn and Résumé links). Home
+  is marked on the home page and All Work on the Work page and every case study. With fewer links, the full header shows
   again from 768px wide (the menu button is for phones only).
 - Home page hero: the heading, the phone and the hexagons are 20% smaller.
 - Home page hero on phones and tablets (below 1024px): the phone and hexagons now show, centred below the buttons

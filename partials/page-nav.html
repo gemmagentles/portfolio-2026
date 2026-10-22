@@ -1,9 +1,9 @@
 <!--
-  "On this page": a slim bar of links to the home page's sections, in page order. It comes straight after the hero
-  and sticks to the top of the screen once the hero has scrolled away (the header scrolls away with the hero). It
-  takes up no room in the page, so nothing moves when it shows. The section you're reading is highlighted
-  (aria-current="location"). Each link points at a section's id; the sections carry data-page-section so they stop
-  below the bar when jumped to. Script: src/js/modules/page-nav.js; styles: src/scss/components/_page-nav.scss.
+  "On this page": a slim bar of links to the home page's sections, in page order, fixed to the bottom of the screen.
+  It slides up into view once the hero has scrolled away, and takes up no room in the page, so nothing moves when it
+  shows. The section you're reading is highlighted
+  (aria-current="location"). Each link points at a section's id; the sections carry data-page-section (see the
+  styles). Script: src/js/modules/page-nav.js; styles: src/scss/components/_page-nav.scss.
   Each link starts with the section's chapter number from its eyebrow (screen readers skip it). To add a section:
   give it an id and data-page-section, and add a link here in its place in the page order.
 -->
