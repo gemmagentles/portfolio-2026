@@ -22,12 +22,19 @@ version number and date.
   project's repo, or, when the repo is private (as for LNDMRK), clicking it makes it try to open (the arrow
   pushes up and back), then the arrow's lines reshape into a padlock as the text changes to "Repo private".
   The arrows on "Visit site" and "View code" are now drawn as lines so the two match.
+- Home page hero: a giant outlined "PORTFOLIO" (the style of "NEXT" in the call to action) along the bottom,
+  full width with its ends and the bottom of its letters cropped. The hero has room for it at the bottom, so it sits
+  below the phone and text, not behind them. It fades and rises in gently on page load (still for visitors who
+  prefer reduced motion). Screen readers skip it.
 - Every case study now ends with a real "all devices" mockup like LNDMRK's: the client's site on an iMac, a
   MacBook, an iPad and an iPhone, made from its own screenshots by `npm run capture` (it replaces the placeholder,
   but never a picture chosen by hand). Fraser Valley and Nueva Gold have theirs.
 
 ### Changed
 
+- Home page hero: the heading, the phone and the hexagons are 20% smaller.
+- Home page hero on phones and tablets (below 1024px): the phone and hexagons now show, centred below the buttons
+  (they used to be hidden there).
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
 - The GitHub and LinkedIn links in the header, footer and contact page now go to the real profiles
   (github.com/gemmagentles and ca.linkedin.com/in/gemmagentles) instead of placeholders.
