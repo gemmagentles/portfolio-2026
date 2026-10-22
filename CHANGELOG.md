@@ -75,6 +75,8 @@ version number and date.
 
 ### Fixed
 
+- The design system page scrolled sideways on phones: the spacing list's rows were wider than the screen. On phones
+  each token's name and size now share a line with its bar underneath.
 - The header's links capsule overlapped the logo, icons and Résumé button between about 768px and 1100px wide. Below
   1024px the header now uses the menu button (the full nav doesn't fit), and from 1024px the capsule sits between
   the logo and the icons, centred when there's room, instead of pinned to the middle regardless.
