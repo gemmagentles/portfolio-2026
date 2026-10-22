@@ -29,17 +29,29 @@
     gap: var(--space-small);
     min-height: $header-height;
 
-    @include mq(md) {
-      position: relative; // anchors the centred capsule (on phones the menu spans the whole header instead)
+    // From lg up (the full nav needs about 900px, so narrower screens keep the menu button): three columns, the
+    // logo, the capsule of links and the icons and button. The outer two share the leftover space equally, so the
+    // capsule sits in the centre whenever there's room; when one side needs more, the capsule shifts over a little
+    // rather than overlapping it.
+    @include mq(lg) {
+      display: grid;
+      // The outer columns are never squeezed below their natural width (which would shrink the Résumé arrow away).
+      grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+      column-gap: var(--space-small);
     }
   }
 
   &__logo {
     margin-right: auto;
+
+    @include mq(lg) {
+      justify-self: start;
+      margin-right: 0;
+    }
   }
 }
 
-// Mobile: the links, icons and button drop down under the header. From md up: the links in a centred frosted-glass
+// Phones and tablets: the links, icons and button drop down under the header. From lg up: the links in a frosted-glass
 // capsule and the icons and button on the right (from "Nav C" in the design).
 .site-nav {
   position: absolute;
@@ -95,6 +107,10 @@
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @include mq(lg) {
+      justify-self: end; // at the right-hand end of the header
+    }
   }
 
   &__icon {
@@ -116,13 +132,13 @@
       color: var(--white);
     }
 
-    @include mq(md) {
+    @include mq(lg) {
       min-width: 2rem;
       min-height: 2rem;
     }
   }
 
-  // "Résumé" (downloads the PDF): a white pill in the phone menu. From md up it's always a black pill, as on the home
+  // "Résumé" (downloads the PDF): a white pill in the phone menu. From lg up it's always a black pill, as on the home
   // page, turning white on hover or focus; on the plain black bar (pages without a gradient) a faint white outline,
   // like the nav capsule's, keeps it visible.
   &__cta {
@@ -139,7 +155,7 @@
     color: var(--ink);
     text-decoration: none;
 
-    @include mq(md) {
+    @include mq(lg) {
       background: var(--ink);
       color: var(--white);
       transition: background-color 0.2s, color 0.2s;
@@ -165,9 +181,13 @@
     }
   }
 
-  @include mq(md) {
+  // From lg up the nav takes the header's middle and right columns (sharing them through subgrid), with the capsule
+  // in the middle one and the icons and button at the end of the right one.
+  @include mq(lg) {
     position: static;
-    display: flex;
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
     align-items: center;
     padding: 0;
     background: none;
@@ -176,12 +196,8 @@
     translate: none;
     transition: none;
 
-    // The capsule, centred in the header.
+    // The capsule.
     &__list {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      translate: -50% -50%;
       flex-direction: row;
       align-items: center;
       height: 48px;
@@ -314,7 +330,7 @@ html:not(.js) .nav-toggle {
     }
   }
 
-  @include mq(md) {
+  @include mq(lg) {
     display: none;
   }
 }
