@@ -110,9 +110,9 @@
 
 // ---- The giant word ----
 // A giant outlined "PORTFOLIO" behind the hero, in the same style as "NEXT" in the call to action
-// (components/_cta.scss). It runs the full width along the bottom, cropped by the hero's bottom edge, so it reads
-// as a backdrop for the text and phone rather than another heading. Decoration only (hidden from screen readers in
-// index.html), and it lets clicks through.
+// (components/_cta.scss). It runs the full width just below the nav bar, with both ends cropped by the sides, so it
+// reads as a backdrop for the text and phone rather than another heading. Decoration only (hidden from screen
+// readers in index.html), and it lets clicks through.
 .hero__backdrop {
   position: absolute;
   inset: 0;
@@ -122,12 +122,11 @@
 
 .hero__word {
   position: absolute;
-  bottom: -0.3em; // the bottom of the letters runs off the hero
+  top: calc(#{$header-height} - 0.08em); // just below the nav bar (the letters' tops sit a little below the line box)
   left: -0.09em; // the P runs off the left edge
   font-family: var(--font-heading--primary);
   // A little wider than the screen, so both ends are cropped. Capped by the screen height so on wide, short
-  // screens it stays a backdrop along the bottom instead of climbing up behind the buttons (it then stops short
-  // of the right edge, behind the facets).
+  // screens it doesn't reach down behind the heading (it then stops short of the right edge).
   font-size: min(25.3vw, 36svh);
   font-weight: 700;
   line-height: 1;
@@ -136,19 +135,6 @@
   white-space: nowrap;
   color: transparent;
   -webkit-text-stroke: 2px rgb(255 255 255 / 0.22);
-
-  // Phones: across the bottom it would only be a thin strip, so it stands on end up the right-hand side instead,
-  // reading bottom to top and cropped by the right edge, like "NEXT" in the call to action on phones.
-  @include mq-down(md) {
-    top: 50%;
-    right: -0.28em;
-    bottom: auto;
-    left: auto;
-    translate: 0 -50%; // centred top to bottom
-    font-size: min(46vw, 22svh);
-    writing-mode: vertical-rl;
-    rotate: 180deg;
-  }
 }
 
 // On page load the word fades in as it rises a little into place, a moment after the page appears. Visitors
