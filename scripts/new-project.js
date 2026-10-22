@@ -1,4 +1,4 @@
-// Creates a new case study page (in the work-v4 layout: a carousel of the project's pages, then 50/50 rows) and
+// Creates a new case study page (in the case study layout: a carousel of the project's pages, then 50/50 rows) and
 // placeholder images from templates/case-study.html.
 //
 //   npm run new -- "Project Name"

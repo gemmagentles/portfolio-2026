@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-// "View code" for a project whose repo is private (partials/work-split-lndmrk.html). When clicked
+// "View code" for a project whose repo is private (partials/view-code-private.html). When clicked
 // (src/js/modules/private-repo.js):
 //   1. .is-working: it tries to open. The arrow pushes up and right in one smooth motion and eases back.
 //   2. .is-private: it gives up. The arrow's lines reshape into a padlock (an SVG animation in the HTML, started by
