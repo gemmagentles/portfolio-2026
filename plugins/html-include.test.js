@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { renderIncludes, fillVars, markCurrentNav, pageUrl } from './html-include.js';
+import { renderIncludes, fillVars, markCurrentNav, pageUrl, nextCaseStudy } from './html-include.js';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'partials-'));
 fs.writeFileSync(path.join(dir, 'greet.html'), '<p>Hi {{name}} from {{site.name}}</p>');
@@ -52,4 +52,12 @@ test('turns request paths into page URLs', () => {
   assert.equal(pageUrl('/about/index.html'), '/about/');
   assert.equal(pageUrl('/index.html'), '/');
   assert.equal(pageUrl('/404.html'), '/404.html');
+});
+
+test('finds the next case study, looping back to the first', () => {
+  const list = [{ slug: 'a', name: 'A' }, { slug: 'b', name: 'B' }, { slug: 'c', name: 'C' }];
+  assert.deepEqual(nextCaseStudy(list, '/work/a/'), { 'next.href': '/work/b/', 'next.name': 'B' });
+  assert.deepEqual(nextCaseStudy(list, '/work/c/'), { 'next.href': '/work/a/', 'next.name': 'A' });
+  assert.deepEqual(nextCaseStudy(list, '/work/'), {});
+  assert.deepEqual(nextCaseStudy(list, '/'), {});
 });

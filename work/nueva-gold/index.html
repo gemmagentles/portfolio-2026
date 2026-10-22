@@ -29,6 +29,7 @@
       <section class="page-carousel" aria-labelledby="page-carousel-title">
         <div class="container">
           <div class="page-wall__intro">
+            <include src="case-study-back.html"></include>
             <p class="eyebrow">Case study</p>
             <h1 class="page-wall__title" id="page-carousel-title">Nueva Gold</h1>
           </div>
@@ -112,6 +113,23 @@
           </div>
         </div>
       </section>
+
+      <!-- After the case study: the next one (partials/case-study-next.html, which one comes from case-studies.json),
+           then a prompt to get in touch. -->
+      <include src="case-study-next.html"></include>
+
+      <include
+        src="cta.html"
+        eyebrow="Like what you see?"
+        title="Let's build"
+        title2="something"
+        accent="together."
+        ghost="Hello"
+        button="Get in touch"
+        href="/contact/"
+        target="_self"
+        note=""
+      ></include>
     </main>
 
     <include src="footer.html"></include>
