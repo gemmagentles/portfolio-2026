@@ -1,0 +1,127 @@
+@use '../abstracts' as *;
+
+// "On this page" (partials/page-nav.html): a slim dark bar of links to the home page's sections. It sits straight after
+// the hero and sticks to the top of the screen once the hero has gone. It takes up no room in the page (the negative
+// margin cancels its height), so the section under it doesn't move when it shows; it just slides down over its top.
+// src/js/modules/page-nav.js adds .is-visible once the hero has scrolled away and marks the current section's link.
+:root {
+  --page-nav-height: 2.75rem; // 44px
+}
+
+.page-nav {
+  position: sticky;
+  top: 0;
+  z-index: 9; // above the page's sections, below the header's menu (10)
+  height: var(--page-nav-height);
+  margin-bottom: calc(var(--page-nav-height) * -1);
+  background: rgb(11 11 15 / 0.88);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.1), 0 8px 24px rgb(0 0 0 / 0.18);
+  color: var(--white);
+
+  // Hidden until the hero has scrolled away (only when the script is running, so without it the bar is always there).
+  .js & {
+    visibility: hidden;
+    opacity: 0;
+    translate: 0 -100%;
+  }
+
+  .js &.is-visible {
+    visibility: visible;
+    opacity: 1;
+    translate: none;
+  }
+
+  // Slides down into place (not for visitors who prefer reduced motion: they see it appear).
+  @include motion-ok {
+    .js & {
+      transition: opacity 0.3s var(--ease-out), translate 0.3s var(--ease-out), visibility 0s 0.3s;
+    }
+
+    .js &.is-visible {
+      transition-delay: 0s;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-medium);
+    height: 100%;
+  }
+
+  // "On this page", in small mono capitals. From md up only: on phones the links need all the room.
+  &__label {
+    display: none;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.55);
+
+    @include mq(md) {
+      display: block;
+    }
+  }
+
+  // The links in a row. If they don't fit (small phones), the row scrolls sideways, with the edges fading out to show
+  // there's more. The padding gives the focus ring room inside the scrolling row.
+  &__list {
+    display: flex;
+    gap: 4px;
+    min-width: 0;
+    padding: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // From md up there's always room, so no fade at the edges.
+    @include mq(md) {
+      mask-image: none;
+    }
+  }
+
+  // Each link a pill; the current section's is white with dark text.
+  &__link {
+    display: block;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: var(--text-small);
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.8);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background: rgb(255 255 255 / 0.12);
+      color: var(--white);
+    }
+
+    &:focus-visible {
+      outline-color: var(--white);
+      outline-offset: 2px;
+    }
+
+    &[aria-current] {
+      background: var(--white);
+      color: var(--ink);
+    }
+  }
+}
+
+// The sections the bar links to stop just below it when jumped to, so their headings aren't hidden under it.
+// (The page's scroll-padding-top, set for the header, is cleared on the home page: the header scrolls away there.)
+html:has(.page-nav) {
+  scroll-padding-top: 0;
+}
+
+[data-page-section] {
+  scroll-margin-top: var(--page-nav-height);
+}

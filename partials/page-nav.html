@@ -1,0 +1,19 @@
+<!--
+  "On this page": a slim bar of links to the home page's sections, in page order. It comes straight after the hero
+  and sticks to the top of the screen once the hero has scrolled away (the header scrolls away with the hero). It
+  takes up no room in the page, so nothing moves when it shows. The section you're reading is highlighted
+  (aria-current="location"). Each link points at a section's id; the sections carry data-page-section so they stop
+  below the bar when jumped to. Script: src/js/modules/page-nav.js; styles: src/scss/components/_page-nav.scss.
+  To add a section: give it an id and data-page-section, and add a link here in its place in the page order.
+-->
+<nav class="page-nav" aria-label="On this page" data-page-nav>
+  <div class="container page-nav__inner">
+    <p class="page-nav__label" aria-hidden="true">On this page</p>
+    <ul class="page-nav__list">
+      <li><a class="page-nav__link" href="#about">About</a></li>
+      <li><a class="page-nav__link" href="#tools">Tools</a></li>
+      <li><a class="page-nav__link" href="#clients">Clients</a></li>
+      <li><a class="page-nav__link" href="#process">Process</a></li>
+    </ul>
+  </div>
+</nav>
