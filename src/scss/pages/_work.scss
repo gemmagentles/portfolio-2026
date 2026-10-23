@@ -410,6 +410,11 @@
     object-fit: cover;
     object-position: top;
     transition: scale 0.6s ease-in-out;
+
+    // For a screenshot whose interesting part is in the middle (a phone screenshot, where the top is the site's menu).
+    &--centre {
+      object-position: center;
+    }
   }
 
   &__placeholder {
@@ -525,156 +530,6 @@
     height: 18px;
     margin-top: 4px;
     background: var(--ink);
-  }
-
-  // ---- API mock: an endpoint label, then a chart, list or stat ----
-  &__frame--api {
-    gap: 14px;
-    padding: 16px 18px;
-    background: #121218;
-  }
-
-  &__endpoint {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: #8a8a96;
-
-    > span:first-child {
-      color: #6be39b;
-    }
-  }
-
-  &__live {
-    margin-left: auto;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: #1f3d2b;
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    color: #6be39b;
-  }
-
-  // Bar chart: each bar's height comes from --h. The tallest (5th) is pink.
-  &__chart {
-    display: flex;
-    flex: 1;
-    align-items: flex-end;
-    gap: 6px;
-    max-height: 70px;
-    margin-block: auto;
-
-    span {
-      flex: 1;
-      height: var(--h);
-      border-radius: 3px 3px 0 0;
-      background: var(--primary-color);
-
-      &:nth-child(5) {
-        background: var(--secondary-color);
-      }
-    }
-  }
-
-  // List: each row is an icon square, two text lines (widths set inline) and a green status dot.
-  &__rows {
-    display: grid;
-    gap: 8px;
-    margin-block: auto;
-  }
-
-  &__row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    &::before {
-      content: '';
-      flex: 0 0 22px;
-      height: 22px;
-      border-radius: 5px;
-      background: #24242c;
-    }
-
-    &::after {
-      content: '';
-      flex: 0 0 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #6be39b;
-    }
-  }
-
-  &__lines {
-    display: grid;
-    flex: 1;
-    gap: 4px;
-
-    span {
-      height: 5px;
-      border-radius: 3px;
-      background: #3a3a44;
-
-      &:last-child {
-        height: 4px;
-        background: #26262c;
-      }
-    }
-  }
-
-  // Stat: a big number, two text lines and a progress bar (filled to --w).
-  &__stat {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 12px 14px;
-    margin-block: auto;
-  }
-
-  &__stat-value {
-    font-family: var(--font-heading--secondary);
-    font-size: 2.75rem;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--white);
-  }
-
-  &__stat-lines {
-    display: grid;
-    gap: 5px;
-
-    span {
-      height: 5px;
-      border-radius: 3px;
-      background: #3a3a44;
-
-      &:first-child {
-        width: 80%;
-      }
-
-      &:last-child {
-        width: 60%;
-        height: 4px;
-        background: #26262c;
-      }
-    }
-  }
-
-  &__stat-bar {
-    grid-column: 1 / -1;
-    height: 6px;
-    overflow: hidden;
-    border-radius: 3px;
-    background: #24242c;
-
-    span {
-      display: block;
-      width: var(--w);
-      height: 100%;
-      background: var(--brand-gradient);
-    }
   }
 }
 
