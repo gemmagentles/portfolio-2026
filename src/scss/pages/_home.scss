@@ -5,7 +5,7 @@
 // left and, from lg up, a phone on the right (partials/hero-phone.html) over a hexagon of geometric facets
 // (partials/hero-hex.html).
 .hero__wrapper {
-  --title-size: clamp(2.4rem, 0.8rem + 4.8vw, 5.4rem); // the heading's size (86px on wide screens)
+  --title-size: clamp(3rem, 1rem + 6vw, 6.75rem); // the heading's size (108px on wide screens)
   --word-size: 25.3vw; // the giant word's size (see "The giant word" below)
   position: relative;
   overflow: hidden; // crops the facets (and the giant word) at the edges
@@ -162,31 +162,29 @@
 
 // ---- The phone and facets ----
 // The phone is 300 x 610 (its insides are laid out with inline styles in the partial); the facets are centred on it.
-// Both are shown at 80% (zoom, which shrinks the space they take up too). Below lg they sit under the text, centred,
-// at 70% (see the end of this rule).
+// Below lg they sit under the text, centred, at 70% (see the end of this rule).
 .hero__visual {
   position: relative;
   width: 300px;
   height: 610px;
-  zoom: 0.8;
   align-self: center; // below lg: centred under the text
 
   @include mq(lg) {
     justify-self: center; // centred in the space to the right of the text
   }
 
-  // On shorter screens they shrink a little more (90%, 80% and 70% of that 80%) so the phone and its label below
-  // still fit in the hero.
+  // On shorter screens the phone and facets shrink a little (zoom, which shrinks the space they take up too) so
+  // the phone and its label below still fit in the hero.
   @media (max-height: 860px) {
-    zoom: 0.72;
+    zoom: 0.9;
   }
 
   @media (max-height: 780px) {
-    zoom: 0.64;
+    zoom: 0.8;
   }
 
   @media (max-height: 700px) {
-    zoom: 0.56;
+    zoom: 0.7;
   }
 
   // Below lg, under the text: a set 70%, whatever the screen's height (it scrolls, so it doesn't need to fit).
