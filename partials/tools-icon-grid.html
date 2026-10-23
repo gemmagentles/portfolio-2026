@@ -1,7 +1,8 @@
 <!--
   Tools icon grid: 16 squares, 8 per row on desktop (4 on phones), on a black background.
-  Logos live in /images/tools/. Each tile looks like:
-    <li class="tools-icon-grid__item"><img src="/images/tools/name.webp" alt="Tool name" width="240" height="240" loading="lazy" /></li>
+  Logos live in /images/tools/. Each tile shows the logo with the tool name underneath. The name is real text, so
+  the logo has an empty alt (screen readers read the name once, not twice). Each tile looks like:
+    <li class="tools-icon-grid__item"><img class="tools-icon-grid__icon" src="/images/tools/name.webp" alt="" width="240" height="240" loading="lazy" /> <span class="tools-icon-grid__name">Tool name</span></li>
 -->
 <!-- An empty, outlined tile: <li class="tools-icon-grid__item tools-icon-grid__item--empty" aria-hidden="true"></li> -->
 <section class="tools-icon-grid" id="tools" aria-labelledby="tools-icon-grid-title">
@@ -10,53 +11,69 @@
     <h2 class="tools-icon-grid__title" id="tools-icon-grid-title">Tools I <span class="accent-word">use.</span></h2>
     <ul class="tools-icon-grid__list" data-reveal>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/grunt.svg" alt="Grunt" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/grunt.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Grunt</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/webpack.svg" alt="webpack" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/webpack.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">webpack</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/node.svg" alt="Node.js" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/node.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Node.js</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/npm.svg" alt="npm" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/npm.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">npm</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/vscode.svg" alt="VS Code" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/vscode.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">VS Code</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/github.webp" alt="GitHub" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/github.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">GitHub</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/mamp.webp" alt="MAMP" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/mamp.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">MAMP</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/notion.webp" alt="Notion" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/notion.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Notion</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/jira.webp" alt="Jira" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/jira.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Jira</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/wordpress.webp" alt="WordPress" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/wordpress.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">WordPress</span>
       </li>
 
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/figma.svg" alt="Figma" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/figma.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Figma</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/sass.svg" alt="Sass" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/sass.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Sass</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/vite.svg" alt="Vite" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/vite.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Vite</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/html.svg" alt="HTML" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/html.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">HTML</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/javascript.svg" alt="JavaScript" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/javascript.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">JavaScript</span>
       </li>
       <li class="tools-icon-grid__item">
-        <img src="/images/tools/claude.svg" alt="Claude" width="240" height="240" loading="lazy" decoding="async" />
+        <img class="tools-icon-grid__icon" src="/images/tools/claude.svg" alt="" width="240" height="240" loading="lazy" decoding="async" />
+        <span class="tools-icon-grid__name">Claude</span>
       </li>
     </ul>
   </div>
