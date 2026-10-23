@@ -25,28 +25,47 @@
       max-width: 34rem;
     }
 
-    // The quote in a narrower column, so it stays on clear black beside the window.
-    > .work-intro__quote {
+    // The introduction in a narrower column, so it stays on clear black beside the window.
+    > .work-intro__text {
       max-width: 24rem;
     }
   }
 
-  // Bold white with the accent word in a thin weight and the brand gradient, like "new way" in the reference.
+  // A stacked headline: "FEATURED" in bold white over "PROJECTS" in a thin weight and the brand gradient, both
+  // exactly the same width so they line up at the start and the end. The heading is a size container about as
+  // wide as "FEATURED" at the display size (never wider than the column), and each word's font size is that width
+  // divided by the word's own width in Oswald at 1em (measured in Chrome: 3.8931em bold, 3.4078em light, with the
+  // -0.02em letter spacing). Container units keep this true at every screen width. Until Oswald has loaded the
+  // fallback font is a little off; it snaps into line as soon as Oswald arrives (same sizes, no layout script).
   &__title {
+    --work-intro-first: 3.8931; // "FEATURED", Oswald 700
+    --work-intro-second: 3.4078; // "PROJECTS", Oswald 300
+
+    container-type: inline-size;
+    width: min(100%, calc(var(--text-display) * var(--work-intro-first)));
     margin-bottom: var(--space-medium);
     font-family: var(--font-heading--primary);
-    font-size: var(--text-display);
-    font-weight: 700;
     line-height: 0.95;
     text-transform: uppercase;
+  }
 
-    .accent-word {
-      display: block;
+  &__word {
+    display: block;
+    letter-spacing: -0.02em; // set here (not inherited from the h1) so it scales with each word's own size
+    white-space: nowrap; // one line each, even in the fallback font
+
+    &--first {
+      font-size: calc(100cqi / var(--work-intro-first));
+      font-weight: 700;
+    }
+
+    &--second {
+      font-size: calc(100cqi / var(--work-intro-second));
       font-weight: 300;
     }
   }
 
-  &__quote {
+  &__text {
     font-size: var(--text-large);
     line-height: 1.5;
     color: color-mix(in srgb, var(--white) 55%, transparent);

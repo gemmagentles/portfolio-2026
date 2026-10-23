@@ -1,26 +1,32 @@
 @use '../abstracts' as *;
 
 // Wayfinding on the case study pages (in the page, not the header): "Next case study" after the rows
-// (partials/case-study-next.html). The way back to all the work is the header's Work link.
+// (partials/case-study-next.html), with a button to the next case study and an outlined "All work" button back to
+// the Work page.
 
-// "Next case study": a full-width black band, the whole of it one link: a small label, then the next case study's
-// name large, with an arrow that slides right on hover.
+// "Next case study": a full-width black band: a small label and the next case study's name large, then the two
+// buttons. Phones: name, then the buttons stacked full width. From sm up the buttons sit side by side; from md up
+// they move to the right of the name, lined up at the bottom (like the CTA band).
 .case-next {
   background: var(--black);
   color: var(--white);
   border-top: 1px solid rgb(255 255 255 / 0.12);
 
-  &__link {
+  &__inner {
+    display: grid;
+    gap: var(--space-large);
+    padding-block: var(--space-section);
+
+    @include mq(md) {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+  }
+
+  &__heading {
     display: grid;
     gap: var(--space-xsmall);
-    padding-block: var(--space-section);
-    color: inherit;
-    text-decoration: none;
-
-    &:focus-visible {
-      outline-color: var(--white);
-      outline-offset: -6px; // inside the band, so the ring isn't cut off by the page edges
-    }
+    margin: 0;
   }
 
   &__label {
@@ -39,20 +45,74 @@
     text-transform: uppercase;
   }
 
+  &__buttons {
+    display: grid;
+    gap: 12px;
+
+    @include mq(sm) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  // The next case study: a white pill (the main action), purple on hover or focus. At least 48px tall for easy
+  // tapping; full width on phones.
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 999px;
+    background: var(--white);
+    font-family: var(--font-link);
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--purple-color);
+      color: var(--white);
+    }
+
+    // A white ring just outside the pill, so it shows on the black band.
+    &:focus-visible {
+      outline-color: var(--white);
+    }
+
+    // "All work": the same pill outlined in white, so the next case study stays the main action. Fills purple on
+    // hover like the other.
+    &--ghost {
+      background: transparent;
+      color: var(--white);
+      box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.6);
+
+      &:hover,
+      &:focus-visible {
+        box-shadow: inset 0 0 0 1.5px var(--purple-color);
+      }
+    }
+  }
+
   &__arrow {
     display: inline-block;
-    transition: translate 0.3s var(--ease-out), color 0.3s;
+    transition: translate 0.3s var(--ease-out);
   }
 
-  &__link:hover &__arrow,
-  &__link:focus-visible &__arrow {
-    color: var(--purple-color);
-  }
-
+  // On hover or focus the arrow slides the way it points: right to the next case study, left back to all the work.
   @include motion-ok {
-    &__link:hover &__arrow,
-    &__link:focus-visible &__arrow {
+    &__button:hover &__arrow,
+    &__button:focus-visible &__arrow {
       translate: 0.25em 0;
+    }
+
+    &__button:hover &__arrow--back,
+    &__button:focus-visible &__arrow--back {
+      translate: -0.25em 0;
     }
   }
 }

@@ -1,12 +1,19 @@
 <!--
-  "Next case study": a full-width link to the next case study, after a case study's rows. Which one is next comes
-  from case-studies.json (the list of case studies in order; the last one leads back to the first): the build
-  fills in {{next.href}} and {{next.name}} for each page in that list (plugins/html-include.js).
+  "Next case study": a black band after a case study's rows, with the next case study's name and two buttons: one to
+  that case study and an outlined one back to all the work (/work/). Which one is next comes from case-studies.json
+  (the list of case studies in order; the last one leads back to the first): the build fills in {{next.href}} and
+  {{next.name}} for each page in that list (plugins/html-include.js).
   Styles: .case-next in src/scss/components/_case-study-nav.scss.
 -->
 <nav class="case-next" aria-label="Next case study">
-  <a class="case-next__link container" href="{{next.href}}">
-    <span class="case-next__label">Next case study</span>
-    <span class="case-next__name">{{next.name}} <span class="case-next__arrow" aria-hidden="true">→</span></span>
-  </a>
+  <div class="case-next__inner container">
+    <p class="case-next__heading">
+      <span class="case-next__label">Next case study</span>
+      <span class="case-next__name">{{next.name}}</span>
+    </p>
+    <div class="case-next__buttons">
+      <a class="case-next__button" href="{{next.href}}"><span>View case study<span class="visually-hidden">: {{next.name}}</span></span> <span class="case-next__arrow" aria-hidden="true">→</span></a>
+      <a class="case-next__button case-next__button--ghost" href="/work/"><span class="case-next__arrow case-next__arrow--back" aria-hidden="true">←</span> All work</a>
+    </div>
+  </div>
 </nav>
