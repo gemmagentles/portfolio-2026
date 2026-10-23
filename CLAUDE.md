@@ -40,7 +40,8 @@ front-end developer and designer; explain changes in plain words and check them 
     a menu button; between lg and xl the capsule's links are a little tighter so all seven fit.
   - Each case study has, after its rows, "Next case study" (`case-study-next.html`: the build fills in
     `{{next.href}}`/`{{next.name}}` from `case-studies.json`, the last leading back to the first) and a `cta.html`
-    to Contact. The way back to all the work is the header's Work link.
+    to Contact. The "Next case study" band has two buttons: a white one to the next case study and an outlined
+    "All work" one back to `/work/` (the header's Work link goes there too).
 - **Partials:** `<include src="x.html" name="..."></include>` pulls in `partials/x.html`; attributes become `{{name}}`,
   `site.config.json` is `{{site.*}}`, and `{{year}}` is the year. Gotchas:
   - attribute values can't contain `>` or `"`; an unset `{{var}}` stays in the output literally;
