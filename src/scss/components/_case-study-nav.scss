@@ -1,38 +1,7 @@
 @use '../abstracts' as *;
 
-// Wayfinding on the case study pages (in the page, not the header): "← All work" at the top
-// (partials/case-study-back.html) and "Next case study" after the rows (partials/case-study-next.html).
-
-// "← All work": a small link above the case study's name, on the dark hero. The arrow nudges left on hover.
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  margin-bottom: var(--space-medium);
-  padding: 0.35rem 0.1rem;
-  font-size: var(--text-small);
-  font-weight: 500;
-  color: rgb(255 255 255 / 0.75);
-  text-decoration: none;
-  transition: color 0.2s;
-
-  &:hover,
-  &:focus-visible {
-    color: var(--white);
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
-  }
-
-  span {
-    transition: translate 0.2s var(--ease-out);
-  }
-
-  @include motion-ok {
-    &:hover span {
-      translate: -3px 0;
-    }
-  }
-}
+// Wayfinding on the case study pages (in the page, not the header): "Next case study" after the rows
+// (partials/case-study-next.html). The way back to all the work is the header's All Work link.
 
 // "Next case study": a full-width black band, the whole of it one link: a small label, then the next case study's
 // name large, with an arrow that slides right on hover.
