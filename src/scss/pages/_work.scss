@@ -317,7 +317,7 @@
     line-height: 1.5;
   }
 
-  // Phones: 1 card per row. From sm: 2. From lg: 3 (or 4 for the emails, which are narrower).
+  // Phones: 1 card per row. From sm: 2. From lg: 3.
   &__grid {
     display: grid;
     gap: 1.25rem;
@@ -328,12 +328,6 @@
 
     @include mq(lg) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    &--four {
-      @include mq(lg) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
     }
   }
 }

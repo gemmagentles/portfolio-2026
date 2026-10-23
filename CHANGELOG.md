@@ -49,10 +49,9 @@ version number and date.
   components (VIP Benefits, Hot Drop Jackpots and Refer & Earn) in browser-window frames, like the other sections'
   cards.
 - Work page, 04 is now "EDMs & Banners" (was 03 "Custom EDMs"; it swapped places with API Components), with real
-  work in place of the mock emails: banner ads for Kathmandu's Easter Sale and Nissan's Pulsar drive-away offer,
-  shown whole, then Sainsbury's Bank's Nectar loan rates email and Kathmandu's camping gear sale email (showing its
-  footwear deals and Summit Club footer), inset and zoomed out. Its cards now have the same browser-window frame,
-  height and outline as the other rows.
+  work in place of the four mock emails: banner ads for Kathmandu's Easter Sale and Nissan's Pulsar drive-away
+  offer, shown whole, then Kathmandu's camping gear sale email (showing its footwear deals and Summit Club footer),
+  inset and zoomed out. Three across like the other rows, with the same browser-window frame, size and outline.
 - Home page, Tools I use: each box shows the tool's name under its logo (screen readers still hear each name once).
 - Home page, the role cards under My Process: the photo of Gemma shows clean, without the "Agency · Mindset / Hi
   there" words (and the dark fade behind them) over it. Every card now reads from the top, the number first and
