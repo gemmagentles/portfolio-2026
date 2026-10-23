@@ -285,7 +285,7 @@
 
   // The last row: more room below its cards, before the call to action.
   &:last-of-type {
-    padding-bottom: 90px;
+    padding-bottom: 130px;
   }
 
   @include mq(lg) {
