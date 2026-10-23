@@ -43,8 +43,8 @@ version number and date.
   the links are a little tighter so they all fit; below 1024px they're in the menu.
 - Home page: it now ends with "Like what you see? Let's build something together." and a "Get in touch" button
   (swapped with the case studies' prompt).
-- Work page, 02 Custom Coded: the first two placeholders are now screenshots of Thunderpick's Live Support Survey
-  and Slots.lv's Live Chat Form (the third is still a placeholder).
+- Work page, 02 Custom Coded: the placeholders are now screenshots: the first two are Thunderpick's Live Support Survey
+  and Slots.lv's Live Chat Form, and the third MatchPay's Live Chat Window.
 - Work page, 04 API Components: the three placeholder widgets are now real screenshots of Slots.lv components
   (VIP Benefits, Hot Drop Jackpots and Refer & Earn) in browser-window frames, like the other sections' cards.
 - Home page, Tools I use: each box shows the tool's name under its logo (screen readers still hear each name once).
