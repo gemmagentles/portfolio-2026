@@ -1,12 +1,12 @@
 @use '../abstracts' as *;
 
-// The Work page (work/index.html), on black: the hero (components/_work-intro.scss), category links, then one row
-// per category. Also the case studies' carousel and laptop (below), used on every case study.
+// The Work page (work/index.html), on black: the hero (components/_work-intro.scss), category links, one row per
+// category, then the call to action (cta.html) right against the footer, as on the case studies. Also the case
+// studies' carousel and laptop (below), used on every case study.
 // From lg up each row puts the category's number, name and blurb in a column on the left and its cards on the right.
 
 .work-page {
   overflow-x: clip; // the carousel's side screens can reach past the edge on narrow screens
-  padding-bottom: calc(var(--space-section-large) + 20px);
   background: var(--black);
   color: var(--white);
 
@@ -694,11 +694,6 @@
       background: #8f8f99;
     }
   }
-}
-
-// The case studies: nothing after the last section, so no space before the footer.
-.work-page--feature {
-  padding-bottom: 0;
 }
 
 // The laptop's screen scrolls through the whole Nueva Gold home page on a loop: a pause at the top, a slow scroll
