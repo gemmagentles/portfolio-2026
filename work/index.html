@@ -18,17 +18,18 @@
     -->
     <main id="main" class="work-page">
       <!--
-        The hero, on black: the heading and quote on the left, and on the right a browser window full of project
-        screenshots (the same ones as the home page's "My Work" wall), angled and fading into the black behind the
-        text. On phones the window sits under the text. The window is decoration (the projects are listed below), so
-        screen readers skip it. Styles: src/scss/components/_work-intro.scss.
-        The quote is from "Chapter IV · My Work" in the V5 Studio design.
+        The hero, on black: the heading and a short introduction on the left, and on the right a browser window full
+        of project screenshots (the same ones as the home page's "My Work" wall), angled and fading into the black
+        behind the text. On phones the window sits under the text. The window is decoration (the projects are listed
+        below), so screen readers skip it. Styles: src/scss/components/_work-intro.scss.
+        Each heading word is in its own span so the two can be sized to exactly the same width (a stacked headline);
+        the space between them keeps the heading reading "Featured Projects".
       -->
       <section class="work-intro" aria-labelledby="work-title">
         <div class="container work-intro__content">
           <p class="eyebrow" data-reveal>My Work</p>
-          <h1 class="work-intro__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
-          <p class="work-intro__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
+          <h1 class="work-intro__title" id="work-title" data-reveal><span class="work-intro__word work-intro__word--first">Featured</span> <span class="work-intro__word work-intro__word--second accent-word">Projects</span></h1>
+          <p class="work-intro__text" data-reveal>Here you can see a deeper breakdown of my work in some hand picked case studies. Please note, that some projects have been given logins to their CMS to edit themselves. And some agencies I have worked for have a secure, private github.</p>
         </div>
 
         <div class="work-intro__window" aria-hidden="true">
