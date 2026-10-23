@@ -1,7 +1,8 @@
 @use '../abstracts' as *;
 
-// Alternating 50/50 rows of text and a site screenshot (partials/work-split-lndmrk.html). Phones: the screenshot
-// above its text. From md up: side by side, the screenshot on the right in odd rows and on the left in even ones.
+// Alternating 50/50 rows of text and a site screenshot (the case studies: templates/case-study.html). Phones: the
+// screenshot above its text. From md up: side by side, the screenshot on the right in odd rows and on the left in
+// even ones.
 .work-split {
   padding-block: var(--space-section) 0; // the last row runs straight into the footer
   color: var(--white);

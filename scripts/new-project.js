@@ -1,4 +1,4 @@
-// Creates a new case study page (in the work-v4 layout: a carousel of the project's pages, then 50/50 rows) and
+// Creates a new case study page (in the case study layout: a carousel of the project's pages, then 50/50 rows) and
 // placeholder images from templates/case-study.html.
 //
 //   npm run new -- "Project Name"
@@ -101,6 +101,17 @@ try {
 
 fs.mkdirSync(pageDir, { recursive: true });
 fs.writeFileSync(pageFile, page);
+
+// Add it to the end of the case study list, which sets each one's "Next case study" link (the last leads back to the
+// first), so the one that was last now leads here.
+const listFile = path.join(root, 'case-studies.json');
+const list = fs.existsSync(listFile) ? JSON.parse(fs.readFileSync(listFile, 'utf8')) : [];
+if (!list.some((study) => study.slug === slug)) {
+  list.push({ slug, name });
+  // One case study per line, as the file is written by hand: { "slug": "...", "name": "..." }
+  const lines = list.map((study) => `  { "slug": ${JSON.stringify(study.slug)}, "name": ${JSON.stringify(study.name)} }`);
+  fs.writeFileSync(listFile, `[\n${lines.join(',\n')}\n]\n`);
+}
 
 // Placeholder images so the page looks finished until real screenshots go in. The label sits near the top of tall
 // full-length pages (where it's seen first) and in the middle of the rest.

@@ -1,7 +1,7 @@
 // Adds .is-visible to [data-reveal] elements as they scroll into view. Styles live in src/scss/components/_reveal.scss.
 //
 // An element is revealed once its top passes a line on the screen: 90% of the way down for most things, or 65% for
-// data-reveal="late" (the work-v4 50/50 rows, whose animation is meant to play out as you arrive). Anything already
+// data-reveal="late" (the case studies' 50/50 rows, whose animation is meant to play out as you arrive). Anything already
 // above its line is revealed too, so content scrolled past quickly (a fast flick, the End key, reloading halfway
 // down) never stays hidden. Elements revealed together get a small stagger.
 export function initReveal() {

@@ -1,9 +1,12 @@
 @use '../abstracts' as *;
 
-// Smooth cross-fade between pages in browsers that support cross-document view transitions.
-@include motion-ok {
-  @view-transition {
-    navigation: auto;
+// The page-to-page cross-fade is switched on in partials/head.html (it has to be there; see its comment). For anyone
+// who asked for reduced motion, the pages swap without the fade.
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 

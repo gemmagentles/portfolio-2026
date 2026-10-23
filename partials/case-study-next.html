@@ -1,0 +1,12 @@
+<!--
+  "Next case study": a full-width link to the next case study, after a case study's rows. Which one is next comes
+  from case-studies.json (the list of case studies in order; the last one leads back to the first): the build
+  fills in {{next.href}} and {{next.name}} for each page in that list (plugins/html-include.js).
+  Styles: .case-next in src/scss/components/_case-study-nav.scss.
+-->
+<nav class="case-next" aria-label="Next case study">
+  <a class="case-next__link container" href="{{next.href}}">
+    <span class="case-next__label">Next case study</span>
+    <span class="case-next__name">{{next.name}} <span class="case-next__arrow" aria-hidden="true">→</span></span>
+  </a>
+</nav>

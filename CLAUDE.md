@@ -6,12 +6,13 @@ front-end developer and designer; explain changes in plain words and check them 
 ## Commands
 
 - `npm run dev` (port 5173), `npm run build` (into `dist/`), `npm run preview` (serves `dist/`, port 4173)
-- `npm run test:include` tests the partials plugin (8 tests; run after touching `plugins/html-include.js`)
-- `npm run new -- "Project Name"` creates a case study in the work-v4 layout from `templates/case-study.html`, with
+- `npm run test:include` tests the partials plugin (9 tests; run after touching `plugins/html-include.js`)
+- `npm run new -- "Project Name"` creates a case study from `templates/case-study.html`, with
   placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live
   site's address after the name to fill in the "Visit site" links and capture the carousel in one go. It also
   looks for a public repo named after the client on the GitHub account in `site.config.json`: "View code" links to
-  it if found (`view-code.html`), otherwise shows "Repo private" (`view-code-private.html`).
+  it if found (`view-code.html`), otherwise shows "Repo private" (`view-code-private.html`). And it adds the case
+  study to the end of `case-studies.json` (the order of the "Next case study" links).
 - `npm run capture -- <slug> <site>` (`scripts/capture-pages.js`, uses `puppeteer-core` and the installed Chrome):
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
   `public/images/work/<slug>/pages/`) plus the home page on an iPad and a phone, then rewrites the case study's
@@ -23,16 +24,23 @@ front-end developer and designer; explain changes in plain words and check them 
   `pages/devices.webp` (`scripts/devices-mockup.js`: an iMac, MacBook, upright iPad and iPhone drawn in HTML/CSS
   like LNDMRK's, filled with the screenshots, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
   capture only; `node scripts/devices-mockup.js <slug>` remakes just the mockup. The site's own font files are
-  never copied (licensing). Re-run
-  it when the client's site changes.
+  never copied (licensing). Re-run it when the client's site changes.
 
 ## How the site is put together
 
 - **Pages:** every `.html` file is built automatically (`findPages` in `plugins/html-include.js`), except files in
-  `node_modules`, `dist`, `partials`, `templates`, `public`, `src`, `plugins`, `scripts`. Current pages: `/`, `about/`,
-  `contact/`, `work/` (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, all in the work-v4
-  layout from the template), `design-system/`, and the Work page experiments `work-v2/`, `work-v3/`, `work-v4/` (v4 is
-  the current favourite, and the layout the case studies use).
+  `node_modules`, `dist`, `partials`, `templates`, `public`, `src`, `plugins`, `scripts`. Current pages: `/`, `work/`
+  (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, all from the template), `contact/`,
+  `design-system/` and `404.html`. (No About page: the home page's About section replaced it.)
+- **Navigation:**
+  - The header (`header.html`, `aria-label="Main"`), in site order: Home, About, Work, Tools, Clients, Process,
+    Contact, plus the GitHub and LinkedIn icons and the Résumé button. The pages have `data-nav` (so they're marked
+    as current); About, Tools, Clients and Process link to home page sections by id (`/#about`, `/#tools`,
+    `/#clients`, `/#process`), so they work from any page. It scrolls away with the page (not sticky). Below lg it's
+    a menu button; between lg and xl the capsule's links are a little tighter so all seven fit.
+  - Each case study has, after its rows, "Next case study" (`case-study-next.html`: the build fills in
+    `{{next.href}}`/`{{next.name}}` from `case-studies.json`, the last leading back to the first) and a `cta.html`
+    to Contact. The way back to all the work is the header's Work link.
 - **Partials:** `<include src="x.html" name="..."></include>` pulls in `partials/x.html`; attributes become `{{name}}`,
   `site.config.json` is `{{site.*}}`, and `{{year}}` is the year. Gotchas:
   - attribute values can't contain `>` or `"`; an unset `{{var}}` stays in the output literally;
@@ -42,13 +50,13 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Reusable components with settings** (set on the include): `statement.html` (`theme="light|dark"`), `cta.html`
   (eyebrow, title, title2, accent, ghost, button, href, target, note), `work-laptop.html` (href, image, height,
   address, label, priority, `variant="work-laptop--imac"`), `page-wall-lndmrk.html` (`intro`, eyebrow, title).
-- **Case study pieces** (work-v4 and new case studies share them, so changing one changes every page; the text is
+- **Case study pieces** (every case study shares them, so changing one changes every page; the text is
   written in each page): hero carousel `showcase-screen.html` (pos, href, image, width, height, alt, label, name) and
   `showcase-controls.html` (status); 50/50 pictures `work-split-laptop.html` (as `work-laptop.html`),
   `work-split-phone.html`, `-tablet.html`, `-devices.html` (image, width, height, alt) and `-screenshot.html` (+ focus);
   buttons `visit-site.html` (href, address), `view-code.html` (repo) for a repo you can link to, or
   `view-code-private.html` for a private one (turns into "Repo private" when clicked: `private-repo.js`,
-  `_repo-button.scss`). LNDMRK's own content stays in `page-carousel-lndmrk.html` and `work-split-lndmrk.html`.
+  `_repo-button.scss`). Each case study's brand board is `brand-board-<slug>.html`.
 - **SCSS** (`src/scss`, all imported in `main.scss`): `abstracts/` (Sass-only: breakpoints, `$container-max`,
   `$header-height`, mixins), `base/` (`_root.scss` CSS variables, reset, typography), `layout/`, `components/` (one
   partial per component), `pages/`. Start partials with `@use '../abstracts' as *;`.
@@ -109,7 +117,7 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - Build-time "years of experience" number (currently counted in the browser by `years.js` from 2012) plus a yearly
   rebuild, so search engines see the right number.
-- Replace the placeholder text in [square brackets]: Challenges lists (work-v4, work-v3, `/work/` cards), case study
+- Replace the placeholder text in [square brackets]: Challenges lists (the case studies, `/work/` cards), case study
   pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).

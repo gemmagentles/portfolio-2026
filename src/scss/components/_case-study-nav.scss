@@ -1,0 +1,58 @@
+@use '../abstracts' as *;
+
+// Wayfinding on the case study pages (in the page, not the header): "Next case study" after the rows
+// (partials/case-study-next.html). The way back to all the work is the header's Work link.
+
+// "Next case study": a full-width black band, the whole of it one link: a small label, then the next case study's
+// name large, with an arrow that slides right on hover.
+.case-next {
+  background: var(--black);
+  color: var(--white);
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+
+  &__link {
+    display: grid;
+    gap: var(--space-xsmall);
+    padding-block: var(--space-section);
+    color: inherit;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline-color: var(--white);
+      outline-offset: -6px; // inside the band, so the ring isn't cut off by the page edges
+    }
+  }
+
+  &__label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.6);
+  }
+
+  &__name {
+    font-family: var(--font-heading--primary);
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__arrow {
+    display: inline-block;
+    transition: translate 0.3s var(--ease-out), color 0.3s;
+  }
+
+  &__link:hover &__arrow,
+  &__link:focus-visible &__arrow {
+    color: var(--purple-color);
+  }
+
+  @include motion-ok {
+    &__link:hover &__arrow,
+    &__link:focus-visible &__arrow {
+      translate: 0.25em 0;
+    }
+  }
+}

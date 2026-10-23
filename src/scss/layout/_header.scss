@@ -29,10 +29,9 @@
     gap: var(--space-small);
     min-height: $header-height;
 
-    // From lg up (the full nav needs about 900px, so narrower screens keep the menu button): three columns, the
-    // logo, the capsule of links and the icons and button. The outer two share the leftover space equally, so the
-    // capsule sits in the centre whenever there's room; when one side needs more, the capsule shifts over a little
-    // rather than overlapping it.
+    // From lg up (seven links need about 1000px): three columns, the logo, the capsule of links and the icons and
+    // button. The outer two share the leftover space equally, so the capsule sits in the centre whenever there's room;
+    // when one side needs more, the capsule shifts over a little rather than overlapping it.
     @include mq(lg) {
       display: grid;
       // The outer columns are never squeezed below their natural width (which would shrink the Résumé arrow away).
@@ -215,6 +214,12 @@
 
       a {
         font-size: 15px;
+
+        // Between lg and xl the capsule is a little tighter, so all seven links fit beside the logo and buttons.
+        @include mq-between(lg, xl) {
+          padding-inline: 11px;
+          font-size: 14px;
+        }
       }
 
       // The gliding hover pill (src/js/modules/navglide.js): it slides to the hovered link and stretches or shrinks to

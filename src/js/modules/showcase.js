@@ -1,4 +1,4 @@
-// The carousel of a site's pages at the top of a case study (and work-v4): one screen in front, the rest angled
+// The carousel of a site's pages at the top of a case study: one screen in front, the rest angled
 // behind it. Clicking a screen behind (or the arrows) brings that page to the front; the CSS animates the move
 // (src/scss/pages/_work.scss). Clicking the front screen scrolls down so the section after the carousel starts at
 // the top of the screen, when the carousel has data-showcase="scroll" (otherwise its link is followed as normal).
@@ -25,7 +25,7 @@ export function initShowcase() {
     status.textContent = `${name} · ${current + 1} of ${count}`;
   };
 
-  // Scrolls so the content of the section after the carousel's own one (its first child: on work-v4, the 50/50
+  // Scrolls so the content of the section after the carousel's own one (its first child: on a case study, the 50/50
   // section's rows, past its top padding) sits at the very top of the screen. A gentle ease in and out that takes
   // longer the further it goes (rather than the browser's quicker smooth scroll); scrolling or touching the page
   // meanwhile stops it, so it never fights the visitor. Without motion it jumps straight there.
