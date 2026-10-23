@@ -44,8 +44,8 @@ version number and date.
 - Home page, the role cards under My Process: the photo of Gemma shows clean, without the "Agency · Mindset / Hi
   there" words (and the dark fade behind them) over it. Every card now reads from the top, the number first and
   the role right under it, then what it covers, with the tool tag kept at the bottom, so all seven line up the same
-  way. The tool tags now read "Jira · kanban board", "Optimizely · A/B Testing", "GraphQL · API CMS" and
-  "BrowserStack" (were Notion, Wireframes · personas · insights, API dashboard and Chrome DevTools · Lighthouse).
+  way. The tool tags now read "Jira · kanban board", "Optimizely · A/B Test", "GraphQL · API CMS" and
+  "BrowserStack · A11y" (were Notion, Wireframes · personas · insights, API dashboard and Chrome DevTools · Lighthouse).
 - Home page hero on phones and tablets (below 1024px): the phone and hexagons now show, centred below the buttons
   (they used to be hidden there).
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.

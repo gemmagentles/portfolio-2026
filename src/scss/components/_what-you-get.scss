@@ -199,7 +199,7 @@
     background: var(--ink);
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.08em; // a touch tight, so the longest tag (Optimizely · A/B Testing) fits on one line
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--white);
   }
