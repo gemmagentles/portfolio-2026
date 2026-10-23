@@ -415,6 +415,12 @@
     &--centre {
       object-position: center;
     }
+
+    // For a banner ad that should show whole (wider than the tall email frames): fitted, centred on the frame's grey.
+    &--contain {
+      object-fit: contain;
+      object-position: center;
+    }
   }
 
   &__placeholder {
