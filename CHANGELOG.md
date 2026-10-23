@@ -46,7 +46,7 @@ version number and date.
 - Work page, 02 Custom Coded: the placeholders are now screenshots: the first two are Thunderpick's Live Support Survey
   and Slots.lv's Live Chat Form, and the third MatchPay's Live Chat Window.
 - Work page: it now ends with the case studies' "Your brand could be next" prompt to Contact, right against the
-  footer (the page's own space at the bottom is gone).
+  footer (the page's own space at the bottom is gone), with 90px of space below the last row of work.
 - Work page, 03 API Components (was 04): the three placeholder widgets are now real screenshots of Slots.lv
   components (VIP Benefits, Hot Drop Jackpots and Refer & Earn) in browser-window frames, like the other sections'
   cards.

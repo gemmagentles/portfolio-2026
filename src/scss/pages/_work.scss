@@ -283,6 +283,11 @@
   border-top: 1px solid #26262c;
   scroll-margin-top: $header-height; // so the category links don't land under the sticky header
 
+  // The last row: more room below its cards, before the call to action.
+  &:last-of-type {
+    padding-bottom: 90px;
+  }
+
   @include mq(lg) {
     grid-template-columns: 15.5rem minmax(0, 1fr);
     gap: var(--space-large);
