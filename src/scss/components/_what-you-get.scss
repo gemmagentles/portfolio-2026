@@ -47,7 +47,7 @@
     }
   }
 
-  // ---- The photo card: the photo fills it, with the label and name over the top ----
+  // ---- The photo card: the photo fills it, with no words over it ----
   // Phones and tablets: a fixed height, since the photo doesn't set one. From lg up: the height of its row.
   &__portrait {
     position: relative;
@@ -88,43 +88,17 @@
       object-position: 52% 40%;
     }
 
-    // A vignette (edges and corners darkened, the middle left clear), plus a darker fade at the top so the label
-    // and name read over the photo.
+    // A vignette (edges and corners darkened, the middle left clear), so the photo sits into the black band.
     &::after {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(to bottom, rgb(0 0 0 / 0.7), transparent 38%),
-        radial-gradient(ellipse at 50% 45%, transparent 20%, rgb(0 0 0 / 0.6) 100%);
+      background: radial-gradient(ellipse at 50% 45%, transparent 20%, rgb(0 0 0 / 0.6) 100%);
     }
   }
 
-  &__portrait-intro {
-    position: relative;
-    z-index: 1; // above the photo's dark fade
-    display: grid;
-    gap: 0.5rem;
-    padding: 1.6rem 1.6rem 0;
-  }
-
-  &__portrait-label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #c9b8ff;
-  }
-
-  &__portrait-name {
-    font-family: var(--font-heading--secondary);
-    font-size: clamp(2rem, 1.6rem + 1vw, 2.4rem);
-    font-weight: 500;
-    line-height: 1;
-    color: var(--white);
-  }
-
-  // ---- The role tiles: number at the top, then the role, what it covers and its tool tag at the bottom ----
+  // ---- The role tiles: read from the top (number, then the role right under it, then what it covers), with the
+  // tool tag pinned to the bottom, so every tile lines up the same way whatever the length of its text ----
   &__tile {
     position: relative;
     display: flex;
@@ -199,7 +173,6 @@
   }
 
   &__role {
-    margin-top: auto; // pushes the role, text and tag to the bottom of the tile
     font-family: var(--font-heading--secondary);
     font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.9rem);
     font-weight: 500;
@@ -220,12 +193,13 @@
 
   &__tool {
     align-self: flex-start;
+    margin-top: auto; // pushes the tag to the bottom of the tile, leaving the number, role and text at the top
     padding: 0.45rem 0.9rem;
     border-radius: 999px;
     background: var(--ink);
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em; // a touch tight, so the longest tag (Optimizely · A/B Testing) fits on one line
     text-transform: uppercase;
     color: var(--white);
   }

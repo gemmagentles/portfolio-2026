@@ -41,6 +41,11 @@ version number and date.
   Home is marked on the home page, and Work on the Work page and every case study. Between 1024px and 1280px wide
   the links are a little tighter so they all fit; below 1024px they're in the menu.
 - Home page hero: the heading, the phone and the hexagons are 20% smaller.
+- Home page, the role cards under My Process: the photo of Gemma shows clean, without the "Agency · Mindset / Hi
+  there" words (and the dark fade behind them) over it. Every card now reads from the top, the number first and
+  the role right under it, then what it covers, with the tool tag kept at the bottom, so all seven line up the same
+  way. The tool tags now read "Jira · kanban board", "Optimizely · A/B Testing", "GraphQL · API CMS" and
+  "BrowserStack" (were Notion, Wireframes · personas · insights, API dashboard and Chrome DevTools · Lighthouse).
 - Home page hero on phones and tablets (below 1024px): the phone and hexagons now show, centred below the buttons
   (they used to be hidden there).
 - Project notes now record the GitHub repo and drop the finished "delete the backups" to-do.
@@ -83,6 +88,10 @@ version number and date.
 
 ### Fixed
 
+- The cross-fade between pages was sometimes skipped, with a "Transition was aborted ... opt-in disabled" error
+  in the console (about one click in three in Chrome): the new page could be ready to show before Chrome had read
+  the stylesheet that switched the fade on. It's now switched on in a small style block at the top of every page's
+  head, so every click fades. Visitors who prefer reduced motion still get no fade.
 - The design system page scrolled sideways on phones: the spacing list's rows were wider than the screen. On phones
   each token's name and size now share a line with its bar underneath.
 - The header's links capsule overlapped the logo, icons and Résumé button between about 768px and 1100px wide. Below
