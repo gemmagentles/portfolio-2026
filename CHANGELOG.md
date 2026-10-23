@@ -84,8 +84,8 @@ version number and date.
   intro, goals and role; Fraser Valley still needs its text. The capture also takes the home page on an iPad and a
   phone for those rows.
 - Work page (/work/): a new black hero: "Featured Projects" left-aligned and stacked, the two words exactly the same
-  width at every screen size ("Projects" in a thin gradient weight), with an introduction about the hand-picked case
-  studies, client CMS logins and private agency repos, and, beside it, an angled browser window of project screenshots in the style of the home page's "My
+  width at every screen size ("Projects" in a thin gradient weight), with a short introduction to the hand-picked
+  case studies, and, beside it, an angled browser window of project screenshots in the style of the home page's "My
   Work" wall, fading into the black. The carousel is gone from the hero (each project now has its own in its case
   study), and the wall of LNDMRK pages and the two LNDMRK bento grids are hidden (their partials are kept, to bring
   back any time). Its nav bar now has the gradient, like the other work pages.
