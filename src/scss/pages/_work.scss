@@ -416,8 +416,7 @@
       object-position: center;
     }
 
-    // A real email under the inbox preview: inset on the grey like the mock email (__email), so it reads as an email
-    // in an inbox, zoomed out to show more of it.
+    // An email screenshot: inset in its frame (like the mock email, __email), zoomed out to show more of it.
     &--email {
       width: auto;
       margin: 10px 18px 0;
@@ -428,7 +427,7 @@
       object-position: bottom;
     }
 
-    // For a banner ad that should show whole (wider than the tall email frames): fitted, centred on the frame's grey.
+    // For a banner ad that should show whole: fitted and centred in its frame.
     &--contain {
       object-fit: contain;
       object-position: center;

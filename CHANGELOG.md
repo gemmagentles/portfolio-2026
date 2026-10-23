@@ -45,10 +45,10 @@ version number and date.
   (swapped with the case studies' prompt).
 - Work page, 02 Custom Coded: the placeholders are now screenshots: the first two are Thunderpick's Live Support Survey
   and Slots.lv's Live Chat Form, and the third MatchPay's Live Chat Window.
-- Work page, 03 Custom EDMs: the first two boxes now show banner ads, whole and centred: Kathmandu's Easter Sale
-  and Nissan's Pulsar drive-away banner. The third is Sainsbury's Bank's Nectar loan rates email, under its inbox
-  preview, and the fourth Kathmandu's camping gear sale email (showing its footwear deals and Summit Club footer).
-  The two emails sit inset on the grey, like the mock email, so they read as emails in an inbox.
+- Work page, 03 is now "EDMs & Banners" (was "Custom EDMs"), with real work in place of the mock emails: banner
+  ads for Kathmandu's Easter Sale and Nissan's Pulsar drive-away offer, shown whole, then Sainsbury's Bank's Nectar
+  loan rates email and Kathmandu's camping gear sale email (showing its footwear deals and Summit Club footer),
+  inset and zoomed out. Its cards now have the same browser-window frame, height and outline as the other rows.
 - Work page, 04 API Components: the three placeholder widgets are now real screenshots of Slots.lv components
   (VIP Benefits, Hot Drop Jackpots and Refer & Earn) in browser-window frames, like the other sections' cards.
 - Home page, Tools I use: each box shows the tool's name under its logo (screen readers still hear each name once).
