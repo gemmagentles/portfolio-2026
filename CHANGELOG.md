@@ -13,9 +13,10 @@ version number and date.
 
 ### Added
 
-- Case studies: a "Next case study" link (the last leads back to the first, in the order set in
-  `case-studies.json`, which `npm run new` adds to) and a "Let's build something together" prompt to Contact at
-  the end.
+- Case studies: a "Next case study" band at the end, with the next case study's name, a "View case study" button
+  to it (the last leads back to the first, in the order set in `case-studies.json`, which `npm run new` adds to)
+  and an outlined "All work" button back to the Work page. Below it, the "Your brand could be next" prompt to
+  Contact (the one the home page used to end with).
 - Gitflow branching rules in `CLAUDE.md`: work happens in batches on `feature/` branches (one per batch, not per
   change), plus `release/` and `hotfix/` branches, never straight on `main` or `develop`.
 - This changelog, and a rule that it's updated with every merge.
@@ -40,7 +41,9 @@ version number and date.
   to their sections of the home page from any page (Tools and Work used to point at sections that didn't exist).
   Home is marked on the home page, and Work on the Work page and every case study. Between 1024px and 1280px wide
   the links are a little tighter so they all fit; below 1024px they're in the menu.
-- Home page hero: the heading, the phone and the hexagons are 20% smaller.
+- Home page: it now ends with "Like what you see? Let's build something together." and a "Get in touch" button
+  (swapped with the case studies' prompt).
+- Home page, Tools I use: each box shows the tool's name under its logo (screen readers still hear each name once).
 - Home page, the role cards under My Process: the photo of Gemma shows clean, without the "Agency · Mindset / Hi
   there" words (and the dark fade behind them) over it. Every card now reads from the top, the number first and
   the role right under it, then what it covers, with the tool tag kept at the bottom, so all seven line up the same
@@ -80,8 +83,9 @@ version number and date.
   in the carousel. LNDMRK has its full write-up, pictures and brand board (shared with work-v4); Nueva Gold has its
   intro, goals and role; Fraser Valley still needs its text. The capture also takes the home page on an iPad and a
   phone for those rows.
-- Work page (/work/): a new black hero: "Featured Projects" left-aligned (with "Projects" in a thin gradient
-  weight) and, beside it, an angled browser window of project screenshots in the style of the home page's "My
+- Work page (/work/): a new black hero: "Featured Projects" left-aligned and stacked, the two words exactly the same
+  width at every screen size ("Projects" in a thin gradient weight), with an introduction about the hand-picked case
+  studies, client CMS logins and private agency repos, and, beside it, an angled browser window of project screenshots in the style of the home page's "My
   Work" wall, fading into the black. The carousel is gone from the hero (each project now has its own in its case
   study), and the wall of LNDMRK pages and the two LNDMRK bento grids are hidden (their partials are kept, to bring
   back any time). Its nav bar now has the gradient, like the other work pages.
