@@ -33,16 +33,14 @@ front-end developer and designer; explain changes in plain words and check them 
   (+ case studies `work/lndmrk/`, `work/fraser-valley/`, `work/nueva-gold/`, all from the template), `contact/`,
   `design-system/` and `404.html`. (No About page: the home page's About section replaced it.)
 - **Navigation:**
-  - The header (`header.html`, `aria-label="Main"`) has the pages only: Home, All Work, Contact, plus the GitHub and
-    LinkedIn icons and the Résumé button. It scrolls away with the page (not sticky); below md it's a menu button.
-  - The home page has an "On this page" bar fixed to the bottom of the screen (`page-nav.html`,
-    `aria-label="On this page"`) linking to its About, My Work, Tools, Clients, My Process and My Values (Why it
-    matters) sections, each with its chapter number. It shows once the hero has gone, and `page-nav.js` marks the
-    section being read with `aria-current="location"` (IntersectionObserver). To add a section: give it an `id` and
-    `data-page-section` (the hook for its `scroll-margin-top` in `_page-nav.scss`), and add a link in page order.
+  - The header (`header.html`, `aria-label="Main"`), in site order: Home, About, Work, Tools, Clients, Process,
+    Contact, plus the GitHub and LinkedIn icons and the Résumé button. The pages have `data-nav` (so they're marked
+    as current); About, Tools, Clients and Process link to home page sections by id (`/#about`, `/#tools`,
+    `/#clients`, `/#process`), so they work from any page. It scrolls away with the page (not sticky). Below lg it's
+    a menu button; between lg and xl the capsule's links are a little tighter so all seven fit.
   - Each case study has, after its rows, "Next case study" (`case-study-next.html`: the build fills in
     `{{next.href}}`/`{{next.name}}` from `case-studies.json`, the last leading back to the first) and a `cta.html`
-    to Contact. The way back to all the work is the header's All Work link.
+    to Contact. The way back to all the work is the header's Work link.
 - **Partials:** `<include src="x.html" name="..."></include>` pulls in `partials/x.html`; attributes become `{{name}}`,
   `site.config.json` is `{{site.*}}`, and `{{year}}` is the year. Gotchas:
   - attribute values can't contain `>` or `"`; an unset `{{var}}` stays in the output literally;

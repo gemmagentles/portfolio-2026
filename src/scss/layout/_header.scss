@@ -29,10 +29,10 @@
     gap: var(--space-small);
     min-height: $header-height;
 
-    // From md up: three columns, the logo, the capsule of links and the icons and button. The outer two share the
-    // leftover space equally, so the capsule sits in the centre whenever there's room; when one side needs more, the
-    // capsule shifts over a little rather than overlapping it.
-    @include mq(md) {
+    // From lg up (seven links need about 1000px): three columns, the logo, the capsule of links and the icons and
+    // button. The outer two share the leftover space equally, so the capsule sits in the centre whenever there's room;
+    // when one side needs more, the capsule shifts over a little rather than overlapping it.
+    @include mq(lg) {
       display: grid;
       // The outer columns are never squeezed below their natural width (which would shrink the Résumé arrow away).
       grid-template-columns: minmax(max-content, 1fr) auto minmax(max-content, 1fr);
@@ -43,14 +43,14 @@
   &__logo {
     margin-right: auto;
 
-    @include mq(md) {
+    @include mq(lg) {
       justify-self: start;
       margin-right: 0;
     }
   }
 }
 
-// Phones: the links, icons and button drop down under the header. From md up: the links in a frosted-glass
+// Phones and tablets: the links, icons and button drop down under the header. From lg up: the links in a frosted-glass
 // capsule and the icons and button on the right (from "Nav C" in the design).
 .site-nav {
   position: absolute;
@@ -107,7 +107,7 @@
     align-items: center;
     gap: 16px;
 
-    @include mq(md) {
+    @include mq(lg) {
       justify-self: end; // at the right-hand end of the header
     }
   }
@@ -131,13 +131,13 @@
       color: var(--white);
     }
 
-    @include mq(md) {
+    @include mq(lg) {
       min-width: 2rem;
       min-height: 2rem;
     }
   }
 
-  // "Résumé" (downloads the PDF): a white pill in the phone menu. From md up it's always a black pill, as on the home
+  // "Résumé" (downloads the PDF): a white pill in the phone menu. From lg up it's always a black pill, as on the home
   // page, turning white on hover or focus; on the plain black bar (pages without a gradient) a faint white outline,
   // like the nav capsule's, keeps it visible.
   &__cta {
@@ -154,7 +154,7 @@
     color: var(--ink);
     text-decoration: none;
 
-    @include mq(md) {
+    @include mq(lg) {
       background: var(--ink);
       color: var(--white);
       transition: background-color 0.2s, color 0.2s;
@@ -180,9 +180,9 @@
     }
   }
 
-  // From md up the nav takes the header's middle and right columns (sharing them through subgrid), with the capsule
+  // From lg up the nav takes the header's middle and right columns (sharing them through subgrid), with the capsule
   // in the middle one and the icons and button at the end of the right one.
-  @include mq(md) {
+  @include mq(lg) {
     position: static;
     grid-column: 2 / -1;
     display: grid;
@@ -214,6 +214,12 @@
 
       a {
         font-size: 15px;
+
+        // Between lg and xl the capsule is a little tighter, so all seven links fit beside the logo and buttons.
+        @include mq-between(lg, xl) {
+          padding-inline: 11px;
+          font-size: 14px;
+        }
       }
 
       // The gliding hover pill (src/js/modules/navglide.js): it slides to the hovered link and stretches or shrinks to
@@ -329,7 +335,7 @@ html:not(.js) .nav-toggle {
     }
   }
 
-  @include mq(md) {
+  @include mq(lg) {
     display: none;
   }
 }

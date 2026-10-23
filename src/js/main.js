@@ -9,7 +9,6 @@ import { initWorkGrid } from './modules/workgrid.js';
 import { initYears } from './modules/years.js';
 import { initShowcase } from './modules/showcase.js';
 import { initPrivateRepo } from './modules/private-repo.js';
-import { initPageNav } from './modules/page-nav.js';
 
 initNav();
 initNavGlide();
@@ -21,4 +20,3 @@ initWorkGrid();
 initYears();
 initShowcase();
 initPrivateRepo();
-initPageNav();
