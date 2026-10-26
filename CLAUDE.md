@@ -53,7 +53,7 @@ front-end developer and designer; explain changes in plain words and check them 
   - nav links `<a href="/x/" data-nav="/x/">` get `aria-current` automatically; `/` only marks the home page.
 - **Reusable components with settings** (set on the include): `statement.html` (`theme="light|dark"`), `cta.html`
   (eyebrow, title, title2, accent, ghost, button, href, target, note), `work-laptop.html` (href, image, height,
-  address, label, priority, `variant="work-laptop--imac"`), `page-wall-lndmrk.html` (`intro`, eyebrow, title).
+  address, label, priority, `variant="work-laptop--imac"`).
 - **Case study pieces** (every case study shares them, so changing one changes every page; the text is
   written in each page): hero carousel `showcase-screen.html` (pos, href, image, width, height, alt, label, name) and
   `showcase-controls.html` (status); 50/50 pictures `work-split-laptop.html` (as `work-laptop.html`),
@@ -72,7 +72,7 @@ front-end developer and designer; explain changes in plain words and check them 
   - The reset strips list padding/bullets from `ul[class]`, so list padding needs extra specificity
     (e.g. `.block &`). `[hidden]` is `display: none !important`.
   - `motion-ok` mixin wraps animation; respect `prefers-reduced-motion`. `hex-bullet` mixin draws the hexagon bullets.
-- **JS:** `src/js/main.js` starts one module per feature from `src/js/modules/`. `wave.js` is switched off.
+- **JS:** `src/js/main.js` starts one module per feature from `src/js/modules/`.
   `showcase.js` drives the carousel (only one per page); `data-showcase="scroll"` makes the front screen scroll to the
   next section (otherwise its link is followed).
 

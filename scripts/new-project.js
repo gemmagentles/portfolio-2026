@@ -170,8 +170,8 @@ if (site) {
 
 console.log(`
 Next:
-  1. Add a card to index.html:
-     <include src="project-card.html" slug="${slug}" image="/images/work/${slug}/cover.svg" name="${name}" meta="Client website · 2026" summary="..."></include>
+  1. Add a card to the CMS Websites row in work/index.html:
+     <include src="work-card-site.html" href="/work/${slug}/" image="/images/work/${slug}/cover.svg" name="${name}" type="Website"></include>
   2. Write the case study in work/${slug}/index.html (replace everything in [square brackets])
   3. Swap the placeholder images for real screenshots (update the file names and sizes in the page if you use .webp)
 `);

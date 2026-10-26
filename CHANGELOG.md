@@ -11,6 +11,21 @@ version number and date.
 
 ## [Unreleased]
 
+### Removed
+
+- Unused sections that were hidden or replaced, with their styles: the curved wave edges between sections, the LNDMRK
+  bento grid, full-width cards, page wall and page spread, the hero's side phones and hexagon bands (and the script
+  that made them), the old project cards and the 3D turning ring carousel. Nothing on the site looks different.
+- Leftover styles for things no page uses any more: the old home page layout (section heading, work grid, intro), the
+  browser-window and phone frames in the 50/50 rows, the Work page card placeholder, the clients caption and the
+  brand board tagline.
+- The logo experiments in `public/images/` (animated logo GIFs and videos and the earlier logo PNGs), about 7 MB.
+
+### Changed
+
+- The brand board styles moved from `_work-bento.scss` into their own `_brand-board.scss`.
+- `npm run new` now suggests adding the new case study's card to the Work page, not the old home page project cards.
+
 ## [1.1.1] - 2026-10-26
 
 ### Added

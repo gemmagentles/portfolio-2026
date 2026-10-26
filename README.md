@@ -48,7 +48,7 @@ src/scss/
 
 src/js/
   main.js                  Starts each module
-  modules/                 One file per feature: nav, navline, reveal, header, process, tools, workgrid, cards, wave
+  modules/                 One file per feature: header, nav, navglide, reveal, process, workgrid, years, showcase, private-repo
 
 public/                    Copied as-is: images, favicon, robots.txt, sitemap.xml, resume.pdf
 plugins/html-include.js    The small plugin that powers partials (no extra dependencies)
@@ -60,10 +60,10 @@ Any page can pull in a partial:
 
 ```html
 <include src="footer.html"></include>
-<include src="project-card.html" slug="lndmrk" name="LNDMRK" summary="..."></include>
+<include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" name="LNDMRK" type="Website"></include>
 ```
 
-Attributes become variables inside the partial (`{{name}}`, `{{summary}}`). Everything in `site.config.json` works anywhere as `{{site.name}}`, `{{site.email}}` and so on, and `{{year}}` is the current year.
+Attributes become variables inside the partial (`{{name}}`, `{{href}}`). Everything in `site.config.json` works anywhere as `{{site.name}}`, `{{site.email}}` and so on, and `{{year}}` is the current year.
 
 Nav links written as `<a href="/contact/" data-nav="/contact/">` get `aria-current` automatically on the matching page, which the CSS uses to underline the current link.
 
