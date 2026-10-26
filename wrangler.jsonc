@@ -1,0 +1,13 @@
+// Cloudflare hosting settings, read by `npx wrangler deploy` (Cloudflare runs it after `npm run build`).
+// The site is static, so this just uploads the built `dist/` folder; there's no server code.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Must match the Worker's name in the Cloudflare dashboard.
+  "name": "portfolio-2026",
+  "compatibility_date": "2026-10-26",
+  "assets": {
+    "directory": "./dist",
+    // Unknown addresses get the site's own 404 page (dist/404.html) with a 404 status.
+    "not_found_handling": "404-page"
+  }
+}
