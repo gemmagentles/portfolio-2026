@@ -7,7 +7,7 @@
       description="What Gemma Gentles has built: CMS websites, custom-coded front ends, email campaigns and API components."
     ></include>
   </head>
-  <body class="page-work">
+  <body class="page-work nav-gradient">
     <include src="header.html"></include>
 
     <!--
@@ -18,104 +18,50 @@
     -->
     <main id="main" class="work-page">
       <!--
-        Showcase: the three featured projects as browser-window screens in a carousel. One sits in front with the
-        other two angled behind it. Clicking a screen behind brings it to the front; clicking the front one drops it
-        and unfolds a drawer with its description (src/js/modules/showcase.js). data-pos is each screen's place:
-        0 front, 1 right, -1 left.
-        The quote is from "Chapter IV · My Work" in the V5 Studio design.
-        The background is the home page hero's: the pink-to-blue gradient and the hexagon facets (partials/hero-hex.html).
-        data-header-over makes the header see-through over it, like the home page (src/scss/layout/_header.scss).
+        The hero, on black: the heading and a short introduction on the left, and on the right a browser window full
+        of project screenshots (the same ones as the home page's "My Work" wall), angled and fading into the black
+        behind the text. On phones the window sits under the text. The window is decoration (the projects are listed
+        below), so screen readers skip it. Styles: src/scss/components/_work-intro.scss.
+        Each heading word is in its own span so the two can be sized to exactly the same width (a stacked headline);
+        the space between them keeps the heading reading "Featured Projects".
       -->
-      <section class="work-showcase" aria-labelledby="work-title" data-header-over>
-        <div class="work-showcase__facets" aria-hidden="true">
-          <include src="hero-hex.html"></include>
+      <section class="work-intro" aria-labelledby="work-title">
+        <div class="container work-intro__content">
+          <p class="eyebrow" data-reveal>My Work</p>
+          <h1 class="work-intro__title" id="work-title" data-reveal><span class="work-intro__word work-intro__word--first">Featured</span> <span class="work-intro__word work-intro__word--second accent-word">Projects</span></h1>
+          <p class="work-intro__text" data-reveal>Here you can see a deeper breakdown of my work in some hand picked case studies.</p>
         </div>
 
-        <div class="container work-showcase__inner">
-          <p class="eyebrow" data-reveal>My Work</p>
-          <h1 class="work-showcase__title" id="work-title" data-reveal>Featured <span class="accent-word">Projects</span></h1>
-
-          <div class="work-showcase__carousel" data-showcase data-reveal>
-            <ul class="work-showcase__stage">
-              <li class="work-showcase__screen" data-pos="0">
-                <a href="/work/lndmrk/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">LNDMRK</span>
-                  </span>
-                </a>
-              </li>
-              <li class="work-showcase__screen" data-pos="1">
-                <a href="/work/fraser-valley/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">Fraser Valley</span>
-                  </span>
-                </a>
-              </li>
-              <li class="work-showcase__screen" data-pos="-1">
-                <a href="/work/nueva-gold/">
-                  <span class="work-showcase__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                  <img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" />
-                  <span class="work-showcase__caption">
-                    <span class="work-showcase__label">Featured project</span>
-                    <span class="work-showcase__name">Nueva Gold</span>
-                  </span>
-                </a>
-              </li>
-            </ul>
-
-            <!-- The drawer that unfolds from under the front screen when it's clicked: one description per screen,
-                 in the same order as the screens above. Only the front screen's one shows. -->
-            <div class="work-showcase__drawer" id="work-showcase-drawer" data-showcase-drawer>
-              <div class="work-showcase__drawer-inner">
-                <div class="work-showcase__details" data-details>
-                  <p class="work-showcase__details-meta">LNDMRK · CMS website</p>
-                  <p>[Two or three sentences about LNDMRK: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-                <div class="work-showcase__details" data-details hidden>
-                  <p class="work-showcase__details-meta">Fraser Valley · CMS website</p>
-                  <p>[Two or three sentences about Fraser Valley: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-                <div class="work-showcase__details" data-details hidden>
-                  <p class="work-showcase__details-meta">Nueva Gold · CMS website</p>
-                  <p>[Two or three sentences about Nueva Gold: who the client is, what they needed, what you designed and built, and the result.]</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="work-showcase__controls">
-              <button class="work-showcase__arrow" type="button" aria-label="Previous project" data-showcase-prev>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
-              </button>
-              <p class="work-showcase__status" aria-live="polite" data-showcase-status>LNDMRK · 1 of 3</p>
-              <button class="work-showcase__arrow" type="button" aria-label="Next project" data-showcase-next>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-              </button>
-            </div>
-          </div>
-
-          <p class="work-showcase__quote" data-reveal>Functional art for every user and ease for every client CMS.</p>
+        <div class="work-intro__window" aria-hidden="true">
+          <div class="work-intro__bar"><span></span><span></span><span></span><span class="work-intro__address">gemmagentles.dev/work</span></div>
+          <ul class="work-intro__grid">
+            <li class="work-intro__tile"><img src="/images/projects/harveys-thumbnail.jpg" alt="" width="740" height="496" decoding="async" /><span class="work-intro__name">Harveys</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">LNDMRK</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Nueva Gold</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/kathmandu.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Kathmandu</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/nandos.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Nando's</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Fraser Valley Gaels</span><span class="work-intro__type">Case study</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/signal.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Signal</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/scottish-friendly.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Scottish Friendly</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/andersontreesurgeryMedium2.jpg" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Anderson Tree Surgery</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/ABCofHealthLtd_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">ABC of Health</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/smudge-digital.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Smudge Digital</span><span class="work-intro__type">Website</span></li>
+            <li class="work-intro__tile"><img src="/images/projects/Decorhom_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">Decorhom</span><span class="work-intro__type">Website</span></li>
+          </ul>
         </div>
       </section>
 
-      <include src="page-wall-lndmrk.html" intro="hidden" eyebrow="" title=""></include>
-
-      <include src="work-bento.html"></include>
-
-      <include src="work-cards-lndmrk.html"></include>
+      <!-- Hidden for now: the wall of LNDMRK pages (partials/page-wall-lndmrk.html, with intro="hidden" and empty
+           eyebrow and title), the LNDMRK bento grid (partials/work-bento.html) and the same tiles as full-width cards
+           (partials/work-cards-lndmrk.html). Include any of them here again to bring it back. -->
 
       <div class="container">
         <nav class="work-page__filters" aria-label="Work categories" data-reveal>
-          <ul>
+          <ul class="work-page__filter-list">
             <li><a href="#cms-websites"><span>01</span>CMS Websites</a></li>
             <li><a href="#custom-coded"><span>02</span>Custom Coded</a></li>
-            <li><a href="#custom-edms"><span>03</span>Custom EDMs</a></li>
-            <li><a href="#api-components"><span>04</span>API Components</a></li>
+            <li><a href="#api-components"><span>03</span>API Components</a></li>
+            <li><a href="#edms-banners"><span>04</span>EDMs &amp; Banners</a></li>
           </ul>
         </nav>
 
@@ -133,7 +79,7 @@
           </div>
         </section>
 
-        <!-- 02 · Custom Coded: placeholders. Swap each for a work-card-site include once you have the screenshot. -->
+        <!-- 02 · Custom Coded: screenshots of hand-built pieces in browser-window frames. -->
         <section class="work-category" id="custom-coded" aria-labelledby="custom-coded-title" data-reveal>
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">02</p>
@@ -144,90 +90,113 @@
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
                 <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <span class="work-card__placeholder" aria-hidden="true">&lt;/&gt;</span>
+                <img class="work-card__shot" src="/images/work/thunderpick/live-support-survey.webp" alt="Thunderpick live support survey: two yes or no questions, a comments box and a Submit button" width="479" height="457" loading="lazy" decoding="async" />
               </div>
-              <h3 class="work-card__name">[Project name]</h3>
-              <p class="work-card__type">Custom build</p>
+              <h3 class="work-card__name">Live Support Survey</h3>
+              <p class="work-card__type">Thunderpick · Custom build</p>
             </article>
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
                 <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <span class="work-card__placeholder" aria-hidden="true">&lt;/&gt;</span>
+                <img class="work-card__shot" src="/images/work/slots-lv/live-chat-form.webp" alt="Slots.lv live chat form: name, email, PIN, birth date, reason and message fields, and a Start Chat button" width="478" height="398" loading="lazy" decoding="async" />
               </div>
-              <h3 class="work-card__name">[Project name]</h3>
-              <p class="work-card__type">Custom build</p>
+              <h3 class="work-card__name">Live Chat Form</h3>
+              <p class="work-card__type">Slots.lv · Custom build</p>
             </article>
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
                 <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <span class="work-card__placeholder" aria-hidden="true">&lt;/&gt;</span>
+                <img class="work-card__shot" src="/images/work/matchpay/live-chat-window.webp" alt="MatchPay live chat window: two system messages, a 500-character message box, and Close, attach and Send buttons" width="519" height="736" loading="lazy" decoding="async" />
               </div>
-              <h3 class="work-card__name">[Project name]</h3>
-              <p class="work-card__type">Custom build</p>
+              <h3 class="work-card__name">Live Chat Window</h3>
+              <p class="work-card__type">MatchPay · Custom build</p>
             </article>
           </div>
         </section>
 
-        <!-- 03 · Custom EDMs: four across on wide screens. -->
-        <section class="work-category" id="custom-edms" aria-labelledby="custom-edms-title" data-reveal>
-          <div class="work-category__intro">
-            <p class="work-category__number" aria-hidden="true">03</p>
-            <h2 class="work-category__title" id="custom-edms-title">Custom EDMs</h2>
-            <p class="work-category__text">Email campaigns coded to render cleanly in every inbox, on every screen.</p>
-          </div>
-          <div class="work-category__grid work-category__grid--four">
-            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
-            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
-            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
-            <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
-          </div>
-        </section>
-
-        <!-- 04 · API Components: each card is a small mock of a live-data widget (a chart, a list, a stat). -->
+        <!-- 03 · API Components: screenshots of components built on live data (Slots.lv), in browser-window frames. -->
         <section class="work-category" id="api-components" aria-labelledby="api-components-title" data-reveal>
           <div class="work-category__intro">
-            <p class="work-category__number" aria-hidden="true">04</p>
+            <p class="work-category__number" aria-hidden="true">03</p>
             <h2 class="work-category__title" id="api-components-title">API Components</h2>
             <p class="work-category__text">Front-end components wired to live data from APIs and headless CMSs.</p>
           </div>
           <div class="work-category__grid">
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--api" aria-hidden="true">
-                <span class="work-card__endpoint"><span>GET</span> /api/[endpoint]<span class="work-card__live">Live</span></span>
-                <span class="work-card__chart">
-                  <span style="--h: 40%"></span><span style="--h: 62%"></span><span style="--h: 48%"></span><span style="--h: 75%"></span><span style="--h: 92%"></span><span style="--h: 58%"></span><span style="--h: 70%"></span>
-                </span>
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img class="work-card__shot" src="/images/work/slots-lv/vip-benefits.webp" alt="Slots.lv VIP benefits: five benefit tiles, the member's tier and a reward points progress bar" width="971" height="747" loading="lazy" decoding="async" />
               </div>
-              <h3 class="work-card__name">[Component name]</h3>
-              <p class="work-card__type">Component · live data</p>
+              <h3 class="work-card__name">VIP Benefits</h3>
+              <p class="work-card__type">Slots.lv · live data</p>
             </article>
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--api" aria-hidden="true">
-                <span class="work-card__endpoint"><span>GET</span> /api/[endpoint]<span class="work-card__live">Live</span></span>
-                <span class="work-card__rows">
-                  <span class="work-card__row"><span class="work-card__lines"><span style="width: 70%"></span><span style="width: 50%"></span></span></span>
-                  <span class="work-card__row"><span class="work-card__lines"><span style="width: 55%"></span><span style="width: 65%"></span></span></span>
-                  <span class="work-card__row"><span class="work-card__lines"><span style="width: 80%"></span><span style="width: 45%"></span></span></span>
-                </span>
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img class="work-card__shot work-card__shot--centre" src="/images/work/slots-lv/hot-drop-jackpots.webp" alt="Slots.lv Hot Drop Jackpots on a phone: hourly, epic and daily jackpot amounts with countdowns, above a game carousel" width="301" height="374" loading="lazy" decoding="async" />
               </div>
-              <h3 class="work-card__name">[Component name]</h3>
-              <p class="work-card__type">Component · live data</p>
+              <h3 class="work-card__name">Hot Drop Jackpots</h3>
+              <p class="work-card__type">Slots.lv · live data</p>
             </article>
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--api" aria-hidden="true">
-                <span class="work-card__endpoint"><span>GET</span> /api/[endpoint]<span class="work-card__live">Live</span></span>
-                <span class="work-card__stat">
-                  <span class="work-card__stat-value">[00]</span>
-                  <span class="work-card__stat-lines"><span></span><span></span></span>
-                  <span class="work-card__stat-bar"><span style="--w: 64%"></span></span>
-                </span>
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img class="work-card__shot" src="/images/work/slots-lv/refer-and-earn.webp" alt="Slots.lv Refer and Earn: the member's referral tier on a progress bar, their rewards, referrals so far, share link and share buttons" width="782" height="660" loading="lazy" decoding="async" />
               </div>
-              <h3 class="work-card__name">[Component name]</h3>
-              <p class="work-card__type">Component · live data</p>
+              <h3 class="work-card__name">Refer &amp; Earn</h3>
+              <p class="work-card__type">Slots.lv · live data</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 04 · EDMs & Banners: in the same browser-window frames as the other rows. The banner ads show whole; the email sits inset, zoomed out to show more of it. -->
+        <section class="work-category" id="edms-banners" aria-labelledby="edms-banners-title" data-reveal>
+          <div class="work-category__intro">
+            <p class="work-category__number" aria-hidden="true">04</p>
+            <h2 class="work-category__title" id="edms-banners-title">EDMs &amp; Banners</h2>
+            <p class="work-category__text">Email campaigns and banner ads, coded to render cleanly in every inbox and on every screen.</p>
+          </div>
+          <div class="work-category__grid">
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/kathmandu/easter-sale-banner.webp" alt="Kathmandu Easter Sale banner: up to 50% off a great range, a hiker leaping across a mountainside, and a Shop Now button" width="750" height="624" loading="lazy" decoding="async" />
+              </div>
+              <h3 class="work-card__name">Easter Sale</h3>
+              <p class="work-card__type">Kathmandu · Banner ad</p>
+            </article>
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/nissan/pulsar-banner.webp" alt="Nissan Pulsar banner: Pulsar ST sedan and hatch auto, $19,990 drive away, two cars in a snowy hangar, and a Find Out More button" width="750" height="626" loading="lazy" decoding="async" />
+              </div>
+              <h3 class="work-card__name">Pulsar Drive Away</h3>
+              <p class="work-card__type">Nissan · Animated banner</p>
+            </article>
+            <article class="work-card">
+              <div class="work-card__frame work-card__frame--browser">
+                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
+                <img class="work-card__shot work-card__shot--email work-card__shot--bottom" src="/images/work/kathmandu/camping-gear-email.webp" alt="Kathmandu email: last days to save 10% on camping gear, deals on active wear, thermals and jackets, bike and hiking track stories, footwear deals and the Summit Club" width="423" height="761" loading="lazy" decoding="async" />
+              </div>
+              <h3 class="work-card__name">Camping Gear Sale</h3>
+              <p class="work-card__type">Kathmandu · Email</p>
             </article>
           </div>
         </section>
       </div>
+
+      <include
+        src="cta.html"
+        eyebrow="Now booking new projects"
+        title="Your brand"
+        title2="could be"
+        accent="next."
+        ghost="Next"
+        button="Start a project"
+        href="/contact/"
+        target="_self"
+        note=""
+      ></include>
     </main>
 
     <include src="footer.html"></include>

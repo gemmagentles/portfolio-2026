@@ -1,7 +1,8 @@
 @use '../abstracts' as *;
 
-// Alternating 50/50 rows of text and a site screenshot (partials/work-split-lndmrk.html). Phones: the screenshot
-// above its text. From md up: side by side, the screenshot on the right in odd rows and on the left in even ones.
+// Alternating 50/50 rows of text and a site screenshot (the case studies: templates/case-study.html). Phones: the
+// screenshot above its text. From md up: side by side, the screenshot on the right in odd rows and on the left in
+// even ones.
 .work-split {
   padding-block: var(--space-section) 0; // the last row runs straight into the footer
   color: var(--white);
@@ -524,11 +525,23 @@
 }
 
 
-// The "Visit site" button: a black pill, purple on hover. After a heading it sits 50px below it (the text box's own
-// gap is var(--space-small), so the margin makes up the rest).
+// "Visit site" and "View code" side by side (wrapping onto two lines if there isn't room). After a heading they sit
+// 50px below it (the text box's own gap is var(--space-small), so the margin makes up the rest).
+.work-split__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  .work-split__heading + & {
+    margin-top: calc(50px - var(--space-small));
+  }
+}
+
+// The "Visit site" button: a black pill, purple on hover.
 .work-split__button {
   align-self: flex-start;
   display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.7rem 1.3rem;
   border-radius: 999px;
@@ -544,7 +557,66 @@
     background: var(--purple-color);
   }
 
-  .work-split__heading + & {
-    margin-top: calc(50px - var(--space-small));
+  // "View code": the same pill outlined, so the live site stays the main action. Fills purple on hover like the other.
+  &--ghost {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--white);
+      box-shadow: inset 0 0 0 1.5px var(--purple-color);
+    }
+  }
+}
+
+// The ↗ arrow on "Visit site" and "View code", drawn as lines (so the private-repo button can reshape it into a
+// padlock, src/scss/components/_repo-button.scss), at the size of the text.
+.work-split__arrow {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+// Zoom (work-split--reveal-zoom on the section): how the rows appear as they scroll in, in place of the site-wide
+// fade-up from _reveal.scss. The rows stay where they are (so no gap opens between them); inside each, the text's
+// lines rise and fade in one after another while the picture fades in slightly enlarged and slowly settles to its
+// normal size (the panel clips what's outside it). The rows start once they're well on screen (data-reveal="late"
+// in reveal.js, which adds .is-visible) and move slowly, so it plays out as you scroll. The movement uses
+// transform and scale, as the phone and tablet already use translate to position themselves. Only with motion OK.
+@include motion-ok {
+  .js .work-split--reveal-zoom {
+    // The row, and anything inside it with its own fade-up (like the iMac), stays put: the zoom does the animating.
+    :is(.work-split__row[data-reveal], .work-split__row [data-reveal]) {
+      opacity: 1;
+      translate: none;
+      transition: none;
+    }
+
+    .work-split__row[data-reveal] .work-split__text > * {
+      opacity: 0;
+      transform: translateY(1rem);
+      transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out);
+    }
+
+    // Each line of the text a moment after the last.
+    @for $i from 2 through 6 {
+      .work-split__row[data-reveal] .work-split__text > :nth-child(#{$i}) {
+        transition-delay: #{($i - 1) * 100}ms;
+      }
+    }
+
+    .work-split__row[data-reveal] .work-split__shot > * {
+      opacity: 0;
+      scale: 1.08;
+      transition: opacity 1.3s var(--ease-out) 0.1s, scale 2.2s var(--ease-out) 0.1s; // just after the text starts
+    }
+
+    .work-split__row.is-visible :is(.work-split__text, .work-split__shot) > * {
+      opacity: 1;
+      transform: none;
+      scale: 1;
+    }
   }
 }

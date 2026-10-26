@@ -28,7 +28,8 @@
   }
 
   // Jump links to each section, as outline pills.
-  &__toc ul {
+  // A class of its own, so the plain-list hexagon bullets (base/_typography.scss) don't apply.
+  &__toc-list {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
@@ -187,13 +188,28 @@
   }
 
   // ---- Spacing ----
+  // Each token: its name, its size, then a bar that long. On phones the name and size share a line with the bar
+  // underneath (side by side, the longer bars ran off the screen); from md up all three sit in a row.
   &__spacing li {
     display: grid;
-    grid-template-columns: 11rem 6rem 1fr;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem 1rem;
     padding-block: 0.6rem;
     font-size: var(--text-small);
+
+    @include mq(md) {
+      grid-template-columns: 11rem 6rem 1fr;
+    }
+
+    // Phones: the bar on its own line, under the name and size.
+    > .ds__bar {
+      grid-column: 1 / -1;
+
+      @include mq(md) {
+        grid-column: auto;
+      }
+    }
 
     > span:nth-child(2) {
       font-family: var(--font-mono);

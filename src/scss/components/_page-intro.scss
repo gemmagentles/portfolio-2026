@@ -1,0 +1,13 @@
+@use '../abstracts' as *;
+
+// The plain heading block at the top of a simple page (e.g. the 404 page): a big light heading, then a lead line.
+.page-intro {
+  display: grid;
+  gap: var(--space-medium);
+  padding-block: var(--space-section-large) var(--space-large);
+
+  h1 {
+    font-size: var(--text-display);
+    font-weight: 400;
+  }
+}

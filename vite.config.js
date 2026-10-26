@@ -13,6 +13,7 @@ export default defineConfig({
     htmlInclude({
       partialsDir: resolve(root, 'partials'),
       configFile: resolve(root, 'site.config.json'),
+      caseStudiesFile: resolve(root, 'case-studies.json'), // their order, for each one's "Next case study" link
     }),
   ],
   server: {

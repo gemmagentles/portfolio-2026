@@ -5,19 +5,33 @@
 // left and, from lg up, a phone on the right (partials/hero-phone.html) over a hexagon of geometric facets
 // (partials/hero-hex.html).
 .hero__wrapper {
+  --title-size: clamp(3rem, 1rem + 6vw, 6.75rem); // the heading's size (108px on wide screens)
+  --word-size: 25.3vw; // the giant word's size (see "The giant word" below)
   position: relative;
-  overflow: hidden; // crops the facets at the edges
+  overflow: hidden; // crops the facets (and the giant word) at the edges
   // The header floats over the top of the hero (layout/_header.scss), so the hero starts at the top of the page.
+  // At the bottom, room for the visible part of the giant word (0.545 of its size plus 20px) and a gap, so the
+  // phone and the text always sit above it.
   padding-top: $header-height;
+  padding-bottom: calc(var(--word-size) * 0.545 + 20px + 1.5rem);
   background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
 }
 
 .hero {
+  position: relative; // in front of the word
   display: flex;
   align-items: center;
   // Fills the screen under the header on every device, with the content centred in it.
   min-height: calc(100svh - #{$header-height});
   padding-block: clamp(4rem, 3rem + 5vw, 7rem);
+
+  // Below lg: the text, then the phone centred underneath it.
+  @include mq-down(lg) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-large);
+  }
 
   // From lg up: two columns. The text takes the width it needs and the phone sits centred in the rest of the row.
   @include mq(lg) {
@@ -58,7 +72,7 @@
   // "FRONT END" in solid white, then "DEVELOPER" on its own line as a white outline, in Oswald capitals.
   &__title {
     font-family: var(--font-heading--primary);
-    font-size: clamp(3rem, 1rem + 6vw, 6.75rem); // 108px on wide screens
+    font-size: var(--title-size);
     font-weight: 700;
     line-height: 0.95;
     text-transform: uppercase;
@@ -107,17 +121,55 @@
   }
 }
 
+// ---- The giant word ----
+// A giant outlined "PORTFOLIO" along the bottom of the hero, in the same style as "NEXT" in the call to action
+// (components/_cta.scss): a little wider than the screen, so the P and the O run off the sides, with the bottom of
+// the letters cropped by the hero's bottom edge. The hero keeps room for it at the bottom (its padding-bottom
+// above), so it sits below the phone and text rather than behind them. Oswald's capitals run from 0.105em to 0.93em
+// down the 0.95em line box (measured); with the box 0.3em (less 20px) below the edge, 0.545em + 20px of the
+// letters shows.
+// Decoration only: hidden from screen readers in index.html, behind the hero's content, and it lets clicks through.
+.hero__word {
+  position: absolute;
+  bottom: calc(-0.3em + 20px); // the bottom of the letters runs off the hero
+  left: -0.09em; // the P runs off the left edge
+  font-family: var(--font-heading--primary);
+  font-size: var(--word-size);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(255 255 255 / 0.22);
+  pointer-events: none;
+}
+
+// On page load the word fades in as it rises a little into place, a moment after the page appears. Visitors
+// who prefer reduced motion see it in place from the start.
+@include motion-ok {
+  .hero__word {
+    animation: hero-word-in 1.6s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}
+
+@keyframes hero-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.12em);
+  }
+}
+
 // ---- The phone and facets ----
 // The phone is 300 x 610 (its insides are laid out with inline styles in the partial); the facets are centred on it.
-// Hidden below lg.
+// Below lg they sit under the text, centred, at 70% (see the end of this rule).
 .hero__visual {
   position: relative;
-  display: none;
   width: 300px;
   height: 610px;
+  align-self: center; // below lg: centred under the text
 
   @include mq(lg) {
-    display: block;
     justify-self: center; // centred in the space to the right of the text
   }
 
@@ -132,6 +184,11 @@
   }
 
   @media (max-height: 700px) {
+    zoom: 0.7;
+  }
+
+  // Below lg, under the text: a set 70%, whatever the screen's height (it scrolls, so it doesn't need to fit).
+  @include mq-down(lg) {
     zoom: 0.7;
   }
 }

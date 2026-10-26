@@ -1,0 +1,119 @@
+@use '../abstracts' as *;
+
+// "View code" for a project whose repo is private (partials/view-code-private.html). When clicked
+// (src/js/modules/private-repo.js):
+//   1. .is-working: it tries to open. The arrow pushes up and right in one smooth motion and eases back.
+//   2. .is-private: it gives up. The arrow's lines reshape into a padlock (an SVG animation in the HTML, started by
+//      the JS), "View code" slides up and out as "Repo private" slides up in, and the padlock settles with a small
+//      turn as it "locks".
+// It takes its look from the button it's mixed with (e.g. work-split__button--ghost). Without motion it simply swaps.
+//
+// The button keeps one width throughout (the JS fixes it at the "Repo private" size), so nothing around it shifts.
+// Inside, the text's box eases from the width of "View code" to the width of "Repo private", carrying the icon
+// along with it, so the text and icon always sit the same distance apart.
+.repo-button {
+  justify-content: center;
+  border: 0; // a <button>: drop the browser's default border so it matches the link buttons
+
+  &__text {
+    display: inline-grid;
+    justify-items: start; // each text keeps its own width, so the JS can measure it
+    min-width: 0; // let the width the JS sets win over the longer text's width
+    overflow: hidden; // clips the texts as they slide in and out
+    transition: width 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  &__label,
+  &__message {
+    grid-area: 1 / 1;
+  }
+
+  &__message {
+    visibility: hidden;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+    overflow: visible; // the padlock's loop reaches the top of the box
+  }
+
+  // While it tries and once it's private, it stays outlined: no purple fill on hover, as there's nothing to click.
+  &.is-working,
+  &.is-private {
+    cursor: default;
+
+    &:hover,
+    &:focus-visible {
+      background: transparent;
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1.5px var(--ink);
+    }
+  }
+
+  &.is-private {
+    .repo-button__label {
+      visibility: hidden;
+    }
+
+    .repo-button__message {
+      visibility: visible;
+    }
+  }
+
+  @include motion-ok {
+    &.is-working .repo-button__icon {
+      animation: repo-button-try 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    &.is-private .repo-button__label {
+      animation: repo-button-text-out 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    &.is-private .repo-button__message {
+      animation: repo-button-text-in 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    // The settle starts as the lines finish becoming the padlock.
+    &.is-private .repo-button__icon {
+      animation: repo-button-settle 0.5s ease-in-out 0.45s;
+    }
+  }
+}
+
+// One push up and right (the way the arrow points), easing back to where it started.
+@keyframes repo-button-try {
+  50% {
+    translate: 0.3em -0.3em;
+  }
+}
+
+@keyframes repo-button-text-out {
+  from {
+    visibility: visible;
+  }
+
+  to {
+    opacity: 0;
+    translate: 0 -110%;
+  }
+}
+
+@keyframes repo-button-text-in {
+  from {
+    opacity: 0;
+    translate: 0 110%;
+  }
+}
+
+// A small turn back and forth as the padlock "locks".
+@keyframes repo-button-settle {
+  35% {
+    rotate: -8deg;
+  }
+
+  70% {
+    rotate: 4deg;
+  }
+}

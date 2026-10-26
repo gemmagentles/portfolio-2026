@@ -1,0 +1,33 @@
+<!--
+  The Fraser Valley brand guidelines board as a 50/50 row's picture: their wordmark, the font of their headings,
+  their main colours, logo and favicon, read from their live site (made by npm run capture, scripts/brand-board.js).
+  Re-capturing rewrites it; to keep your own changes, delete the "made by npm run capture" words in this note.
+  Styles: .brand-board in src/scss/components/_work-bento.scss, the panel in _work-split.scss.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400&display=swap" />
+<div class="work-split__shot work-split__shot--board">
+  <div class="brand-board brand-board--bars" style="--board-ink: #040707; --board-paper: #ffffff; --serif: 'Roboto Condensed', serif">
+    <div class="brand-board__panel brand-board__panel--cover">
+      <p class="brand-board__wordmark">Fraser Valley Gaels Gaelic Football Club</p>
+      <p class="brand-board__meta"><span>Brand guidelines</span></p>
+    </div>
+    <div class="brand-board__panel brand-board__panel--type">
+      <p class="brand-board__label">Typography</p>
+      <p class="brand-board__specimen" aria-hidden="true" style="font-weight: 400">A<i>a</i></p>
+      <p class="brand-board__note">Roboto Condensed</p>
+    </div>
+    <div class="brand-board__panel brand-board__panel--colours">
+      <p class="brand-board__label">Colours</p>
+      <ul class="brand-board__swatches">
+        <li style="--swatch: #040707; color: #fff">#040707</li>
+        <li style="--swatch: #ffffff; color: #111">#FFFFFF</li>
+        <li style="--swatch: #4a4a50; color: #fff">#4A4A50</li>
+        <li style="--swatch: #094d8b; color: #fff">#094D8B</li>
+      </ul>
+    </div>
+    <div class="brand-board__panel brand-board__marks" style="background: #ffffff">
+      <img class="brand-board__logo" src="/images/work/fraser-valley/brand/logo.png" alt="Fraser Valley logo" style="height: 40px" loading="lazy" decoding="async" />
+      <img class="brand-board__favicon" src="/images/work/fraser-valley/brand/favicon.ico" alt="Fraser Valley favicon" width="64" height="64" loading="lazy" decoding="async" />
+    </div>
+  </div>
+</div>

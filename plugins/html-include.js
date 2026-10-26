@@ -7,7 +7,8 @@
 // - Any other attribute becomes a variable inside that partial: {{title}}, {{description}}.
 // - Everything in site.config.json is available everywhere as {{site.name}}, {{site.email}}, etc.
 // - {{year}} is always the current year.
-// - Nav links written as <a href="/about/" data-nav="/about/"> get aria-current set automatically
+// - Each case study listed in case-studies.json gets {{next.href}} and {{next.name}}: the next one in the list.
+// - Nav links written as <a href="/contact/" data-nav="/contact/"> get aria-current set automatically
 //   when you're on that page (or inside that section).
 
 import fs from 'node:fs';
@@ -68,6 +69,20 @@ export function loadGlobals(configFile) {
   return globals;
 }
 
+// The case study after this page's, from the list in order ({ slug, name } for each, as in case-studies.json): the
+// next one along, or the first after the last. Its address and name become {{next.href}} and {{next.name}} on that
+// page (for partials/case-study-next.html). Pages that aren't in the list get nothing.
+export function nextCaseStudy(list, url) {
+  const index = list.findIndex((study) => url === `/work/${study.slug}/`);
+  if (index < 0) return {};
+  const next = list[(index + 1) % list.length];
+  return { 'next.href': `/work/${next.slug}/`, 'next.name': next.name };
+}
+
+export function loadCaseStudies(file) {
+  return file && fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : [];
+}
+
 // Every .html file outside the ignored folders becomes a page in the build.
 export function findPages(root, dir = root, pages = {}) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -83,26 +98,27 @@ export function findPages(root, dir = root, pages = {}) {
   return pages;
 }
 
-export function htmlInclude({ partialsDir, configFile }) {
+export function htmlInclude({ partialsDir, configFile, caseStudiesFile }) {
   const normalizedPartials = path.normalize(partialsDir) + path.sep;
-  const normalizedConfig = configFile ? path.normalize(configFile) : null;
+  const watchedFiles = [configFile, caseStudiesFile].filter(Boolean).map((file) => path.normalize(file));
 
   return {
     name: 'html-include',
     transformIndexHtml: {
       order: 'pre',
       handler(html, ctx) {
-        const globals = loadGlobals(configFile);
+        const url = pageUrl(ctx.path);
+        const globals = { ...loadGlobals(configFile), ...nextCaseStudy(loadCaseStudies(caseStudiesFile), url) };
         let out = renderIncludes(html, partialsDir, globals, 0, ctx.path);
         out = fillVars(out, globals);
-        out = markCurrentNav(out, pageUrl(ctx.path));
+        out = markCurrentNav(out, url);
         return out;
       },
     },
-    // Editing a partial or the site config reloads the browser.
+    // Editing a partial, the site config or the case study list reloads the browser.
     handleHotUpdate({ file, server }) {
       const changed = path.normalize(file);
-      if (changed.startsWith(normalizedPartials) || changed === normalizedConfig) {
+      if (changed.startsWith(normalizedPartials) || watchedFiles.includes(changed)) {
         server.ws.send({ type: 'full-reload' });
         return [];
       }

@@ -11,14 +11,14 @@
 
 @use 'components/button';
 @use 'components/skip-link';
+@use 'components/page-intro';
 @use 'components/reveal';
 @use 'components/eyebrow';
-@use 'components/drips';
 @use 'components/section-wave';
 @use 'components/carousel';
 @use 'components/project-card';
 @use 'components/work-browser';
-@use 'components/about' as about-section; // aliased: pages/about already uses the name "about"
+@use 'components/about';
 @use 'components/clients';
 @use 'components/work-grid';
 @use 'components/statement';
@@ -32,12 +32,13 @@
 @use 'components/page-wall';
 @use 'components/work-cards';
 @use 'components/work-split';
+@use 'components/case-study-nav';
+@use 'components/work-intro';
+@use 'components/repo-button';
 @use 'components/page-spread';
-@use 'components/client-grid';
 
 @use 'pages/home';
-@use 'pages/about';
+
 @use 'pages/contact';
-@use 'pages/case-study';
 @use 'pages/work';
 @use 'pages/design-system';

@@ -2,24 +2,7 @@
   About: heading, then four facts in a joined grid (styled after the stats row on webdesignawards.io).
   Each fact has a small label, a big value and a short note.
 -->
-<section class="about" aria-labelledby="about-title">
-  <!-- Purple paint dripping down from the hero, in the left margin (src/js/modules/drips.js starts it).
-       Hidden for now: remove the "hidden" attribute to bring the drips back. -->
-  <div class="drips" aria-hidden="true" data-drips hidden>
-    <!-- Melts each drip's neck, stem and tip into one smooth shape: blur them together, then sharpen the edge. -->
-    <svg class="drips__filter" focusable="false">
-      <filter id="drip-goo">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="goo" />
-        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-      </filter>
-    </svg>
-    <span class="drips__drip"></span>
-    <span class="drips__drip"></span>
-    <span class="drips__drip"></span>
-    <span class="drips__drip"></span>
-  </div>
-
+<section class="about" id="about" aria-labelledby="about-title">
   <div class="container about__inner" data-reveal>
     <div>
       <p class="eyebrow">Chapter I · Who I am</p>

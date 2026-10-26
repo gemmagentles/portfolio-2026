@@ -4,114 +4,131 @@
     <include
       src="head.html"
       title="__NAME__ — Case study — Gemma Gentles"
-      description="How I built the __NAME__ website: the brief, my role, key decisions and the result."
+      description="[One sentence for search results: what __NAME__ is and what I built for them.]"
     ></include>
   </head>
-  <body class="page-case-study">
+  <body class="page-work nav-gradient">
     <include src="header.html"></include>
 
-    <main id="main">
-      <article class="case-study">
-        <header class="case-study__header container">
-          <a class="text-link case-study__back" href="/#work">&larr; All work</a>
-          <h1 class="case-study__title" data-reveal>__NAME__</h1>
-          <p class="lead" data-reveal>
-            Two sentences for skimmers: what the client needed and what you built for them.
-          </p>
+    <!--
+      A case study in the case study layout (made by npm run new from templates/case-study.html): the project's pages in
+      a carousel at the top, then alternating 50/50 rows of text and pictures, ending with the live site.
+      Write the text here; the pictures, carousel screens and buttons are shared partials, so their look changes in
+      one place for every case study. Replace everything in [square brackets], and swap the placeholder .svg
+      pictures in public/images/work/__SLUG__/ for real screenshots (update the file names and sizes here if you use
+      .webp). Styles: .page-carousel and .work-showcase in src/scss/pages/_work.scss, .work-split in
+      src/scss/components/_work-split.scss.
+    -->
+    <main id="main" class="work-page work-page--feature">
+      <!-- The hero: the project's name, and its pages as browser windows (partials/showcase-screen.html). Clicking
+           the front one scrolls down to the rows; clicking one behind brings it to the front.
+           npm run capture (or npm run new with the site's address) screenshots every page of the live site and
+           rewrites the screens between the two "carousel screens" markers, with the line under the carousel, so
+           leave the markers in. To do it by hand: one screen per page, pos 0 front, 1 right, -1 left, 2 waiting
+           behind, and keep the count in status right. -->
+      <section class="page-carousel" aria-labelledby="page-carousel-title">
+        <div class="container">
+          <div class="page-wall__intro">
+            <p class="eyebrow">Case study</p>
+            <h1 class="page-wall__title" id="page-carousel-title">__NAME__</h1>
+          </div>
 
-          <dl class="case-study__meta" data-reveal>
-            <div>
-              <dt>Role</dt>
-              <dd>Design &amp; front end development</dd>
-            </div>
-            <div>
-              <dt>Year</dt>
-              <dd>2026</dd>
-            </div>
-            <div>
-              <dt>Type</dt>
-              <dd>Client website</dd>
-            </div>
-            <div>
-              <dt>Tools</dt>
-              <dd>HTML, SCSS, JavaScript</dd>
-            </div>
-          </dl>
-
-          <a class="button" href="https://example.com" target="_blank" rel="noopener" data-reveal>
-            Visit live site <span class="visually-hidden">(opens in a new tab)</span>&nearr;
-          </a>
-        </header>
-
-        <figure class="case-study__hero container" data-reveal>
-          <img
-            src="/images/work/__SLUG__/cover.svg"
-            alt="The __NAME__ home page on a desktop screen"
-            width="1600"
-            height="1000"
-            fetchpriority="high"
-          />
-        </figure>
-
-        <div class="case-study__body container">
-          <section class="case-study__section" data-reveal>
-            <h2>The brief</h2>
-            <p>Who the client is, what they needed, and what was wrong with what they had before.</p>
-          </section>
-
-          <section class="case-study__section" data-reveal>
-            <h2>My role</h2>
-            <p>What you owned: design, build, content, launch. Mention anyone you worked with.</p>
-          </section>
-
-          <section class="case-study__section" data-reveal>
-            <h2>Approach</h2>
-            <p>Two or three decisions that show how you think. For each, say what you chose and why.</p>
-            <ul>
-              <li><strong>Decision one:</strong> what you chose and why it mattered.</li>
-              <li><strong>Decision two:</strong> what you chose and why it mattered.</li>
-              <li><strong>Decision three:</strong> what you chose and why it mattered.</li>
+          <div class="work-showcase__carousel" data-showcase="scroll" data-reveal>
+            <ul class="work-showcase__stage">
+              <!-- carousel screens: start -->
+              <include src="showcase-screen.html" pos="0" href="#work-split-title" image="/images/work/__SLUG__/home-full.svg" width="1440" height="3600" alt="The __NAME__ home page" label="__NAME__" name="Home"></include>
+              <include src="showcase-screen.html" pos="1" href="#work-split-title" image="/images/work/__SLUG__/about-full.svg" width="1440" height="3000" alt="The __NAME__ about page" label="__NAME__" name="About"></include>
+              <include src="showcase-screen.html" pos="-1" href="#work-split-title" image="/images/work/__SLUG__/contact-full.svg" width="1440" height="2000" alt="The __NAME__ contact page" label="__NAME__" name="Contact"></include>
+              <!-- carousel screens: end -->
             </ul>
-          </section>
-        </div>
 
-        <div class="case-study__gallery container">
-          <figure data-reveal>
-            <img
-              src="/images/work/__SLUG__/desktop.svg"
-              alt="A __NAME__ page on desktop"
-              width="1600"
-              height="1000"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>Describe what this screen shows.</figcaption>
-          </figure>
-          <figure class="case-study__gallery-mobile" data-reveal>
-            <img
-              src="/images/work/__SLUG__/mobile.svg"
-              alt="The __NAME__ site on a phone"
-              width="780"
-              height="1688"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>The mobile layout.</figcaption>
-          </figure>
+            <include src="showcase-controls.html" status="Home · 1 of 3"></include>
+          </div>
         </div>
+      </section>
 
-        <div class="case-study__body container">
-          <section class="case-study__section" data-reveal>
-            <h2>The result</h2>
-            <p>What launched and what the client got out of it, in words. Add a short client quote if you have one.</p>
-          </section>
+      <!-- The story in 50/50 rows (text on one side, a picture on the other, swapping sides each row). Each picture is
+           a partial: work-split-laptop (the home page scrolling in an iMac), -phone, -tablet, -screenshot or
+           -devices; any of them can go in any row. -->
+      <section class="work-split work-split--full work-split--reveal-zoom" aria-labelledby="work-split-title">
+        <div class="container">
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">Case study · __NAME__</p>
+              <h2 class="work-split__title" id="work-split-title">[What you built, e.g. WordPress website development]</h2>
+              <p>[Two sentences: who the client is, what they needed, and what you built for them.]</p>
+            </div>
+            <include src="work-split-laptop.html" href="https://example.com" image="/images/work/__SLUG__/home-full.svg" height="3600" address="[example.com]" label="The __NAME__ website on an iMac: visit the live site" priority="auto"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">What I achieved</p>
+              <h3 class="work-split__heading">This client's goals</h3>
+              <ul class="work-split__list">
+                <li>[A goal the site had to meet, e.g. a CMS for the client to make their own changes]</li>
+                <li>[Another goal]</li>
+              </ul>
+            </div>
+            <include src="work-split-phone.html" image="/images/work/__SLUG__/mobile.svg" width="780" height="1688" alt="[A __NAME__ page on a phone]"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">Problem solving</p>
+              <h3 class="work-split__heading">The challenges that came</h3>
+              <ul class="work-split__list">
+                <li>[A challenge on this project, and how you solved it]</li>
+                <li>[Another challenge, and how you solved it]</li>
+              </ul>
+            </div>
+            <include src="work-split-tablet.html" image="/images/work/__SLUG__/tablet.svg" width="2360" height="1640" alt="[A __NAME__ section on an iPad]"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <h3 class="work-split__heading">Built with</h3>
+              <p class="work-split__tags"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span></p>
+              <h3 class="work-split__heading">My role</h3>
+              <p class="work-split__tags"><span>Design</span> <span>Front end development</span></p>
+            </div>
+            <!-- The client's brand guidelines board: npm run capture (or npm run new with the site's address) makes it
+                 from the live site and puts it here in place of this screenshot (scripts/brand-board.js). -->
+            <include src="work-split-screenshot.html" image="/images/work/__SLUG__/screenshot.svg" width="1600" height="1000" alt="[What this screenshot shows]" focus="0%"></include>
+          </div>
+
+          <div class="work-split__row" data-reveal="late">
+            <div class="work-split__text">
+              <p class="eyebrow">[example.com]</p>
+              <h3 class="work-split__heading">See the website live.</h3>
+              <!-- "View code": if the code is in a repo you can link to, swap view-code-private.html for view-code.html
+                   with repo="https://github.com/..." on it. -->
+              <div class="work-split__buttons">
+                <include src="visit-site.html" href="https://example.com" address="[example.com]"></include>
+                <include src="view-code-private.html"></include>
+              </div>
+            </div>
+            <include src="work-split-devices.html" image="/images/work/__SLUG__/devices.svg" width="1600" height="1246" alt="The __NAME__ website on a desktop, a laptop, a tablet and a phone"></include>
+          </div>
         </div>
+      </section>
 
-        <nav class="case-study__next container" aria-label="Next project" data-reveal>
-          <p>Next project</p>
-          <a href="/#work">Back to all work &rarr;</a>
-        </nav>
-      </article>
+      <!-- After the case study: the next one (partials/case-study-next.html, which one comes from case-studies.json),
+           then a prompt to get in touch. -->
+      <include src="case-study-next.html"></include>
+
+      <include
+        src="cta.html"
+        eyebrow="Now booking new projects"
+        title="Your brand"
+        title2="could be"
+        accent="next."
+        ghost="Next"
+        button="Start a project"
+        href="/contact/"
+        target="_self"
+        note=""
+      ></include>
     </main>
 
     <include src="footer.html"></include>
