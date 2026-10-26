@@ -8,8 +8,7 @@
   background: var(--brand-gradient);
   color: var(--white);
 
-  // Crops the ghost text to the section. Done here rather than on .cta itself so the curved bottom edge from
-  // src/js/modules/wave.js can still overlap the footer by a pixel.
+  // Crops the ghost text to the section.
   &__backdrop {
     position: absolute;
     inset: 0;

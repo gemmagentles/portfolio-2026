@@ -1,5 +1,5 @@
 // Makes a brand guidelines board for a case study from the client's live site, in the bars layout
-// (.brand-board--bars in _work-bento.scss): their name as the wordmark, their heading font as a big "Aa", their main
+// (.brand-board--bars in _brand-board.scss): their name as the wordmark, their heading font as a big "Aa", their main
 // colours as stacked bars, and their logo and favicon. Used by scripts/capture-pages.js (npm run capture).
 //
 // From the home page it reads:
@@ -248,7 +248,7 @@ export async function makeBrandBoard(page, slug, project) {
   The ${escape(project)} brand guidelines board as a 50/50 row's picture: their wordmark, the font of their headings,
   their main colours, logo and favicon, read from their live site (${MARKER}, scripts/brand-board.js).
   Re-capturing rewrites it; to keep your own changes, delete the "${MARKER}" words in this note.
-  Styles: .brand-board in src/scss/components/_work-bento.scss, the panel in _work-split.scss.
+  Styles: .brand-board in src/scss/components/_brand-board.scss, the panel in _work-split.scss.
 -->
 ${fontLink ? `<link rel="stylesheet" href="${fontLink}" />\n` : ''}<div class="work-split__shot work-split__shot--board">
   <div class="brand-board brand-board--bars" style="--board-ink: ${hex(ink)}; --board-paper: ${hex(paper)}; --serif: ${fontStack}">

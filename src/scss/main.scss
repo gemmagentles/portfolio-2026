@@ -14,9 +14,6 @@
 @use 'components/page-intro';
 @use 'components/reveal';
 @use 'components/eyebrow';
-@use 'components/section-wave';
-@use 'components/carousel';
-@use 'components/project-card';
 @use 'components/work-browser';
 @use 'components/about';
 @use 'components/clients';
@@ -28,14 +25,12 @@
 @use 'components/what-you-get';
 @use 'components/process';
 @use 'components/why-it-matters';
-@use 'components/work-bento';
+@use 'components/brand-board';
 @use 'components/page-wall';
-@use 'components/work-cards';
 @use 'components/work-split';
 @use 'components/case-study-nav';
 @use 'components/work-intro';
 @use 'components/repo-button';
-@use 'components/page-spread';
 
 @use 'pages/home';
 
