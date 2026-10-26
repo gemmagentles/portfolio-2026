@@ -11,6 +11,8 @@ version number and date.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-26
+
 ### Added
 
 - Case studies: a "Next case study" band at the end, with the next case study's name, a "View case study" button
@@ -143,5 +145,6 @@ version number and date.
 - HTML partials plugin with tests, SCSS design tokens, and vanilla JS modules on a small Vite starter.
 - `.gitignore` and `.gitattributes` (Unix line endings), published to GitHub as a public repo.
 
-[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.0.0...develop
+[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.0...develop
+[1.1.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/gemmagentles/portfolio-2026/releases/tag/v1.0.0
