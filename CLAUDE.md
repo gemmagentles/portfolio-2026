@@ -6,6 +6,9 @@ front-end developer and designer; explain changes in plain words and check them 
 ## Commands
 
 - `npm run dev` (port 5173), `npm run build` (into `dist/`), `npm run preview` (serves `dist/`, port 4173)
+- Hosting: Cloudflare Workers (static assets), connected to the GitHub repo. Cloudflare runs `npm run build` then
+  `npx wrangler deploy`, which reads `wrangler.jsonc` (uploads `dist/`; its `name` must match the dashboard's Worker).
+  `npx wrangler deploy --dry-run` checks it locally without signing in.
 - `npm run test:include` tests the partials plugin (9 tests; run after touching `plugins/html-include.js`)
 - `npm run new -- "Project Name"` creates a case study from `templates/case-study.html`, with
   placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live

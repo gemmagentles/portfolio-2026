@@ -11,6 +11,11 @@ version number and date.
 
 ## [Unreleased]
 
+### Added
+
+- Cloudflare hosting: `wrangler.jsonc` tells Cloudflare to upload the built `dist/` folder after `npm run build`,
+  with the site's own 404 page for unknown addresses.
+
 ## [1.1.0] - 2026-10-26
 
 ### Added
