@@ -11,6 +11,8 @@ version number and date.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-10-26
+
 ### Added
 
 - Cloudflare hosting: `wrangler.jsonc` tells Cloudflare to upload the built `dist/` folder after `npm run build`,
@@ -150,6 +152,7 @@ version number and date.
 - HTML partials plugin with tests, SCSS design tokens, and vanilla JS modules on a small Vite starter.
 - `.gitignore` and `.gitattributes` (Unix line endings), published to GitHub as a public repo.
 
-[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.0...develop
+[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...develop
+[1.1.1]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/gemmagentles/portfolio-2026/releases/tag/v1.0.0
