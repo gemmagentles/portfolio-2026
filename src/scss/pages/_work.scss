@@ -1,12 +1,12 @@
 @use '../abstracts' as *;
 
-// The Work page (work/index.html), on black: the hero (components/_work-intro.scss), category links, then one row
-// per category. Also the case studies' carousel and laptop (below), used on every case study.
+// The Work page (work/index.html), on black: the hero (components/_work-intro.scss), category links, one row per
+// category, then the call to action (cta.html) right against the footer, as on the case studies. Also the case
+// studies' carousel and laptop (below), used on every case study.
 // From lg up each row puts the category's number, name and blurb in a column on the left and its cards on the right.
 
 .work-page {
   overflow-x: clip; // the carousel's side screens can reach past the edge on narrow screens
-  padding-bottom: calc(var(--space-section-large) + 20px);
   background: var(--black);
   color: var(--white);
 
@@ -283,6 +283,11 @@
   border-top: 1px solid #26262c;
   scroll-margin-top: $header-height; // so the category links don't land under the sticky header
 
+  // The last row: more room below its cards, before the call to action.
+  &:last-of-type {
+    padding-bottom: 130px;
+  }
+
   @include mq(lg) {
     grid-template-columns: 15.5rem minmax(0, 1fr);
     gap: var(--space-large);
@@ -317,7 +322,7 @@
     line-height: 1.5;
   }
 
-  // Phones: 1 card per row. From sm: 2. From lg: 3 (or 4 for the emails, which are narrower).
+  // Phones: 1 card per row. From sm: 2. From lg: 3.
   &__grid {
     display: grid;
     gap: 1.25rem;
@@ -328,12 +333,6 @@
 
     @include mq(lg) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    &--four {
-      @include mq(lg) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
     }
   }
 }
@@ -410,6 +409,28 @@
     object-fit: cover;
     object-position: top;
     transition: scale 0.6s ease-in-out;
+
+    // For a screenshot whose interesting part is in the middle (a phone screenshot, where the top is the site's menu).
+    &--centre {
+      object-position: center;
+    }
+
+    // An email screenshot: inset in its frame (like the mock email, __email), zoomed out to show more of it.
+    &--email {
+      width: auto;
+      margin: 10px 18px 0;
+    }
+
+    // Shows the bottom of a tall screenshot instead of the top (e.g. an email's footer deals).
+    &--bottom {
+      object-position: bottom;
+    }
+
+    // For a banner ad that should show whole: fitted and centred in its frame.
+    &--contain {
+      object-fit: contain;
+      object-position: center;
+    }
   }
 
   &__placeholder {
@@ -525,156 +546,6 @@
     height: 18px;
     margin-top: 4px;
     background: var(--ink);
-  }
-
-  // ---- API mock: an endpoint label, then a chart, list or stat ----
-  &__frame--api {
-    gap: 14px;
-    padding: 16px 18px;
-    background: #121218;
-  }
-
-  &__endpoint {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: #8a8a96;
-
-    > span:first-child {
-      color: #6be39b;
-    }
-  }
-
-  &__live {
-    margin-left: auto;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: #1f3d2b;
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    color: #6be39b;
-  }
-
-  // Bar chart: each bar's height comes from --h. The tallest (5th) is pink.
-  &__chart {
-    display: flex;
-    flex: 1;
-    align-items: flex-end;
-    gap: 6px;
-    max-height: 70px;
-    margin-block: auto;
-
-    span {
-      flex: 1;
-      height: var(--h);
-      border-radius: 3px 3px 0 0;
-      background: var(--primary-color);
-
-      &:nth-child(5) {
-        background: var(--secondary-color);
-      }
-    }
-  }
-
-  // List: each row is an icon square, two text lines (widths set inline) and a green status dot.
-  &__rows {
-    display: grid;
-    gap: 8px;
-    margin-block: auto;
-  }
-
-  &__row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    &::before {
-      content: '';
-      flex: 0 0 22px;
-      height: 22px;
-      border-radius: 5px;
-      background: #24242c;
-    }
-
-    &::after {
-      content: '';
-      flex: 0 0 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #6be39b;
-    }
-  }
-
-  &__lines {
-    display: grid;
-    flex: 1;
-    gap: 4px;
-
-    span {
-      height: 5px;
-      border-radius: 3px;
-      background: #3a3a44;
-
-      &:last-child {
-        height: 4px;
-        background: #26262c;
-      }
-    }
-  }
-
-  // Stat: a big number, two text lines and a progress bar (filled to --w).
-  &__stat {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 12px 14px;
-    margin-block: auto;
-  }
-
-  &__stat-value {
-    font-family: var(--font-heading--secondary);
-    font-size: 2.75rem;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--white);
-  }
-
-  &__stat-lines {
-    display: grid;
-    gap: 5px;
-
-    span {
-      height: 5px;
-      border-radius: 3px;
-      background: #3a3a44;
-
-      &:first-child {
-        width: 80%;
-      }
-
-      &:last-child {
-        width: 60%;
-        height: 4px;
-        background: #26262c;
-      }
-    }
-  }
-
-  &__stat-bar {
-    grid-column: 1 / -1;
-    height: 6px;
-    overflow: hidden;
-    border-radius: 3px;
-    background: #24242c;
-
-    span {
-      display: block;
-      width: var(--w);
-      height: 100%;
-      background: var(--brand-gradient);
-    }
   }
 }
 
@@ -828,11 +699,6 @@
       background: #8f8f99;
     }
   }
-}
-
-// The case studies: nothing after the last section, so no space before the footer.
-.work-page--feature {
-  padding-bottom: 0;
 }
 
 // The laptop's screen scrolls through the whole Nueva Gold home page on a loop: a pause at the top, a slow scroll
