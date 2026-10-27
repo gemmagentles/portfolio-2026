@@ -32,6 +32,8 @@ version number and date.
   broken "Open to work" pill with the call to action's dot label.
 - The design system page's header has the pink-to-blue gradient, like the Work page and case studies.
 - The design system page's type samples are lorem ipsum, so they show the fonts and sizes rather than real copy.
+- One heading font variable, `--font-heading` (Oswald), in place of `--font-heading--primary` and
+  `--font-heading--secondary`, which had both become Oswald. Nothing on the site looks different.
 
 ### Added
 

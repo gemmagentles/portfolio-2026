@@ -29,8 +29,7 @@
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; // paragraphs, links and lists
   --font-mono: 'Space Mono', ui-monospace, monospace; // sub headings (eyebrows, labels)
   --font-link: var(--font-body); // all links
-  --font-heading--primary: 'Oswald', 'Arial Narrow', sans-serif; // all headings (h1, h2, h3) and the logo
-  --font-heading--secondary: var(--font-heading--primary); // section headings (h2) and h3: Oswald too (was Fraunces)
+  --font-heading: 'Oswald', 'Arial Narrow', sans-serif; // all headings (h1, h2, h3) and the logo
 
   // Fluid type scale: min size at 360px wide, max at 1280px wide
   --text-small: clamp(0.83rem, 0.8rem + 0.15vw, 0.94rem); // captions, labels

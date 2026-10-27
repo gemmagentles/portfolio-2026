@@ -80,7 +80,7 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - **BEM for every class:** `block`, `block__element`, `block--modifier`; states as `is-*` / `has-*`. No Tailwind or
   utility classes. Don't reuse another block's element class in a new component; give it its own.
-- **Fonts:** all headings (h1–h3) and the logo Oswald (`--font-heading--primary`); paragraphs, links and lists Inter;
+- **Fonts:** all headings (h1–h3) and the logo Oswald (`--font-heading`); paragraphs, links and lists Inter;
   eyebrows/labels Space Mono. Client brand boards use the client's fonts (Bodoni Moda for LNDMRK, Cormorant for
   Nueva Gold).
 - **Look:** bullets are hexagon outlines (`hex-bullet`); white text cards; the 50/50 section (`work-split--full`) is

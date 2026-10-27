@@ -31,18 +31,18 @@ h3 {
 
 h1 {
   font-size: var(--text-3xl);
-  font-family: var(--font-heading--primary);
+  font-family: var(--font-heading);
 }
 
 // Every heading that starts a section is an h2 (the hero and page titles are h1s, so they keep their own look).
 h2 {
   font-size: 42px;
-  font-family: var(--font-heading--secondary);
+  font-family: var(--font-heading);
 }
 
 h3 {
   font-size: var(--text-large);
-  font-family: var(--font-heading--secondary);
+  font-family: var(--font-heading);
 }
 
 // The last word of a section heading, wrapped in <span class="accent-word">: filled with the hero's

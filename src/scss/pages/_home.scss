@@ -71,7 +71,7 @@
 
   // "FRONT END" in solid white, then "DEVELOPER" on its own line as a white outline, in Oswald capitals.
   &__title {
-    font-family: var(--font-heading--primary);
+    font-family: var(--font-heading);
     font-size: var(--title-size);
     font-weight: 700;
     line-height: 0.95;
@@ -133,7 +133,7 @@
   position: absolute;
   bottom: calc(-0.3em + 20px); // the bottom of the letters runs off the hero
   left: -0.09em; // the P runs off the left edge
-  font-family: var(--font-heading--primary);
+  font-family: var(--font-heading);
   font-size: var(--word-size);
   font-weight: 700;
   line-height: 0.95;

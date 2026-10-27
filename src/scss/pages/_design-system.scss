@@ -15,7 +15,7 @@
   }
 
   &__title {
-    font-family: var(--font-heading--primary);
+    font-family: var(--font-heading);
     font-size: var(--text-3xl);
     text-transform: none;
   }
@@ -66,7 +66,7 @@
 
   // The big gradient number above each section heading.
   &__number {
-    font-family: var(--font-heading--primary);
+    font-family: var(--font-heading);
     font-size: clamp(2.5rem, 2rem + 1.5vw, 3.25rem);
     font-weight: 500;
     line-height: 1;
@@ -179,7 +179,7 @@
 
   &__scale-sample {
     overflow: hidden;
-    font-family: var(--font-heading--primary);
+    font-family: var(--font-heading);
     font-weight: 500;
     line-height: 1.1;
     text-overflow: ellipsis;
@@ -324,7 +324,7 @@
 
     h3 {
       margin-top: 0.6rem;
-      font-family: var(--font-heading--secondary);
+      font-family: var(--font-heading);
       font-size: var(--text-large);
     }
 
@@ -400,13 +400,13 @@
 
     // On the home page this is an h3 (which sets the font); here it's a paragraph, so it doesn't add a heading.
     .why-it-matters__heading {
-      font-family: var(--font-heading--secondary);
+      font-family: var(--font-heading);
       font-weight: 500;
     }
   }
 
   &__heading-sample {
-    font-family: var(--font-heading--secondary);
+    font-family: var(--font-heading);
     font-size: var(--text-2xl);
     font-weight: 500;
     line-height: 1.1;
