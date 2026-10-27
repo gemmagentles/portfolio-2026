@@ -25,6 +25,31 @@ version number and date.
 
 - The brand board styles moved from `_work-bento.scss` into their own `_brand-board.scss`.
 - `npm run new` now suggests adding the new case study's card to the Work page, not the old home page project cards.
+- The design system page matches the site again: the right purple (#A66BE3), the `--black`, `--ink`, `--paper` and
+  `--white` tokens, the greys and green the pages use, the fixed 42px section heading size, the 16px card corners,
+  the header's springy glide and the padlock's easing. Fixed examples that no longer matched (button hovers are
+  purple, the logo is Oswald, the call-to-action button is white, the work card has no serif) and replaced the
+  broken "Open to work" pill with the call to action's dot label.
+- The design system page's header has the pink-to-blue gradient, like the Work page and case studies.
+- The design system page's type samples are lorem ipsum, so they show the fonts and sizes rather than real copy.
+- One heading font variable, `--font-heading` (Oswald), in place of `--font-heading--primary` and
+  `--font-heading--secondary`, which had both become Oswald. Nothing on the site looks different.
+- Text is now set with twelve text styles named by their job (display, title, heading, subheading, card title,
+  number, statement, lead, body, small, eyebrow, label) instead of sizes picked freely, with the rules on the design
+  system page. Text that did the same job now matches: the Contact and 404 titles are bold capitals like the other
+  big titles, the call to action's title is bold, the "essentials" facts are Oswald (they were in a serif), card
+  titles and labels share one size each, lists are the same size as paragraphs, and the hero tagline is the intro
+  size.
+
+### Fixed
+
+- The "Case studies" line in the home page's work section had no size (it used a size that didn't exist), so it now
+  uses the intro text size.
+
+### Added
+
+- Design system: a value card, a second work card, and a new "Case study pieces" section with the Visit site / View
+  code buttons, the private repo button, tags, hexagon bullets and the next case study buttons.
 
 ## [1.1.1] - 2026-10-26
 

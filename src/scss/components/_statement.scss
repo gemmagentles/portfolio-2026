@@ -17,9 +17,8 @@
   }
 
   &__text {
+    @include type(lead);
     max-width: 55ch;
-    font-size: var(--text-large);
-    line-height: 1.6;
   }
 }
 

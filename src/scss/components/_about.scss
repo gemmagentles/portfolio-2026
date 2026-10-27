@@ -38,26 +38,18 @@
   }
 
   &__label {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    @include type(label);
     color: var(--muted-color);
   }
 
   &__value {
     margin-top: var(--space-xsmall);
-    font-family: "Fraunces", serif;
-    // font-family: var(--font-heading--secondary);
-    font-size: clamp(1.75rem, 1.4rem + 1vw, 2.15rem);
-    // font-weight: 600;
-    line-height: 1.05;
+    @include type(subheading);
   }
 
   &__note {
     margin-top: var(--space-xsmall);
-    font-size: var(--text-small);
-    line-height: 1.45;
+    @include type(small);
     color: var(--muted-color);
   }
 }

@@ -52,11 +52,7 @@
     align-items: center;
     gap: 0.75em;
     margin-bottom: 1.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.42em;
-    text-transform: uppercase;
+    @include type(eyebrow);
     color: var(--white);
   }
 
@@ -70,11 +66,13 @@
   }
 
   // "FRONT END" in solid white, then "DEVELOPER" on its own line as a white outline, in Oswald capitals.
+  // Type exception (sized to fit): --title-size fits the two words to the hero's text column.
   &__title {
-    font-family: var(--font-heading--primary);
+    font-family: var(--font-heading);
     font-size: var(--title-size);
     font-weight: 700;
     line-height: 0.95;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
     color: var(--ink); // "FRONT END" in black; "DEVELOPER" stays a white outline
   }
@@ -88,8 +86,7 @@
   &__tagline {
     max-width: 30ch; // three lines for the current line of text
     margin-top: 1.5rem;
-    font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem); // 20px on wide screens
-    line-height: 1.4;
+    @include type(lead);
     color: var(--white);
   }
 
@@ -133,7 +130,8 @@
   position: absolute;
   bottom: calc(-0.3em + 20px); // the bottom of the letters runs off the hero
   left: -0.09em; // the P runs off the left edge
-  font-family: var(--font-heading--primary);
+  // Type exception (decoration): a giant outlined word.
+  font-family: var(--font-heading);
   font-size: var(--word-size);
   font-weight: 700;
   line-height: 0.95;

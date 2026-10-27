@@ -72,6 +72,13 @@ front-end developer and designer; explain changes in plain words and check them 
   - The reset strips list padding/bullets from `ul[class]`, so list padding needs extra specificity
     (e.g. `.block &`). `[hidden]` is `display: none !important`.
   - `motion-ok` mixin wraps animation; respect `prefers-reduced-motion`. `hex-bullet` mixin draws the hexagon bullets.
+  - **Text styles** (`abstracts/_type.scss`): text is styled by its job with `@include type(<role>)`: display, title,
+    heading, subheading, card-title, number, statement, lead, body, small, eyebrow, label (each sets font, size,
+    weight, line height, letter spacing and capitals; sizes are `--text-<role>`). h1 = title, h2 = heading,
+    h3 = subheading, `.lead`, `.eyebrow` and body text already have theirs. Components never set font-size, family,
+    weight, line-height, letter-spacing or text-transform; the only variation is `$bold: true`. If nothing fits, add a
+    role (in `_type.scss`, `_root.scss` and the design system page), not a one-off size. Exceptions are marked
+    "Type exception" in a comment: decoration, words sized to fit, miniatures inside pictures, the logo.
 - **JS:** `src/js/main.js` starts one module per feature from `src/js/modules/`.
   `showcase.js` drives the carousel (only one per page); `data-showcase="scroll"` makes the front screen scroll to the
   next section (otherwise its link is followed).
@@ -80,7 +87,7 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - **BEM for every class:** `block`, `block__element`, `block--modifier`; states as `is-*` / `has-*`. No Tailwind or
   utility classes. Don't reuse another block's element class in a new component; give it its own.
-- **Fonts:** all headings (h1–h3) and the logo Oswald (`--font-heading--primary`); paragraphs, links and lists Inter;
+- **Fonts:** all headings (h1–h3) and the logo Oswald (`--font-heading`); paragraphs, links and lists Inter;
   eyebrows/labels Space Mono. Client brand boards use the client's fonts (Bodoni Moda for LNDMRK, Cormorant for
   Nueva Gold).
 - **Look:** bullets are hexagon outlines (`hex-bullet`); white text cards; the 50/50 section (`work-split--full`) is

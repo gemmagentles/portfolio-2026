@@ -3,6 +3,8 @@
 // Each case study's brand guidelines board (partials/brand-board-<slug>.html), in its 50/50 row: a mini brand page in
 // the client's own style. LNDMRK's is hand-made: their off-white panels and ink black, with the Didone serif (Bodoni
 // Moda) for the wordmark and specimen; the cover runs full width, with type and colours side by side under it.
+// Type exception (miniature): the board is a small picture of the client's brand, in their fonts, so its text sizes
+// are its own rather than the site's text styles.
 .brand-board {
   --board-ink: #0b0b0b;
   --board-paper: var(--paper); // LNDMRK's off-white (the site-wide token)
