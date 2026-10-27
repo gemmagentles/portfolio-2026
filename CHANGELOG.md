@@ -30,6 +30,7 @@ version number and date.
   the header's springy glide and the padlock's easing. Fixed examples that no longer matched (button hovers are
   purple, the logo is Oswald, the call-to-action button is white, the work card has no serif) and replaced the
   broken "Open to work" pill with the call to action's dot label.
+- The design system page's header has the pink-to-blue gradient, like the Work page and case studies.
 
 ### Added
 
