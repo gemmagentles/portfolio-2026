@@ -49,6 +49,8 @@ version number and date.
 
 ### Added
 
+- Photoshop and BrowserStack in the "Tools I use" grid (logos from Devicon). The tiles are smaller to fit 18: 9 per
+  row on desktop (was 8), 6 on tablets and 3 on phones, so every row is full.
 - Design system: a value card, a second work card, and a new "Case study pieces" section with the Visit site / View
   code buttons, the private repo button, tags, hexagon bullets and the next case study buttons.
 

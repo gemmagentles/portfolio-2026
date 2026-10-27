@@ -10,14 +10,19 @@
     margin-bottom: var(--space-large);
   }
 
-  // Phones: 4 per row. From md up: 8 per row, so 16 tiles make two rows.
+  // 18 tiles in even rows: 3 per row on phones (6 rows), 6 on tablets (3 rows), 9 from lg up (2 rows). Fewer than
+  // that and the longest name (BrowserStack) won't fit on one line.
   &__list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-small);
 
     @include mq(md) {
-      grid-template-columns: repeat(8, 1fr);
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    @include mq(lg) {
+      grid-template-columns: repeat(9, 1fr);
     }
   }
 
