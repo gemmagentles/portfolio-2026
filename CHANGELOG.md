@@ -24,6 +24,7 @@ version number and date.
 ### Changed
 
 - The brand board styles moved from `_work-bento.scss` into their own `_brand-board.scss`.
+- `.gitignore` now skips `.wrangler/`, the deploy tool's temporary files, so they can't be committed by mistake.
 - `npm run new` now suggests adding the new case study's card to the Work page, not the old home page project cards.
 - The design system page matches the site again: the right purple (#A66BE3), the `--black`, `--ink`, `--paper` and
   `--white` tokens, the greys and green the pages use, the fixed 42px section heading size, the 16px card corners,
