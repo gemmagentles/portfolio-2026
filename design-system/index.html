@@ -80,28 +80,79 @@
       </section>
 
       <!-- 02 · Typography -->
+      <!-- Each sample uses its role through ds__sample--<role> (src/scss/pages/_design-system.scss), which applies the
+           same type() mixin as the components, so the samples always match the site. -->
       <section class="ds__section container" id="type" aria-labelledby="type-title">
         <p class="ds__number">02</p>
         <h2 id="type-title">Typography</h2>
-        <p class="ds__note">Oswald for all headings (h1, h2 and h3) and the logo; Inter for paragraphs, links and lists; Space Mono for eyebrows and labels. Most sizes are fluid: each grows from its phone size at 360px wide to its full size at 1280px. The biggest titles (the hero, the call to action, case study names) are Oswald capitals.</p>
+        <p class="ds__note">Text is set with a short list of text styles, named by their job. To style some text, pick the style that describes what it is (a card title, a caption), not a size: <code>@include type(card-title);</code>. Each style sets the font, size, weight, line height, letter spacing and capitals together.</p>
 
-        <h3 class="ds__subhead">Families</h3>
+        <h3 class="ds__subhead">Fonts</h3>
         <ul class="ds__fonts">
-          <li><span class="ds__font-sample ds__font-sample--caps" style="font-family: var(--font-heading)">Lorem ipsum dolor</span><strong>Oswald</strong><code>--font-heading</code><span>All headings (h1, h2 and h3) and the logo; the biggest titles in bold capitals</span></li>
-          <li><span class="ds__font-sample" style="font-family: var(--font-body)">Lorem ipsum dolor sit amet, consectetur.</span><strong>Inter</strong><code>--font-body, --font-link</code><span>Paragraphs, all links and buttons, and lists</span></li>
-          <li><span class="ds__font-sample" style="font-family: var(--font-mono); font-size: 0.8em; letter-spacing: 0.12em; text-transform: uppercase">Lorem · Ipsum</span><strong>Space Mono</strong><code>--font-mono</code><span>Eyebrows, labels, captions and counters</span></li>
+          <li><span class="ds__sample ds__sample--heading">Lorem ipsum dolor</span><strong>Oswald</strong><code>--font-heading</code><span>Every heading style, numbers and the logo</span></li>
+          <li><span class="ds__sample ds__sample--lead">Lorem ipsum dolor sit amet, consectetur.</span><strong>Inter</strong><code>--font-body</code><span>Statement, lead, body and small: paragraphs, lists, links and buttons</span></li>
+          <li><span class="ds__sample ds__sample--eyebrow">Lorem · Ipsum</span><strong>Space Mono</strong><code>--font-mono</code><span>Eyebrow and label</span></li>
         </ul>
 
-        <h3 class="ds__subhead">Scale</h3>
-        <ul class="ds__scale">
-          <li><code>--text-display</code><span class="ds__scale-range">45 → 112px</span><span class="ds__scale-sample" style="font-size: var(--text-display)">Lorem ipsum</span></li>
-          <li><code>--text-3xl</code><span class="ds__scale-range">36 → 72px</span><span class="ds__scale-sample" style="font-size: var(--text-3xl)">Lorem ipsum dolor</span></li>
-          <li><code>h2</code><span class="ds__scale-range">42px</span><span class="ds__scale-sample ds__scale-sample--h2">Lorem ipsum dolor sit</span></li>
-          <li><code>--text-2xl</code><span class="ds__scale-range">28 → 45px</span><span class="ds__scale-sample" style="font-size: var(--text-2xl)">Lorem ipsum dolor sit amet</span></li>
-          <li><code>--text-xl</code><span class="ds__scale-range">23 → 32px</span><span class="ds__scale-sample" style="font-size: var(--text-xl)">Lorem ipsum dolor sit amet, consectetur</span></li>
-          <li><code>--text-large</code><span class="ds__scale-range">19 → 24px</span><span class="ds__scale-sample" style="font-size: var(--text-large)">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></li>
-          <li><code>--text-body</code><span class="ds__scale-range">16 → 18px</span><span class="ds__scale-sample ds__scale-sample--body" style="font-size: var(--text-body)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></li>
-          <li><code>--text-small</code><span class="ds__scale-range">13 → 15px</span><span class="ds__scale-sample ds__scale-sample--body" style="font-size: var(--text-small)">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></li>
+        <h3 class="ds__subhead">Text styles</h3>
+        <ul class="ds__styles">
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(display)</code><span>45 → 112px · Oswald bold capitals</span><p>The one big title at the top of a page or band: hero, case study name, call to action, Contact, 404.</p></div>
+            <p class="ds__sample ds__sample--display">Lorem ipsum</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(title)</code><span>36 → 72px · Oswald bold capitals · h1</span><p>A page's main heading when there's no display title; the next case study's name.</p></div>
+            <p class="ds__sample ds__sample--title">Lorem ipsum</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(heading)</code><span>42px · Oswald · h2</span><p>The heading that starts a section.</p></div>
+            <p class="ds__sample ds__sample--heading">Lorem ipsum dolor</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(subheading)</code><span>24 → 34px · Oswald · h3</span><p>A title inside a section: a card, a block of text, a category.</p></div>
+            <p class="ds__sample ds__sample--subheading">Lorem ipsum dolor sit</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(card-title)</code><span>20 → 24px · Oswald</span><p>A small title under a thumbnail or in a tile: work cards, the role tiles.</p></div>
+            <p class="ds__sample ds__sample--card-title">Lorem ipsum dolor sit</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(number)</code><span>40 → 52px · Oswald</span><p>Big numbers: 01, 02… beside categories and on tiles.</p></div>
+            <p class="ds__sample ds__sample--number">01</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(statement)</code><span>23 → 32px · Inter</span><p>A large line of plain text: a standout sentence, an email address.</p></div>
+            <p class="ds__sample ds__sample--statement">Lorem ipsum dolor sit amet, consectetur.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(lead)</code><span>19 → 24px · Inter · .lead</span><p>The intro paragraph under a heading, taglines, big buttons and links.</p></div>
+            <p class="ds__sample ds__sample--lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(body)</code><span>16 → 18px · Inter · the page default</span><p>Paragraphs, lists, links and buttons. Set on the body, so most text needs nothing.</p></div>
+            <p class="ds__sample ds__sample--body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(small)</code><span>13 → 15px · Inter</span><p>Captions, tags, legal text, header links.</p></div>
+            <p class="ds__sample ds__sample--small">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(eyebrow)</code><span>13 → 15px · Space Mono capitals · .eyebrow</span><p>The line above a heading, counters ("Home · 1 of 3") and step numbers.</p></div>
+            <p class="ds__sample ds__sample--eyebrow">Lorem · Ipsum</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(label)</code><span>11px · Space Mono capitals</span><p>Small labels: card types, fact labels, tags on dark pills.</p></div>
+            <p class="ds__sample ds__sample--label">Lorem ipsum</p>
+          </li>
+        </ul>
+
+        <h3 class="ds__subhead">Rules</h3>
+        <ul class="ds__rules">
+          <li>Components don't set font sizes, fonts, weights, line heights, letter spacing or capitals; the text style does. They only set colour and spacing.</li>
+          <li>The h1, h2 and h3 tags, <code>.lead</code> and <code>.eyebrow</code> already have their style, and everything else gets body. Add a style only when the text does a different job from its tag.</li>
+          <li>Bold is the only variation: <code>@include type(body, $bold: true);</code> for buttons and emphasis.</li>
+          <li>If nothing fits, add a style to the list (<code>src/scss/abstracts/_type.scss</code> and this page) rather than a one-off size.</li>
+          <li>Exceptions, each marked "Type exception" in the code: decoration (the giant outlined words), words sized to fit the screen (the hero and Work page titles, tool names), miniatures inside pictures (device and browser mock-ups, brand boards) and the logo.</li>
         </ul>
       </section>
 
@@ -171,7 +222,7 @@
           <article class="ds__specimen">
             <div class="ds__stage">
               <p class="eyebrow">Chapter VI · Clients</p>
-              <p class="ds__heading-sample">Brands that trust <span class="accent-word">me.</span></p>
+              <p class="ds__sample ds__sample--heading">Brands that trust <span class="accent-word">me.</span></p>
             </div>
             <h3>Section heading</h3>
             <p>An eyebrow, then an Oswald h2 with its last word in the brand gradient.</p>

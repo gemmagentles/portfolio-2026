@@ -319,7 +319,6 @@
 
     p {
       max-width: 48ch;
-      line-height: 1.6;
       color: #3c3c46;
     }
 
@@ -329,16 +328,8 @@
     }
   }
 
-  &__title {
-    font-size: var(--text-2xl);
-  }
-
+  // An h3, so it has the subheading style.
   &__heading {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    font-weight: 500;
-    line-height: 1.15;
-
     // Extra space above a heading that follows other content (e.g. "My role" after the Built with tags), but not
     // after an eyebrow label: there the gap matches the first box's (the text box's own gap).
     &:not(:first-child, .eyebrow + &) {
@@ -351,7 +342,6 @@
     display: grid;
     gap: 0.6rem;
     max-width: 48ch;
-    line-height: 1.5;
     color: #3c3c46;
 
     li {
@@ -374,7 +364,7 @@
       padding: 0.35rem 0.85rem;
       border: 1px solid rgb(11 11 15 / 0.2);
       border-radius: 999px;
-      font-size: var(--text-small);
+      @include type(small);
       color: var(--ink);
     }
   }
@@ -438,7 +428,7 @@
   padding: 0.7rem 1.3rem;
   border-radius: 999px;
   background: var(--ink);
-  font-weight: 600;
+  @include type(body, $bold: true);
   color: var(--white);
   text-decoration: none;
   white-space: nowrap;

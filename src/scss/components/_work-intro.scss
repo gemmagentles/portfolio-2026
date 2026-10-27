@@ -41,6 +41,8 @@
     --work-intro-first: 3.8931; // "FEATURED", Oswald 700
     --work-intro-second: 3.4078; // "PROJECTS", Oswald 300
 
+    // Type exception (sized to fit): each word is sized to fill the title's width, which is as wide as "FEATURED" in
+    // the display style.
     container-type: inline-size;
     width: min(100%, calc(var(--text-display) * var(--work-intro-first)));
     margin-bottom: var(--space-medium);
@@ -66,8 +68,7 @@
   }
 
   &__text {
-    font-size: var(--text-large);
-    line-height: 1.5;
+    @include type(lead);
     color: color-mix(in srgb, var(--white) 55%, transparent);
   }
 
@@ -113,6 +114,7 @@
     }
   }
 
+  // Type exception (miniature): the browser window's address bar, names and types are drawn small, like a screenshot.
   &__address {
     margin-inline: auto;
     padding: 3px 16px;

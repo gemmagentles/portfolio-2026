@@ -22,9 +22,8 @@
     gap: var(--space-small);
 
     p:not(.eyebrow) {
+      @include type(lead);
       max-width: 45ch;
-      font-size: var(--text-large);
-      line-height: 1.6;
     }
   }
 

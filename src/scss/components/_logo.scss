@@ -2,6 +2,7 @@
 
 // The logo: just the name, in white Oswald (the font of the main headings), in title case as written in the HTML.
 .logo {
+  // Type exception (the logo): a brand mark at a fixed size, not a text style.
   font-family: var(--font-heading);
   font-size: 21px;
   font-weight: 600;

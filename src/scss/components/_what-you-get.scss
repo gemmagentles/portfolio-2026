@@ -19,9 +19,8 @@
   }
 
   &__lead {
+    @include type(statement);
     max-width: 34ch;
-    font-size: var(--text-xl);
-    line-height: 1.3;
   }
 
   &__bento {
@@ -154,41 +153,29 @@
         padding: 2rem;
 
         .what-you-get__role {
-          font-size: clamp(2.25rem, 1.6rem + 2vw, 3.5rem);
+          @include type(subheading);
         }
 
         .what-you-get__text {
+          @include type(lead);
           max-width: 32rem;
-          font-size: var(--text-large);
         }
       }
     }
   }
 
+  // A small number above the role, so the card-title style rather than the big number style.
   &__number {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 500;
-    line-height: 1;
+    @include type(card-title);
   }
 
   &__role {
-    font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.9rem);
-    font-weight: 500;
-    line-height: 1;
-    text-transform: uppercase;
+    @include type(card-title);
     color: var(--white);
-
-    // Four to a row from lg up, so a little smaller there to keep "RESEARCHER" on one line in the narrower tiles.
-    @include mq(lg) {
-      font-size: clamp(1.3rem, 0.4rem + 1.4vw, 1.9rem);
-    }
   }
 
   &__text {
     max-width: 27.5rem;
-    line-height: 1.5;
   }
 
   &__tool {
@@ -197,10 +184,7 @@
     padding: 0.45rem 0.9rem;
     border-radius: 999px;
     background: var(--ink);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    @include type(label);
     color: var(--white);
   }
 }

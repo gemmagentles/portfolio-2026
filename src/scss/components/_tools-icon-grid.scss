@@ -58,6 +58,7 @@
   &__name {
     max-width: 100%;
     margin-top: 6cqi; // a gap under the logo, in step with the square
+    // Type exception (sized to fit): the name scales with its tile so long names fit.
     font-family: var(--font-mono);
     font-size: clamp(0.625rem, 11cqi, 0.875rem);
     line-height: 1.2;

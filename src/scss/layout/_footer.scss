@@ -23,7 +23,7 @@
   }
 
   &__email {
-    font-size: var(--text-xl);
+    @include type(statement);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
     overflow-wrap: anywhere;
@@ -94,7 +94,7 @@
 
   &__legal {
     grid-column: 1 / -1;
-    font-size: var(--text-small);
+    @include type(small);
 
     // The "Design system" link after the copyright.
     a {
