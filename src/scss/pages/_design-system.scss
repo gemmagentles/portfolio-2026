@@ -151,6 +151,12 @@
     margin-bottom: 0.4rem;
     font-size: var(--text-2xl);
     line-height: 1.15;
+
+    // Bold capitals, like the hero title.
+    &--caps {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
   }
 
   &__scale li {
@@ -178,6 +184,11 @@
     line-height: 1.1;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    // The h2 size is fixed (base/_typography.scss), not a fluid token.
+    &--h2 {
+      font-size: 42px;
+    }
 
     &--body {
       font-family: var(--font-body);
@@ -300,6 +311,17 @@
       }
     }
 
+    // Two columns of the three from lg up (the whole row on tablets).
+    &--wide-2 {
+      @include mq(md) {
+        grid-column: 1 / -1;
+      }
+
+      @include mq(lg) {
+        grid-column: span 2;
+      }
+    }
+
     h3 {
       margin-top: 0.6rem;
       font-family: var(--font-heading--secondary);
@@ -352,6 +374,34 @@
     > p {
       width: 100%;
       text-align: center;
+    }
+
+    // The dot label keeps its own width, so the dot stays next to the text.
+    > .cta__eyebrow {
+      width: auto;
+      text-align: start;
+    }
+
+    // The tags sit centred like the other examples.
+    > .work-split__tags {
+      justify-content: center;
+    }
+
+    // The call-to-action button at a size that fits the stage, on one line.
+    .cta__button {
+      font-size: var(--text-large);
+      white-space: nowrap;
+    }
+  }
+
+  // The value card at the width of one of the three on the home page.
+  &__card {
+    max-width: 22rem;
+
+    // On the home page this is an h3 (which sets the font); here it's a paragraph, so it doesn't add a heading.
+    .why-it-matters__heading {
+      font-family: var(--font-heading--secondary);
+      font-weight: 500;
     }
   }
 

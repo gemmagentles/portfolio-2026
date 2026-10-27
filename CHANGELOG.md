@@ -25,6 +25,16 @@ version number and date.
 
 - The brand board styles moved from `_work-bento.scss` into their own `_brand-board.scss`.
 - `npm run new` now suggests adding the new case study's card to the Work page, not the old home page project cards.
+- The design system page matches the site again: the right purple (#A66BE3), the `--black`, `--ink`, `--paper` and
+  `--white` tokens, the greys and green the pages use, the fixed 42px section heading size, the 16px card corners,
+  the header's springy glide and the padlock's easing. Fixed examples that no longer matched (button hovers are
+  purple, the logo is Oswald, the call-to-action button is white, the work card has no serif) and replaced the
+  broken "Open to work" pill with the call to action's dot label.
+
+### Added
+
+- Design system: a value card, a second work card, and a new "Case study pieces" section with the Visit site / View
+  code buttons, the private repo button, tags, hexagon bullets and the next case study buttons.
 
 ## [1.1.1] - 2026-10-26
 

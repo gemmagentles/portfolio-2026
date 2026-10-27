@@ -79,7 +79,7 @@
     color: var(--ink);
   }
 
-  // Black pill with a white circle holding the arrow. The arrow nudges right on hover.
+  // White pill with a white circle holding the arrow. It lifts on hover and the arrow nudges right.
   &__button {
     justify-self: start;
     display: inline-flex;
