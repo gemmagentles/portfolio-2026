@@ -96,7 +96,7 @@
     }
   }
 
-  // ---- The role tiles: read from the top (number, then the role right under it, then what it covers), with the
+  // ---- The role tiles: read from the top (the role, then what it covers), with the
   // tool tag pinned to the bottom, so every tile lines up the same way whatever the length of its text ----
   &__tile {
     position: relative;
@@ -164,11 +164,6 @@
     }
   }
 
-  // A small number above the role, so the card-title style rather than the big number style.
-  &__number {
-    @include type(card-title);
-  }
-
   &__role {
     @include type(card-title);
     color: var(--white);
@@ -180,7 +175,7 @@
 
   &__tool {
     align-self: flex-start;
-    margin-top: auto; // pushes the tag to the bottom of the tile, leaving the number, role and text at the top
+    margin-top: auto; // pushes the tag to the bottom of the tile, leaving the role and text at the top
     padding: 0.45rem 0.9rem;
     border-radius: 999px;
     background: var(--ink);

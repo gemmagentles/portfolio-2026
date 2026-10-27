@@ -13,6 +13,8 @@ version number and date.
 
 ### Removed
 
+- The numbers (01, 02…) on the home page's role cards and "My key engineering values" cards; each card now starts
+  with its title.
 - Unused sections that were hidden or replaced, with their styles: the curved wave edges between sections, the LNDMRK
   bento grid, full-width cards, page wall and page spread, the hero's side phones and hexagon bands (and the script
   that made them), the old project cards and the 3D turning ring carousel. Nothing on the site looks different.
