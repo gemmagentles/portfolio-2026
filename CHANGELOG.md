@@ -31,6 +31,7 @@ version number and date.
   purple, the logo is Oswald, the call-to-action button is white, the work card has no serif) and replaced the
   broken "Open to work" pill with the call to action's dot label.
 - The design system page's header has the pink-to-blue gradient, like the Work page and case studies.
+- The design system page's type samples are lorem ipsum, so they show the fonts and sizes rather than real copy.
 
 ### Added
 
