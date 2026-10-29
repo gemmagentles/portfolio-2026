@@ -38,6 +38,8 @@ version number and date.
 
 - Work page on phones: the hero's three screens face straight on and are wider than the screen, so the outer two run
   a little off each side; the category pills sit two side by side in two rows.
+- Call to action on phones (every page): the big outlined word rises from the bottom edge, below the button, instead
+  of sitting behind the heading.
 
 ### Fixed
 

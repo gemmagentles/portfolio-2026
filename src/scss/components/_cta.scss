@@ -1,12 +1,18 @@
 @use '../abstracts' as *;
 
 // "Your brand could be next." on the brand gradient, above the footer. A giant outlined "NEXT" sits behind it
-// in the top-right corner. Phones: heading then button, stacked. From md up: side by side, lined up at the bottom.
+// in the top-right corner. Phones: heading then button, stacked, with the outlined word rising from the bottom edge
+// below the button instead (so it's clear of the text), and extra room at the bottom for it. From md up: side by side,
+// lined up at the bottom.
 .cta {
   position: relative;
   padding-block: clamp(4rem, 2.5rem + 5vw, 7rem) calc(clamp(4rem, 2.5rem + 5vw, 7.5rem) + 20px);
   background: var(--brand-gradient);
   color: var(--white);
+
+  @include mq-down(md) {
+    padding-bottom: 8.5rem;
+  }
 
   // Crops the ghost text to the section.
   &__backdrop {
@@ -31,6 +37,12 @@
     color: transparent;
     -webkit-text-stroke: 2px rgb(255 255 255 / 0.22);
     pointer-events: none;
+
+    // Phones: from the bottom-right, its lower part cut off by the section's edge.
+    @include mq-down(md) {
+      top: auto;
+      bottom: -0.42em;
+    }
   }
 
   &__inner {
