@@ -28,6 +28,8 @@ version number and date.
 - Work page: the API Components description is about building player reward UIs from the back-end developers'
   REST API endpoints.
 - Work page: the EDMs & Banners description is about building them with designers and testing every email in Litmus.
+- Work page: the API Components cards say what each shows (Level & Points, Time & Money Value, Referrals, Current &
+  Next Level) instead of "live data".
 - Work page: the CMS Websites description is about building custom WordPress themes with ACF and editor-friendly
   blocks, using LocalWP.
 - Work page: the hero introduction says what Gemma does (custom WordPress builds, chat UIs, API-driven components
