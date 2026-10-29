@@ -7,14 +7,14 @@
       description="The design system behind gemmagentles.dev: colour, type, spacing, motion and components."
     ></include>
   </head>
-  <body class="page-design-system">
+  <body class="page-design-system nav-gradient">
     <include src="header.html"></include>
 
     <!--
       Design system: the tokens and components this site is built from, shown live.
       Swatches, type samples and spacing bars read the real CSS variables (src/scss/base/_root.scss), and the
-      components use the site's own classes, so this page stays in step when either changes. The hex values and
-      pixel sizes written next to them are plain text: update them if you change a token.
+      components use the site's own classes and partials, so this page stays in step when either changes. The hex
+      values and pixel sizes written next to them are plain text: update them if you change a token.
       Styles for this page only: src/scss/pages/_design-system.scss.
     -->
     <main id="main" class="ds">
@@ -32,6 +32,7 @@
             <li><a href="#spacing">03 · Spacing</a></li>
             <li><a href="#shape">04 · Shape, motion &amp; layout</a></li>
             <li><a href="#components">05 · Components</a></li>
+            <li><a href="#case-study">06 · Case study pieces</a></li>
           </ul>
         </nav>
       </header>
@@ -40,66 +41,118 @@
       <section class="ds__section container" id="colour" aria-labelledby="colour-title">
         <p class="ds__number">01</p>
         <h2 id="colour-title">Colour</h2>
-        <p class="ds__note">Blue and pink carry the brand, mostly as one gradient. Pages alternate black and white sections; the greys are for borders and quiet text on black.</p>
+        <p class="ds__note">Blue and pink carry the brand, mostly as one gradient, with purple for hovers. Pages alternate black and white sections; the greys are for borders and quiet text on black.</p>
 
         <h3 class="ds__subhead">Brand</h3>
         <ul class="ds__swatches">
           <li class="ds__swatch"><span class="ds__chip" style="background: var(--primary-color)"></span><strong>Primary blue</strong><code>--primary-color</code><span>#5170FF</span></li>
           <li class="ds__swatch"><span class="ds__chip" style="background: var(--secondary-color)"></span><strong>Secondary pink</strong><code>--secondary-color</code><span>#FF66C4</span></li>
-          <li class="ds__swatch"><span class="ds__chip" style="background: var(--purple-color)"></span><strong>Purple</strong><code>--purple-color</code><span>#7F6DEF</span></li>
+          <li class="ds__swatch"><span class="ds__chip" style="background: var(--purple-color)"></span><strong>Purple</strong><code>--purple-color</code><span>#A66BE3</span></li>
           <li class="ds__swatch ds__swatch--wide"><span class="ds__chip" style="background: var(--brand-gradient)"></span><strong>Brand gradient</strong><code>--brand-gradient</code><span>135°, blue → pink</span></li>
         </ul>
 
         <h3 class="ds__subhead">Neutrals</h3>
         <ul class="ds__swatches">
-          <li class="ds__swatch"><span class="ds__chip" style="background: #000"></span><strong>Black</strong><code>sections, header, footer</code><span>#000000</span></li>
-          <li class="ds__swatch"><span class="ds__chip" style="background: #0b0b0f"></span><strong>Ink</strong><code>buttons and text on colour</code><span>#0B0B0F</span></li>
+          <li class="ds__swatch"><span class="ds__chip" style="background: var(--black)"></span><strong>Black</strong><code>--black</code><span>#000000</span></li>
+          <li class="ds__swatch"><span class="ds__chip" style="background: var(--ink)"></span><strong>Ink</strong><code>--ink</code><span>#0B0B0F</span></li>
           <li class="ds__swatch"><span class="ds__chip" style="background: var(--text-color)"></span><strong>Text</strong><code>--text-color</code><span>#1F1D1A</span></li>
+          <li class="ds__swatch"><span class="ds__chip" style="background: #3c3c46"></span><strong>Body on white</strong><code>case study text</code><span>#3C3C46</span></li>
           <li class="ds__swatch"><span class="ds__chip" style="background: var(--muted-color)"></span><strong>Muted</strong><code>--muted-color</code><span>#625D55</span></li>
-          <li class="ds__swatch"><span class="ds__chip ds__chip--outlined" style="background: var(--surface-color)"></span><strong>White</strong><code>--surface-color</code><span>#FFFFFF</span></li>
+          <li class="ds__swatch"><span class="ds__chip ds__chip--outlined" style="background: var(--white)"></span><strong>White</strong><code>--white, --surface-color</code><span>#FFFFFF</span></li>
+          <li class="ds__swatch"><span class="ds__chip ds__chip--outlined" style="background: #f5f5f7"></span><strong>Card grey</strong><code>value cards</code><span>#F5F5F7</span></li>
           <li class="ds__swatch"><span class="ds__chip ds__chip--outlined" style="background: var(--background-color)"></span><strong>Paper</strong><code>--background-color</code><span>#F6F3EC</span></li>
+          <li class="ds__swatch"><span class="ds__chip ds__chip--outlined" style="background: var(--paper)"></span><strong>LNDMRK paper</strong><code>--paper</code><span>#F0EFEB</span></li>
         </ul>
 
         <h3 class="ds__subhead">Greys on black</h3>
         <ul class="ds__swatches">
           <li class="ds__swatch"><span class="ds__chip" style="background: #26262c"></span><strong>Rule</strong><code>dividing lines</code><span>#26262C</span></li>
           <li class="ds__swatch"><span class="ds__chip" style="background: #2a2a30"></span><strong>Border</strong><code>card edges</code><span>#2A2A30</span></li>
-          <li class="ds__swatch"><span class="ds__chip" style="background: #3a3a44"></span><strong>Outline</strong><code>pills, tiles</code><span>#3A3A44</span></li>
+          <li class="ds__swatch"><span class="ds__chip" style="background: #3a3a44"></span><strong>Outline</strong><code>pills, browser dots</code><span>#3A3A44</span></li>
           <li class="ds__swatch"><span class="ds__chip" style="background: #8a8a96"></span><strong>Label</strong><code>small labels</code><span>#8A8A96</span></li>
-          <li class="ds__swatch"><span class="ds__chip" style="background: #a6a6b0"></span><strong>Quiet</strong><code>captions, client names</code><span>#A6A6B0</span></li>
           <li class="ds__swatch"><span class="ds__chip" style="background: #b7b7c2"></span><strong>Body on black</strong><code>descriptions</code><span>#B7B7C2</span></li>
         </ul>
 
         <h3 class="ds__subhead">Status</h3>
         <ul class="ds__swatches">
-          <li class="ds__swatch"><span class="ds__chip" style="background: #2f9e5b"></span><strong>Available</strong><code>"Open to work" dot</code><span>#2F9E5B</span></li>
-          <li class="ds__swatch"><span class="ds__chip" style="background: #6be39b"></span><strong>Live</strong><code>API mock-ups</code><span>#6BE39B</span></li>
+          <li class="ds__swatch"><span class="ds__chip" style="background: #22c55e"></span><strong>Live</strong><code>"Live build" and status dots</code><span>#22C55E</span></li>
         </ul>
       </section>
 
       <!-- 02 · Typography -->
+      <!-- Each sample uses its role through ds__sample--<role> (src/scss/pages/_design-system.scss), which applies the
+           same type() mixin as the components, so the samples always match the site. -->
       <section class="ds__section container" id="type" aria-labelledby="type-title">
         <p class="ds__number">02</p>
         <h2 id="type-title">Typography</h2>
-        <p class="ds__note">Oswald for all headings (h1, h2 and h3) and the logo; Inter for paragraphs, links and lists; Space Mono for sub headings. Sizes are fluid: each grows from its phone size at 360px wide to its full size at 1280px.</p>
+        <p class="ds__note">Text is set with a short list of text styles, named by their job. To style some text, pick the style that describes what it is (a card title, a caption), not a size: <code>@include type(card-title);</code>. Each style sets the font, size, weight, line height, letter spacing and capitals together.</p>
 
-        <h3 class="ds__subhead">Families</h3>
+        <h3 class="ds__subhead">Fonts</h3>
         <ul class="ds__fonts">
-          <li><span class="ds__font-sample" style="font-family: var(--font-heading--primary); font-weight: 500">Front end developer</span><strong>Oswald</strong><code>--font-heading--primary</code><span>Page titles (h1), like the hero heading, and the logo</span></li>
-          <li><span class="ds__font-sample" style="font-family: var(--font-heading--secondary); font-weight: 500">Who I've worked with</span><strong>Oswald</strong><code>--font-heading--secondary</code><span>Section headings (h2) and h3</span></li>
-          <li><span class="ds__font-sample" style="font-family: var(--font-body)">Clean, accessible front-end code.</span><strong>Inter</strong><code>--font-body, --font-link</code><span>Paragraphs, all links and buttons, and lists</span></li>
-          <li><span class="ds__font-sample" style="font-family: var(--font-mono); font-size: 0.8em; letter-spacing: 0.12em; text-transform: uppercase">Chapter II · Clients</span><strong>Space Mono</strong><code>--font-mono</code><span>Sub headings (eyebrows, labels), captions and counters</span></li>
+          <li><span class="ds__sample ds__sample--heading">Lorem ipsum dolor</span><strong>Oswald</strong><code>--font-heading</code><span>Every heading style, numbers and the logo</span></li>
+          <li><span class="ds__sample ds__sample--lead">Lorem ipsum dolor sit amet, consectetur.</span><strong>Inter</strong><code>--font-body</code><span>Statement, lead, body and small: paragraphs, lists, links and buttons</span></li>
+          <li><span class="ds__sample ds__sample--eyebrow">Lorem · Ipsum</span><strong>Space Mono</strong><code>--font-mono</code><span>Eyebrow and label</span></li>
         </ul>
 
-        <h3 class="ds__subhead">Scale</h3>
-        <ul class="ds__scale">
-          <li><code>--text-display</code><span class="ds__scale-range">45 → 112px</span><span class="ds__scale-sample" style="font-size: var(--text-display)">Display</span></li>
-          <li><code>--text-3xl</code><span class="ds__scale-range">36 → 72px</span><span class="ds__scale-sample" style="font-size: var(--text-3xl)">Heading 1</span></li>
-          <li><code>--text-2xl</code><span class="ds__scale-range">28 → 45px</span><span class="ds__scale-sample" style="font-size: var(--text-2xl)">Heading 2</span></li>
-          <li><code>--text-xl</code><span class="ds__scale-range">23 → 32px</span><span class="ds__scale-sample" style="font-size: var(--text-xl)">Taglines and card titles</span></li>
-          <li><code>--text-large</code><span class="ds__scale-range">19 → 24px</span><span class="ds__scale-sample" style="font-size: var(--text-large)">Intro text and h3</span></li>
-          <li><code>--text-body</code><span class="ds__scale-range">16 → 18px</span><span class="ds__scale-sample ds__scale-sample--body" style="font-size: var(--text-body)">Body text, set at a line height of 1.6 for comfortable reading.</span></li>
-          <li><code>--text-small</code><span class="ds__scale-range">13 → 15px</span><span class="ds__scale-sample ds__scale-sample--body" style="font-size: var(--text-small)">Captions, labels and legal text.</span></li>
+        <h3 class="ds__subhead">Text styles</h3>
+        <ul class="ds__styles">
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(display)</code><span>45 → 112px · Oswald bold capitals</span><p>The one big title at the top of a page or band: hero, case study name, call to action, Contact, 404.</p></div>
+            <p class="ds__sample ds__sample--display">Lorem ipsum</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(title)</code><span>36 → 72px · Oswald bold capitals · h1</span><p>A page's main heading when there's no display title; the next case study's name.</p></div>
+            <p class="ds__sample ds__sample--title">Lorem ipsum</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(heading)</code><span>42px · Oswald · h2</span><p>The heading that starts a section.</p></div>
+            <p class="ds__sample ds__sample--heading">Lorem ipsum dolor</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(subheading)</code><span>24 → 34px · Oswald · h3</span><p>A title inside a section: a card, a block of text, a category.</p></div>
+            <p class="ds__sample ds__sample--subheading">Lorem ipsum dolor sit</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(card-title)</code><span>20 → 24px · Oswald</span><p>A small title under a thumbnail or in a tile: work cards, the role tiles.</p></div>
+            <p class="ds__sample ds__sample--card-title">Lorem ipsum dolor sit</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(number)</code><span>40 → 52px · Oswald</span><p>Big numbers: 01, 02… beside the Work page categories.</p></div>
+            <p class="ds__sample ds__sample--number">01</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(statement)</code><span>23 → 32px · Inter</span><p>A large line of plain text: a standout sentence, an email address.</p></div>
+            <p class="ds__sample ds__sample--statement">Lorem ipsum dolor sit amet, consectetur.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(lead)</code><span>19 → 24px · Inter · .lead</span><p>The intro paragraph under a heading, taglines, big buttons and links.</p></div>
+            <p class="ds__sample ds__sample--lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(body)</code><span>16 → 18px · Inter · the page default</span><p>Paragraphs, lists, links and buttons. Set on the body, so most text needs nothing.</p></div>
+            <p class="ds__sample ds__sample--body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(small)</code><span>13 → 15px · Inter</span><p>Captions, tags, legal text, header links.</p></div>
+            <p class="ds__sample ds__sample--small">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(eyebrow)</code><span>13 → 15px · Space Mono capitals · .eyebrow</span><p>The line above a heading, counters ("Home · 1 of 3") and step numbers.</p></div>
+            <p class="ds__sample ds__sample--eyebrow">Lorem · Ipsum</p>
+          </li>
+          <li class="ds__style">
+            <div class="ds__style-info"><code>type(label)</code><span>11px · Space Mono capitals</span><p>Small labels: card types, fact labels, tags on dark pills.</p></div>
+            <p class="ds__sample ds__sample--label">Lorem ipsum</p>
+          </li>
+        </ul>
+
+        <h3 class="ds__subhead">Rules</h3>
+        <ul class="ds__rules">
+          <li>Components don't set font sizes, fonts, weights, line heights, letter spacing or capitals; the text style does. They only set colour and spacing.</li>
+          <li>The h1, h2 and h3 tags, <code>.lead</code> and <code>.eyebrow</code> already have their style, and everything else gets body. Add a style only when the text does a different job from its tag.</li>
+          <li>Bold is the only variation: <code>@include type(body, $bold: true);</code> for buttons and emphasis.</li>
+          <li>If nothing fits, add a style to the list (<code>src/scss/abstracts/_type.scss</code> and this page) rather than a one-off size.</li>
+          <li>Exceptions, each marked "Type exception" in the code: decoration (the giant outlined words), words sized to fit the screen (the hero and Work page titles, tool names), miniatures inside pictures (device and browser mock-ups, brand boards) and the logo.</li>
         </ul>
       </section>
 
@@ -129,20 +182,20 @@
           <div>
             <h3 class="ds__subhead">Corners</h3>
             <ul class="ds__radii">
-              <li><span style="border-radius: 4px"></span><strong>4px</strong>Small tiles</li>
-              <li><span style="border-radius: 8px"></span><strong>8px</strong>Cards, screens</li>
+              <li><span style="border-radius: 8px"></span><strong>8px</strong>Screens, browser frames</li>
               <li><span style="border-radius: var(--radius)"></span><strong>12px</strong><code>--radius</code></li>
-              <li><span style="border-radius: 999px"></span><strong>Pill</strong>Buttons, tags</li>
+              <li><span style="border-radius: 16px"></span><strong>16px</strong>Cards, role tiles</li>
+              <li><span style="border-radius: 999px"></span><strong>Pill</strong>Buttons, tags, the nav</li>
             </ul>
           </div>
 
           <div>
             <h3 class="ds__subhead">Motion</h3>
             <dl class="ds__list">
-              <div><dt><code>--ease-out</code></dt><dd>cubic-bezier(0.22, 1, 0.36, 1). Snappy: page reveals, header links, carousel moves.</dd></div>
-              <div><dt>Soft ease-out</dt><dd>cubic-bezier(0.33, 1, 0.68, 1). Long glides: the logo intro.</dd></div>
-              <div><dt>ease-in-out</dt><dd>Colour fades and hover fills, 0.3 to 0.45s.</dd></div>
-              <div><dt>Reduced motion</dt><dd>Every animation is wrapped so it only runs for visitors who haven't asked for less motion; they see the finished state.</dd></div>
+              <div><dt><code>--ease-out</code></dt><dd>cubic-bezier(0.22, 1, 0.36, 1). The default: scroll reveals, the carousel, footer and process hovers.</dd></div>
+              <div><dt>Springy</dt><dd>cubic-bezier(0.34, 1.4, 0.64, 1). The white pill gliding between header links, overshooting a little.</dd></div>
+              <div><dt>Ease in and out</dt><dd>cubic-bezier(0.65, 0, 0.35, 1) for the "Repo private" padlock; plain ease-in-out for colour fades and hover fills, 0.3 to 0.45s.</dd></div>
+              <div><dt>Reduced motion</dt><dd>Every animation is wrapped (the <code>motion-ok</code> mixin) so it only runs for visitors who haven't asked for less motion; they see the finished state.</dd></div>
             </dl>
           </div>
 
@@ -151,9 +204,9 @@
             <dl class="ds__list">
               <div><dt><code>sm</code></dt><dd>576px</dd></div>
               <div><dt><code>md</code></dt><dd>768px. Most layouts switch from stacked to side by side here.</dd></div>
-              <div><dt><code>lg</code></dt><dd>1024px</dd></div>
+              <div><dt><code>lg</code></dt><dd>1024px. The header's menu button becomes the capsule of links.</dd></div>
               <div><dt><code>xl</code></dt><dd>1280px</dd></div>
-              <div><dt>Container</dt><dd>68rem (1088px) wide at most, plus the gutters.</dd></div>
+              <div><dt>Container</dt><dd>68rem (1088px) wide at most, plus the gutters. The header is 76px tall.</dd></div>
             </dl>
           </div>
         </div>
@@ -168,8 +221,8 @@
         <div class="ds__grid">
           <article class="ds__specimen">
             <div class="ds__stage">
-              <p class="eyebrow">Chapter II · Clients</p>
-              <p class="ds__heading-sample">Who I've worked <span class="accent-word">with</span></p>
+              <p class="eyebrow">Chapter VI · Clients</p>
+              <p class="ds__sample ds__sample--heading">Brands that trust <span class="accent-word">me.</span></p>
             </div>
             <h3>Section heading</h3>
             <p>An eyebrow, then an Oswald h2 with its last word in the brand gradient.</p>
@@ -182,13 +235,13 @@
               <a class="button button--ghost" href="#components">Ghost</a>
             </div>
             <h3>Buttons</h3>
-            <p>Pills that fill with the accent blue and lift 2px on hover.</p>
+            <p>Pills that fill with purple on hover.</p>
             <code>.button, .button--ghost</code>
           </article>
 
           <article class="ds__specimen">
             <div class="ds__stage ds__stage--dark">
-              <a class="button button--light" href="#components">See Work</a>
+              <a class="button button--light" href="#components">Case studies</a>
             </div>
             <h3>Light button</h3>
             <p>The white version, for black sections.</p>
@@ -203,17 +256,17 @@
               </a>
             </div>
             <h3>Call-to-action button</h3>
-            <p>The big black pill with an arrow that nudges right on hover.</p>
-            <code>.cta__button, .cta__arrow</code>
+            <p>The big white pill on the gradient. It lifts on hover and its arrow nudges right.</p>
+            <code>.cta__button, .cta__arrow (partials/cta.html)</code>
           </article>
 
           <article class="ds__specimen">
             <div class="ds__stage ds__stage--gradient">
-              <p class="hero__eyebrow"><span class="hero__status" aria-hidden="true"></span>Open to work Vancouver/Remote</p>
+              <p class="cta__eyebrow ds__flush">Now booking new projects</p>
             </div>
-            <h3>Status pill</h3>
-            <p>An outlined pill with a pulsing green dot.</p>
-            <code>.hero__eyebrow, .hero__status</code>
+            <h3>Dot label</h3>
+            <p>A Space Mono label with a dot in front, above the call to action's heading.</p>
+            <code>.cta__eyebrow</code>
           </article>
 
           <article class="ds__specimen">
@@ -238,16 +291,16 @@
               </ul>
             </div>
             <h3>Icon links</h3>
-            <p>A boxed arrow: up-right for a new tab, down for a download. The box fills blue and the arrow nudges on hover.</p>
+            <p>A boxed arrow: up-right for a new tab, down for a download. The box fills and the arrow nudges on hover.</p>
             <code>.site-footer__icon, .site-footer__arrow--out / --down</code>
           </article>
 
           <article class="ds__specimen">
             <div class="ds__stage">
-              <a class="text-link" href="#components">More about me &rarr;</a>
+              <a class="text-link" href="#components">Back to the home page &rarr;</a>
             </div>
             <h3>Text link</h3>
-            <p>Underlined, and blue on hover.</p>
+            <p>Underlined, and purple on hover.</p>
             <code>.text-link</code>
           </article>
 
@@ -256,7 +309,7 @@
               <span class="logo">Gemma Gentles</span>
             </div>
             <h3>Logo</h3>
-            <p>Live text, not an image: the name in white Inter.</p>
+            <p>Live text, not an image: the name in white Oswald.</p>
             <code>.logo (partials/header.html)</code>
           </article>
 
@@ -275,14 +328,87 @@
             <code>.clients__list (partials/clients.html)</code>
           </article>
 
-          <article class="ds__specimen ds__specimen--wide">
+          <article class="ds__specimen">
+            <div class="ds__stage ds__stage--start">
+              <div class="why-it-matters__item ds__card">
+                <p class="why-it-matters__heading">Build to scale</p>
+                <p class="why-it-matters__text">An Oswald heading and a short paragraph.</p>
+              </div>
+            </div>
+            <h3>Value card</h3>
+            <p>Light grey with a soft shadow. Three side by side from lg up, all the same height.</p>
+            <code>.why-it-matters__item (partials/why-it-matters.html)</code>
+          </article>
+
+          <article class="ds__specimen ds__specimen--wide-2">
             <div class="ds__stage ds__stage--dark ds__stage--cards">
-              <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" name="LNDMRK" type="Website"></include>
-              <include src="work-card-email.html" name="[Campaign name]" subject="[Subject line]" brand="[Brand]"></include>
+              <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" width="1600" height="1000" name="LNDMRK" type="WordPress"></include>
+              <include src="work-card-site.html" href="/work/nueva-gold/" image="/images/work/nueva-gold/cover.webp" width="1600" height="1000" name="Nueva Gold" type="WordPress"></include>
             </div>
             <h3>Work cards</h3>
-            <p>A website in a browser frame, and an email mock-up, each with a serif name and a mono label.</p>
-            <code>partials/work-card-site.html, partials/work-card-email.html</code>
+            <p>A screenshot in a browser frame, with an Oswald name and a Space Mono label underneath.</p>
+            <code>partials/work-card-site.html</code>
+          </article>
+        </div>
+      </section>
+
+      <!-- 06 · Case study pieces -->
+      <section class="ds__section container" id="case-study" aria-labelledby="case-study-title">
+        <p class="ds__number">06</p>
+        <h2 id="case-study-title">Case study pieces</h2>
+        <p class="ds__note">Shared by every case study (all made from <code>templates/case-study.html</code>), so changing one changes them all.</p>
+
+        <div class="ds__grid">
+          <article class="ds__specimen">
+            <div class="ds__stage">
+              <include src="visit-site.html" href="#case-study" address="example.com"></include>
+              <include src="view-code.html" repo="#case-study"></include>
+            </div>
+            <h3>Site and code buttons</h3>
+            <p>"Visit site" as a black pill, "View code" outlined. Both fill purple on hover.</p>
+            <code>partials/visit-site.html, partials/view-code.html</code>
+          </article>
+
+          <article class="ds__specimen">
+            <div class="ds__stage">
+              <include src="view-code-private.html"></include>
+            </div>
+            <h3>Private repo button</h3>
+            <p>Try it: the arrow tries to open, then turns into a padlock as the text changes to "Repo private".</p>
+            <code>partials/view-code-private.html</code>
+          </article>
+
+          <article class="ds__specimen">
+            <div class="ds__stage">
+              <p class="work-split__tags ds__flush"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span> <span>WordPress</span></p>
+            </div>
+            <h3>Tags</h3>
+            <p>Tools and roles as small outlined pills.</p>
+            <code>.work-split__tags</code>
+          </article>
+
+          <article class="ds__specimen">
+            <div class="ds__stage">
+              <ul class="work-split__list ds__flush">
+                <li>A CMS for the client to make their own changes</li>
+                <li>A contact form to attract new clients</li>
+              </ul>
+            </div>
+            <h3>Hexagon bullets</h3>
+            <p>Bulleted lists use a hexagon outline in the text colour (the <code>hex-bullet</code> mixin).</p>
+            <code>.work-split__list, or a plain &lt;ul&gt;</code>
+          </article>
+
+          <article class="ds__specimen ds__specimen--wide-2">
+            <div class="ds__stage ds__stage--dark">
+              <div class="case-next__buttons">
+                <a class="case-next__button" href="#case-study"><span>View case study</span> <span class="case-next__arrow" aria-hidden="true">→</span></a>
+                <a class="case-next__button case-next__button--ghost" href="#case-study"><span class="case-next__arrow case-next__arrow--back" aria-hidden="true">←</span> All work</a>
+              </div>
+            </div>
+            <h3>Next case study buttons</h3>
+            <p>A white pill to the next case study and an outlined one back to all the work, on the black band after each case study.</p>
+            <code>.case-next__button, --ghost (partials/case-study-next.html)</code>
           </article>
         </div>
       </section>

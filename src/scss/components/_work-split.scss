@@ -282,83 +282,6 @@
     pointer-events: none;
   }
 
-  // The first screenshots, framed as a browser window (a Safari-style toolbar with its address) on LNDMRK's off-white.
-  &__shot--browser {
-    display: grid;
-    place-items: center;
-    padding: clamp(1rem, 0.5rem + 2.5vw, 3rem);
-    background: var(--paper);
-
-    &::before {
-      display: none;
-    }
-  }
-
-  // 70% of its panel's width (30% smaller than filling it).
-  &__browser {
-    width: 70%;
-    overflow: hidden;
-    border-radius: 10px;
-    background: var(--white);
-    box-shadow: 0 0 0 1px rgb(11 11 15 / 0.08), 0 24px 48px -20px rgb(11 11 15 / 0.35);
-
-    img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      object-position: 50% var(--focus, 0%);
-    }
-  }
-
-  // The buttons on the left, then the address centred in the space after them (so they never overlap).
-  &__bar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    height: 2rem;
-    padding-inline: 0.75rem;
-    background: #ececee;
-    border-bottom: 1px solid #dcdce0;
-  }
-
-  &__dots {
-    flex-shrink: 0;
-    display: flex;
-    gap: 6px;
-
-    span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #ff5f57;
-
-      &:nth-child(2) {
-        background: #febc2e;
-      }
-
-      &:nth-child(3) {
-        background: #28c840;
-      }
-    }
-  }
-
-  &__address {
-    flex: 0 1 18rem;
-    min-width: 0;
-    margin-inline: auto;
-    padding: 0.2rem 0.5rem;
-    border-radius: 6px;
-    background: var(--white);
-    font-size: 0.7rem;
-    text-align: center;
-    color: #3c3c43;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   // The device mockup (iMac, MacBook, iPad and iPhone): shown whole, centred on LNDMRK's off-white.
   &__shot--devices {
     display: grid;
@@ -384,31 +307,6 @@
     }
   }
 
-  // A phone screenshot: shown whole and narrow, centred in a black phone frame on LNDMRK's off-white.
-  &__shot--phone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-block: var(--space-large);
-    background: var(--paper);
-
-    &::before {
-      display: none;
-    }
-
-    > img {
-      position: static;
-      width: min(60%, 16rem);
-      height: auto;
-      aspect-ratio: 9 / 19.5;
-      padding: 7px;
-      border-radius: 2.25rem; // the phone keeps its rounded corners
-      background: var(--ink);
-      box-shadow: inset 0 0 0 1.5px #3a3a46, 0 30px 60px -30px rgb(11 11 15 / 0.4);
-      clip-path: inset(0 round 2.25rem);
-    }
-  }
-
   // The text side: a white card with dark text.
   &__text {
     display: grid;
@@ -421,7 +319,6 @@
 
     p {
       max-width: 48ch;
-      line-height: 1.6;
       color: #3c3c46;
     }
 
@@ -431,16 +328,8 @@
     }
   }
 
-  &__title {
-    font-size: var(--text-2xl);
-  }
-
+  // An h3, so it has the subheading style.
   &__heading {
-    font-family: var(--font-heading--secondary);
-    font-size: var(--text-xl);
-    font-weight: 500;
-    line-height: 1.15;
-
     // Extra space above a heading that follows other content (e.g. "My role" after the Built with tags), but not
     // after an eyebrow label: there the gap matches the first box's (the text box's own gap).
     &:not(:first-child, .eyebrow + &) {
@@ -453,7 +342,6 @@
     display: grid;
     gap: 0.6rem;
     max-width: 48ch;
-    line-height: 1.5;
     color: #3c3c46;
 
     li {
@@ -476,15 +364,9 @@
       padding: 0.35rem 0.85rem;
       border: 1px solid rgb(11 11 15 / 0.2);
       border-radius: 999px;
-      font-size: var(--text-small);
+      @include type(small);
       color: var(--ink);
     }
-  }
-
-  &__url {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.04em;
   }
 }
 
@@ -546,7 +428,7 @@
   padding: 0.7rem 1.3rem;
   border-radius: 999px;
   background: var(--ink);
-  font-weight: 600;
+  @include type(body, $bold: true);
   color: var(--white);
   text-decoration: none;
   white-space: nowrap;

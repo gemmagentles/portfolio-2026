@@ -3,6 +3,9 @@ node_modules/
 dist/
 .vite/
 
+# Cloudflare wrangler's temporary build files (made while deploying)
+.wrangler/
+
 # Old backup copies from before Git; history replaces them
 *.bak
 *.bak.*

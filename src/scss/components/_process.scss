@@ -3,7 +3,7 @@
 // Black band with a progress bar that lights up each stage in turn.
 // --progress (0 to 1) and the is-done / is-active classes are set by src/js/modules/process.js.
 .process {
-  // Bottom: just the curved edge's height (.section-wave) plus a little, so the curve clears the step labels.
+  // Bottom: less room than the top, just enough under the step labels.
   padding-block: var(--space-section-large) calc(clamp(40px, 6vw, 80px) + var(--space-small));
   background: var(--black);
   color: var(--white);
@@ -74,7 +74,6 @@
     gap: var(--space-xsmall);
     min-height: var(--row);
     padding-left: calc(var(--dot) + var(--space-medium));
-    line-height: 1.2;
     color: #8a8a8a;
     transition: color 0.4s var(--ease-out);
 
@@ -126,22 +125,11 @@
   }
 
   &__number {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.08em;
+    @include type(eyebrow);
   }
 
   &__name {
-    // font-size: var(--text-large);
-    font-weight: 600;
+    @include type(body, $bold: true);
     transition: color 0.4s var(--ease-out);
-
-    // @include mq(md) {
-    //   font-size: var(--text-body);
-    // }
-
-    // @include mq(lg) {
-    //   font-size: var(--text-large);
-    // }
   }
 }

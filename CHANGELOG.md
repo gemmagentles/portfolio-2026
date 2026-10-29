@@ -11,6 +11,66 @@ version number and date.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-29
+
+### Removed
+
+- The numbers (01, 02…) on the home page's role cards and "My key engineering values" cards; each card now starts
+  with its title.
+- Unused sections that were hidden or replaced, with their styles: the curved wave edges between sections, the LNDMRK
+  bento grid, full-width cards, page wall and page spread, the hero's side phones and hexagon bands (and the script
+  that made them), the old project cards and the 3D turning ring carousel. Nothing on the site looks different.
+- Leftover styles for things no page uses any more: the old home page layout (section heading, work grid, intro), the
+  browser-window and phone frames in the 50/50 rows, the Work page card placeholder, the clients caption and the
+  brand board tagline.
+- The logo experiments in `public/images/` (animated logo GIFs and videos and the earlier logo PNGs), about 7 MB.
+
+### Changed
+
+- Work page hero: Nueva Gold, Fraser Valley and LNDMRK's home pages as three equal screens in dark browser frames,
+  slanted inwards, instead of a window of twelve project screenshots.
+- Work page: Custom Coded and EDMs & Banners show their screenshots on plain dark panels instead of browser windows
+  (they're widgets, ads and emails, not web pages); the Custom Coded pieces now show whole.
+- Work page labels: "WordPress" instead of "Website" on the case studies, "Chatbox UI" instead of "Custom build".
+- Work page: the Thunderpick survey shows without its "Live Support" header bar, and Fraser Valley's card uses a new
+  home page screenshot.
+- The contact email is hi@gemmagentles.dev (was studio@gemmagentles.dev).
+- The brand board styles moved from `_work-bento.scss` into their own `_brand-board.scss`.
+- `.gitignore` now skips `.wrangler/`, the deploy tool's temporary files, so they can't be committed by mistake.
+- `npm run new` now suggests adding the new case study's card to the Work page, not the old home page project cards.
+- The design system page matches the site again: the right purple (#A66BE3), the `--black`, `--ink`, `--paper` and
+  `--white` tokens, the greys and green the pages use, the fixed 42px section heading size, the 16px card corners,
+  the header's springy glide and the padlock's easing. Fixed examples that no longer matched (button hovers are
+  purple, the logo is Oswald, the call-to-action button is white, the work card has no serif) and replaced the
+  broken "Open to work" pill with the call to action's dot label.
+- The design system page's header has the pink-to-blue gradient, like the Work page and case studies.
+- The design system page's type samples are lorem ipsum, so they show the fonts and sizes rather than real copy.
+- One heading font variable, `--font-heading` (Oswald), in place of `--font-heading--primary` and
+  `--font-heading--secondary`, which had both become Oswald. Nothing on the site looks different.
+- Text is now set with twelve text styles named by their job (display, title, heading, subheading, card title,
+  number, statement, lead, body, small, eyebrow, label) instead of sizes picked freely, with the rules on the design
+  system page. Text that did the same job now matches: the Contact and 404 titles are bold capitals like the other
+  big titles, the call to action's title is bold, the "essentials" facts are Oswald (they were in a serif), card
+  titles and labels share one size each, lists are the same size as paragraphs, and the hero tagline is the intro
+  size.
+
+### Fixed
+
+- Work page screenshots looked pixelated, because the browser shrank large images a long way. Each now has
+  tile-sized copies (shrunk in steps, so small text stays sharp), and the browser picks the right one for the screen.
+- The "Case studies" line in the home page's work section had no size (it used a size that didn't exist), so it now
+  uses the intro text size.
+
+### Added
+
+- Work page: a line under the introduction saying some projects have been handed over to their clients, so may have
+  changed in ways Gemma hasn't approved.
+- Photoshop and BrowserStack in the "Tools I use" grid (Photoshop's logo from Devicon, BrowserStack's from the
+  gilbarbara/logos set, drawn with true circles so its edges are smooth). The tiles are smaller to fit 18: 9 per
+  row on desktop (was 8), 6 on tablets and 3 on phones, so every row is full.
+- Design system: a value card, a second work card, and a new "Case study pieces" section with the Visit site / View
+  code buttons, the private repo button, tags, hexagon bullets and the next case study buttons.
+
 ## [1.1.1] - 2026-10-26
 
 ### Added
@@ -152,7 +212,8 @@ version number and date.
 - HTML partials plugin with tests, SCSS design tokens, and vanilla JS modules on a small Vite starter.
 - `.gitignore` and `.gitattributes` (Unix line endings), published to GitHub as a public repo.
 
-[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...develop
+[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.2.0...develop
+[1.2.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/gemmagentles/portfolio-2026/releases/tag/v1.0.0

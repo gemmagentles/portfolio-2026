@@ -28,8 +28,7 @@
       padding: 0.55rem 1rem;
       border: 1px solid #3a3a44;
       border-radius: 999px;
-      font-family: var(--font-link);
-      font-size: 1.05rem;
+      @include type(body);
       color: #b7b7c2;
       text-decoration: none;
       transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -42,8 +41,7 @@
     }
 
     span {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
+      @include type(label);
       color: #8a8a96;
     }
   }
@@ -214,10 +212,7 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    @include type(label);
 
     &::before {
       content: '';
@@ -228,9 +223,7 @@
   }
 
   &__name {
-    font-family: var(--font-heading--secondary);
-    font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.6rem);
-    line-height: 1.1;
+    @include type(subheading);
   }
 
   // Previous / next arrows either side of "Fraser Valley · 1 of 3".
@@ -266,12 +259,9 @@
   }
 
   &__status {
+    @include type(eyebrow);
     min-width: 12rem;
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.08em;
     text-align: center;
-    text-transform: uppercase;
     color: rgb(255 255 255 / 0.9);
   }
 }
@@ -300,26 +290,22 @@
   }
 
   &__number {
-    font-family: var(--font-heading--secondary);
-    font-size: clamp(2.5rem, 2rem + 1.5vw, 3.25rem); // 52px on wide screens
-    font-weight: 500;
-    line-height: 1;
+    @include type(number);
     background: var(--brand-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  // An h2 (it starts each category), but a title inside the page's list of work, so the subheading style.
   &__title {
+    @include type(subheading);
     margin: 0;
-    font-size: clamp(1.75rem, 1.4rem + 1vw, 2.1rem); // 34px on wide screens
-    line-height: 1.05;
   }
 
   &__text {
     max-width: 40ch;
     color: #b7b7c2;
-    line-height: 1.5;
   }
 
   // Phones: 1 card per row. From sm: 2. From lg: 3.
@@ -371,6 +357,18 @@
 
     &--browser {
       background: linear-gradient(160deg, #1c1c22, #101014);
+    }
+
+    // A plain panel, no browser bar: for pieces that aren't web pages (widgets, banner ads, emails). The screenshot
+    // sits inside with a margin and a soft shadow that follows its shape.
+    &--panel {
+      padding: var(--space-small) var(--space-small) 0;
+      background: radial-gradient(120% 100% at 50% 0%, #1f1f26, #111115 75%);
+
+      .work-card__shot--contain {
+        padding-bottom: var(--space-small);
+        filter: drop-shadow(0 12px 20px rgb(0 0 0 / 0.55));
+      }
     }
   }
 
@@ -433,37 +431,19 @@
     }
   }
 
-  &__placeholder {
-    display: grid;
-    flex: 1;
-    place-items: center;
-    font-family: var(--font-mono);
-    font-size: 1.75rem;
-    font-weight: 700;
-    background: var(--brand-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   &__name {
+    @include type(card-title);
     margin: 0;
-    font-family: var(--font-heading--secondary);
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.2;
     color: var(--white);
   }
 
   &__type {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    @include type(label);
     color: #8a8a96;
   }
 
   // ---- Email mock: an inbox preview over a simple email layout ----
+  // Type exception (miniature): text drawn small inside the picture of an email.
   &__frame--email {
     height: 18.75rem; // 300px
     background: #ededf1;
@@ -646,7 +626,7 @@
     }
   }
 
-  // The address bar, centred.
+  // The address bar, centred. Type exception (miniature): sized with the laptop's screen.
   &__address {
     display: flex;
     align-items: center;

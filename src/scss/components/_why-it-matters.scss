@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-// White section: heading, then the numbered reasons as three cards.
+// White section: heading, then the reasons as three cards.
 .why-it-matters {
   padding-block: var(--space-section-large) calc(var(--space-section) + 20px); // 20px extra at the bottom
   background: var(--white);
@@ -30,7 +30,7 @@
     }
   }
 
-  // Number at the top, then the heading and the paragraph, on a light grey card.
+  // The heading and the paragraph, on a light grey card.
   &__item {
     display: flex;
     flex-direction: column;
@@ -42,18 +42,8 @@
     box-shadow: 0 1px 2px rgb(11 11 15 / 0.06), 0 16px 32px -20px rgb(11 11 15 / 0.25);
   }
 
-  &__number {
-    font-family: var(--font-mono);
-    font-weight: 700;
-  }
-
   &__heading {
-    // font-family: var(--font-heading--p);
-    // font-weight: 400;
-    font-size: clamp(1.9rem, 1.4rem + 1.4vw, 2.6rem);
-    line-height: 1;
-    letter-spacing: 0;
-    // text-transform: uppercase;
+    @include type(subheading);
   }
 
   &__highlight {
@@ -63,7 +53,6 @@
   }
 
   &__text {
-    line-height: 1.55;
     color: #2e2e36;
   }
 }

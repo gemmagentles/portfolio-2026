@@ -1,32 +1,33 @@
 @use '../abstracts' as *;
 
-// The Work page hero (work/index.html), on black: the heading and quote on the left, and on the right a browser
-// window full of project screenshots in the style of the home page's "My Work" wall (bordered, slightly darkened
-// tiles), each with its name and type underneath. The window is angled, runs off the right and bottom edges, and
-// fades into the black behind the text. Phones: the window sits under the text, fading out at the bottom.
+// The Work page hero (work/index.html), on black: the heading and introduction on the left, and on the right the
+// three case studies' home pages as three equal screens, slanted inwards towards the text. Below lg the screens sit under the text.
 .work-intro {
   position: relative;
-  overflow: hidden; // crops the window where it runs off the edges
-  padding-block: calc(var(--space-section-large) * 0.6) var(--space-section-large);
+  overflow: hidden; // keeps the turned screens' corners inside the hero
+  // Only a little room at the bottom, so the category pills under the hero show without scrolling.
+  padding-block: calc(var(--space-section-large) * 0.6) var(--space-large);
   background: var(--black);
   color: var(--white);
 
-  @include mq(md) {
+  // From lg the screens sit beside the text (positioned, so they don't add height): tall enough for them.
+  @include mq(lg) {
     display: grid;
     align-content: center;
-    min-height: clamp(520px, 72vh, 760px);
+    min-height: 34rem;
   }
 
   &__content {
     position: relative;
-    z-index: 1; // above the window's faded edge
+    z-index: 1; // above the screens
 
     > * {
       max-width: 34rem;
     }
 
-    // The introduction in a narrower column, so it stays on clear black beside the window.
-    > .work-intro__text {
+    // The introduction in a narrower column, so it stays clear of the screens.
+    > .work-intro__text,
+    > .work-intro__note {
       max-width: 24rem;
     }
   }
@@ -41,10 +42,12 @@
     --work-intro-first: 3.8931; // "FEATURED", Oswald 700
     --work-intro-second: 3.4078; // "PROJECTS", Oswald 300
 
+    // Type exception (sized to fit): each word is sized to fill the title's width, which is as wide as "FEATURED" in
+    // the display style.
     container-type: inline-size;
     width: min(100%, calc(var(--text-display) * var(--work-intro-first)));
     margin-bottom: var(--space-medium);
-    font-family: var(--font-heading--primary);
+    font-family: var(--font-heading);
     line-height: 0.95;
     text-transform: uppercase;
   }
@@ -66,120 +69,103 @@
   }
 
   &__text {
-    font-size: var(--text-large);
-    line-height: 1.5;
+    @include type(lead);
     color: color-mix(in srgb, var(--white) 55%, transparent);
   }
 
-  // The browser window: on phones a band under the text, a little wider than the screen; from md up beside the text,
-  // angled, starting a third of the way across and running off the right edge.
-  &__window {
-    margin: var(--space-large) calc(var(--gutter) * -1) 0 var(--gutter);
-    max-height: 22rem;
-    overflow: hidden;
-    padding: 10px;
-    border: 1px solid #2a2a30;
-    border-radius: 12px;
-    background: #101014;
-    mask-image: linear-gradient(to bottom, #000 55%, transparent);
-
-    @include mq(md) {
-      position: absolute;
-      top: 14%;
-      left: 42%;
-      width: max(60vw, 760px);
-      max-height: none;
-      margin: 0;
-      transform: perspective(1800px) rotateY(-14deg) rotateX(5deg);
-      transform-origin: left center;
-      // Fades in from the left (into the text's side) and out at the bottom.
-      mask-image: linear-gradient(to right, transparent 10%, #000 50%), linear-gradient(to bottom, #000 60%, transparent);
-      mask-composite: intersect;
-    }
+  // A disclaimer under the introduction: some sites now belong to their clients and may have changed since.
+  &__note {
+    @include type(small);
+    margin-top: var(--space-small);
+    color: color-mix(in srgb, var(--white) 45%, transparent);
   }
 
-  // Three dots and the address, as on the case studies' browser windows.
-  &__bar {
+  // The three screens side by side, all the same size and brightness (equal weight), and slanted inwards together,
+  // towards the text. Below lg under the text, centred; from lg on the right, beside the text, lined up with the right
+  // edge of the page's container.
+  &__screens {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 2px 4px 10px;
+    justify-content: center;
+    gap: 3%;
+    width: min(100% - 2 * var(--gutter), 34rem);
+    margin: var(--space-section) auto 0;
+    transform: perspective(1600px) rotateY(-16deg) rotateX(4deg);
+    container-type: inline-size; // the screens' sizes are worked out from this width (cqi)
 
-    > span:not(.work-intro__address) {
-      width: 8px;
-      height: 8px;
+    @include mq(lg) {
+      position: absolute;
+      top: 50%;
+      right: calc((100% - min(100% - 2 * var(--gutter), #{$container-max})) / 2);
+      width: min(47%, 40rem);
+      margin: 0;
+      translate: 0 -50%;
+    }
+  }
+
+  // One screen: a dark browser window (as on the case study cards) showing the top of a site's full-length home page,
+  // with a deep shadow. A third of the row (less the gaps); its height is 3:4 plus 180px, worked out from its width.
+  &__screen {
+    display: flex;
+    flex-direction: column;
+    width: 31cqi;
+    height: calc(31cqi * 4 / 3 + 180px);
+    overflow: hidden;
+    border: 1px solid #2a2a30;
+    border-radius: 8px;
+    background: #101014;
+    box-shadow: 0 30px 60px rgb(0 0 0 / 0.6);
+  }
+
+  // The window's top bar: three dots and an empty address bar.
+  &__bar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 4px;
+    height: 20px;
+    padding-inline: 8px;
+    background: #1a1a20;
+    border-bottom: 1px solid #2a2a30;
+
+    span {
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background: #3a3a42;
+      background: #3a3a44;
+    }
+
+    &::after {
+      content: '';
+      flex: 1;
+      height: 9px;
+      margin-left: 6px;
+      border-radius: 5px;
+      background: #24242c;
     }
   }
 
-  &__address {
-    margin-inline: auto;
-    padding: 3px 16px;
-    border-radius: 6px;
-    background: #1c1c22;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    color: #8a8a96;
+  // The screenshot fills the rest of the window, from the top of the page.
+  &__shot {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-
-    @include mq(sm) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    @include mq(md) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  // A screenshot cropped to 4:3 from the top, with a thin border and a light darkening (as on the home page wall),
-  // then the project's name and type.
-  &__tile {
-    display: grid;
-    gap: 2px;
-
-    img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      margin-bottom: 6px;
-      border: 1px solid #3a3a3a;
-      border-radius: 6px;
-      object-fit: cover;
-      object-position: top;
-      filter: brightness(0.85);
-    }
-  }
-
-  &__name {
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--white);
-  }
-
-  &__type {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    color: #8a8a96;
-  }
-
-  // On load the window glides in from the right and fades up, just after the heading.
+  // On load the screens fade in, just after the heading.
   @include motion-ok {
-    &__window {
-      animation: work-intro-window 1.6s var(--ease-out) 0.3s both;
+    &__screens {
+      animation: work-intro-screens 1.4s var(--ease-out) 0.3s both;
     }
   }
 }
 
-@keyframes work-intro-window {
+// Fades in and grows slightly into place (scale, so it doesn't fight the slant's transform).
+@keyframes work-intro-screens {
   from {
     opacity: 0;
-    translate: 6rem 0;
+    scale: 0.94;
   }
 }

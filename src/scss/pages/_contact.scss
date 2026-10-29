@@ -1,3 +1,5 @@
+@use '../abstracts' as *;
+
 .contact {
   display: grid;
   gap: var(--space-large);
@@ -5,12 +7,11 @@
   padding-block: var(--space-section-large) var(--space-section);
 
   h1 {
-    font-size: var(--text-display);
-    font-weight: 400;
+    @include type(display);
   }
 
   &__email {
-    font-size: var(--text-3xl);
+    @include type(statement);
     text-underline-offset: 0.15em;
     text-decoration-thickness: 2px;
     overflow-wrap: anywhere;
@@ -25,7 +26,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-medium);
-    font-size: var(--text-large);
+    @include type(lead);
 
     a {
       text-underline-offset: 0.3em;

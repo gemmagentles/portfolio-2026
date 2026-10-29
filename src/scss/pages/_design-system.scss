@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../abstracts' as *;
 
 // The design system page (design-system/index.html): white, with a numbered section per topic and
@@ -14,16 +15,9 @@
     padding-block: var(--space-section-large) var(--space-section);
   }
 
-  &__title {
-    font-family: var(--font-heading--primary);
-    font-size: var(--text-3xl);
-    text-transform: none;
-  }
-
   &__lead {
+    @include type(lead);
     max-width: 52ch;
-    font-size: var(--text-large);
-    line-height: 1.5;
     color: var(--muted-color);
   }
 
@@ -40,9 +34,7 @@
       padding: 0.5rem 1rem;
       border: 1px solid #d9d9de;
       border-radius: 999px;
-      font-family: var(--font-link);
-      font-size: var(--text-small);
-      font-weight: 400;
+      @include type(small);
       text-decoration: none;
       transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
@@ -66,10 +58,7 @@
 
   // The big gradient number above each section heading.
   &__number {
-    font-family: var(--font-heading--primary);
-    font-size: clamp(2.5rem, 2rem + 1.5vw, 3.25rem);
-    font-weight: 500;
-    line-height: 1;
+    @include type(number);
     background: var(--brand-gradient);
     -webkit-background-clip: text;
     background-clip: text;
@@ -84,13 +73,10 @@
 
   &__subhead {
     margin: var(--space-large) 0 var(--space-small);
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    @include type(eyebrow);
   }
 
+  // Type exception (code): class names and tokens written on this page, a little smaller than the text around them.
   code {
     font-family: var(--font-mono);
     font-size: 0.8em;
@@ -107,14 +93,14 @@
   &__swatch {
     display: grid;
     gap: 0.15rem;
-    font-size: var(--text-small);
+    @include type(small);
 
     &--wide {
       grid-column: span 2;
     }
 
     span:last-child {
-      font-family: var(--font-mono);
+      @include type(label);
       color: var(--muted-color);
     }
   }
@@ -139,7 +125,7 @@
       gap: 0.15rem;
       padding-bottom: var(--space-medium);
       border-bottom: 1px solid #e4e4e8;
-      font-size: var(--text-small);
+      @include type(small);
 
       > span:last-child {
         color: var(--muted-color);
@@ -147,43 +133,63 @@
     }
   }
 
-  &__font-sample {
+  // A sample of each text style, made with the same mixin the components use (abstracts/_type.scss).
+  &__sample {
     margin-bottom: 0.4rem;
-    font-size: var(--text-2xl);
-    line-height: 1.15;
-  }
+    overflow-wrap: anywhere;
 
-  &__scale li {
-    display: grid;
-    align-items: baseline;
-    gap: 0.25rem 1rem;
-    padding-block: var(--space-small);
-    border-bottom: 1px solid #e4e4e8;
-
-    @include mq(md) {
-      grid-template-columns: 11rem 6rem 1fr;
+    @each $role in map.keys($type-roles) {
+      &--#{$role} {
+        @include type($role);
+      }
     }
   }
 
-  &__scale-range {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    color: var(--muted-color);
+  // Each text style: its name, size and job on the left, then the sample (stacked on phones).
+  &__style {
+    display: grid;
+    gap: var(--space-small) var(--space-large);
+    align-items: center;
+    padding-block: var(--space-medium);
+    border-bottom: 1px solid #e4e4e8;
+
+    @include mq(md) {
+      grid-template-columns: 16rem 1fr;
+    }
+
+    .ds__sample {
+      margin-bottom: 0;
+    }
   }
 
-  &__scale-sample {
-    overflow: hidden;
-    font-family: var(--font-heading--primary);
-    font-weight: 500;
-    line-height: 1.1;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  &__style-info {
+    display: grid;
+    gap: 0.2rem;
+    @include type(small);
 
-    &--body {
-      font-family: var(--font-body);
-      font-weight: 400;
-      line-height: 1.6;
-      white-space: normal;
+    > span {
+      @include type(label);
+      color: var(--muted-color);
+    }
+
+    > p {
+      color: var(--muted-color);
+    }
+  }
+
+  // The rules, as a hexagon-bullet list (it has a class, so it gets the bullets here rather than from the reset).
+  &__rules {
+    display: grid;
+    gap: var(--space-xsmall);
+    max-width: 70ch;
+
+    li {
+      position: relative;
+      padding-left: 1.4em;
+
+      &::before {
+        @include hex-bullet;
+      }
     }
   }
 
@@ -196,7 +202,7 @@
     align-items: center;
     gap: 0.5rem 1rem;
     padding-block: 0.6rem;
-    font-size: var(--text-small);
+    @include type(small);
 
     @include mq(md) {
       grid-template-columns: 11rem 6rem 1fr;
@@ -212,7 +218,7 @@
     }
 
     > span:nth-child(2) {
-      font-family: var(--font-mono);
+      @include type(label);
       color: var(--muted-color);
     }
   }
@@ -241,7 +247,7 @@
     li {
       display: grid;
       gap: 0.15rem;
-      font-size: var(--text-small);
+      @include type(small);
       color: var(--muted-color);
     }
 
@@ -266,11 +272,11 @@
     }
 
     dt {
-      font-weight: 600;
+      @include type(body, $bold: true);
     }
 
     dd {
-      font-size: var(--text-small);
+      @include type(small);
       color: var(--muted-color);
     }
   }
@@ -300,14 +306,24 @@
       }
     }
 
+    // Two columns of the three from lg up (the whole row on tablets).
+    &--wide-2 {
+      @include mq(md) {
+        grid-column: 1 / -1;
+      }
+
+      @include mq(lg) {
+        grid-column: span 2;
+      }
+    }
+
     h3 {
       margin-top: 0.6rem;
-      font-family: var(--font-heading--secondary);
-      font-size: var(--text-large);
+      @include type(card-title);
     }
 
     > p {
-      font-size: var(--text-small);
+      @include type(small);
       color: var(--muted-color);
     }
   }
@@ -353,13 +369,27 @@
       width: 100%;
       text-align: center;
     }
+
+    // The dot label keeps its own width, so the dot stays next to the text.
+    > .cta__eyebrow {
+      width: auto;
+      text-align: start;
+    }
+
+    // The tags sit centred like the other examples.
+    > .work-split__tags {
+      justify-content: center;
+    }
+
+    // The call-to-action button on one line.
+    .cta__button {
+      white-space: nowrap;
+    }
   }
 
-  &__heading-sample {
-    font-family: var(--font-heading--secondary);
-    font-size: var(--text-2xl);
-    font-weight: 500;
-    line-height: 1.1;
+  // The value card at the width of one of the three on the home page.
+  &__card {
+    max-width: 22rem;
   }
 
   // Strips a component's own outer spacing so it sits centred on its stage.

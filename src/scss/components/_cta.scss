@@ -8,8 +8,7 @@
   background: var(--brand-gradient);
   color: var(--white);
 
-  // Crops the ghost text to the section. Done here rather than on .cta itself so the curved bottom edge from
-  // src/js/modules/wave.js can still overlap the footer by a pixel.
+  // Crops the ghost text to the section.
   &__backdrop {
     position: absolute;
     inset: 0;
@@ -21,8 +20,9 @@
     position: absolute;
     top: -0.17em;
     right: -0.1em;
-    font-family: var(--font-heading--primary);
-    font-size: clamp(10rem, 4rem + 24vw, 26rem); // 420px on wide screens
+    // Type exception (decoration): a giant outlined word, 420px on wide screens.
+    font-family: var(--font-heading);
+    font-size: clamp(10rem, 4rem + 24vw, 26rem);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.04em;
@@ -49,10 +49,7 @@
     align-items: center;
     gap: 0.85em;
     margin-bottom: var(--space-medium);
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    @include type(eyebrow);
     color: var(--ink);
 
     // The dot before the label.
@@ -66,13 +63,8 @@
   }
 
   &__title {
+    @include type(display);
     margin: 0;
-    font-family: var(--font-heading--primary);
-    font-size: clamp(2.75rem, 1.4rem + 5.6vw, 6.5rem); // 104px on wide screens
-    font-weight: 500;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
     color: var(--white);
   }
 
@@ -80,7 +72,7 @@
     color: var(--ink);
   }
 
-  // Black pill with a white circle holding the arrow. The arrow nudges right on hover.
+  // White pill with a white circle holding the arrow. It lifts on hover and the arrow nudges right.
   &__button {
     justify-self: start;
     display: inline-flex;
@@ -90,10 +82,7 @@
     border-radius: 999px;
     background: white;
     color: black;
-    font-family: var(--font-link);
-    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.65rem); // 26px on wide screens
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    @include type(lead, $bold: true);
     text-decoration: none;
     box-shadow: 0 18px 40px rgb(11 11 15 / 0.3);
     transition: box-shadow 0.3s ease-in-out, translate 0.3s ease-in-out;
