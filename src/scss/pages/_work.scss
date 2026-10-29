@@ -370,6 +370,11 @@
         padding-bottom: var(--space-small);
         filter: drop-shadow(0 12px 20px rgb(0 0 0 / 0.55));
       }
+
+      // An email runs right up to the top of the panel (no gap above it), from top to bottom of the box.
+      .work-card__shot--email {
+        margin-top: calc(var(--space-small) * -1);
+      }
     }
   }
 
