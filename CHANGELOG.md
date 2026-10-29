@@ -25,6 +25,14 @@ version number and date.
 
 ### Changed
 
+- Work page hero: Nueva Gold, Fraser Valley and LNDMRK's home pages as three equal screens in dark browser frames,
+  slanted inwards, instead of a window of twelve project screenshots.
+- Work page: Custom Coded and EDMs & Banners show their screenshots on plain dark panels instead of browser windows
+  (they're widgets, ads and emails, not web pages); the Custom Coded pieces now show whole.
+- Work page labels: "WordPress" instead of "Website" on the case studies, "Chatbox UI" instead of "Custom build".
+- Work page: the Thunderpick survey shows without its "Live Support" header bar, and Fraser Valley's card uses a new
+  home page screenshot.
+- The contact email is hi@gemmagentles.dev (was studio@gemmagentles.dev).
 - The brand board styles moved from `_work-bento.scss` into their own `_brand-board.scss`.
 - `.gitignore` now skips `.wrangler/`, the deploy tool's temporary files, so they can't be committed by mistake.
 - `npm run new` now suggests adding the new case study's card to the Work page, not the old home page project cards.
@@ -46,11 +54,15 @@ version number and date.
 
 ### Fixed
 
+- Work page screenshots looked pixelated, because the browser shrank large images a long way. Each now has
+  tile-sized copies (shrunk in steps, so small text stays sharp), and the browser picks the right one for the screen.
 - The "Case studies" line in the home page's work section had no size (it used a size that didn't exist), so it now
   uses the intro text size.
 
 ### Added
 
+- Work page: a line under the introduction saying some projects have been handed over to their clients, so may have
+  changed in ways Gemma hasn't approved.
 - Photoshop and BrowserStack in the "Tools I use" grid (Photoshop's logo from Devicon, BrowserStack's from the
   gilbarbara/logos set, drawn with true circles so its edges are smooth). The tiles are smaller to fit 18: 9 per
   row on desktop (was 8), 6 on tablets and 3 on phones, so every row is full.
