@@ -16,6 +16,11 @@ version number and date.
 - Work page: the CMS Websites cards have a see-through black layer over the screenshot with a white "View case study" button on it
   (a little darker on hover).
 
+### Changed
+
+- Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
+  other two chat boxes.
+
 ## [1.2.0] - 2026-10-29
 
 ### Removed
