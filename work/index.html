@@ -18,7 +18,7 @@
     -->
     <main id="main" class="work-page">
       <!--
-        The hero, on black: the heading, a short introduction and a disclaimer on the left, and on the right the three
+        The hero, on black: the heading and a short introduction on the left, and on the right the three
         case studies' home pages as three equal screens side by side (Nueva Gold, Fraser Valley, LNDMRK), slanted inwards
         together, each in a dark browser window showing the top of its page. Below lg the screens sit under the text.
         They're decoration (the projects are listed below), so screen readers skip them.
@@ -31,7 +31,6 @@
           <p class="eyebrow" data-reveal>My Work</p>
           <h1 class="work-intro__title" id="work-title" data-reveal><span class="work-intro__word work-intro__word--first">Featured</span> <span class="work-intro__word work-intro__word--second accent-word">Projects</span></h1>
           <p class="work-intro__text" data-reveal>Here you can see a deeper breakdown of my work in some hand picked case studies.</p>
-          <p class="work-intro__note" data-reveal>Some projects have been handed over to the client, so could be changed in ways I have not approved.</p>
         </div>
 
         <div class="work-intro__screens" aria-hidden="true">
@@ -63,6 +62,7 @@
             <include src="work-card-site.html" href="/work/nueva-gold/" image="/images/work/nueva-gold/cover.webp" width="1600" height="1000" name="Nueva Gold" type="WordPress"></include>
             <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" width="1600" height="1000" name="LNDMRK" type="WordPress"></include>
           </div>
+          <p class="work-category__note">Screenshots captured October 2026. Some of these sites have since been handed over to their clients, so they may have changed in ways I haven't approved.</p>
         </section>
 
         <!-- 02 · Custom Coded: screenshots of hand-built pieces, whole, on plain panels (they're widgets, not web pages). -->
@@ -162,6 +162,16 @@
               <p class="work-card__type">Kathmandu · Email</p>
             </article>
           </div>
+        </section>
+
+        <!-- This site: its own code is public, so it's the one project here with code to read. -->
+        <section class="work-source" aria-labelledby="work-source-title" data-reveal>
+          <div class="work-source__text">
+            <p class="eyebrow">This site</p>
+            <h2 class="work-source__title" id="work-source-title">Hand-coded, and open to read.</h2>
+            <p class="work-source__body">HTML, SCSS and vanilla JavaScript on a small Vite setup, with its own partials plugin and tests, design tokens and twelve text styles, BEM throughout, and Gitflow with a changelog.</p>
+          </div>
+          <a class="button button--light work-source__button" href="{{site.github}}/portfolio-2026" target="_blank" rel="noopener">View the code on GitHub <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&nearr;</span></a>
         </section>
       </div>
 

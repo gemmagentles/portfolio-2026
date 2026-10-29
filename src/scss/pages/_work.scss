@@ -273,11 +273,6 @@
   border-top: 1px solid #26262c;
   scroll-margin-top: $header-height; // so the category links don't land under the sticky header
 
-  // The last row: more room below its cards, before the call to action.
-  &:last-of-type {
-    padding-bottom: 130px;
-  }
-
   @include mq(lg) {
     grid-template-columns: 15.5rem minmax(0, 1fr);
     gap: var(--space-large);
@@ -306,6 +301,17 @@
   &__text {
     max-width: 40ch;
     color: #b7b7c2;
+  }
+
+  // A small note under a row's cards (CMS Websites: when the screenshots were taken, and that some sites now belong to
+  // their clients). Lined up with the cards from lg.
+  &__note {
+    @include type(small);
+    color: #8a8a96;
+
+    @include mq(lg) {
+      grid-column: 2;
+    }
   }
 
   // Phones: 1 card per row. From sm: 2. From lg: 3.

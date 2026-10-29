@@ -1,0 +1,36 @@
+@use '../abstracts' as *;
+
+// "This site" at the end of the Work page's rows (work/index.html): a short line about how the portfolio is built, and
+// a button to its public code on GitHub (the one project on the page with code anyone can read). Text then button on
+// phones; side by side from md, the button lined up with the bottom of the text.
+.work-source {
+  display: grid;
+  gap: var(--space-medium);
+  padding-block: calc(var(--space-large) * 2) 130px;
+  border-top: 1px solid #26262c;
+
+  @include mq(md) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--space-large);
+  }
+
+  &__text {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  &__title {
+    @include type(subheading);
+    margin: 0;
+  }
+
+  &__body {
+    max-width: 60ch;
+    color: #b7b7c2;
+  }
+
+  &__button {
+    justify-self: start;
+  }
+}

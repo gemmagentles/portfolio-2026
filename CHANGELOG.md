@@ -15,12 +15,16 @@ version number and date.
 
 - Work page: the CMS Websites cards have a see-through black layer over the screenshot with a white "View case study" button on it
   (a little darker on hover).
+- Work page: a "This site" row after the last category, saying how the portfolio is built, with a button to its code on
+  GitHub.
 
 ### Changed
 
 - Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
   other two chat boxes.
 - Work page: the Camping Gear Sale email runs right up to the top of its box (no gap above it).
+- Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
+  taken.
 
 ## [1.2.0] - 2026-10-29
 

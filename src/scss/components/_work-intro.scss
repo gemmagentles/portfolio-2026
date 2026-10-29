@@ -26,8 +26,7 @@
     }
 
     // The introduction in a narrower column, so it stays clear of the screens.
-    > .work-intro__text,
-    > .work-intro__note {
+    > .work-intro__text {
       max-width: 24rem;
     }
   }
@@ -71,13 +70,6 @@
   &__text {
     @include type(lead);
     color: color-mix(in srgb, var(--white) 55%, transparent);
-  }
-
-  // A disclaimer under the introduction: some sites now belong to their clients and may have changed since.
-  &__note {
-    @include type(small);
-    margin-top: var(--space-small);
-    color: color-mix(in srgb, var(--white) 45%, transparent);
   }
 
   // The three screens side by side, all the same size and brightness (equal weight), and slanted inwards together,
