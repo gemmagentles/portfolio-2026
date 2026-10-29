@@ -25,6 +25,8 @@ version number and date.
 - Work page: the Camping Gear Sale email runs right up to the top of its box (no gap above it).
 - Work page: the Custom Coded description is about the 11 client chatboxes built at Squadforce, with a Grunt.js
   system to preview them.
+- Work page: the API Components description is about building player reward UIs from the back-end developers'
+  REST API endpoints.
 - Work page: the CMS Websites description is now "WordPress theme development: custom themes, ACF, editor-friendly
   blocks."
 - Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
