@@ -381,12 +381,12 @@
     z-index: 1;
     display: grid;
     place-items: center;
-    background: color-mix(in srgb, var(--black) 75%, transparent);
+    background: color-mix(in srgb, var(--black) 85%, transparent);
     transition: background-color 0.3s ease-in-out;
 
     .work-card__link:hover &,
     .work-card__link:focus-visible & {
-      background: color-mix(in srgb, var(--black) 85%, transparent);
+      background: color-mix(in srgb, var(--black) 92%, transparent);
     }
   }
 
