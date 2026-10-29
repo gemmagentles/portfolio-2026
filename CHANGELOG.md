@@ -25,6 +25,8 @@ version number and date.
   and the intro line is narrower (550px).
 - Home page: Sainsbury's Bank moves to the end of the clients list.
 - Home page: the Prologue says "14 years of experience" instead of "over a decade", matching the essentials.
+- "Front end" spelled one way across the site: "front-end" before a noun (front-end developer, including the home
+  hero heading, page titles and case study tags), "front end" on its own. "Future-proofing" with a hyphen too.
 - Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
   other two chat boxes.
 - Work page: the Camping Gear Sale email runs right up to the top of its box (no gap above it).
