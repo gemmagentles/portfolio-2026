@@ -56,12 +56,16 @@
     letter-spacing: -0.02em; // set here (not inherited from the h1) so it scales with each word's own size
     white-space: nowrap; // one line each, even in the fallback font
 
+    // Each word pulled left by the gap Oswald leaves before its first letter (F, P), which grows with these big sizes,
+    // so the letters line up with the eyebrow and introduction above and below (measured in Chrome).
     &--first {
+      margin-left: -0.055em;
       font-size: calc(100cqi / var(--work-intro-first));
       font-weight: 700;
     }
 
     &--second {
+      margin-left: -0.065em;
       font-size: calc(100cqi / var(--work-intro-second));
       font-weight: 300;
     }

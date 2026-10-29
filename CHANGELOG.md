@@ -36,6 +36,11 @@ version number and date.
 - Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
   taken.
 
+### Fixed
+
+- Work page: the big "Featured Projects" heading lines up with "My work" and the introduction (Oswald's built-in
+  gap before the F and P made it look indented).
+
 ## [1.2.0] - 2026-10-29
 
 ### Removed
