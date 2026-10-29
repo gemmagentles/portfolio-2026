@@ -36,6 +36,7 @@
 
   &__name {
     @include type(title);
+    @include optical-left; // the case study names start with straight-sided capitals (N, F, L)
   }
 
   &__buttons {

@@ -75,6 +75,7 @@
     letter-spacing: -0.02em;
     text-transform: uppercase;
     color: var(--ink); // "FRONT END" in black; "DEVELOPER" stays a white outline
+    @include optical-left; // F and D line up with the eyebrow and tagline
   }
 
   &__accent {
@@ -379,5 +380,15 @@
   100% {
     transform: translate(160px, 570px);
     opacity: 0;
+  }
+}
+
+// The home page's call to action, "Let's build / together.": its first line starts with an L, so it's pulled back to
+// line up with the eyebrow above (the other pages' "Your brand…" starts with a Y, which needs no nudge).
+.page-home .cta__title {
+  @include optical-left;
+
+  .cta__accent {
+    text-indent: 0; // "together." starts with a t, already in line
   }
 }

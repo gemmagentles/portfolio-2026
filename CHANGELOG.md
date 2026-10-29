@@ -11,6 +11,43 @@ version number and date.
 
 ## [Unreleased]
 
+### Added
+
+- Work page: the CMS Websites cards have a see-through black layer over the screenshot with a white "View case study" button on it
+  (a little darker on hover).
+- Work page: a "This site" row after the last category, saying how the portfolio is built (including the agentic
+  engineering workflow with Claude Code), with a button to its code on GitHub.
+
+### Changed
+
+- Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
+  other two chat boxes.
+- Work page: the Camping Gear Sale email runs right up to the top of its box (no gap above it).
+- Work page: the Custom Coded description is about the 11 client chatboxes built at Squadforce, with a Grunt.js
+  system that automated shared edits.
+- Work page: the API Components description is about building player reward UIs from the back-end developers'
+  REST API endpoints.
+- Work page: the EDMs & Banners description is about building them with designers and testing every email in Litmus.
+- Work page: the API Components cards say what each shows (Level & Points, Time & Money Value, Referrals & Levels) instead of "live data".
+- Work page: the CMS Websites description is about building custom WordPress themes with ACF and editor-friendly
+  blocks, using LocalWP.
+- Work page: the hero introduction says what Gemma does (custom WordPress builds, chat UIs, API-driven components
+  and email) instead of introducing the case studies.
+- Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
+  taken.
+
+- Work page on phones: the hero's three screens face straight on and are wider than the screen, so the outer two run
+  a little off each side; the category pills sit two side by side in two rows.
+- Call to action on phones (every page): the big outlined word rises from the bottom edge, below the button, instead
+  of sitting behind the heading.
+
+### Fixed
+
+- Big headings line up with the text above and below them: Oswald leaves a gap before straight-sided capitals that
+  grows with the size, so they looked indented. Fixed on the Work page ("Featured Projects"), the home page hero
+  ("Front End Developer") and call to action ("Let's build"), Contact ("Let's talk"), the 404 page and the case
+  studies' "Next case study" name.
+
 ## [1.2.0] - 2026-10-29
 
 ### Removed

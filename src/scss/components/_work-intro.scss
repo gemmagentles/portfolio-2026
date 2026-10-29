@@ -26,8 +26,7 @@
     }
 
     // The introduction in a narrower column, so it stays clear of the screens.
-    > .work-intro__text,
-    > .work-intro__note {
+    > .work-intro__text {
       max-width: 24rem;
     }
   }
@@ -57,12 +56,16 @@
     letter-spacing: -0.02em; // set here (not inherited from the h1) so it scales with each word's own size
     white-space: nowrap; // one line each, even in the fallback font
 
+    // Each word pulled left by the gap Oswald leaves before its first letter (F, P), which grows with these big sizes,
+    // so the letters line up with the eyebrow and introduction above and below (measured in Chrome).
     &--first {
+      margin-left: -0.055em;
       font-size: calc(100cqi / var(--work-intro-first));
       font-weight: 700;
     }
 
     &--second {
+      margin-left: -0.065em;
       font-size: calc(100cqi / var(--work-intro-second));
       font-weight: 300;
     }
@@ -71,13 +74,6 @@
   &__text {
     @include type(lead);
     color: color-mix(in srgb, var(--white) 55%, transparent);
-  }
-
-  // A disclaimer under the introduction: some sites now belong to their clients and may have changed since.
-  &__note {
-    @include type(small);
-    margin-top: var(--space-small);
-    color: color-mix(in srgb, var(--white) 45%, transparent);
   }
 
   // The three screens side by side, all the same size and brightness (equal weight), and slanted inwards together,
@@ -92,6 +88,14 @@
     margin: var(--space-section) auto 0;
     transform: perspective(1600px) rotateY(-16deg) rotateX(4deg);
     container-type: inline-size; // the screens' sizes are worked out from this width (cqi)
+
+    // Phones: straight on (no slant) and wider than the screen, centred, so the outer two run a little off each side
+    // (the hero crops them).
+    @include mq-down(md) {
+      width: 124vw;
+      margin-left: -12vw;
+      transform: none;
+    }
 
     @include mq(lg) {
       position: absolute;

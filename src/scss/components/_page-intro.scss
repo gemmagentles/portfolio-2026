@@ -8,5 +8,6 @@
 
   h1 {
     @include type(display);
+    @include optical-left; // "Page not found": the P lines up with the text below
   }
 }
