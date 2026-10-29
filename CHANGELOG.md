@@ -13,7 +13,7 @@ version number and date.
 
 ### Added
 
-- Work page: the CMS Websites cards have a see-through black layer over the screenshot with "View case study" on it
+- Work page: the CMS Websites cards have a see-through black layer over the screenshot with a white "View case study" button on it
   (a little darker on hover).
 
 ## [1.2.0] - 2026-10-29

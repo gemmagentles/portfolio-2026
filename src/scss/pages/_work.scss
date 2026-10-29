@@ -390,12 +390,17 @@
     }
   }
 
-  // "View case study": white and underlined, like .text-link.
+  // "View case study": a white .button. Purple when anywhere on the card is hovered or focused, as .button is on hover.
   &__more {
-    @include type(body, $bold: true);
-    color: var(--white);
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
+    @include type(small, $bold: true);
+    padding: 0.7em 1.3em; // a little smaller than a full-size .button, to suit the card
+
+    .work-card__link:hover &,
+    .work-card__link:focus-visible & {
+      background: var(--purple-color);
+      border-color: var(--purple-color);
+      color: var(--contrast-color);
+    }
   }
 
   &__arrow {
