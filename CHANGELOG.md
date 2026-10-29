@@ -23,6 +23,7 @@ version number and date.
 - Home page: the "full project lifecycle" line and the seven role cards speak in the first person ("I see the project
   as a whole…"), so the page reads in one voice. New wording on the Designer, Front-end developer and QA tester cards,
   and the intro line is narrower (550px).
+- Home page: Sainsbury's Bank moves to the end of the clients list.
 - Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
   other two chat boxes.
 - Work page: the Camping Gear Sale email runs right up to the top of its box (no gap above it).
