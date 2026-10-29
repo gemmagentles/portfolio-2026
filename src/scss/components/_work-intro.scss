@@ -89,6 +89,14 @@
     transform: perspective(1600px) rotateY(-16deg) rotateX(4deg);
     container-type: inline-size; // the screens' sizes are worked out from this width (cqi)
 
+    // Phones: straight on (no slant) and wider than the screen, centred, so the outer two run a little off each side
+    // (the hero crops them).
+    @include mq-down(md) {
+      width: 124vw;
+      margin-left: -12vw;
+      transform: none;
+    }
+
     @include mq(lg) {
       position: absolute;
       top: 50%;

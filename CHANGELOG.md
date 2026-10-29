@@ -36,6 +36,9 @@ version number and date.
 - Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
   taken.
 
+- Work page on phones: the hero's three screens face straight on and are wider than the screen, so the outer two run
+  a little off each side; the category pills sit two side by side in two rows.
+
 ### Fixed
 
 - Big headings line up with the text above and below them: Oswald leaves a gap before straight-sided capitals that

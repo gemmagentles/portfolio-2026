@@ -14,22 +14,40 @@
   &__filters {
     margin-block: var(--space-section) var(--space-large);
 
-    // Their own class, so the plain-list hexagon bullets (base/_typography.scss) don't apply.
+    // Their own class, so the plain-list hexagon bullets (base/_typography.scss) don't apply. Phones: two side by side
+    // in two rows; from md, one row that wraps if it must.
     .work-page__filter-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+
+      @include mq(md) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
     }
 
+    // Phones: a little smaller and centred in their half, so "API Components" fits beside its neighbour.
     a {
-      display: inline-flex;
+      @include type(small);
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 1rem;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.75rem;
       border: 1px solid #3a3a44;
       border-radius: 999px;
-      @include type(body);
+      white-space: nowrap;
       color: #b7b7c2;
+
+      @include mq(md) {
+        @include type(body);
+        display: inline-flex;
+        gap: 0.5rem;
+        padding: 0.55rem 1rem;
+      }
+
       text-decoration: none;
       transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
