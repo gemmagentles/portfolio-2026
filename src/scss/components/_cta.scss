@@ -2,16 +2,19 @@
 
 // "Your brand could be next." on the brand gradient, above the footer. A giant outlined "NEXT" sits behind it
 // in the top-right corner. Phones: heading then button, stacked, with the outlined word rising from the bottom edge
-// instead (clear of the heading, partly behind the button), and a little extra room at the bottom for it. From md up: side by side,
+// instead (clear of the heading, just below the button), and extra room at the bottom for it. From md up: side by side,
 // lined up at the bottom.
 .cta {
+  --cta-ghost-size: clamp(10rem, 4rem + 24vw, 26rem); // the outlined word's size
+
   position: relative;
   padding-block: clamp(4rem, 2.5rem + 5vw, 7rem) calc(clamp(4rem, 2.5rem + 5vw, 7.5rem) + 20px);
   background: var(--brand-gradient);
   color: var(--white);
 
+  // Phones: room under the button for the outlined word: the 84% of it that shows, plus a 15px gap above it.
   @include mq-down(md) {
-    padding-bottom: 7rem;
+    padding-bottom: calc(var(--cta-ghost-size) * 0.84 + 15px);
   }
 
   // Crops the ghost text to the section.
@@ -28,7 +31,7 @@
     right: -0.1em;
     // Type exception (decoration): a giant outlined word, 420px on wide screens.
     font-family: var(--font-heading);
-    font-size: clamp(10rem, 4rem + 24vw, 26rem);
+    font-size: var(--cta-ghost-size);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.04em;
@@ -38,8 +41,8 @@
     -webkit-text-stroke: 2px rgb(255 255 255 / 0.22);
     pointer-events: none;
 
-    // Phones: from the bottom-right, only the very bottom of the letters cut off by the section's edge. It can run
-    // up behind the button.
+    // Phones: from the bottom-right, the bottom 16% of the letters cut off by the section's edge, with the tops of
+    // the letters about 15px below the button (the section's bottom padding makes the room).
     @include mq-down(md) {
       top: auto;
       bottom: -0.16em;
