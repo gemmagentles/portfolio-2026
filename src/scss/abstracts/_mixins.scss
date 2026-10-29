@@ -50,6 +50,14 @@
 }
 
 // Only animate for people who haven't asked for reduced motion.
+// Optical alignment for big Oswald headings: fonts leave a little gap before each letter, and at display sizes the gap
+// before a straight-sided capital (F, D, L, N, P) is about 0.057em, so the heading looks indented next to smaller text
+// above or below it. A negative text-indent pulls the start of each line back (it's inherited, so a word set as its
+// own block, like a second line in a span, gets it too). Only for headings whose lines start with those letters.
+@mixin optical-left($gap: 0.057em) {
+  text-indent: -$gap;
+}
+
 @mixin motion-ok {
   @media (prefers-reduced-motion: no-preference) {
     @content;

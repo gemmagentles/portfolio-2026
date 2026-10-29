@@ -38,8 +38,10 @@ version number and date.
 
 ### Fixed
 
-- Work page: the big "Featured Projects" heading lines up with "My work" and the introduction (Oswald's built-in
-  gap before the F and P made it look indented).
+- Big headings line up with the text above and below them: Oswald leaves a gap before straight-sided capitals that
+  grows with the size, so they looked indented. Fixed on the Work page ("Featured Projects"), the home page hero
+  ("Front End Developer") and call to action ("Let's build"), Contact ("Let's talk"), the 404 page and the case
+  studies' "Next case study" name.
 
 ## [1.2.0] - 2026-10-29
 
