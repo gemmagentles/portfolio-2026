@@ -18,10 +18,11 @@
     -->
     <main id="main" class="work-page">
       <!--
-        The hero, on black: the heading and a short introduction on the left, and on the right a browser window full
-        of project screenshots (the same ones as the home page's "My Work" wall), angled and fading into the black
-        behind the text. On phones the window sits under the text. The window is decoration (the projects are listed
-        below), so screen readers skip it. Styles: src/scss/components/_work-intro.scss.
+        The hero, on black: the heading, a short introduction and a disclaimer on the left, and on the right the three
+        case studies' home pages as three equal screens side by side (Nueva Gold, Fraser Valley, LNDMRK), slanted inwards
+        together, each in a dark browser window showing the top of its page. Below lg the screens sit under the text.
+        They're decoration (the projects are listed below), so screen readers skip them.
+        Styles: src/scss/components/_work-intro.scss.
         Each heading word is in its own span so the two can be sized to exactly the same width (a stacked headline);
         the space between them keeps the heading reading "Featured Projects".
       -->
@@ -30,24 +31,13 @@
           <p class="eyebrow" data-reveal>My Work</p>
           <h1 class="work-intro__title" id="work-title" data-reveal><span class="work-intro__word work-intro__word--first">Featured</span> <span class="work-intro__word work-intro__word--second accent-word">Projects</span></h1>
           <p class="work-intro__text" data-reveal>Here you can see a deeper breakdown of my work in some hand picked case studies.</p>
+          <p class="work-intro__note" data-reveal>Some projects have been handed over to the client, so could be changed in ways I have not approved.</p>
         </div>
 
-        <div class="work-intro__window" aria-hidden="true">
-          <div class="work-intro__bar"><span></span><span></span><span></span><span class="work-intro__address">gemmagentles.dev/work</span></div>
-          <ul class="work-intro__grid">
-            <li class="work-intro__tile"><img src="/images/projects/harveys-thumbnail.jpg" alt="" width="740" height="496" decoding="async" /><span class="work-intro__name">Harveys</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/work/lndmrk/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">LNDMRK</span><span class="work-intro__type">Case study</span></li>
-            <li class="work-intro__tile"><img src="/images/work/nueva-gold/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Nueva Gold</span><span class="work-intro__type">Case study</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/kathmandu.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Kathmandu</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/nandos.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Nando's</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/work/fraser-valley/cover.webp" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Fraser Valley Gaels</span><span class="work-intro__type">Case study</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/signal.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Signal</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/scottish-friendly.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Scottish Friendly</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/andersontreesurgeryMedium2.jpg" alt="" width="1600" height="1000" decoding="async" /><span class="work-intro__name">Anderson Tree Surgery</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/ABCofHealthLtd_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">ABC of Health</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/smudge-digital.webp" alt="" width="368" height="256" decoding="async" /><span class="work-intro__name">Smudge Digital</span><span class="work-intro__type">Website</span></li>
-            <li class="work-intro__tile"><img src="/images/projects/Decorhom_thumbnail.jpg" alt="" width="1600" height="900" decoding="async" /><span class="work-intro__name">Decorhom</span><span class="work-intro__type">Website</span></li>
-          </ul>
+        <div class="work-intro__screens" aria-hidden="true">
+          <div class="work-intro__screen"><span class="work-intro__bar"><span></span><span></span><span></span></span><img class="work-intro__shot" src="/images/work/nueva-gold/home-full.webp" alt="" width="720" height="2741" decoding="async" /></div>
+          <div class="work-intro__screen"><span class="work-intro__bar"><span></span><span></span><span></span></span><img class="work-intro__shot" src="/images/work/fraser-valley/home-full.webp" alt="" width="720" height="2405" decoding="async" /></div>
+          <div class="work-intro__screen"><span class="work-intro__bar"><span></span><span></span><span></span></span><img class="work-intro__shot" src="/images/work/lndmrk/home-full.webp" alt="" width="720" height="1926" decoding="async" /></div>
         </div>
       </section>
 
@@ -69,13 +59,13 @@
             <p class="work-category__text">Sites your team can update themselves, built on a CMS that's easy to use.</p>
           </div>
           <div class="work-category__grid">
-            <include src="work-card-site.html" href="/work/fraser-valley/" image="/images/work/fraser-valley/cover.webp" name="Fraser Valley" type="Website"></include>
-            <include src="work-card-site.html" href="/work/nueva-gold/" image="/images/work/nueva-gold/cover.webp" name="Nueva Gold" type="Website"></include>
-            <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" name="LNDMRK" type="Website"></include>
+            <include src="work-card-site.html" href="/work/fraser-valley/" image="/images/work/fraser-valley/home-full.webp" width="720" height="2405" name="Fraser Valley" type="WordPress"></include>
+            <include src="work-card-site.html" href="/work/nueva-gold/" image="/images/work/nueva-gold/cover.webp" width="1600" height="1000" name="Nueva Gold" type="WordPress"></include>
+            <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" width="1600" height="1000" name="LNDMRK" type="WordPress"></include>
           </div>
         </section>
 
-        <!-- 02 · Custom Coded: screenshots of hand-built pieces in browser-window frames. -->
+        <!-- 02 · Custom Coded: screenshots of hand-built pieces, whole, on plain panels (they're widgets, not web pages). -->
         <section class="work-category" id="custom-coded" aria-labelledby="custom-coded-title" data-reveal>
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">02</p>
@@ -84,28 +74,25 @@
           </div>
           <div class="work-category__grid">
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--browser">
-                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot" src="/images/work/thunderpick/live-support-survey.webp" alt="Thunderpick live support survey: two yes or no questions, a comments box and a Submit button" width="479" height="457" loading="lazy" decoding="async" />
+              <div class="work-card__frame work-card__frame--panel">
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/thunderpick/live-support-survey-tile.webp" srcset="/images/work/thunderpick/live-support-survey-tile-280.webp 280w, /images/work/thunderpick/live-support-survey-tile.webp 479w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Thunderpick live support survey: two yes or no questions, a comments box and a Submit button" width="479" height="415" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Live Support Survey</h3>
-              <p class="work-card__type">Thunderpick · Custom build</p>
+              <p class="work-card__type">Thunderpick · Chatbox UI</p>
             </article>
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--browser">
-                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot" src="/images/work/slots-lv/live-chat-form.webp" alt="Slots.lv live chat form: name, email, PIN, birth date, reason and message fields, and a Start Chat button" width="478" height="398" loading="lazy" decoding="async" />
+              <div class="work-card__frame work-card__frame--panel">
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/slots-lv/live-chat-form.webp" srcset="/images/work/slots-lv/live-chat-form-280.webp 280w, /images/work/slots-lv/live-chat-form.webp 478w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Slots.lv live chat form: name, email, PIN, birth date, reason and message fields, and a Start Chat button" width="478" height="398" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Live Chat Form</h3>
-              <p class="work-card__type">Slots.lv · Custom build</p>
+              <p class="work-card__type">Slots.lv · Chatbox UI</p>
             </article>
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--browser">
-                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot" src="/images/work/matchpay/live-chat-window.webp" alt="MatchPay live chat window: two system messages, a 500-character message box, and Close, attach and Send buttons" width="519" height="736" loading="lazy" decoding="async" />
+              <div class="work-card__frame work-card__frame--panel">
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/matchpay/live-chat-window.webp" srcset="/images/work/matchpay/live-chat-window-280.webp 280w, /images/work/matchpay/live-chat-window.webp 519w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="MatchPay live chat window: two system messages, a 500-character message box, and Close, attach and Send buttons" width="519" height="736" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Live Chat Window</h3>
-              <p class="work-card__type">MatchPay · Custom build</p>
+              <p class="work-card__type">MatchPay · Chatbox UI</p>
             </article>
           </div>
         </section>
@@ -121,7 +108,7 @@
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
                 <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot" src="/images/work/slots-lv/vip-benefits.webp" alt="Slots.lv VIP benefits: five benefit tiles, the member's tier and a reward points progress bar" width="971" height="747" loading="lazy" decoding="async" />
+                <img class="work-card__shot" src="/images/work/slots-lv/vip-benefits.webp" srcset="/images/work/slots-lv/vip-benefits-280.webp 280w, /images/work/slots-lv/vip-benefits-560.webp 560w, /images/work/slots-lv/vip-benefits.webp 971w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Slots.lv VIP benefits: five benefit tiles, the member's tier and a reward points progress bar" width="971" height="747" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">VIP Benefits</h3>
               <p class="work-card__type">Slots.lv · live data</p>
@@ -137,7 +124,7 @@
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
                 <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot" src="/images/work/slots-lv/refer-and-earn.webp" alt="Slots.lv Refer and Earn: the member's referral tier on a progress bar, their rewards, referrals so far, share link and share buttons" width="782" height="660" loading="lazy" decoding="async" />
+                <img class="work-card__shot" src="/images/work/slots-lv/refer-and-earn.webp" srcset="/images/work/slots-lv/refer-and-earn-280.webp 280w, /images/work/slots-lv/refer-and-earn-560.webp 560w, /images/work/slots-lv/refer-and-earn.webp 782w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Slots.lv Refer and Earn: the member's referral tier on a progress bar, their rewards, referrals so far, share link and share buttons" width="782" height="660" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Refer &amp; Earn</h3>
               <p class="work-card__type">Slots.lv · live data</p>
@@ -145,7 +132,7 @@
           </div>
         </section>
 
-        <!-- 04 · EDMs & Banners: in the same browser-window frames as the other rows. The banner ads show whole; the email sits inset, zoomed out to show more of it. -->
+        <!-- 04 · EDMs & Banners: on plain panels, like 02 (no browser window: they're ads and emails, not web pages). The banner ads show whole; the email sits inset, zoomed out to show more of it. -->
         <section class="work-category" id="edms-banners" aria-labelledby="edms-banners-title" data-reveal>
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">04</p>
@@ -154,25 +141,22 @@
           </div>
           <div class="work-category__grid">
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--browser">
-                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot work-card__shot--contain" src="/images/work/kathmandu/easter-sale-banner.webp" alt="Kathmandu Easter Sale banner: up to 50% off a great range, a hiker leaping across a mountainside, and a Shop Now button" width="750" height="624" loading="lazy" decoding="async" />
+              <div class="work-card__frame work-card__frame--panel">
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/kathmandu/easter-sale-banner.webp" srcset="/images/work/kathmandu/easter-sale-banner-280.webp 280w, /images/work/kathmandu/easter-sale-banner-560.webp 560w, /images/work/kathmandu/easter-sale-banner.webp 750w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Kathmandu Easter Sale banner: up to 50% off a great range, a hiker leaping across a mountainside, and a Shop Now button" width="750" height="624" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Easter Sale</h3>
               <p class="work-card__type">Kathmandu · Banner ad</p>
             </article>
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--browser">
-                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot work-card__shot--contain" src="/images/work/nissan/pulsar-banner.webp" alt="Nissan Pulsar banner: Pulsar ST sedan and hatch auto, $19,990 drive away, two cars in a snowy hangar, and a Find Out More button" width="750" height="626" loading="lazy" decoding="async" />
+              <div class="work-card__frame work-card__frame--panel">
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/nissan/pulsar-banner.webp" srcset="/images/work/nissan/pulsar-banner-280.webp 280w, /images/work/nissan/pulsar-banner-560.webp 560w, /images/work/nissan/pulsar-banner.webp 750w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Nissan Pulsar banner: Pulsar ST sedan and hatch auto, $19,990 drive away, two cars in a snowy hangar, and a Find Out More button" width="750" height="626" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Pulsar Drive Away</h3>
               <p class="work-card__type">Nissan · Animated banner</p>
             </article>
             <article class="work-card">
-              <div class="work-card__frame work-card__frame--browser">
-                <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
-                <img class="work-card__shot work-card__shot--email work-card__shot--bottom" src="/images/work/kathmandu/camping-gear-email.webp" alt="Kathmandu email: last days to save 10% on camping gear, deals on active wear, thermals and jackets, bike and hiking track stories, footwear deals and the Summit Club" width="423" height="761" loading="lazy" decoding="async" />
+              <div class="work-card__frame work-card__frame--panel">
+                <img class="work-card__shot work-card__shot--email work-card__shot--bottom" src="/images/work/kathmandu/camping-gear-email.webp" srcset="/images/work/kathmandu/camping-gear-email-280.webp 280w, /images/work/kathmandu/camping-gear-email.webp 423w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Kathmandu email: last days to save 10% on camping gear, deals on active wear, thermals and jackets, bike and hiking track stories, footwear deals and the Summit Club" width="423" height="761" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Camping Gear Sale</h3>
               <p class="work-card__type">Kathmandu · Email</p>

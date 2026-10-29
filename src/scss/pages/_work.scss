@@ -358,6 +358,18 @@
     &--browser {
       background: linear-gradient(160deg, #1c1c22, #101014);
     }
+
+    // A plain panel, no browser bar: for pieces that aren't web pages (widgets, banner ads, emails). The screenshot
+    // sits inside with a margin and a soft shadow that follows its shape.
+    &--panel {
+      padding: var(--space-small) var(--space-small) 0;
+      background: radial-gradient(120% 100% at 50% 0%, #1f1f26, #111115 75%);
+
+      .work-card__shot--contain {
+        padding-bottom: var(--space-small);
+        filter: drop-shadow(0 12px 20px rgb(0 0 0 / 0.55));
+      }
+    }
   }
 
   // Browser chrome: three dots and an empty address bar.
