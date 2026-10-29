@@ -27,6 +27,7 @@ version number and date.
   system that automated shared edits.
 - Work page: the API Components description is about building player reward UIs from the back-end developers'
   REST API endpoints.
+- Work page: the EDMs & Banners description is about building them with designers and testing every email in Litmus.
 - Work page: the CMS Websites description is now "WordPress theme development: custom themes, ACF, editor-friendly
   blocks."
 - Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
