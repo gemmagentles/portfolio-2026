@@ -29,7 +29,7 @@ version number and date.
   REST API endpoints.
 - Work page: the EDMs & Banners description is about building them with designers and testing every email in Litmus.
 - Work page: the CMS Websites description is now "WordPress theme development: custom themes, ACF, editor-friendly
-  blocks."
+  blocks", with a line about the LocalWP workflow.
 - Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
   taken.
 
