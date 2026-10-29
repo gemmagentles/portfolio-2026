@@ -15,8 +15,8 @@ version number and date.
 
 - Work page: the CMS Websites cards have a see-through black layer over the screenshot with a white "View case study" button on it
   (a little darker on hover).
-- Work page: a "This site" row after the last category, saying how the portfolio is built, with a button to its code on
-  GitHub.
+- Work page: a "This site" row after the last category, saying how the portfolio is built (including the agentic
+  engineering workflow with Claude Code), with a button to its code on GitHub.
 
 ### Changed
 
