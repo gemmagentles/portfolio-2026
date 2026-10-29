@@ -1,5 +1,7 @@
 <!--
-  A website on the Work page: its screenshot in a browser-window frame, then its name and type.
+  A website on the Work page: its screenshot in a browser-window frame, under a see-through black layer with
+  "View case study" on top, then its name and type. The whole card is one link, so "View case study" is a span styled
+  as a .text-link (a real link inside a link isn't allowed); the layer darkens a little on hover.
   Attributes: href, image (cropped from the top), width, height (the image's own size), name, type.
 -->
 <article class="work-card">
@@ -7,6 +9,7 @@
     <div class="work-card__frame work-card__frame--browser">
       <span class="work-card__bar" aria-hidden="true"><span></span><span></span><span></span></span>
       <img class="work-card__shot" src="{{image}}" alt="" width="{{width}}" height="{{height}}" loading="lazy" decoding="async" />
+      <span class="work-card__overlay"><span class="text-link work-card__more">View case study <span class="work-card__arrow" aria-hidden="true">&rarr;</span></span></span>
     </div>
     <h3 class="work-card__name">{{name}}</h3>
     <p class="work-card__type">{{type}}</p>

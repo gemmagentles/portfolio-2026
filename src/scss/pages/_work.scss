@@ -346,6 +346,7 @@
   }
 
   &__frame {
+    position: relative; // holds the overlay
     display: flex;
     flex-direction: column;
     height: 13.75rem; // 220px
@@ -372,8 +373,48 @@
     }
   }
 
-  // Browser chrome: three dots and an empty address bar.
+  // A see-through black layer over a website card's screenshot (below the browser bar, work-card-site.html), with
+  // "View case study" centred on it. A little darker on hover or keyboard focus, and the arrow nudges right.
+  &__overlay {
+    position: absolute;
+    inset: 26px 0 0; // the browser bar's height
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--black) 50%, transparent);
+    transition: background-color 0.3s ease-in-out;
+
+    .work-card__link:hover &,
+    .work-card__link:focus-visible & {
+      background: color-mix(in srgb, var(--black) 65%, transparent);
+    }
+  }
+
+  // "View case study": white and underlined, like .text-link.
+  &__more {
+    @include type(body, $bold: true);
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  &__arrow {
+    display: inline-block;
+
+    @include motion-ok {
+      transition: translate 0.3s var(--ease-out);
+    }
+
+    .work-card__link:hover &,
+    .work-card__link:focus-visible & {
+      translate: 0.25em 0;
+    }
+  }
+
+  // Browser chrome: three dots and an empty address bar. On top, so the screenshot's hover zoom tucks under it.
   &__bar {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-shrink: 0;
     align-items: center;
