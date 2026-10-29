@@ -11,6 +11,8 @@ version number and date.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-10-29
+
 ### Removed
 
 - The numbers (01, 02…) on the home page's role cards and "My key engineering values" cards; each card now starts
@@ -210,7 +212,8 @@ version number and date.
 - HTML partials plugin with tests, SCSS design tokens, and vanilla JS modules on a small Vite starter.
 - `.gitignore` and `.gitattributes` (Unix line endings), published to GitHub as a public repo.
 
-[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...develop
+[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.2.0...develop
+[1.2.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/gemmagentles/portfolio-2026/releases/tag/v1.0.0
