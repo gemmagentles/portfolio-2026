@@ -28,8 +28,10 @@ version number and date.
 - Work page: the API Components description is about building player reward UIs from the back-end developers'
   REST API endpoints.
 - Work page: the EDMs & Banners description is about building them with designers and testing every email in Litmus.
-- Work page: the CMS Websites description is now "WordPress theme development: custom themes, ACF, editor-friendly
-  blocks", with a line about the LocalWP workflow.
+- Work page: the CMS Websites description is about building custom WordPress themes with ACF and editor-friendly
+  blocks, using LocalWP.
+- Work page: the hero introduction says what Gemma does (custom WordPress builds, chat UIs, API-driven components
+  and email) instead of introducing the case studies.
 - Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
   taken.
 
