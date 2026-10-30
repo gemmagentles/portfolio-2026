@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.3.0",
   "type": "module",
   "description": "Hand-coded portfolio: HTML, SCSS and vanilla JS on a small Vite starter.",
   "scripts": {
