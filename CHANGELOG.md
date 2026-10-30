@@ -20,6 +20,9 @@ version number and date.
 
 ### Changed
 
+- 404 page: restyled like the home hero, on the brand gradient with the header over it: "PAGE NOT" in black over an
+  outlined "FOUND", a giant outlined "404" behind, a "Back to home" and a "See my work" button, and a row of pages to
+  try (About me, My process, a case study, Contact) with hexagon bullets.
 - Home page: the "full project lifecycle" line and the seven role cards speak in the first person ("I see the project
   as a whole…"), so the page reads in one voice. New wording on the Designer, Front-end developer and QA tester cards,
   and the intro line is narrower (550px).
@@ -66,6 +69,8 @@ version number and date.
 
 ### Fixed
 
+- Footer on tablets (768 to 1023px wide): the email address no longer breaks onto two lines; the links sit under it
+  until there's room for both side by side.
 - Big headings line up with the text above and below them: Oswald leaves a gap before straight-sided capitals that
   grows with the size, so they looked indented. Fixed on the Work page ("Featured Projects"), the home page hero
   ("Front End Developer") and call to action ("Let's build"), Contact ("Let's talk"), the 404 page and the case

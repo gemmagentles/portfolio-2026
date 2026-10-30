@@ -12,7 +12,9 @@
     display: grid;
     gap: var(--space-large);
 
-    @include mq(md) {
+    // From lg the email and the links share a row. Below that they stack, so the email always fits on one line
+    // (on tablets the two side by side squeezed it until it broke).
+    @include mq(lg) {
       grid-template-columns: 1fr auto;
       align-items: end;
     }
