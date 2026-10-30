@@ -18,7 +18,7 @@
     -->
     <main id="main" class="work-page">
       <!--
-        The hero, on black: the heading, a short introduction and a disclaimer on the left, and on the right the three
+        The hero, on black: the heading and a short introduction on the left, and on the right the three
         case studies' home pages as three equal screens side by side (Nueva Gold, Fraser Valley, LNDMRK), slanted inwards
         together, each in a dark browser window showing the top of its page. Below lg the screens sit under the text.
         They're decoration (the projects are listed below), so screen readers skip them.
@@ -30,8 +30,7 @@
         <div class="container work-intro__content">
           <p class="eyebrow" data-reveal>My Work</p>
           <h1 class="work-intro__title" id="work-title" data-reveal><span class="work-intro__word work-intro__word--first">Featured</span> <span class="work-intro__word work-intro__word--second accent-word">Projects</span></h1>
-          <p class="work-intro__text" data-reveal>Here you can see a deeper breakdown of my work in some hand picked case studies.</p>
-          <p class="work-intro__note" data-reveal>Some projects have been handed over to the client, so could be changed in ways I have not approved.</p>
+          <p class="work-intro__text" data-reveal>Front-end developer: custom WordPress builds, chat UIs, API-driven components and email, for agencies and in-house teams.</p>
         </div>
 
         <div class="work-intro__screens" aria-hidden="true">
@@ -56,13 +55,14 @@
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">01</p>
             <h2 class="work-category__title" id="cms-websites-title">CMS Websites</h2>
-            <p class="work-category__text">Sites your team can update themselves, built on a CMS that's easy to use.</p>
+            <p class="work-category__text">I build custom WordPress themes with ACF and editor-friendly blocks, using a streamlined LocalWP workflow.</p>
           </div>
           <div class="work-category__grid">
             <include src="work-card-site.html" href="/work/fraser-valley/" image="/images/work/fraser-valley/home-full.webp" width="720" height="2405" name="Fraser Valley" type="WordPress"></include>
             <include src="work-card-site.html" href="/work/nueva-gold/" image="/images/work/nueva-gold/cover.webp" width="1600" height="1000" name="Nueva Gold" type="WordPress"></include>
             <include src="work-card-site.html" href="/work/lndmrk/" image="/images/work/lndmrk/cover.webp" width="1600" height="1000" name="LNDMRK" type="WordPress"></include>
           </div>
+          <p class="work-category__note">Screenshots captured October 2026. Some of these sites have since been handed over to their clients, so they may have changed in ways I haven't approved.</p>
         </section>
 
         <!-- 02 · Custom Coded: screenshots of hand-built pieces, whole, on plain panels (they're widgets, not web pages). -->
@@ -70,7 +70,7 @@
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">02</p>
             <h2 class="work-category__title" id="custom-coded-title">Custom Coded</h2>
-            <p class="work-category__text">Hand-built front ends with no templates, written for speed and accessibility.</p>
+            <p class="work-category__text">I built the front end of 11 chatboxes at Squadforce, and a Grunt.js system that automated shared edits, reducing edit times.</p>
           </div>
           <div class="work-category__grid">
             <article class="work-card">
@@ -89,7 +89,7 @@
             </article>
             <article class="work-card">
               <div class="work-card__frame work-card__frame--panel">
-                <img class="work-card__shot work-card__shot--contain" src="/images/work/matchpay/live-chat-window.webp" srcset="/images/work/matchpay/live-chat-window-280.webp 280w, /images/work/matchpay/live-chat-window.webp 519w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="MatchPay live chat window: two system messages, a 500-character message box, and Close, attach and Send buttons" width="519" height="736" loading="lazy" decoding="async" />
+                <img class="work-card__shot work-card__shot--contain" src="/images/work/matchpay/live-chat-window-tile.webp" srcset="/images/work/matchpay/live-chat-window-tile-280.webp 280w, /images/work/matchpay/live-chat-window-tile.webp 627w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="MatchPay live chat window: two system messages, a 500-character message box, and Close, attach and Send buttons" width="627" height="543" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Live Chat Window</h3>
               <p class="work-card__type">MatchPay · Chatbox UI</p>
@@ -102,7 +102,7 @@
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">03</p>
             <h2 class="work-category__title" id="api-components-title">API Components</h2>
-            <p class="work-category__text">Front-end components wired to live data from APIs and headless CMSs.</p>
+            <p class="work-category__text">With back-end developers' REST API endpoints, I built UIs showing players their level and rewards: points, referrals, crypto or cash.</p>
           </div>
           <div class="work-category__grid">
             <article class="work-card">
@@ -111,7 +111,7 @@
                 <img class="work-card__shot" src="/images/work/slots-lv/vip-benefits.webp" srcset="/images/work/slots-lv/vip-benefits-280.webp 280w, /images/work/slots-lv/vip-benefits-560.webp 560w, /images/work/slots-lv/vip-benefits.webp 971w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Slots.lv VIP benefits: five benefit tiles, the member's tier and a reward points progress bar" width="971" height="747" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">VIP Benefits</h3>
-              <p class="work-card__type">Slots.lv · live data</p>
+              <p class="work-card__type">Slots.lv · Level &amp; Points</p>
             </article>
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
@@ -119,7 +119,7 @@
                 <img class="work-card__shot work-card__shot--centre" src="/images/work/slots-lv/hot-drop-jackpots.webp" alt="Slots.lv Hot Drop Jackpots on a phone: hourly, epic and daily jackpot amounts with countdowns, above a game carousel" width="301" height="374" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Hot Drop Jackpots</h3>
-              <p class="work-card__type">Slots.lv · live data</p>
+              <p class="work-card__type">Slots.lv · Time &amp; Money Value</p>
             </article>
             <article class="work-card">
               <div class="work-card__frame work-card__frame--browser">
@@ -127,7 +127,7 @@
                 <img class="work-card__shot" src="/images/work/slots-lv/refer-and-earn.webp" srcset="/images/work/slots-lv/refer-and-earn-280.webp 280w, /images/work/slots-lv/refer-and-earn-560.webp 560w, /images/work/slots-lv/refer-and-earn.webp 782w" sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 90vw" alt="Slots.lv Refer and Earn: the member's referral tier on a progress bar, their rewards, referrals so far, share link and share buttons" width="782" height="660" loading="lazy" decoding="async" />
               </div>
               <h3 class="work-card__name">Refer &amp; Earn</h3>
-              <p class="work-card__type">Slots.lv · live data</p>
+              <p class="work-card__type">Slots.lv · Referrals &amp; Levels</p>
             </article>
           </div>
         </section>
@@ -137,7 +137,7 @@
           <div class="work-category__intro">
             <p class="work-category__number" aria-hidden="true">04</p>
             <h2 class="work-category__title" id="edms-banners-title">EDMs &amp; Banners</h2>
-            <p class="work-category__text">Email campaigns and banner ads, coded to render cleanly in every inbox and on every screen.</p>
+            <p class="work-category__text">I built banner ads and email campaigns with designers, testing every EDM in Litmus. Coding for email clients kept my foundations sharp.</p>
           </div>
           <div class="work-category__grid">
             <article class="work-card">
@@ -162,6 +162,17 @@
               <p class="work-card__type">Kathmandu · Email</p>
             </article>
           </div>
+        </section>
+
+        <!-- This site: its own code is public, so it's the one project here with code to read. -->
+        <section class="work-source" aria-labelledby="work-source-title" data-reveal>
+          <div class="work-source__text">
+            <p class="eyebrow">This site</p>
+            <h2 class="work-source__title" id="work-source-title">Built by hand and with agents, open to read.</h2>
+            <p class="work-source__body">HTML, SCSS and vanilla JavaScript on a small Vite setup, with its own partials plugin and tests, design tokens, BEM throughout, and Gitflow with a changelog.</p>
+            <p class="work-source__body">Built with agentic engineering: I direct Claude Code through a CLAUDE.md of project rules and conventions, review its work, and every change is checked in headless Chrome at desktop and phone sizes before it's merged.</p>
+          </div>
+          <a class="button button--light work-source__button" href="{{site.github}}/portfolio-2026" target="_blank" rel="noopener">View the code on GitHub <span class="visually-hidden">(opens in a new tab)</span><span aria-hidden="true">&nearr;</span></a>
         </section>
       </div>
 

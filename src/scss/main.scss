@@ -11,7 +11,6 @@
 
 @use 'components/button';
 @use 'components/skip-link';
-@use 'components/page-intro';
 @use 'components/reveal';
 @use 'components/eyebrow';
 @use 'components/work-browser';
@@ -30,6 +29,7 @@
 @use 'components/work-split';
 @use 'components/case-study-nav';
 @use 'components/work-intro';
+@use 'components/work-source';
 @use 'components/repo-button';
 
 @use 'pages/home';
@@ -37,3 +37,4 @@
 @use 'pages/contact';
 @use 'pages/work';
 @use 'pages/design-system';
+@use 'pages/not-found';

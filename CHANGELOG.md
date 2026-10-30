@@ -11,6 +11,73 @@ version number and date.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-30
+
+### Added
+
+- Work page: the CMS Websites cards have a see-through black layer over the screenshot with a white "View case study" button on it
+  (a little darker on hover).
+- Work page: a "This site" row after the last category, saying how the portfolio is built (including the agentic
+  engineering workflow with Claude Code), with a button to its code on GitHub.
+
+### Changed
+
+- 404 page: restyled like the home hero, on the brand gradient with the header over it: "PAGE NOT" in black over an
+  outlined "FOUND", a giant outlined "404" behind, a "Back to home" and a "See my work" button, and a row of pages to
+  try (About me, My process, a case study, Contact) with hexagon bullets.
+- Home page: the "full project lifecycle" line and the seven role cards speak in the first person ("I see the project
+  as a whole…"), so the page reads in one voice. New wording on the Designer, Front-end developer and QA tester cards,
+  and the intro line is narrower (550px).
+- Home page: Sainsbury's Bank moves to the end of the clients list.
+- Home page: the page title is "Gemma Gentles Portfolio · Front-End Developer in Vancouver".
+- Home page: the Prologue tells how Gemma started (designing and building for a startup agency, working solo and in
+  teams, with businesses of every size) and where she is now (front-end development, from CMS websites to custom API
+  components).
+- Home page: Chapter III is "How I work · My typical workflow", walking through Jira, Figma, VS Code, Grunt.js or
+  Vite, LocalWP with WordPress and ACF, and SCSS.
+- Home page: Chapter VII is "My favourite type of work · Building a user experience", about bringing designs to life
+  and building one component for many use cases.
+- Home page: the featured work line reads "See the challenges, solutions and outcomes of my featured work."
+- Home page: the systems thinking section is "Responsive, accessible and future-proof.", with a new paragraph about
+  how the whole project works for the customer, the staff and the team.
+- Home page: a new picture beside it follows one feature, Nueva Gold's Services section: its fields in WordPress and
+  the live site checked at phone size in Chrome DevTools on two monitors, and its template in VS Code with Claude Code
+  on a laptop in front. It's larger than the old one and sits 15px lower. It's drawn by
+  `node scripts/workflow-mockup.js` (new).
+- Home page: the three value cards (Build to scale, Test for all, Document workflows) read as Gemma's own values and
+  why they matter.
+- "Front end" spelled one way across the site: "front-end" before a noun (front-end developer, including the home
+  hero heading, page titles and case study tags), "front end" on its own. "Future-proofing" with a hyphen too.
+- Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
+  other two chat boxes.
+- Work page: the Camping Gear Sale email runs right up to the top of its box (no gap above it).
+- Work page: the Custom Coded description is about the 11 client chatboxes built at Squadforce, with a Grunt.js
+  system that automated shared edits.
+- Work page: the API Components description is about building player reward UIs from the back-end developers'
+  REST API endpoints.
+- Work page: the EDMs & Banners description is about building them with designers and testing every email in Litmus.
+- Work page: the API Components cards say what each shows (Level & Points, Time & Money Value, Referrals & Levels) instead of "live data".
+- Work page: the CMS Websites description is about building custom WordPress themes with ACF and editor-friendly
+  blocks, using LocalWP.
+- Work page: the hero introduction says what Gemma does (custom WordPress builds, chat UIs, API-driven components
+  and email) instead of introducing the case studies.
+- Work page: the disclaimer moved from the hero to under the case study cards, with the date the screenshots were
+  taken.
+
+- Work page on phones: the hero's three screens face straight on and are wider than the screen, so the outer two run
+  a little off each side; the category pills sit two side by side in two rows.
+- Call to action on phones (every page): the big outlined word rises from the bottom edge, below the button, instead
+  of sitting behind the heading.
+
+### Fixed
+
+- Footer on tablets (768 to 1023px wide): the email address no longer breaks onto two lines; the links sit under it
+  until there's room for both side by side.
+- Big headings line up with the text above and below them: Oswald leaves a gap before straight-sided capitals that
+  grows with the size, so they looked indented. Fixed on the Work page ("Featured Projects"), the home page hero
+  ("Front End Developer") and call to action ("Let's build"), Contact ("Let's talk"), the 404 page and the case
+  studies' "Next case study" name.
+
 ## [1.2.0] - 2026-10-29
 
 ### Removed
@@ -212,7 +279,8 @@ version number and date.
 - HTML partials plugin with tests, SCSS design tokens, and vanilla JS modules on a small Vite starter.
 - `.gitignore` and `.gitattributes` (Unix line endings), published to GitHub as a public repo.
 
-[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.2.0...develop
+[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.3.0...develop
+[1.3.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.0.0...v1.1.0

@@ -28,6 +28,10 @@ front-end developer and designer; explain changes in plain words and check them 
   like LNDMRK's, filled with the screenshots, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
   capture only; `node scripts/devices-mockup.js <slug>` remakes just the mockup. The site's own font files are
   never copied (licensing). Re-run it when the client's site changes.
+- `node scripts/workflow-mockup.js` draws the home page's "Responsive, accessible and future-proof." picture
+  (`public/images/workflow/devices.webp`): two monitors (WordPress, Chrome DevTools at phone size) and a MacBook (VS
+  Code with Claude Code), screens drawn in HTML/CSS around Nueva Gold's captures. `--keep` reuses the screens already
+  there (e.g. real screenshots saved as `imac-left.webp`, `imac-right.webp`, `laptop.webp`).
 
 ## How the site is put together
 

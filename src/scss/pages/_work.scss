@@ -14,22 +14,40 @@
   &__filters {
     margin-block: var(--space-section) var(--space-large);
 
-    // Their own class, so the plain-list hexagon bullets (base/_typography.scss) don't apply.
+    // Their own class, so the plain-list hexagon bullets (base/_typography.scss) don't apply. Phones: two side by side
+    // in two rows; from md, one row that wraps if it must.
     .work-page__filter-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+
+      @include mq(md) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
     }
 
+    // Phones: a little smaller and centred in their half, so "API Components" fits beside its neighbour.
     a {
-      display: inline-flex;
+      @include type(small);
+      display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 1rem;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.75rem;
       border: 1px solid #3a3a44;
       border-radius: 999px;
-      @include type(body);
+      white-space: nowrap;
       color: #b7b7c2;
+
+      @include mq(md) {
+        @include type(body);
+        display: inline-flex;
+        gap: 0.5rem;
+        padding: 0.55rem 1rem;
+      }
+
       text-decoration: none;
       transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
@@ -273,11 +291,6 @@
   border-top: 1px solid #26262c;
   scroll-margin-top: $header-height; // so the category links don't land under the sticky header
 
-  // The last row: more room below its cards, before the call to action.
-  &:last-of-type {
-    padding-bottom: 130px;
-  }
-
   @include mq(lg) {
     grid-template-columns: 15.5rem minmax(0, 1fr);
     gap: var(--space-large);
@@ -306,6 +319,17 @@
   &__text {
     max-width: 40ch;
     color: #b7b7c2;
+  }
+
+  // A small note under a row's cards (CMS Websites: when the screenshots were taken, and that some sites now belong to
+  // their clients). Lined up with the cards from lg.
+  &__note {
+    @include type(small);
+    color: #8a8a96;
+
+    @include mq(lg) {
+      grid-column: 2;
+    }
   }
 
   // Phones: 1 card per row. From sm: 2. From lg: 3.
@@ -346,6 +370,7 @@
   }
 
   &__frame {
+    position: relative; // holds the overlay
     display: flex;
     flex-direction: column;
     height: 13.75rem; // 220px
@@ -369,11 +394,61 @@
         padding-bottom: var(--space-small);
         filter: drop-shadow(0 12px 20px rgb(0 0 0 / 0.55));
       }
+
+      // An email runs right up to the top of the panel (no gap above it), from top to bottom of the box.
+      .work-card__shot--email {
+        margin-top: calc(var(--space-small) * -1);
+      }
     }
   }
 
-  // Browser chrome: three dots and an empty address bar.
+  // A see-through black layer over a website card's screenshot (below the browser bar, work-card-site.html), with
+  // "View case study" centred on it. A little darker on hover or keyboard focus, and the arrow nudges right.
+  &__overlay {
+    position: absolute;
+    inset: 26px 0 0; // the browser bar's height
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--black) 85%, transparent);
+    transition: background-color 0.3s ease-in-out;
+
+    .work-card__link:hover &,
+    .work-card__link:focus-visible & {
+      background: color-mix(in srgb, var(--black) 92%, transparent);
+    }
+  }
+
+  // "View case study": a white .button. Purple when anywhere on the card is hovered or focused, as .button is on hover.
+  &__more {
+    @include type(small, $bold: true);
+    padding: 0.7em 1.3em; // a little smaller than a full-size .button, to suit the card
+
+    .work-card__link:hover &,
+    .work-card__link:focus-visible & {
+      background: var(--purple-color);
+      border-color: var(--purple-color);
+      color: var(--contrast-color);
+    }
+  }
+
+  &__arrow {
+    display: inline-block;
+
+    @include motion-ok {
+      transition: translate 0.3s var(--ease-out);
+    }
+
+    .work-card__link:hover &,
+    .work-card__link:focus-visible & {
+      translate: 0.25em 0;
+    }
+  }
+
+  // Browser chrome: three dots and an empty address bar. On top, so the screenshot's hover zoom tucks under it.
   &__bar {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-shrink: 0;
     align-items: center;
