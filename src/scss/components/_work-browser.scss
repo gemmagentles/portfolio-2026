@@ -27,7 +27,20 @@
     }
   }
 
+  // Beside the text from md, shifted 15px down without changing the layout (position, because its scroll-in already
+  // uses translate). From lg it also reaches 40px into the right-hand margin, so the devices read larger without
+  // narrowing the text.
   &__image {
     width: 100%;
+
+    @include mq(md) {
+      position: relative;
+      top: 15px;
+    }
+
+    @include mq(lg) {
+      width: calc(100% + 40px);
+      max-width: none;
+    }
   }
 }

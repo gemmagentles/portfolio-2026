@@ -24,7 +24,23 @@ version number and date.
   as a whole…"), so the page reads in one voice. New wording on the Designer, Front-end developer and QA tester cards,
   and the intro line is narrower (550px).
 - Home page: Sainsbury's Bank moves to the end of the clients list.
-- Home page: the Prologue says "14 years of experience" instead of "over a decade", matching the essentials.
+- Home page: the page title is "Gemma Gentles Portfolio · Front-End Developer in Vancouver".
+- Home page: the Prologue tells how Gemma started (designing and building for a startup agency, working solo and in
+  teams, with businesses of every size) and where she is now (front-end development, from CMS websites to custom API
+  components).
+- Home page: Chapter III is "How I work · My typical workflow", walking through Jira, Figma, VS Code, Grunt.js or
+  Vite, LocalWP with WordPress and ACF, and SCSS.
+- Home page: Chapter VII is "My favourite type of work · Building a user experience", about bringing designs to life
+  and building one component for many use cases.
+- Home page: the featured work line reads "See the challenges, solutions and outcomes of my featured work."
+- Home page: the systems thinking section is "Responsive, accessible and future-proof.", with a new paragraph about
+  how the whole project works for the customer, the staff and the team.
+- Home page: a new picture beside it follows one feature, Nueva Gold's Services section: its fields in WordPress and
+  the live site checked at phone size in Chrome DevTools on two monitors, and its template in VS Code with Claude Code
+  on a laptop in front. It's larger than the old one and sits 15px lower. It's drawn by
+  `node scripts/workflow-mockup.js` (new).
+- Home page: the three value cards (Build to scale, Test for all, Document workflows) read as Gemma's own values and
+  why they matter.
 - "Front end" spelled one way across the site: "front-end" before a noun (front-end developer, including the home
   hero heading, page titles and case study tags), "front end" on its own. "Future-proofing" with a hyphen too.
 - Work page: the MatchPay Live Chat Window screenshot without the empty space in its middle, the same shape as the
