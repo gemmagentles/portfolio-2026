@@ -1,0 +1,138 @@
+@use '../abstracts' as *;
+
+// The 404 page (404.html), in the same style as the home hero: the brand gradient filling the screen, with the header
+// see-through over it (data-header-over), "PAGE NOT" in black over an outlined white "FOUND", a line of text, a black
+// and an outlined button, and a row of pages to try with hexagon bullets. A giant outlined "404" sits behind it like
+// "NEXT" in the call to action: on the right from lg, and along the bottom on phones and tablets (with room kept
+// for it there).
+.not-found {
+  --not-found-ghost-size: clamp(11rem, 5rem + 26vw, 30rem); // the outlined "404"'s size
+
+  position: relative;
+  overflow: hidden; // crops the outlined "404" at the edges
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: calc(#{$header-height} + var(--space-section)) var(--space-section);
+  background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  color: var(--white);
+
+  // Phones and tablets: room under the content for the visible top 80% of the outlined "404".
+  @include mq-down(lg) {
+    padding-bottom: calc(var(--not-found-ghost-size) * 0.8 + var(--space-medium));
+  }
+
+  // Decoration only: hidden from screen readers in 404.html, behind the content, and it lets clicks through.
+  &__ghost {
+    position: absolute;
+    right: -0.06em;
+    bottom: -0.2em; // the bottom of the numbers runs off the section
+    // Type exception (decoration): a giant outlined number.
+    font-family: var(--font-heading);
+    font-size: var(--not-found-ghost-size);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 2px rgb(255 255 255 / 0.25);
+    pointer-events: none;
+    user-select: none;
+
+    // From lg: on the right, centred top to bottom, beside the text.
+    @include mq(lg) {
+      top: 50%;
+      bottom: auto;
+      translate: 0 -45%;
+    }
+  }
+
+  &__content {
+    position: relative; // in front of the "404"
+  }
+
+  &__eyebrow {
+    margin-bottom: var(--space-medium);
+  }
+
+  // "PAGE NOT" in black, then "FOUND" on its own line as a white outline (like "FRONT-END DEVELOPER" on the home page).
+  &__title {
+    @include type(display);
+    @include optical-left; // P and F line up with the eyebrow and text
+    color: var(--ink);
+  }
+
+  &__accent {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--white);
+  }
+
+  &__text {
+    max-width: 32ch;
+    margin-top: var(--space-medium);
+    @include type(lead);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: var(--space-large);
+  }
+
+  // "Back to home": black, turning white on hover (like the home hero's "See my work").
+  &__primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+
+    &:hover,
+    &:focus-visible {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--ink);
+    }
+  }
+
+  // The outline button, white like the rest of the text.
+  &__ghost-button {
+    border-color: rgb(255 255 255 / 0.8);
+    color: var(--white);
+  }
+
+  &__more {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-xsmall) var(--space-medium);
+    margin-top: var(--space-large);
+  }
+
+  &__label {
+    @include type(eyebrow);
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xsmall) var(--space-medium);
+
+    li {
+      position: relative;
+      padding-left: 1.25em;
+
+      &::before {
+        @include hex-bullet;
+      }
+    }
+
+    a {
+      text-underline-offset: 0.3em;
+      text-decoration-thickness: 1px;
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+}
