@@ -11,6 +11,31 @@ version number and date.
 
 ## [Unreleased]
 
+### Added
+
+- Contact page: a contact form (full name, company, work email, message) from the "Contact · Animated form flow"
+  design: a "0 / 4 done" count and gradient progress bar, numbered steps that turn into ticks, floating labels, a hint
+  while typing and a fix-it message after leaving a field, a "Still needed" list by the send button, and a "Message
+  sent." ending with a tick that draws itself. Messages are emailed to Gemma, with the sender as Reply-To.
+- The site's first server code: a small Cloudflare Worker (`worker/index.js`) that checks the form, checks Cloudflare
+  Turnstile (spam protection, usually invisible) and sends the email, free through Email Routing. Only `/api/*`
+  reaches it; every other page is served as before.
+- Design system page: status colours for dark and white backgrounds (success, in progress, error).
+
+### Changed
+
+- Contact page redesigned: black, under the gradient header bar like the Work page, with "LET'S TALK" (TALK outlined)
+  centred over a short line ("Open to front-end developer roles…") ending with the email address, then Gemma's photo
+  beside the form on wide screens. The same space under the header as the case studies.
+- 404 page: now shares its style with Contact (one `brand-hero` component), and the whole outlined "404" shows.
+- Wrangler (Cloudflare's tool) is now part of the project, pinned to 4.156.2 after checking its publisher, security
+  advisories, changelog and provenance, so local tests and Cloudflare's deploys use the same checked version.
+
+### Removed
+
+- Contact page: the separate large email link and the "Or find me on" GitHub, LinkedIn and Résumé links (they're in
+  the header and footer).
+
 ## [1.3.0] - 2026-10-30
 
 ### Added

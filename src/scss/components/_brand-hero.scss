@@ -1,15 +1,16 @@
 @use '../abstracts' as *;
 
-// The 404 page (404.html), in the same style as the home hero: the brand gradient filling the screen, with the header
-// see-through over it (data-header-over), "PAGE NOT" in black over an outlined white "FOUND", a line of text, a black
-// and an outlined button, and a row of pages to try with hexagon bullets. A giant outlined "404" sits behind it like
-// "NEXT" in the call to action: on the right from lg, and along the bottom on phones and tablets (with room kept
-// for it there).
-.not-found {
-  --not-found-ghost-size: clamp(11rem, 5rem + 26vw, 30rem); // the outlined "404"'s size
+// A full-screen hero in the home hero's style, for the simple pages (Contact, 404): the brand gradient filling the
+// screen with the header see-through over it (data-header-over on the section), an eyebrow, a heading with a black
+// first line over an outlined white word (like "FRONT-END DEVELOPER" on the home page), a line of text, then the
+// page's own actions: buttons, a big email link, a row of links with hexagon bullets. A giant outlined word sits
+// behind it like "NEXT" in the call to action ("404", "HI"): on the right from lg, and along the bottom on phones and
+// tablets (with room kept for it there).
+.brand-hero {
+  --brand-hero-ghost-size: clamp(11rem, 5rem + 26vw, 30rem); // the outlined word's size
 
   position: relative;
-  overflow: hidden; // crops the outlined "404" at the edges
+  overflow: hidden; // crops the outlined word at the edges
   display: grid;
   align-items: center;
   min-height: 100svh;
@@ -17,22 +18,59 @@
   background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
   color: var(--white);
 
-  // Phones and tablets: room under the content for the visible top 80% of the outlined "404".
-  @include mq-down(lg) {
-    padding-bottom: calc(var(--not-found-ghost-size) * 0.8 + var(--space-medium));
+  // Text then a form (Contact): less room above and below from lg, so the text and the whole form fit on the screen.
+  &:has(.brand-hero__content--stack) {
+    @include mq(lg) {
+      padding-block: calc(#{$header-height} + var(--space-medium)) var(--space-medium);
+    }
   }
 
-  // Decoration only: hidden from screen readers in 404.html, behind the content, and it lets clicks through.
+  // On black (Contact): white text, the title solid white then outlined white, and purple hovers. The page uses the
+  // gradient header bar (nav-gradient on the body) rather than the header over it, so the content gets the same room
+  // under the header as the case studies (80px on desktop, 48px on phones), from the top rather than centred, so it's
+  // the same on every screen height. (Doubled class so it wins over the stacked layout's padding.)
+  &--black {
+    min-height: 0;
+    align-items: start;
+    background: var(--black);
+    color: var(--white);
+
+    &.brand-hero {
+      padding-top: var(--space-section);
+    }
+
+    // The first word of the title in white here (black would vanish), beside the white outlined word.
+    .brand-hero__title {
+      color: var(--white);
+    }
+
+    .brand-hero__text a:hover,
+    .brand-hero__text a:focus-visible,
+    .brand-hero__links a:hover,
+    .brand-hero__links a:focus-visible {
+      color: var(--purple-color);
+    }
+  }
+
+  // Phones and tablets: room under the content for the visible top 80% of the outlined word (when there is one).
+  &:has(.brand-hero__ghost) {
+    @include mq-down(lg) {
+      padding-bottom: calc(var(--brand-hero-ghost-size) * 0.8 + var(--space-medium));
+    }
+  }
+
+  // Decoration only: hidden from screen readers in the page, behind the content, and it lets clicks through.
   &__ghost {
     position: absolute;
-    right: -0.06em;
-    bottom: -0.2em; // the bottom of the numbers runs off the section
-    // Type exception (decoration): a giant outlined number.
+    right: 0.04em; // the whole word shows (a cut-off last letter made "HI" read as "H")
+    bottom: -0.2em; // the bottom of the letters runs off the section
+    // Type exception (decoration): a giant outlined word.
     font-family: var(--font-heading);
-    font-size: var(--not-found-ghost-size);
+    font-size: var(--brand-hero-ghost-size);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.04em;
+    text-transform: uppercase;
     color: transparent;
     -webkit-text-stroke: 2px rgb(255 255 255 / 0.25);
     pointer-events: none;
@@ -47,17 +85,83 @@
   }
 
   &__content {
-    position: relative; // in front of the "404"
+    position: relative; // in front of the outlined word
+
+    // The text, centred, then a form below it (Contact). From md the text is more compact: the title on one line (the accent
+    // word beside it rather than under it).
+    &--stack {
+      display: grid;
+      gap: var(--space-medium);
+
+      // The eyebrow, title and line of text centred above the photo and form.
+      .brand-hero__intro {
+        text-align: center;
+      }
+
+      // No optical nudge to the left: that lines the title up with left-aligned text, so centred it would sit off-centre.
+      .brand-hero__title {
+        text-indent: 0;
+      }
+
+      // The line of text in a centred column up to 600px wide, with room below it before the photo and form.
+      .brand-hero__text {
+        max-width: 600px;
+        margin-inline: auto;
+        margin-bottom: 50px;
+      }
+
+      @include mq(md) {
+        .brand-hero__eyebrow {
+          margin-bottom: var(--space-small);
+        }
+
+        .brand-hero__accent {
+          display: inline;
+        }
+      }
+    }
+  }
+
+  // A photo beside the main content (Contact: Gemma's photo, then the form). From lg two columns, the photo filling
+  // the full height of the form beside it; below lg the photo is hidden and the form takes the width.
+  &__split {
+    display: grid;
+    gap: var(--space-large);
+
+    @include mq(lg) {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-section);
+    }
+  }
+
+  &__photo {
+    display: none;
+
+    @include mq(lg) {
+      position: relative; // the photo is laid over it, so the form alone sets the height
+      display: block;
+      overflow: hidden;
+      border-radius: 16px; // like the home page's photo card
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 52% 35%; // keeps Gemma's face in view however tall the crop
+    }
   }
 
   &__eyebrow {
     margin-bottom: var(--space-medium);
   }
 
-  // "PAGE NOT" in black, then "FOUND" on its own line as a white outline (like "FRONT-END DEVELOPER" on the home page).
+  // The first line in black, then the accent word on its own line as a white outline.
   &__title {
     @include type(display);
-    @include optical-left; // P and F line up with the eyebrow and text
+    @include optical-left; // the first letters line up with the eyebrow and text
     color: var(--ink);
   }
 
@@ -80,7 +184,7 @@
     margin-top: var(--space-large);
   }
 
-  // "Back to home": black, turning white on hover (like the home hero's "See my work").
+  // The main button: black, turning white on hover (like the home hero's "See my work").
   &__primary {
     background: var(--ink);
     border-color: var(--ink);
@@ -95,11 +199,13 @@
   }
 
   // The outline button, white like the rest of the text.
-  &__ghost-button {
+  &__secondary {
     border-color: rgb(255 255 255 / 0.8);
     color: var(--white);
   }
 
+  // A big link, e.g. the email address on Contact: white, underlined, black on hover.
+  // A label, then links in a row, each with a hexagon bullet.
   &__more {
     display: flex;
     flex-wrap: wrap;
@@ -130,7 +236,8 @@
       text-underline-offset: 0.3em;
       text-decoration-thickness: 1px;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         color: var(--ink);
       }
     }

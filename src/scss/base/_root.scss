@@ -15,6 +15,16 @@
   --ink: #0b0b0f; // near-black: dark text on light, buttons, device bezels, dark panels
   --paper: #f0efeb; // LNDMRK's off-white, behind their screenshots and devices
 
+  // Status colours (done, in progress, needs fixing) for text and outlines on dark backgrounds: the contact form's
+  // messages on the black Contact page.
+  --success-color: #7ce0aa;
+  --progress-color: #ffb347;
+  --error-color: #ff6b6b;
+  // The same three, darker, for text on white (each passes 4.5:1): the contact form on a white page.
+  --success-ink: #1a7f45;
+  --progress-ink: #a55400;
+  --error-ink: #c62828;
+
   --header-background-color: var(--black);
   --header-text-color: var(--white);
 

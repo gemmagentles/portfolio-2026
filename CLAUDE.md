@@ -9,6 +9,14 @@ front-end developer and designer; explain changes in plain words and check them 
 - Hosting: Cloudflare Workers (static assets), connected to the GitHub repo. Cloudflare runs `npm run build` then
   `npx wrangler deploy`, which reads `wrangler.jsonc` (uploads `dist/`; its `name` must match the dashboard's Worker).
   `npx wrangler deploy --dry-run` checks it locally without signing in.
+- Contact form: the site's only server code is `worker/index.js` (only `/api/*` reaches it). `POST /api/contact`
+  checks the fields and the Cloudflare Turnstile token, then emails Gemma, free through Email Routing: the `EMAIL`
+  binding can only send to verified destination addresses (no Workers Paid needed). The email comes from
+  hi@gemmagentles.dev with the visitor as Reply-To, and goes to the `CONTACT_TO` secret (Gemma's verified inbox, kept
+  out of this public repo). Turnstile's site key is `turnstileSitekey` in `site.config.json` (locally the form swaps in
+  Cloudflare's test key). Secrets: `npx wrangler secret put TURNSTILE_SECRET` and `npx wrangler secret put CONTACT_TO`.
+  Test it with `npm run build` then `npx wrangler dev` (http://127.0.0.1:8787/contact/): `.dev.vars` (not in Git)
+  holds Cloudflare's public test keys, and emails are only logged, not sent. `npm run preview` has no Worker.
 - `npm run test:include` tests the partials plugin (9 tests; run after touching `plugins/html-include.js`)
 - `npm run new -- "Project Name"` creates a case study from `templates/case-study.html`, with
   placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live
@@ -97,6 +105,14 @@ front-end developer and designer; explain changes in plain words and check them 
 - **Look:** bullets are hexagon outlines (`hex-bullet`); white text cards; the 50/50 section (`work-split--full`) is
   full width with text blocks and the brand board centred in their halves, every row the same height (`--row-h`).
 - **Comments** explain what something is and why, in plain words, like the existing ones. Keep that density.
+- **Installing or upgrading packages (security):** vet before installing, and tell Gemma what was found. Check the
+  publisher (`npm view <pkg>@<version> maintainers repository.url`), GitHub's advisory database
+  (`gh api "/advisories?ecosystem=npm&affects=<pkg>"`), the changelog between the current and new version (security
+  fixes, anything that affects this site; a newer release can fix a hole in older ones, so don't pick by age alone),
+  and provenance (`dist.attestations`: built from the project's own repo by its CI, not uploaded by hand). Install
+  pinned (`--save-exact`), then run `npm audit signatures` and `npm audit`. Keep install scripts unapproved unless
+  something needs them. Never run a package with `npx` that isn't installed in the project (it fetches whatever is
+  newest); add it as a dev dependency first.
 - **Before saying a visual change is done,** build and check it in headless Chrome at 1440px and 390px wide (plus
   other widths when layout depends on it), measuring with `getBoundingClientRect` where spacing matters. Chrome is at
   `C:/Program Files (x86)/Google/Chrome/Application/chrome.exe`; `puppeteer-core` is a dev dependency, so
@@ -136,3 +152,10 @@ front-end developer and designer; explain changes in plain words and check them 
   pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).
+- Fix the 11 high-severity `npm audit` warnings (found 2026-11-03; all in dev tools, none ship to the site), in their
+  own batch: `puppeteer-core` and the packages it brings in (8 of them; needs a major upgrade to 25.x, then re-check
+  the capture and mockup scripts) and `vite` + `source-map-js` (`npm audit fix`, no major change). Vet each update
+  first, as was done for Wrangler: the publisher, GitHub's advisory database, the changelog between the current and
+  new version (security fixes, anything that affects this site), and provenance (built from the project's own repo by
+  its CI); install pinned (`--save-exact`), then `npm audit signatures`. Keep install scripts unapproved unless
+  something needs them.
