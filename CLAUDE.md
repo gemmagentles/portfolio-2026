@@ -18,6 +18,10 @@ front-end developer and designer; explain changes in plain words and check them 
   Test it with `npm run build` then `npx wrangler dev` (http://127.0.0.1:8787/contact/): `.dev.vars` (not in Git)
   holds Cloudflare's public test keys, and emails are only logged, not sent. `npm run preview` has no Worker.
 - `npm run test:include` tests the partials plugin (9 tests; run after touching `plugins/html-include.js`)
+- `npm run test:ux` builds the site and runs the UX tests in `tests/ux/` (each `*.test.js` drives the built site in
+  headless Chrome like a visitor and checks what they see; about 30 seconds). See `tests/ux/README.md` for what each
+  checks and how to add one. When a page gets a behaviour rule worth keeping (e.g. the contact form's "Still needed"
+  list), add a UX test for it.
 - `npm run new -- "Project Name"` creates a case study from `templates/case-study.html`, with
   placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live
   site's address after the name to fill in the "Visit site" links and capture the carousel in one go. It also
@@ -152,6 +156,18 @@ front-end developer and designer; explain changes in plain words and check them 
   pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).
+- Make the contact form quick to set up on another site (agreed 2026-11-03), in this order:
+  1. `npm run setup:contact -- <domain>`: a script using a Cloudflare API token (Turnstile, Workers and Email
+     Routing permissions) that creates the Turnstile widget for the domain, writes its site key to
+     `site.config.json`, stores its secret straight into the Worker (`TURNSTILE_SECRET`, never printed), checks Email
+     Routing is on, and lists the verified destination addresses to pick one for `CONTACT_TO`. One confirmation
+     before anything is created or stored.
+  2. A user-level Claude Code skill, `add-contact-form`, recording what this build learned: the free Email Routing
+     route (no Workers Paid), Turnstile test keys plus `TURNSTILE_TEST_MODE` locally, testing on 127.0.0.1 with
+     `wrangler dev`, keeping the inbox address out of public code, the light/dark form versions, and the design.
+  3. `npm run test:contact` (or a test in `tests/ux/`): starts the Worker locally, fills in the form (an error, the in-progress step, ready,
+     send, "Send another message"), checks the email is built, and checks 1440, 1024, 768 and 390px; pass or fail.
+  Only these stay manual: clicking the verification email for a new destination inbox, and the domain's DNS.
 - Fix the 11 high-severity `npm audit` warnings (found 2026-11-03; all in dev tools, none ship to the site), in their
   own batch: `puppeteer-core` and the packages it brings in (8 of them; needs a major upgrade to 25.x, then re-check
   the capture and mockup scripts) and `vite` + `source-map-js` (`npm audit fix`, no major change). Vet each update

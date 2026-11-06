@@ -15,19 +15,22 @@ version number and date.
 
 - Contact page: a contact form (full name, company, work email, message) from the "Contact · Animated form flow"
   design: a "0 / 4 done" count and gradient progress bar, numbered steps that turn into ticks, floating labels, a hint
-  while typing and a fix-it message after leaving a field, a "Still needed" list by the send button, and a "Message
-  sent." ending with a tick that draws itself. Messages are emailed to Gemma, with the sender as Reply-To.
+  while typing and a fix-it message after leaving a field, a "Still needed" list by the send button (only for fields
+  the visitor has tried or skipped, so nothing is "needed" before they've had a chance), and a "Message sent." ending
+  with a tick that draws itself. Messages are emailed to Gemma, with the sender as Reply-To.
 - The site's first server code: a small Cloudflare Worker (`worker/index.js`) that checks the form, checks Cloudflare
   Turnstile (spam protection, usually invisible) and sends the email, free through Email Routing. Only `/api/*`
   reaches it; every other page is served as before.
 - Design system page: status colours for dark and white backgrounds (success, in progress, error).
+- UX tests: `npm run test:ux` builds the site and checks how pages behave for a visitor in headless Chrome
+  (`tests/ux/`, with a README). The first checks the contact form's "Still needed" list.
 
 ### Changed
 
-- Contact page redesigned: black, under the gradient header bar like the Work page, with "LET'S TALK" (TALK outlined)
-  centred over a short line ("Open to front-end developer roles…") ending with the email address, then Gemma's photo
-  beside the form on wide screens. The same space under the header as the case studies.
-- 404 page: now shares its style with Contact (one `brand-hero` component), and the whole outlined "404" shows.
+- Contact page redesigned: white, under the gradient header bar like the Work page. On the left "LET'S TALK" (TALK
+  outlined), a short line ("Open to front-end developer roles…") ending with the email address and a smaller photo of
+  Gemma; on the right the form in a black box. The same space under the header as the case studies.
+- 404 page: its styles are now a reusable `brand-hero` component, and the whole outlined "404" shows.
 - Wrangler (Cloudflare's tool) is now part of the project, pinned to 4.156.2 after checking its publisher, security
   advisories, changelog and provenance, so local tests and Cloudflare's deploys use the same checked version.
 
