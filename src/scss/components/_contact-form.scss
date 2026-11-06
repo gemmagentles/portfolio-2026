@@ -5,9 +5,9 @@
 // progress bar, then four numbered steps (full name, company, work email, message), all fully visible. Each step's
 // number turns into a gradient tick once its field is filled in correctly, and the current one shows an "In progress"
 // pill. Each field's label floats up when it's used. While typing, a hint says what's still missing; after leaving a
-// field that isn't right, a red fix-it message; once it's right, a green line. By the button, a "Still needed" list;
-// the button stays faded until everything is filled in. Sent: the form fades away and "Message sent." appears with a
-// tick that draws itself. src/js/modules/contact-form.js sets the states (is-done, is-current, is-ready, is-sent) and
+// field that isn't right, a red fix-it message; once it's right, a green line. By the button, a "Still needed" list of
+// the fields the visitor has tried that still aren't right (hidden until then); the button stays faded until everything
+// is filled in. Sent: the form fades away and "Message sent." appears with a tick that draws itself. src/js/modules/contact-form.js sets the states (is-done, is-current, is-ready, is-sent) and
 // the progress (--contact-progress, 0 to 4).
 .contact-form {
   --contact-progress: 0;
@@ -31,7 +31,20 @@
   max-width: 46rem; // one column of steps, wide enough for the "Still needed" list and the button side by side
   color: var(--contact-text);
 
-  // On a black page (Contact): white at different strengths, and the bright status colours.
+  // In a black box on a white page (Contact): its own dark background with room inside and rounded corners, as in the
+  // form's design.
+  &--boxed {
+    padding: clamp(1.25rem, 1rem + 1.25vw, 2.25rem);
+    border-radius: 26px;
+    background: var(--ink);
+
+    // "Message sent." covers the whole box, so it gets the same room inside.
+    .contact-form__done {
+      padding: inherit;
+    }
+  }
+
+  // On a black page or in the black box: white at different strengths, and the bright status colours.
   &--dark {
     --contact-text: var(--white);
     --contact-soft: rgb(255 255 255 / 0.75);

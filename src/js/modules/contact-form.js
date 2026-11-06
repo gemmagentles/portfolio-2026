@@ -1,6 +1,8 @@
 // The Contact page's form (contact/index.html, styles in components/_contact-form.scss). As the visitor types it keeps
 // the design's states up to date: which steps are done (their number becomes a tick), which one is current ("In
-// progress"), the "N / 4 done" count, the progress bar, the "Still needed" list and whether the button is ready. It also draws the Cloudflare Turnstile check, then sends the form to /api/contact
+// progress"), the "N / 4 done" count, the progress bar and whether the button is ready. The "Still needed" list starts
+// empty and hidden: a field's pill only appears once the visitor has had a go at it (left it empty or not right) or
+// has pressed Send without it. It also draws the Cloudflare Turnstile check, then sends the form to /api/contact
 // (worker/index.js) without leaving the page: "Message sent." on success, the reason under the button if not. Each
 // Turnstile token works once, so the check is reset after every attempt. Without JavaScript the form still posts and
 // the Worker redirects back with ?status=.
@@ -16,6 +18,8 @@ export function initContactForm() {
   const button = form.querySelector('button[type="submit"]');
   const done = card.querySelector('[data-contact-done]');
   const slot = card.querySelector('[data-turnstile]');
+  const need = card.querySelector('[data-contact-need]');
+  const tried = new Set(); // the fields the visitor has had a go at (left, or pressed Send without)
   let widgetId;
 
   // The states, worked out from which fields are filled in correctly.
@@ -28,9 +32,14 @@ export function initContactForm() {
       step.classList.toggle('is-done', valid[index]);
       step.classList.toggle('is-current', index === firstOpen && index > 0);
     });
+    // A pill for each field that's been tried and still isn't right; the whole list only when there's one.
+    let needed = 0;
     fields.forEach((field, index) => {
-      card.querySelector(`[data-need="${field.id}"]`).hidden = valid[index];
+      const show = tried.has(field) && !valid[index];
+      card.querySelector(`[data-need="${field.id}"]`).hidden = !show;
+      if (show) needed += 1;
     });
+    need.hidden = needed === 0;
 
     card.style.setProperty('--contact-progress', total);
     count.textContent = `${total} / ${fields.length} done`;
@@ -38,6 +47,11 @@ export function initContactForm() {
   };
 
   form.addEventListener('input', update);
+  // Leaving a field counts as having had a go at it (even if it was skipped).
+  fields.forEach((field) => field.addEventListener('blur', () => {
+    tried.add(field);
+    update();
+  }));
   update();
 
   // Draw the Turnstile check once its script (loaded on the page with render=explicit) is ready. The real site key
@@ -70,9 +84,11 @@ export function initContactForm() {
     event.preventDefault();
     status.textContent = '';
 
-    // Not ready yet: take the visitor to the first field that still needs something.
+    // Not ready yet: show a pill for every field that still needs something, and go to the first one.
     const firstInvalid = fields.find((field) => !field.validity.valid);
     if (firstInvalid) {
+      fields.forEach((field) => tried.add(field));
+      update();
       firstInvalid.focus();
       return;
     }
@@ -98,6 +114,7 @@ export function initContactForm() {
   // "Send another message": back to an empty form.
   card.querySelector('[data-contact-again]').addEventListener('click', () => {
     form.reset();
+    tried.clear();
     update();
     card.classList.remove('is-sent');
     fields[0].focus();

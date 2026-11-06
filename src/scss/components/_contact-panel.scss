@@ -1,0 +1,82 @@
+@use '../abstracts' as *;
+
+// The Contact page (contact/index.html), on white under the gradient header bar: on the left "GET IN TOUCH", "LET'S"
+// in black over an outlined "TALK" and a line of text ending with the email address, then a smaller photo of Gemma;
+// on the right the contact form in its black box (components/_contact-form.scss). From lg two columns, the photo
+// filling whatever height is left so the left column ends level with the form; below lg one column, the copy then
+// the form, with the photo hidden so the form isn't pushed further down. The same room under the header as the case
+// studies (80px on desktop, 48px on phones).
+.contact-panel {
+  padding-block: var(--space-section);
+  background: var(--white);
+  color: var(--ink);
+
+  &__inner {
+    display: grid;
+    gap: var(--space-large);
+
+    @include mq(lg) {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-section);
+    }
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__eyebrow {
+    margin-bottom: var(--space-medium);
+  }
+
+  // "LET'S" in black, then "TALK" on its own line as a black outline.
+  &__title {
+    @include type(display);
+    @include optical-left; // the L and T line up with the eyebrow and text
+  }
+
+  &__accent {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--ink);
+  }
+
+  &__text {
+    max-width: 30ch;
+    margin-top: var(--space-medium);
+    @include type(lead);
+
+    a {
+      text-underline-offset: 0.2em;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--purple-color);
+      }
+    }
+  }
+
+  &__photo {
+    display: none;
+
+    @include mq(lg) {
+      position: relative; // the photo is laid over it, so it takes the height that's left rather than its own
+      display: block;
+      flex: 1;
+      min-height: 220px;
+      margin-top: var(--space-large);
+      overflow: hidden;
+      border-radius: 16px; // like the home page's photo card
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 52% 35%; // keeps Gemma's face in view however the crop falls
+    }
+  }
+}

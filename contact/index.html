@@ -12,119 +12,114 @@
 
     <main id="main">
       <!--
-        Contact, in the brand hero style (shared with the 404 page) on black, under the gradient header bar: "LET'S" in
-        white over an outlined "TALK" and a line of text ending with the email address. Below it, straight on the page,
-        Gemma's photo beside the contact form. It sends through the site's Worker (worker/index.js), protected by
-        Cloudflare Turnstile; its script is src/js/modules/contact-form.js. Styles: components/_brand-hero.scss and
-        components/_contact-form.scss.
+        Contact, on white under the gradient header bar: on the left the heading, a line of text ending with the email
+        address and a smaller photo of Gemma; on the right the contact form in a black box. The form sends through the
+        site's Worker (worker/index.js), protected by Cloudflare Turnstile; its script is src/js/modules/contact-form.js.
+        Styles: components/_contact-panel.scss and _contact-form.scss.
       -->
-      <section class="brand-hero brand-hero--black" aria-labelledby="contact-title">
-        <div class="brand-hero__content brand-hero__content--stack container">
-          <div class="brand-hero__intro">
-            <p class="eyebrow brand-hero__eyebrow" data-reveal>Get in touch</p>
-            <h1 class="brand-hero__title" id="contact-title" data-reveal>Let's <span class="brand-hero__accent">talk</span></h1>
-            <p class="brand-hero__text" data-reveal>
-              Open to front-end developer roles. Send a message below, or email
+      <section class="contact-panel" aria-labelledby="contact-title">
+        <div class="contact-panel__inner container">
+          <div class="contact-panel__intro">
+            <p class="eyebrow contact-panel__eyebrow" data-reveal>Get in touch</p>
+            <h1 class="contact-panel__title" id="contact-title" data-reveal>Let's <span class="contact-panel__accent">talk</span></h1>
+            <p class="contact-panel__text" data-reveal>
+              Open to front-end developer roles. Send a message, or email
               <a href="mailto:{{site.email}}">{{site.email}}</a>.
             </p>
-          </div>
-
-          <!-- From lg: Gemma's photo on the left, as tall as the form, to balance the page (hidden on phones and tablets,
-               so the form isn't pushed further down). -->
-          <div class="brand-hero__split">
-            <figure class="brand-hero__photo">
+            <!-- From lg only, filling the height left beside the form (hidden on phones and tablets). -->
+            <figure class="contact-panel__photo">
               <img src="/images/gemma-photo.webp" alt="Gemma Gentles smiling in a denim jacket by a lake" width="1280" height="1268" loading="lazy" decoding="async" />
             </figure>
-            <!-- The contact form, from the "Contact · Animated form flow" design: a progress bar, four numbered steps (all
-                 visible, the current one marked "In progress"), floating labels, a hint while typing and a fix-it message after leaving
-                 a field, a "Still needed" list by the button, and a "Message sent." ending. -->
-            <div class="contact-form contact-form--dark" id="contact-form" data-contact-form data-reveal>
-              <form class="contact-form__form" action="/api/contact" method="post" aria-labelledby="contact-form-title" novalidate>
-                <div class="contact-form__top">
-                  <h2 class="contact-form__title" id="contact-form-title">Send a message</h2>
-                  <span class="contact-form__count" data-contact-count>0 / 4 done</span>
-                </div>
-                <div class="contact-form__bar" aria-hidden="true"><span></span></div>
-
-                <div class="contact-form__steps">
-                  <div class="contact-form__step" data-step>
-                    <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">01</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
-                    <div class="contact-form__body">
-                      <div class="contact-form__field">
-                        <input class="contact-form__input" id="contact-name" name="name" type="text" placeholder=" " autocomplete="name" maxlength="100" required minlength="3" pattern="\s*\S+(\s+\S+)+\s*" aria-describedby="contact-name-error" />
-                        <label class="contact-form__label" for="contact-name">Full name</label>
-                        <span class="contact-form__live">Keep going: add your surname too, e.g. “Alex Morgan”.</span>
-                        <span class="contact-form__error" id="contact-name-error">Please add your first and last name, e.g. “Alex Morgan”.</span>
-                        <span class="contact-form__good">✓ Nice to meet you</span>
-                      </div>
-                      <p class="contact-form__hint">First and last name, so I know who I’m talking to. <span class="contact-form__now">In progress</span></p>
-                    </div>
-                  </div>
-                  <div class="contact-form__step" data-step>
-                    <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">02</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
-                    <div class="contact-form__body">
-                      <div class="contact-form__field">
-                        <input class="contact-form__input" id="contact-company" name="company" type="text" placeholder=" " autocomplete="organization" maxlength="100" required minlength="2" aria-describedby="contact-company-error" />
-                        <label class="contact-form__label" for="contact-company">Company name</label>
-                        <span class="contact-form__live">Keep going: your company or studio name.</span>
-                        <span class="contact-form__error" id="contact-company-error">Please add your company name. Freelancing? Your own name or studio works too.</span>
-                        <span class="contact-form__good">✓ Got it</span>
-                      </div>
-                      <p class="contact-form__hint">Let me know where you’re coming from. <span class="contact-form__now">In progress</span></p>
-                    </div>
-                  </div>
-                  <div class="contact-form__step" data-step>
-                    <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">03</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
-                    <div class="contact-form__body">
-                      <div class="contact-form__field">
-                        <input class="contact-form__input" id="contact-email" name="email" type="email" placeholder=" " autocomplete="email" inputmode="email" maxlength="254" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" aria-describedby="contact-email-error" />
-                        <label class="contact-form__label" for="contact-email">Work email</label>
-                        <span class="contact-form__live">Almost: an email needs an @ and a domain, like name@company.com.</span>
-                        <span class="contact-form__error" id="contact-email-error">That doesn’t look like an email yet. Check for the @ and domain (name@company.com).</span>
-                        <span class="contact-form__good">✓ I’ll reply here</span>
-                      </div>
-                      <p class="contact-form__hint">I’ll reply to this address. No newsletters, ever. <span class="contact-form__now">In progress</span></p>
-                    </div>
-                  </div>
-                  <div class="contact-form__step" data-step>
-                    <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">04</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
-                    <div class="contact-form__body">
-                      <div class="contact-form__field">
-                        <textarea class="contact-form__input contact-form__input--message" id="contact-message" name="message" placeholder=" " rows="3" maxlength="5000" required minlength="20" aria-describedby="contact-message-error"></textarea>
-                        <label class="contact-form__label" for="contact-message">Your message</label>
-                        <span class="contact-form__live">Keep typing: a sentence or two (20+ characters) is perfect.</span>
-                        <span class="contact-form__error" id="contact-message-error">Your message is a little short. Add a sentence or two so I can help.</span>
-                        <span class="contact-form__good">✓ Looks great</span>
-                      </div>
-                      <p class="contact-form__hint">What are you looking for? <span class="contact-form__now">In progress</span></p>
-                    </div>
-                  </div>
-
-                  <div class="contact-form__send">
-                    <!-- Cloudflare Turnstile (spam protection): drawn here by contact-form.js with this site key. -->
-                    <div class="contact-form__turnstile" data-turnstile data-sitekey="{{site.turnstileSitekey}}"></div>
-                    <p class="contact-form__need" data-contact-need>
-                      <span class="contact-form__need-label">Still needed:</span>
-                      <span class="contact-form__chip" data-need="contact-name"><i>01</i>name</span>
-                      <span class="contact-form__chip" data-need="contact-company"><i>02</i>company</span>
-                      <span class="contact-form__chip" data-need="contact-email"><i>03</i>email</span>
-                      <span class="contact-form__chip" data-need="contact-message"><i>04</i>message</span>
-                    </p>
-                    <div class="contact-form__send-row">
-                      <button class="button button--light contact-form__submit" type="submit">Send message <span class="contact-form__arrow" aria-hidden="true">→</span></button>
-                      <span class="contact-form__ready">✓ All set, ready to send</span>
-                    </div>
-                    <p class="contact-form__status" role="status" aria-live="polite" data-contact-status></p>
-                  </div>
-                </div>
-              </form>
-
-              <div class="contact-form__done" data-contact-done tabindex="-1">
-                <svg class="contact-form__tick" viewBox="0 0 76 76" width="76" height="76" fill="none" aria-hidden="true"><circle cx="38" cy="38" r="36" fill="url(#contact-tick-gradient)" /><path d="M23 39 L33 49 L54 28" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /><defs><linearGradient id="contact-tick-gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5170ff" /><stop offset="1" stop-color="#ff66c4" /></linearGradient></defs></svg>
-                <h2 class="contact-form__done-title">Message sent.</h2>
-                <p class="contact-form__done-text">Thanks, it’s in my inbox. I’ll reply to your work email within 1–2 working days.</p>
-                <button class="contact-form__again" type="button" data-contact-again>Send another message</button>
+          </div>
+          <!-- The contact form, from the "Contact · Animated form flow" design, in a black box: a progress bar, four
+               numbered steps (all visible, the current one marked "In progress"), floating labels, a hint while typing and
+               a fix-it message after leaving a field, a "Still needed" list by the button, and a "Message sent." ending. -->
+          <div class="contact-form contact-form--dark contact-form--boxed" id="contact-form" data-contact-form data-reveal>
+            <form class="contact-form__form" action="/api/contact" method="post" aria-labelledby="contact-form-title" novalidate>
+              <div class="contact-form__top">
+                <h2 class="contact-form__title" id="contact-form-title">Send a message</h2>
+                <span class="contact-form__count" data-contact-count>0 / 4 done</span>
               </div>
+              <div class="contact-form__bar" aria-hidden="true"><span></span></div>
+
+              <div class="contact-form__steps">
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">01</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <input class="contact-form__input" id="contact-name" name="name" type="text" placeholder=" " autocomplete="name" maxlength="100" required minlength="3" pattern="\s*\S+(\s+\S+)+\s*" aria-describedby="contact-name-error" />
+                      <label class="contact-form__label" for="contact-name">Full name</label>
+                      <span class="contact-form__live">Keep going: add your surname too, e.g. “Alex Morgan”.</span>
+                      <span class="contact-form__error" id="contact-name-error">Please add your first and last name, e.g. “Alex Morgan”.</span>
+                      <span class="contact-form__good">✓ Nice to meet you</span>
+                    </div>
+                    <p class="contact-form__hint">First and last name, so I know who I’m talking to. <span class="contact-form__now">In progress</span></p>
+                  </div>
+                </div>
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">02</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <input class="contact-form__input" id="contact-company" name="company" type="text" placeholder=" " autocomplete="organization" maxlength="100" required minlength="2" aria-describedby="contact-company-error" />
+                      <label class="contact-form__label" for="contact-company">Company name</label>
+                      <span class="contact-form__live">Keep going: your company or studio name.</span>
+                      <span class="contact-form__error" id="contact-company-error">Please add your company name. Freelancing? Your own name or studio works too.</span>
+                      <span class="contact-form__good">✓ Got it</span>
+                    </div>
+                    <p class="contact-form__hint">Let me know where you’re coming from. <span class="contact-form__now">In progress</span></p>
+                  </div>
+                </div>
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">03</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <input class="contact-form__input" id="contact-email" name="email" type="email" placeholder=" " autocomplete="email" inputmode="email" maxlength="254" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" aria-describedby="contact-email-error" />
+                      <label class="contact-form__label" for="contact-email">Work email</label>
+                      <span class="contact-form__live">Almost: an email needs an @ and a domain, like name@company.com.</span>
+                      <span class="contact-form__error" id="contact-email-error">That doesn’t look like an email yet. Check for the @ and domain (name@company.com).</span>
+                      <span class="contact-form__good">✓ I’ll reply here</span>
+                    </div>
+                    <p class="contact-form__hint">I’ll reply to this address. No newsletters, ever. <span class="contact-form__now">In progress</span></p>
+                  </div>
+                </div>
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__marker" aria-hidden="true"><span class="contact-form__num">04</span><span class="contact-form__check"><svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2 5 8.6 9.6 3.6" /></svg></span></div>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <textarea class="contact-form__input contact-form__input--message" id="contact-message" name="message" placeholder=" " rows="3" maxlength="5000" required minlength="20" aria-describedby="contact-message-error"></textarea>
+                      <label class="contact-form__label" for="contact-message">Your message</label>
+                      <span class="contact-form__live">Keep typing: a sentence or two (20+ characters) is perfect.</span>
+                      <span class="contact-form__error" id="contact-message-error">Your message is a little short. Add a sentence or two so I can help.</span>
+                      <span class="contact-form__good">✓ Looks great</span>
+                    </div>
+                    <p class="contact-form__hint">What are you looking for? <span class="contact-form__now">In progress</span></p>
+                  </div>
+                </div>
+
+                <div class="contact-form__send">
+                  <!-- Cloudflare Turnstile (spam protection): drawn here by contact-form.js with this site key. -->
+                  <div class="contact-form__turnstile" data-turnstile data-sitekey="{{site.turnstileSitekey}}"></div>
+                  <p class="contact-form__need" data-contact-need hidden>
+                    <span class="contact-form__need-label">Still needed:</span>
+                    <span class="contact-form__chip" data-need="contact-name" hidden><i>01</i>name</span>
+                    <span class="contact-form__chip" data-need="contact-company" hidden><i>02</i>company</span>
+                    <span class="contact-form__chip" data-need="contact-email" hidden><i>03</i>email</span>
+                    <span class="contact-form__chip" data-need="contact-message" hidden><i>04</i>message</span>
+                  </p>
+                  <div class="contact-form__send-row">
+                    <button class="button button--light contact-form__submit" type="submit">Send message <span class="contact-form__arrow" aria-hidden="true">→</span></button>
+                    <span class="contact-form__ready">✓ All set, ready to send</span>
+                  </div>
+                  <p class="contact-form__status" role="status" aria-live="polite" data-contact-status></p>
+                </div>
+              </div>
+            </form>
+
+            <div class="contact-form__done" data-contact-done tabindex="-1">
+              <svg class="contact-form__tick" viewBox="0 0 76 76" width="76" height="76" fill="none" aria-hidden="true"><circle cx="38" cy="38" r="36" fill="url(#contact-tick-gradient)" /><path d="M23 39 L33 49 L54 28" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /><defs><linearGradient id="contact-tick-gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5170ff" /><stop offset="1" stop-color="#ff66c4" /></linearGradient></defs></svg>
+              <h2 class="contact-form__done-title">Message sent.</h2>
+              <p class="contact-form__done-text">Thanks, it’s in my inbox. I’ll reply to your work email within 1–2 working days.</p>
+              <button class="contact-form__again" type="button" data-contact-again>Send another message</button>
             </div>
           </div>
         </div>

@@ -1,10 +1,10 @@
 @use '../abstracts' as *;
 
-// A full-screen hero in the home hero's style, for the simple pages (Contact, 404): the brand gradient filling the
+// A full-screen hero in the home hero's style, for simple pages (the 404 page): the brand gradient filling the
 // screen with the header see-through over it (data-header-over on the section), an eyebrow, a heading with a black
 // first line over an outlined white word (like "FRONT-END DEVELOPER" on the home page), a line of text, then the
-// page's own actions: buttons, a big email link, a row of links with hexagon bullets. A giant outlined word sits
-// behind it like "NEXT" in the call to action ("404", "HI"): on the right from lg, and along the bottom on phones and
+// page's own actions: buttons and a row of links with hexagon bullets. A giant outlined word sits
+// behind it like "NEXT" in the call to action ("404"): on the right from lg, and along the bottom on phones and
 // tablets (with room kept for it there).
 .brand-hero {
   --brand-hero-ghost-size: clamp(11rem, 5rem + 26vw, 30rem); // the outlined word's size
@@ -17,40 +17,6 @@
   padding-block: calc(#{$header-height} + var(--space-section)) var(--space-section);
   background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
   color: var(--white);
-
-  // Text then a form (Contact): less room above and below from lg, so the text and the whole form fit on the screen.
-  &:has(.brand-hero__content--stack) {
-    @include mq(lg) {
-      padding-block: calc(#{$header-height} + var(--space-medium)) var(--space-medium);
-    }
-  }
-
-  // On black (Contact): white text, the title solid white then outlined white, and purple hovers. The page uses the
-  // gradient header bar (nav-gradient on the body) rather than the header over it, so the content gets the same room
-  // under the header as the case studies (80px on desktop, 48px on phones), from the top rather than centred, so it's
-  // the same on every screen height. (Doubled class so it wins over the stacked layout's padding.)
-  &--black {
-    min-height: 0;
-    align-items: start;
-    background: var(--black);
-    color: var(--white);
-
-    &.brand-hero {
-      padding-top: var(--space-section);
-    }
-
-    // The first word of the title in white here (black would vanish), beside the white outlined word.
-    .brand-hero__title {
-      color: var(--white);
-    }
-
-    .brand-hero__text a:hover,
-    .brand-hero__text a:focus-visible,
-    .brand-hero__links a:hover,
-    .brand-hero__links a:focus-visible {
-      color: var(--purple-color);
-    }
-  }
 
   // Phones and tablets: room under the content for the visible top 80% of the outlined word (when there is one).
   &:has(.brand-hero__ghost) {
@@ -86,72 +52,6 @@
 
   &__content {
     position: relative; // in front of the outlined word
-
-    // The text, centred, then a form below it (Contact). From md the text is more compact: the title on one line (the accent
-    // word beside it rather than under it).
-    &--stack {
-      display: grid;
-      gap: var(--space-medium);
-
-      // The eyebrow, title and line of text centred above the photo and form.
-      .brand-hero__intro {
-        text-align: center;
-      }
-
-      // No optical nudge to the left: that lines the title up with left-aligned text, so centred it would sit off-centre.
-      .brand-hero__title {
-        text-indent: 0;
-      }
-
-      // The line of text in a centred column up to 600px wide, with room below it before the photo and form.
-      .brand-hero__text {
-        max-width: 600px;
-        margin-inline: auto;
-        margin-bottom: 50px;
-      }
-
-      @include mq(md) {
-        .brand-hero__eyebrow {
-          margin-bottom: var(--space-small);
-        }
-
-        .brand-hero__accent {
-          display: inline;
-        }
-      }
-    }
-  }
-
-  // A photo beside the main content (Contact: Gemma's photo, then the form). From lg two columns, the photo filling
-  // the full height of the form beside it; below lg the photo is hidden and the form takes the width.
-  &__split {
-    display: grid;
-    gap: var(--space-large);
-
-    @include mq(lg) {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      gap: var(--space-section);
-    }
-  }
-
-  &__photo {
-    display: none;
-
-    @include mq(lg) {
-      position: relative; // the photo is laid over it, so the form alone sets the height
-      display: block;
-      overflow: hidden;
-      border-radius: 16px; // like the home page's photo card
-    }
-
-    img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 52% 35%; // keeps Gemma's face in view however tall the crop
-    }
   }
 
   &__eyebrow {
