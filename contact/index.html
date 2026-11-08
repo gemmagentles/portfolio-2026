@@ -7,24 +7,110 @@
       description="Get in touch with Gemma Gentles about front-end web developer roles."
     ></include>
   </head>
-  <body class="page-contact">
+  <body class="page-contact nav-gradient">
     <include src="header.html"></include>
 
     <main id="main">
-      <section class="contact container">
-        <h1 data-reveal>Let's talk</h1>
-        <p class="lead" data-reveal>
-          I'm looking for front-end web developer roles. The quickest way to reach me is email.
-        </p>
-        <a class="contact__email" href="mailto:{{site.email}}" data-reveal>{{site.email}}</a>
-        <ul class="contact__links" data-reveal>
-          <li><a href="{{site.github}}" rel="me noopener" target="_blank">GitHub</a></li>
-          <li><a href="{{site.linkedin}}" rel="me noopener" target="_blank">LinkedIn</a></li>
-          <li><a href="/resume.pdf">Résumé (PDF)</a></li>
-        </ul>
+      <!--
+        Contact, on black under the gradient header bar: on the left the heading, a short paragraph and a
+        photo of Gemma; on the right the contact form in a black box. The form sends through the
+        site's Worker (worker/index.js), protected by Cloudflare Turnstile; its script is src/js/modules/contact-form.js.
+        Styles: components/_contact-panel.scss and _contact-form.scss.
+      -->
+      <section class="contact-panel" aria-labelledby="contact-title">
+        <div class="contact-panel__inner container">
+          <div class="contact-panel__intro">
+            <p class="eyebrow contact-panel__eyebrow" data-reveal>Available for new roles</p>
+            <h1 class="contact-panel__title" id="contact-title" data-reveal>Let's <span class="contact-panel__accent">talk</span></h1>
+            <p class="contact-panel__text" data-reveal>
+              Send me a message about the brand you represent and any questions you may have. I look forward to
+              getting to know your business.
+            </p>
+            <!-- From lg only, filling the height left beside the form (hidden on phones and tablets). -->
+            <figure class="contact-panel__photo">
+              <img src="/images/gemma-photo.webp" alt="Gemma Gentles smiling in a denim jacket by a lake" width="1280" height="1268" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+          <!-- The contact form, from the "Contact · Animated form flow" design, in a black box: four fields (all
+               visible, the current one outlined in amber), labels above the fields, a fix-it message after leaving a
+               field that isn't right (or "Please fill in…" if it was left empty), and a "Message sent." ending. -->
+          <div class="contact-form contact-form--dark contact-form--boxed" id="contact-form" data-contact-form data-reveal>
+            <form class="contact-form__form" action="/api/contact" method="post" aria-label="Send me a message" novalidate>
+              <div class="contact-form__steps">
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <label class="contact-form__label" for="contact-name">Full name</label>
+                      <input class="contact-form__input" id="contact-name" name="name" type="text" placeholder=" " autocomplete="name" maxlength="100" required minlength="3" pattern="\s*\S+(\s+\S+)+\s*" aria-describedby="contact-name-error contact-name-missing" />
+                      <span class="contact-form__error" id="contact-name-error">Please add your first and last name, e.g. “Alex Morgan”.</span>
+                      <span class="contact-form__missing" id="contact-name-missing">Please fill in your full name.</span>
+                      <span class="contact-form__good">✓ Nice to meet you<span data-first-name></span></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <label class="contact-form__label" for="contact-company">Company name</label>
+                      <input class="contact-form__input" id="contact-company" name="company" type="text" placeholder=" " autocomplete="organization" maxlength="100" required minlength="2" aria-describedby="contact-company-error contact-company-missing" />
+                      <span class="contact-form__error" id="contact-company-error">Please add your company name. Freelancing? Your own name or studio works too.</span>
+                      <span class="contact-form__missing" id="contact-company-missing">Please fill in your company name.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <label class="contact-form__label" for="contact-email">Work email</label>
+                      <input class="contact-form__input" id="contact-email" name="email" type="email" placeholder=" " autocomplete="email" inputmode="email" maxlength="254" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" aria-describedby="contact-email-error contact-email-missing" />
+                      <span class="contact-form__error" id="contact-email-error">That doesn’t look like an email yet. Check for the @ and domain (name@company.com).</span>
+                      <span class="contact-form__missing" id="contact-email-missing">Please fill in your work email.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-form__step" data-step>
+                  <div class="contact-form__body">
+                    <div class="contact-form__field">
+                      <label class="contact-form__label" for="contact-message">Your message</label>
+                      <textarea class="contact-form__input contact-form__input--message" id="contact-message" name="message" placeholder=" " rows="5" maxlength="5000" required minlength="20" aria-describedby="contact-message-error contact-message-missing"></textarea>
+                      <span class="contact-form__error" id="contact-message-error">Your message is a little short. Add a sentence or two so I can help.</span>
+                      <span class="contact-form__missing" id="contact-message-missing">Please fill in your message.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-form__send">
+                  <!-- Cloudflare Turnstile (spam protection): drawn here by contact-form.js with this site key. -->
+                  <div class="contact-form__turnstile" data-turnstile data-sitekey="{{site.turnstileSitekey}}"></div>
+                  <div class="contact-form__send-row">
+                    <button class="button button--light contact-form__submit" type="submit">Send message <span class="contact-form__arrow" aria-hidden="true">→</span></button>
+                    <span class="contact-form__ready">✓ All set, ready to send</span>
+                  </div>
+                  <p class="contact-form__status" role="status" aria-live="polite" data-contact-status></p>
+                  <!-- For screen readers only: what still needs attention after a Send that couldn't go yet. -->
+                  <p class="visually-hidden" role="status" aria-live="polite" data-contact-announce></p>
+                </div>
+              </div>
+            </form>
+
+            <div class="contact-form__done" data-contact-done tabindex="-1">
+              <svg class="contact-form__tick" viewBox="0 0 76 76" width="76" height="76" fill="none" aria-hidden="true"><circle cx="38" cy="38" r="36" fill="url(#contact-tick-gradient)" /><path d="M23 39 L33 49 L54 28" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /><defs><linearGradient id="contact-tick-gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5170ff" /><stop offset="1" stop-color="#ff66c4" /></linearGradient></defs></svg>
+              <h2 class="contact-form__done-title">Message sent.</h2>
+              <p class="contact-form__done-text">Thanks, it’s in my inbox. I’ll reply to your work email within 1–2 working days.</p>
+              <p class="contact-form__done-text">
+                In the meantime, follow me on
+                <a class="contact-form__done-link" href="{{site.linkedin}}" target="_blank" rel="noopener"><svg class="contact-form__done-icon" viewBox="0 0 128 128" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M116 3H12a8.91 8.91 0 00-9 8.8v104.42a8.91 8.91 0 009 8.78h104a8.93 8.93 0 009-8.81V11.77A8.93 8.93 0 00116 3zM39.17 107H21.06V48.73h18.11zm-9-66.21a10.5 10.5 0 1110.49-10.5 10.5 10.5 0 01-10.54 10.48zM107 107H88.89V78.65c0-6.75-.12-15.44-9.41-15.44s-10.87 7.36-10.87 15V107H50.53V48.73h17.36v8h.24c2.42-4.58 8.32-9.41 17.13-9.41C103.6 47.28 107 59.35 107 75z" /></svg>LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a>
+                or
+                <a class="contact-form__done-link" href="{{site.github}}" target="_blank" rel="noopener"><svg class="contact-form__done-icon" viewBox="0 0 128 128" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z" /><path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm2.446 2.729c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zM31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm3.261 3.361c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm4.5 1.951c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm4.943.361c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm4.598-.782c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0" /></svg>GitHub<span class="visually-hidden"> (opens in a new tab)</span></a>.
+              </p>
+              <button class="contact-form__again" type="button" data-contact-again>Send another message</button>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
     <include src="footer.html"></include>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" id="turnstile-script" async defer></script>
   </body>
 </html>

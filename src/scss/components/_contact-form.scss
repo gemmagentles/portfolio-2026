@@ -1,0 +1,375 @@
+@use '../abstracts' as *;
+
+// The Contact page's form (contact/index.html), from the "Contact · Animated form flow" design, straight on the page
+// (no card), in dark-on-white colours, or light-on-dark with contact-form--dark: four fields (full name, company,
+// work email, message), all fully visible; a field that's right gets a green outline, and the current one an amber one
+// that pulses once. Each field's label sits above it, always. After leaving a field that isn't right, a red fix-it
+// message, or "Please fill in…" if it was left empty (nothing interrupts while they're still typing, and a field
+// they haven't reached yet stays neutral); once the name is right, "Nice to meet you, <first name>". The button
+// stays faded until everything is filled in. Sent: the form fades away and "Message sent." appears with a tick that
+// draws itself. src/js/modules/contact-form.js sets the states (is-current, is-tried, is-ready, is-sent).
+.contact-form {
+  // Its colours, for a white page (contact-form--dark below swaps them for a dark one):
+  --contact-text: var(--ink); // what's typed
+  --contact-soft: color-mix(in srgb, var(--ink) 72%, transparent); // titles, hints while typing, the sent text
+  --contact-quiet: color-mix(in srgb, var(--ink) 62%, transparent); // quieter text
+  --contact-line: color-mix(in srgb, var(--ink) 22%, transparent); // a field's resting outline
+  --contact-fill: color-mix(in srgb, var(--ink) 4%, transparent); // a field's background
+  --contact-fill-focus: var(--white); // a field's background while typing in it
+  --contact-strong: var(--ink); // a field's outline while typing in it
+  --contact-ok: var(--success-ink);
+  --contact-bad: var(--error-ink);
+
+  position: relative;
+  max-width: 46rem; // one column of fields, not stretched across the whole width
+  color: var(--contact-text);
+
+  // In a black box on a white page (Contact): its own dark background with room inside and rounded corners, as in the
+  // form's design.
+  &--boxed {
+    padding: clamp(1.25rem, 1rem + 1vw, 1.75rem); // 20px on phones, 28px on desktop
+    border-radius: 26px;
+    background: var(--ink);
+
+    // "Message sent." covers the whole box, so it gets the same room inside.
+    .contact-form__done {
+      padding: inherit;
+    }
+  }
+
+  // On a black page or in the black box: white at different strengths, and the bright status colours.
+  &--dark {
+    --contact-text: var(--white);
+    --contact-soft: rgb(255 255 255 / 0.75);
+    --contact-quiet: rgb(255 255 255 / 0.6);
+    --contact-line: rgb(255 255 255 / 0.18);
+    --contact-fill: rgb(255 255 255 / 0.06);
+    --contact-fill-focus: rgb(255 255 255 / 0.1);
+    --contact-strong: var(--white);
+    --contact-ok: var(--success-color);
+    --contact-bad: var(--error-color);
+  }
+
+  // Room between one field (and its message) and the next field's label.
+  &__steps {
+    display: grid;
+    gap: 20px;
+  }
+
+  // ---- The field, with its floating label and three messages ----
+  &__field {
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px 18px; // name, company and email: 53px tall
+    border: 0;
+    border-radius: 14px;
+    background: var(--contact-fill);
+    box-shadow: inset 0 0 0 1.5px var(--contact-line);
+    color: var(--contact-text);
+    @include type(body);
+    outline: none;
+
+    // The message box five lines tall (rows="5" in the page), as it's the field that matters most.
+    &--message {
+      padding-block: 14px;
+      resize: vertical;
+    }
+
+    &:focus {
+      background: var(--contact-fill-focus);
+      box-shadow: inset 0 0 0 2px var(--contact-strong), 0 0 0 6px color-mix(in srgb, var(--primary-color) 22%, transparent);
+    }
+
+    &:valid {
+      box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--contact-ok) 70%, transparent);
+    }
+
+    // Wrong, or left empty, and the visitor has moved on: red outline (the message shows below). Empty only counts once
+    // they've had a go at the field (is-tried: left it, or pressed Send).
+    &:not(:placeholder-shown):not(:focus):invalid,
+    .contact-form__step.is-tried &:placeholder-shown:not(:focus) {
+      background: color-mix(in srgb, var(--contact-bad) 5%, transparent);
+      box-shadow: inset 0 0 0 1.5px var(--contact-bad);
+    }
+
+    // The current step's empty field pulses amber once when its turn comes.
+    @include motion-ok {
+      .contact-form__step.is-current &:placeholder-shown {
+        animation: contact-form-ready 1.1s ease-out 0.15s;
+      }
+    }
+  }
+
+  // The label, always above its field, in white (the form's text colour) and bold, so it clearly leads the field.
+  &__label {
+    display: block;
+    margin: 0 0 6px 2px;
+    color: var(--contact-text);
+    @include type(body, $bold: true);
+  }
+
+  // The messages under a field, each sliding open when it applies.
+  &__error,
+  &__missing,
+  &__good {
+    display: block;
+    max-height: 0;
+    margin-top: 0;
+    opacity: 0;
+    overflow: hidden;
+    @include type(small);
+  }
+
+  &__error,
+  &__missing {
+    color: var(--contact-bad);
+
+    &::before {
+      content: '⚠ ';
+    }
+  }
+
+  // Something typed that isn't right yet.
+  &__error {
+    .contact-form__input:not(:placeholder-shown):not(:focus):invalid ~ & {
+      max-height: 4em;
+      margin-top: 8px;
+      opacity: 1;
+    }
+  }
+
+  // Left empty after they've had a go at it.
+  &__missing {
+    .contact-form__step.is-tried .contact-form__input:placeholder-shown:not(:focus) ~ & {
+      max-height: 4em;
+      margin-top: 8px;
+      opacity: 1;
+    }
+  }
+
+  &__good {
+    color: var(--contact-ok);
+
+    .contact-form__input:valid ~ & {
+      max-height: 2em;
+      margin-top: 8px;
+      opacity: 1;
+    }
+  }
+
+  // ---- Sending: Turnstile, the button ----
+  // Just below the message box; Turnstile (if it ever shows) and any message from the server fit in without adding
+  // a gap of their own while they're hidden.
+  &__send {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4px;
+  }
+
+  // Turnstile only draws its box here when Cloudflare needs the visitor to click (interaction-only); usually it checks
+  // quietly and this stays empty.
+  &__turnstile:empty {
+    display: none;
+  }
+
+  // The button on the right from md, with "All set" to its left; on phones the button on the left.
+  &__send-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+
+    @include mq(md) {
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+    }
+  }
+
+  // "Send message" is the site's primary button (.button, or .button--light on a dark page; see the design system
+  // page), at full strength all the time: pressing it before everything is right shows what's missing. This only adds
+  // its sending state.
+  &__submit {
+    cursor: pointer;
+
+    &[aria-busy='true'] {
+      opacity: 0.7;
+      cursor: progress;
+    }
+  }
+
+  &__ready {
+    display: none;
+    color: var(--contact-ok);
+    @include type(small);
+
+    .contact-form.is-ready & {
+      display: inline;
+    }
+  }
+
+  // A problem from the server (e.g. the email didn't go): shown under the button.
+  &__status {
+    margin-top: 12px;
+    color: var(--contact-bad);
+    @include type(small);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  // ---- Sent ----
+  &__done {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 18px;
+    opacity: 0;
+    visibility: hidden;
+    outline: none;
+  }
+
+  &.is-sent &__form {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.is-sent &__done {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Below lg there's no photo beside the box to stay level with, so once sent the form steps out and the box shrinks
+  // to fit the message (rather than keeping the form's height around a lot of empty space).
+  @include mq-down(lg) {
+    &.is-sent &__form {
+      display: none;
+    }
+
+    &.is-sent &__done {
+      position: static;
+      padding: 0;
+    }
+  }
+
+  &__tick {
+    color: var(--white);
+  }
+
+  &__done-title {
+    @include type(title);
+  }
+
+  &__done-text {
+    color: var(--contact-soft);
+  }
+
+  // LinkedIn and GitHub in "In the meantime, follow me on…": white and underlined, purple on hover like the site's
+  // other text links.
+  &__done-link {
+    color: var(--contact-text);
+    text-underline-offset: 0.2em;
+    white-space: nowrap; // keeps the icon with its name
+    transition: color 0.3s var(--ease-out);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--purple-color);
+    }
+  }
+
+  // The LinkedIn or GitHub logo before its name (the header's icons), the height of the text and sitting on its line.
+  &__done-icon {
+    display: inline-block; // the reset makes pictures blocks
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3em;
+    vertical-align: -0.125em;
+  }
+
+  &__again {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--contact-soft);
+    @include type(eyebrow);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--purple-color);
+    }
+  }
+
+  // ---- Movement (only for visitors who haven't asked for less) ----
+  @include motion-ok {
+    &__input {
+      transition: box-shadow 0.25s, background-color 0.25s;
+    }
+
+    &__error,
+    &__missing,
+    &__good {
+      transition: max-height 0.3s, opacity 0.3s, margin-top 0.3s;
+    }
+
+    // The button's own colour fades (from .button), plus the fade in when the form is ready.
+    &__submit {
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+
+    &__arrow {
+      transition: transform 0.3s;
+    }
+
+    &__submit:hover &__arrow {
+      transform: translateX(4px);
+    }
+
+    &__form {
+      transition: opacity 0.4s, visibility 0.4s;
+    }
+
+    &__done {
+      transition: opacity 0.5s 0.2s, visibility 0.5s 0.2s;
+    }
+
+    // The tick draws itself once the message has gone.
+    &__tick path {
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+    }
+
+    &.is-sent &__tick path {
+      animation: contact-form-draw 0.7s 0.5s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+    }
+  }
+}
+
+@keyframes contact-form-ready {
+  0% {
+    box-shadow: inset 0 0 0 1.5px var(--contact-line), 0 0 0 0 color-mix(in srgb, var(--progress-color) 55%, transparent);
+  }
+
+  60% {
+    box-shadow: inset 0 0 0 1.5px var(--progress-color), 0 0 0 10px transparent;
+  }
+
+  100% {
+    box-shadow: inset 0 0 0 1.5px var(--contact-line), 0 0 0 0 transparent;
+  }
+}
+
+@keyframes contact-form-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

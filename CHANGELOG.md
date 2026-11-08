@@ -11,6 +11,40 @@ version number and date.
 
 ## [Unreleased]
 
+### Added
+
+- Contact page: a working contact form (full name, company, work email, message) in a black box. Each field has a
+  white label above it; a field turns green when it's right ("✓ Nice to meet you, Alex" under the name) and red with a
+  "Please fill in…" message once the visitor has had a go at it or pressed Send; the next field to fill in glows amber
+  for a moment; "✓ All set, ready to send" shows by the button when everything is right. Screen readers hear how many
+  fields need attention when Send is pressed too early. Messages are emailed to Gemma, with the sender as Reply-To.
+- Contact page: a "Message sent." screen with a tick that draws itself, a reply time, "In the meantime, follow me on
+  LinkedIn or GitHub" (with their logos) and a "Send another message" button. On phones and tablets the box shrinks to
+  fit it.
+- The site's first server code: a small Cloudflare Worker (`worker/index.js`) that checks the form, checks Cloudflare
+  Turnstile (spam protection, usually invisible) and sends the email, free through Email Routing. Only `/api/*`
+  reaches it; every other page is served as before.
+- Design system page: status colours for dark and white backgrounds (success, in progress, error).
+- UX tests: `npm run test:ux` builds the site and checks how pages behave for a visitor in headless Chrome
+  (`tests/ux/`, with a README): the greeting with the first name, the "Please fill in…" messages for fields left
+  empty, and the announcement for screen readers.
+
+### Changed
+
+- Contact page redesigned on black under the gradient header bar, in two equal columns split by a thin grey line: on
+  the left "Available for new roles", "LET'S TALK" on one line (TALK outlined), "Send me a message about the brand you
+  represent…" and a photo of Gemma by a lake, tinted with the brand gradient, ending level with the Send button; on the
+  right the form. On phones and tablets the photo is hidden so the form comes sooner.
+- Footer: a thin grey line along its top on the Contact page, so the black page doesn't run into it.
+- 404 page: its styles are now a reusable `brand-hero` component, and the whole outlined "404" shows.
+- Wrangler (Cloudflare's tool) is now part of the project, pinned to 4.156.2 after checking its publisher, security
+  advisories, changelog and provenance, so local tests and Cloudflare's deploys use the same checked version.
+
+### Removed
+
+- Contact page: the separate large email link and the "Or find me on" GitHub, LinkedIn and Résumé links (they're in
+  the header and footer).
+
 ## [1.3.0] - 2026-10-30
 
 ### Added

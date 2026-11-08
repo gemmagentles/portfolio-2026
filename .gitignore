@@ -11,9 +11,10 @@ dist/
 *.bak.*
 *.bak.tar
 
-# Local environment files (never publish keys)
+# Local environment files (never publish keys); .dev.vars holds the Worker's local settings
 .env
 .env.*
+.dev.vars
 
 # Logs
 *.log

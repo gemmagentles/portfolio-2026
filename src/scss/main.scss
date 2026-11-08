@@ -13,6 +13,9 @@
 @use 'components/skip-link';
 @use 'components/reveal';
 @use 'components/eyebrow';
+@use 'components/brand-hero';
+@use 'components/contact-form';
+@use 'components/contact-panel';
 @use 'components/work-browser';
 @use 'components/about';
 @use 'components/clients';
@@ -33,8 +36,5 @@
 @use 'components/repo-button';
 
 @use 'pages/home';
-
-@use 'pages/contact';
 @use 'pages/work';
 @use 'pages/design-system';
-@use 'pages/not-found';
