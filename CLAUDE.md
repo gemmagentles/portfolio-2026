@@ -20,8 +20,8 @@ front-end developer and designer; explain changes in plain words and check them 
 - `npm run test:include` tests the partials plugin (9 tests; run after touching `plugins/html-include.js`)
 - `npm run test:ux` builds the site and runs the UX tests in `tests/ux/` (each `*.test.js` drives the built site in
   headless Chrome like a visitor and checks what they see; about 30 seconds). See `tests/ux/README.md` for what each
-  checks and how to add one. When a page gets a behaviour rule worth keeping (e.g. the contact form's "Still needed"
-  list), add a UX test for it.
+  checks and how to add one. When a page gets a behaviour rule worth keeping (e.g. the contact form's "Please fill in…"
+  messages), add a UX test for it.
 - `npm run new -- "Project Name"` creates a case study from `templates/case-study.html`, with
   placeholder `.svg` pictures in `public/images/work/<slug>/` (names can't contain `"`, `<` or `>`). Add the live
   site's address after the name to fill in the "Visit site" links and capture the carousel in one go. It also

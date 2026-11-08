@@ -7,6 +7,12 @@
   background: var(--black);
   color: var(--contrast-color);
 
+  // On the Contact page a thin line along the top (the grey of the form's field outlines), as the page above is black
+  // too and would run into it.
+  .page-contact & {
+    border-top: 1px solid rgb(255 255 255 / 0.18);
+  }
+
   &__inner {
     position: relative;
     display: grid;

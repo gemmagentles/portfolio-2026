@@ -18,7 +18,9 @@ site's preview server and Chrome itself (`helpers.js`) and closes them after. It
 
 | File | What it checks |
 | --- | --- |
-| `contact-still-needed.test.js` | The contact form's "Still needed" list stays hidden until the visitor has had a go: a field's pill appears only after they skip it, leave it wrong or press Send without it, each pill on its own, and it goes once put right. |
+| `contact-greeting.test.js` | Once the name is filled in, the green line greets the visitor by their first name ("✓ Nice to meet you, Alex"), shown as plain text, and goes back to the plain greeting when the name is cleared. |
+| `contact-left-empty.test.js` | A field left empty turns red and says "Please fill in…" once the visitor has had a go at it (left it or pressed Send), never before; the message goes when they start typing, and Send on an empty form shows it for every field. |
+| `contact-errors-for-screen-readers.test.js` | Screen reader users hear what others see: a field tried and still not right is marked invalid (never before they've had a go, unmarked once put right), and a Send that can't go yet announces how many fields need attention and which ("2 fields need attention: Full name, Work email."), then goes to the first. |
 
 ## Adding a test
 

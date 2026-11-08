@@ -1,45 +1,59 @@
 @use '../abstracts' as *;
 
-// The Contact page (contact/index.html), on white under the gradient header bar: on the left "GET IN TOUCH", "LET'S"
-// in black over an outlined "TALK" and a line of text ending with the email address, then a smaller photo of Gemma;
-// on the right the contact form in its black box (components/_contact-form.scss). From lg two columns, the photo
-// filling whatever height is left so the left column ends level with the form; below lg one column, the copy then
-// the form, with the photo hidden so the form isn't pushed further down. The same room under the header as the case
-// studies (80px on desktop, 48px on phones).
+// The Contact page (contact/index.html), on black under the gradient header bar: on the left "GET IN TOUCH", "LET'S
+// TALK" on one line (TALK outlined), a line of text ending with the email address and a photo of Gemma; on the right
+// the contact form in its black box (components/_contact-form.scss). From lg two equal columns, the photo filling the
+// height that's left so the left column ends level with the form; below lg one column, the copy then the form, with
+// the photo hidden so the form isn't pushed further down. The same room under the header as the case studies (80px
+// on desktop, 48px on phones).
 .contact-panel {
   padding-block: var(--space-section);
-  background: var(--white);
-  color: var(--ink);
+  background: var(--black);
+  color: var(--white);
 
   &__inner {
     display: grid;
     gap: var(--space-large);
 
     @include mq(lg) {
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr)); // two equal halves, the line between them in the middle
       gap: var(--space-section);
     }
   }
 
+  // From lg, a thin line down the middle of the gap between the copy and the form, the full height of the row, in the
+  // same grey as the form's field outlines (white at 18%), so the two columns read as clearly separate.
   &__intro {
+    position: relative;
     display: flex;
     flex-direction: column;
+
+    @include mq(lg) {
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: calc(var(--space-section) / -2);
+        width: 1px;
+        background: rgb(255 255 255 / 0.18);
+      }
+    }
   }
 
   &__eyebrow {
     margin-bottom: var(--space-medium);
   }
 
-  // "LET'S" in black, then "TALK" on its own line as a black outline.
+  // "LET'S" in white, then "TALK" beside it on the same line as a white outline.
   &__title {
     @include type(display);
     @include optical-left; // the L and T line up with the eyebrow and text
   }
 
   &__accent {
-    display: block;
     color: transparent;
-    -webkit-text-stroke: 2px var(--ink);
+    -webkit-text-stroke: 2px var(--white);
   }
 
   &__text {
@@ -66,8 +80,16 @@
       flex: 1;
       min-height: 220px;
       margin-top: var(--space-large);
+      // Ends level with the bottom of the Send button rather than the form's box: the box's inner padding
+      // (contact-form--boxed in _contact-form.scss, keep the two the same).
+      margin-bottom: clamp(1.25rem, 1rem + 1vw, 1.75rem);
       overflow: hidden;
       border-radius: 16px; // like the home page's photo card
+      // Gemma's photo in the brand colours: the brand gradient (like the header) underneath, and the photo in black and
+      // white blended into it (luminosity), so the light and shade come from the photo and the colour from the gradient.
+      // The whole photo is used, so there are no cut-out edges.
+      background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+      isolation: isolate;
     }
 
     img {
@@ -77,6 +99,8 @@
       height: 100%;
       object-fit: cover;
       object-position: 52% 35%; // keeps Gemma's face in view however the crop falls
+      filter: grayscale(1) contrast(1.1);
+      mix-blend-mode: luminosity;
     }
   }
 }

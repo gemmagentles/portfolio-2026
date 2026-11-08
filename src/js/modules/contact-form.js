@@ -1,11 +1,11 @@
 // The Contact page's form (contact/index.html, styles in components/_contact-form.scss). As the visitor types it keeps
-// the design's states up to date: which steps are done (their number becomes a tick), which one is current ("In
-// progress"), the "N / 4 done" count, the progress bar and whether the button is ready. The "Still needed" list starts
-// empty and hidden: a field's pill only appears once the visitor has had a go at it (left it empty or not right) or
-// has pressed Send without it. It also draws the Cloudflare Turnstile check, then sends the form to /api/contact
-// (worker/index.js) without leaving the page: "Message sent." on success, the reason under the button if not. Each
-// Turnstile token works once, so the check is reset after every attempt. Without JavaScript the form still posts and
-// the Worker redirects back with ?status=.
+// the design's states up to date: which field is current (it pulses amber once), which fields the visitor has had a go
+// at (left, or pressed Send without: only those show "Please fill in…" or count as invalid for screen readers) and
+// whether the button is ready. A Send that can't go yet goes to the first field that needs something and tells screen
+// readers how many fields need attention. It also draws the Cloudflare Turnstile check, then sends the
+// form to /api/contact (worker/index.js) without leaving the page: "Message sent." on success, the reason under the
+// button if not. Each Turnstile token works once, so the check is reset after every attempt. Without JavaScript the
+// form still posts and the Worker redirects back with ?status=.
 export function initContactForm() {
   const card = document.querySelector('[data-contact-form]');
   if (!card) return;
@@ -13,12 +13,11 @@ export function initContactForm() {
   const form = card.querySelector('form');
   const steps = [...card.querySelectorAll('[data-step]')];
   const fields = steps.map((step) => step.querySelector('input, textarea'));
-  const count = card.querySelector('[data-contact-count]');
   const status = card.querySelector('[data-contact-status]');
   const button = form.querySelector('button[type="submit"]');
   const done = card.querySelector('[data-contact-done]');
   const slot = card.querySelector('[data-turnstile]');
-  const need = card.querySelector('[data-contact-need]');
+  const announce = card.querySelector('[data-contact-announce]');
   const tried = new Set(); // the fields the visitor has had a go at (left, or pressed Send without)
   let widgetId;
 
@@ -29,24 +28,29 @@ export function initContactForm() {
     const total = valid.filter(Boolean).length;
 
     steps.forEach((step, index) => {
-      step.classList.toggle('is-done', valid[index]);
       step.classList.toggle('is-current', index === firstOpen && index > 0);
+      step.classList.toggle('is-tried', tried.has(fields[index])); // left empty now shows "Please fill in…"
     });
-    // A pill for each field that's been tried and still isn't right; the whole list only when there's one.
-    let needed = 0;
+    // Screen readers say "invalid" for a field that's been tried and still isn't right (as its red outline shows).
     fields.forEach((field, index) => {
-      const show = tried.has(field) && !valid[index];
-      card.querySelector(`[data-need="${field.id}"]`).hidden = !show;
-      if (show) needed += 1;
+      if (tried.has(field) && !valid[index]) field.setAttribute('aria-invalid', 'true');
+      else field.removeAttribute('aria-invalid');
     });
-    need.hidden = needed === 0;
 
-    card.style.setProperty('--contact-progress', total);
-    count.textContent = `${total} / ${fields.length} done`;
     card.classList.toggle('is-ready', total === fields.length);
   };
 
   form.addEventListener('input', update);
+
+  // "✓ Nice to meet you, Alex": the first word of the name they typed (as plain text, so nothing typed becomes HTML).
+  const nameField = form.querySelector('#contact-name');
+  const firstName = card.querySelector('[data-first-name]');
+  const greet = () => {
+    const first = nameField.value.trim().split(/\s+/)[0];
+    firstName.textContent = first ? `, ${first}` : '';
+  };
+  nameField.addEventListener('input', greet);
+
   // Leaving a field counts as having had a go at it (even if it was skipped).
   fields.forEach((field) => field.addEventListener('blur', () => {
     tried.add(field);
@@ -84,14 +88,20 @@ export function initContactForm() {
     event.preventDefault();
     status.textContent = '';
 
-    // Not ready yet: show a pill for every field that still needs something, and go to the first one.
-    const firstInvalid = fields.find((field) => !field.validity.valid);
-    if (firstInvalid) {
+    // Not ready yet: mark every field that still needs something, tell screen readers which, and go to the first.
+    const needing = fields.filter((field) => !field.validity.valid);
+    if (needing.length) {
       fields.forEach((field) => tried.add(field));
       update();
-      firstInvalid.focus();
+      const names = needing.map((field) => form.querySelector(`label[for="${field.id}"]`).textContent.trim());
+      const count = needing.length === 1 ? '1 field needs attention' : `${needing.length} fields need attention`;
+      announce.textContent = '';
+      // Set a moment later, so the same words are announced again on a second try.
+      setTimeout(() => { announce.textContent = `${count}: ${names.join(', ')}.`; }, 50);
+      needing[0].focus();
       return;
     }
+    announce.textContent = '';
 
     button.setAttribute('aria-busy', 'true');
     try {
@@ -115,6 +125,8 @@ export function initContactForm() {
   card.querySelector('[data-contact-again]').addEventListener('click', () => {
     form.reset();
     tried.clear();
+    announce.textContent = '';
+    greet();
     update();
     card.classList.remove('is-sent');
     fields[0].focus();
