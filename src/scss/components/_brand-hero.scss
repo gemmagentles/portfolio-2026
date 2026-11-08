@@ -1,15 +1,16 @@
 @use '../abstracts' as *;
 
-// The 404 page (404.html), in the same style as the home hero: the brand gradient filling the screen, with the header
-// see-through over it (data-header-over), "PAGE NOT" in black over an outlined white "FOUND", a line of text, a black
-// and an outlined button, and a row of pages to try with hexagon bullets. A giant outlined "404" sits behind it like
-// "NEXT" in the call to action: on the right from lg, and along the bottom on phones and tablets (with room kept
-// for it there).
-.not-found {
-  --not-found-ghost-size: clamp(11rem, 5rem + 26vw, 30rem); // the outlined "404"'s size
+// A full-screen hero in the home hero's style, for simple pages (the 404 page): the brand gradient filling the
+// screen with the header see-through over it (data-header-over on the section), an eyebrow, a heading with a black
+// first line over an outlined white word (like "FRONT-END DEVELOPER" on the home page), a line of text, then the
+// page's own actions: buttons and a row of links with hexagon bullets. A giant outlined word sits
+// behind it like "NEXT" in the call to action ("404"): on the right from lg, and along the bottom on phones and
+// tablets (with room kept for it there).
+.brand-hero {
+  --brand-hero-ghost-size: clamp(11rem, 5rem + 26vw, 30rem); // the outlined word's size
 
   position: relative;
-  overflow: hidden; // crops the outlined "404" at the edges
+  overflow: hidden; // crops the outlined word at the edges
   display: grid;
   align-items: center;
   min-height: 100svh;
@@ -17,22 +18,25 @@
   background: linear-gradient(120deg, var(--secondary-color) 0%, var(--primary-color) 100%);
   color: var(--white);
 
-  // Phones and tablets: room under the content for the visible top 80% of the outlined "404".
-  @include mq-down(lg) {
-    padding-bottom: calc(var(--not-found-ghost-size) * 0.8 + var(--space-medium));
+  // Phones and tablets: room under the content for the visible top 80% of the outlined word (when there is one).
+  &:has(.brand-hero__ghost) {
+    @include mq-down(lg) {
+      padding-bottom: calc(var(--brand-hero-ghost-size) * 0.8 + var(--space-medium));
+    }
   }
 
-  // Decoration only: hidden from screen readers in 404.html, behind the content, and it lets clicks through.
+  // Decoration only: hidden from screen readers in the page, behind the content, and it lets clicks through.
   &__ghost {
     position: absolute;
-    right: -0.06em;
-    bottom: -0.2em; // the bottom of the numbers runs off the section
-    // Type exception (decoration): a giant outlined number.
+    right: 0.04em; // the whole word shows (a cut-off last letter made "HI" read as "H")
+    bottom: -0.2em; // the bottom of the letters runs off the section
+    // Type exception (decoration): a giant outlined word.
     font-family: var(--font-heading);
-    font-size: var(--not-found-ghost-size);
+    font-size: var(--brand-hero-ghost-size);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.04em;
+    text-transform: uppercase;
     color: transparent;
     -webkit-text-stroke: 2px rgb(255 255 255 / 0.25);
     pointer-events: none;
@@ -47,17 +51,17 @@
   }
 
   &__content {
-    position: relative; // in front of the "404"
+    position: relative; // in front of the outlined word
   }
 
   &__eyebrow {
     margin-bottom: var(--space-medium);
   }
 
-  // "PAGE NOT" in black, then "FOUND" on its own line as a white outline (like "FRONT-END DEVELOPER" on the home page).
+  // The first line in black, then the accent word on its own line as a white outline.
   &__title {
     @include type(display);
-    @include optical-left; // P and F line up with the eyebrow and text
+    @include optical-left; // the first letters line up with the eyebrow and text
     color: var(--ink);
   }
 
@@ -80,7 +84,7 @@
     margin-top: var(--space-large);
   }
 
-  // "Back to home": black, turning white on hover (like the home hero's "See my work").
+  // The main button: black, turning white on hover (like the home hero's "See my work").
   &__primary {
     background: var(--ink);
     border-color: var(--ink);
@@ -95,11 +99,13 @@
   }
 
   // The outline button, white like the rest of the text.
-  &__ghost-button {
+  &__secondary {
     border-color: rgb(255 255 255 / 0.8);
     color: var(--white);
   }
 
+  // A big link, e.g. the email address on Contact: white, underlined, black on hover.
+  // A label, then links in a row, each with a hexagon bullet.
   &__more {
     display: flex;
     flex-wrap: wrap;
@@ -130,7 +136,8 @@
       text-underline-offset: 0.3em;
       text-decoration-thickness: 1px;
 
-      &:hover {
+      &:hover,
+      &:focus-visible {
         color: var(--ink);
       }
     }
