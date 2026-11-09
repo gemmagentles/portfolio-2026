@@ -30,6 +30,7 @@ npm run dev      # starts the site at http://localhost:5173 and reloads as you e
 | `npm run new -- "Project Name"` | Creates a new case study page and placeholder images (add the live site's address to capture its pages too) |
 | `npm run capture -- slug https://site/` | Screenshots every page of a live site into a case study's carousel, and makes its device pictures and brand board |
 | `node scripts/devices-mockup.js slug` | Remakes just a case study's devices picture (iMac, MacBook, iPad, iPhone) from its screenshots |
+| `node scripts/phone-status.js in.webp out.webp` | Adds a phone status bar and room round the page to a phone screenshot you picked yourself (`npm run capture` does this to the phone picture it takes) |
 | `node scripts/workflow-mockup.js` | Remakes the home page's "Responsive, accessible and future-proof." picture (`--keep` reuses the screens already there) |
 
 ## Where things live
