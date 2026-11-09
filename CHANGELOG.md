@@ -11,6 +11,12 @@ version number and date.
 
 ## [Unreleased]
 
+### Changed
+
+- README rewritten for a new developer: how the site is hosted on Cloudflare (and why a plain static host would break
+  the contact form), testing the contact form locally, how the form stops spam, every command, the code rules, Gitflow
+  and how to vet new packages. The to-do list moved out of the README into CLAUDE.md. (No change to the site itself.)
+
 ## [1.4.0] - 2026-11-08
 
 ### Added

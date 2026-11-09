@@ -147,6 +147,9 @@ front-end developer and designer; explain changes in plain words and check them 
   `[Unreleased]` (Added / Changed / Fixed / Removed), in plain words about what changed on the site. A release moves
   `[Unreleased]` under `[x.y.z] - YYYY-MM-DD`, bumps `version` in `package.json` to match, and updates the compare
   links at the bottom.
+- **README vs CLAUDE.md:** `README.md` is only about what the project is and how to use it (for a new developer;
+  keep it up to date when commands, files, hosting or rules change). Every to-do goes in "Open to-dos" below, never in
+  the README; delete a to-do once it's done.
 
 ## Open to-dos
 
@@ -155,7 +158,17 @@ front-end developer and designer; explain changes in plain words and check them 
 - Replace the placeholder text in [square brackets]: Challenges lists (the case studies, `/work/` cards), case study
   pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
+- Add `public/images/og-image.png` (1200 x 630), the picture shown when a link to the site is shared on LinkedIn or
+  Slack (`partials/head.html` already points to it).
+- Run Lighthouse in Chrome DevTools on each page of the built site (aim for 95+), and tab through every page with the
+  keyboard only.
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).
+- Contact form emails landing in junk (found 2026-11-08): SPF and DKIM were set up but gemmagentles.dev had no DMARC
+  record. In Cloudflare (DNS, by hand): add a TXT record named `_dmarc` with `v=DMARC1; p=none;` (only declares a
+  policy, blocks nothing), mark the junked email "Not spam" and add hi@gemmagentles.dev to Gemma's contacts. Send a
+  test and check Gmail's "Show original" says SPF, DKIM and DMARC PASS. After about two weeks of passes (around
+  2026-11-22), tighten it to `v=DMARC1; p=quarantine;` so fakes of the domain go to junk. Skip a Gmail "Never send to
+  Spam" filter: it would trust anything claiming to be from hi@gemmagentles.dev.
 - Make the contact form quick to set up on another site (agreed 2026-11-03), in this order:
   1. `npm run setup:contact -- <domain>`: a script using a Cloudflare API token (Turnstile, Workers and Email
      Routing permissions) that creates the Turnstile widget for the domain, writes its site key to
