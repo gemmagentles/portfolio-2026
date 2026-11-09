@@ -32,14 +32,22 @@ front-end developer and designer; explain changes in plain words and check them 
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
   `public/images/work/<slug>/pages/`) plus the home page on an iPad and a phone, then rewrites the case study's
   carousel screens between its `carousel screens` markers and the "1 of N" line, and swaps the iMac, iPad and phone
-  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). It also
+  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). The phone
+  row gets `pages/phone-status.webp` (`scripts/phone-status.js`: an iPhone status bar, 9:41, signal, wifi and battery,
+  in the header's colour, above the page, with 15px of room round it so the phone's corners cut nothing off);
+  `node scripts/phone-status.js <in> <out>` does the same to a hand-picked phone picture (LNDMRK's
+  `contact-form-mobile-padded.webp`, then smoothly scaled down to 400 wide: its hairline form underlines broke up when
+  the browser shrank the 780-wide picture into the small phone). The plain `pages/phone.webp` stays for the devices mockup. It also
   writes a brand guidelines board, `partials/brand-board-<slug>.html` (`scripts/brand-board.js`: name, heading font
   from Google Fonts when it's there, main colours, logo and favicon), for the 4th row; a board without the "made by
   npm run capture" note is hand-made and left alone. And it makes the last row's devices mockup,
   `pages/devices.webp` (`scripts/devices-mockup.js`: an iMac, MacBook, upright iPad and iPhone drawn in HTML/CSS
   like LNDMRK's, filled with the screenshots, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
   capture only; `node scripts/devices-mockup.js <slug>` remakes just the mockup. The site's own font files are
-  never copied (licensing). Re-run it when the client's site changes.
+  never copied (licensing). Re-run it when the client's site changes. It rewrites every carousel screen, so it
+  undoes hand-picked ones: Fraser Valley's Home screen (`home-full.webp`, as on the Work page) and Nueva Gold's
+  About, Services and Contact screens (`*-below-hero.webp`: its heroes all look alike, so only Home shows one; each is
+  the menu bar then the page below the hero, cut from the `pages/` screenshot); put them back after a re-capture.
 - `node scripts/workflow-mockup.js` draws the home page's "Responsive, accessible and future-proof." picture
   (`public/images/workflow/devices.webp`): two monitors (WordPress, Chrome DevTools at phone size) and a MacBook (VS
   Code with Claude Code), screens drawn in HTML/CSS around Nueva Gold's captures. `--keep` reuses the screens already

@@ -13,6 +13,18 @@ version number and date.
 
 ### Changed
 
+- Case studies: the "Next case study" band now has "Next case study" as its large heading (a real heading for screen
+  readers), with the next client's name smaller underneath.
+- Fraser Valley case study: the carousel's Home screen uses the same full-length screenshot as the Work page.
+- Fraser Valley and Nueva Gold case studies: WordPress added to "Built with", like LNDMRK (all three are WordPress
+  sites, as the Work page says).
+- Nueva Gold case study: the heroes all looked alike, so only the carousel's Home screen shows one; the others start
+  below it (the site's menu bar, then the page).
+- Case studies: the phone in the second row now shows a phone status bar (time, signal, wifi, battery) above the
+  site's header and a little more room round the page, so nothing is cut off by the phone's corners and the site's
+  menu and buttons sit clear of its edges. LNDMRK's phone (its contact form) is also sharper: the form's thin lines
+  and text no longer break up. New case studies get this automatically: `npm run capture` adds it to the
+  phone picture it takes (`scripts/phone-status.js`, which can also be run on a phone picture chosen by hand).
 - README rewritten for a new developer: how the site is hosted on Cloudflare (and why a plain static host would break
   the contact form), testing the contact form locally, how the form stops spam, every command, the code rules, Gitflow
   and how to vet new packages. The to-do list moved out of the README into CLAUDE.md. (No change to the site itself.)
