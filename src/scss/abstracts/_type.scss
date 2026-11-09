@@ -22,7 +22,7 @@
 $type-roles: (
   // The one big title at the top of a page or band: hero, case study name, call to action, Contact, 404.
   display: (family: var(--font-heading), weight: 700, line-height: 0.95, tracking: -0.02em, case: uppercase),
-  // A page's main heading when there's no display title; the next case study's name.
+  // A page's main heading when there's no display title; "Next case study".
   title: (family: var(--font-heading), weight: 700, line-height: 1, tracking: -0.01em, case: uppercase),
   // The heading that starts a section.
   heading: (family: var(--font-heading), weight: 500, line-height: 1.1, tracking: -0.02em),
