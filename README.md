@@ -2,6 +2,13 @@
 
 Gemma Gentles' portfolio: hand-coded HTML, SCSS and vanilla JavaScript. [Vite](https://vite.dev) only does the chores: it compiles SCSS, reloads the browser when you save, stitches in shared partials, and minifies everything for launch. The contact form is the only server code: a small Cloudflare Worker.
 
+## How this site is built
+
+A 1½-minute tour of the code: pages and partials, the contact form, hosting on Cloudflare, testing and Gitflow.
+
+https://github.com/user-attachments/assets/7e4c1ca3-d1b4-412f-9495-bdd6fcb6f703
+
+
 ## Getting started
 
 You need:
