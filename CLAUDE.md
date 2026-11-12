@@ -37,7 +37,10 @@ front-end developer and designer; explain changes in plain words and check them 
   in the header's colour, above the page, with 15px of room round it so the phone's corners cut nothing off);
   `node scripts/phone-status.js <in> <out>` does the same to a hand-picked phone picture (LNDMRK's
   `contact-form-mobile-padded.webp`, then smoothly scaled down to 400 wide: its hairline form underlines broke up when
-  the browser shrank the 780-wide picture into the small phone). The plain `pages/phone.webp` stays for the devices mockup. It also
+  the browser shrank the 780-wide picture into the small phone). The plain `pages/phone.webp` stays for the devices mockup. The iPads show smoothly scaled-down
+  800-wide copies (`tablet-800.webp`, LNDMRK's `services-tablet-800.webp`): the 2360-wide captures broke up into
+  pixels when the browser shrank them about 7 times into the iPad. A re-capture leaves these copies alone, so remake
+  them after one (the stepped halving used for LNDMRK's phone). It also
   writes a brand guidelines board, `partials/brand-board-<slug>.html` (`scripts/brand-board.js`: name, heading font
   from Google Fonts when it's there, main colours, logo and favicon), for the 4th row; a board without the "made by
   npm run capture" note is hand-made and left alone. And it makes the last row's devices mockup,

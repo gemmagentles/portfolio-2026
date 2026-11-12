@@ -21,6 +21,10 @@ version number and date.
   "The brief" / "What I delivered" (it was "What I achieved" over "This client's goals"), and the box at the end of
   each case study speaks to employers ("Hiring a front-end developer? Let's build something great.") instead of
   clients. The template for new case studies has the same headings and box.
+- Case studies: the iMac, iPad and phone pictures now share one scale, sized from the row height: the iMac is the
+  biggest (it was smaller than the iPad), and every case study shows them at the same size at every screen width
+  (taller rows used to make only the phone grow). The iPad pictures are also sharper: their text and thin lines no
+  longer break up into pixels, and they're about 60% smaller to download.
 - Home page: the "Responsive, accessible and future-proof" section and the "Test for all" card now say every site is
   built with progressive enhancement.
 - Development tools: Lighthouse added (pinned) to measure the speed, accessibility and SEO of pages. (No change to
