@@ -13,6 +13,8 @@ version number and date.
 
 ### Changed
 
+- Header on phones and tablets: a thin line under the bar defines it against the page, and the menu now fills the
+  screen below the header with the links, icons and Résumé button centred. (Desktop is unchanged.)
 - Case studies: the copy for all three is written (from an interview with Gemma), replacing every placeholder: a
   title and intro, the brief and what was delivered, the challenges and how they were solved, and the tools and role
   for each, plus search descriptions to match. Nueva Gold and Fraser Valley have three challenges each (Fraser
