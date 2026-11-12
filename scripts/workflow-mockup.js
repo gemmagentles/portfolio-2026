@@ -1,4 +1,4 @@
-// Makes the home page's "Responsive, accessible and future-proof." devices picture (partials/work-browser.html): two
+// Makes the home page's "Designing for change." devices picture (partials/work-browser.html): two
 // plain black monitors at the back, angled in towards each other, and a MacBook in front in the middle, all
 // following one feature, Nueva Gold's Services section:
 // - left monitor: its ACF repeater fields being edited in WordPress

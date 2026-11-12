@@ -29,8 +29,9 @@ version number and date.
 - Case studies: the iPhone in the last row's devices picture now has a phone status bar too, like the phones in the
   second row, so its Dynamic Island no longer sits on the site's logo. LNDMRK's hand-made devices picture is replaced
   by one made the same way as the others.
-- Home page: the "Responsive, accessible and future-proof" section and the "Test for all" card now say every site is
-  built with progressive enhancement.
+- Home page: the systems thinking section's heading is now "Designing for change." (it
+  was "Responsive, accessible and future-proof."), and the "Test for all" card says every site is built with
+  progressive enhancement.
 - Development tools: Lighthouse added (pinned) to measure the speed, accessibility and SEO of pages. (No change to
   the site itself.)
 - Case studies: the "Next case study" band now has "Next case study" as its large heading (a real heading for screen

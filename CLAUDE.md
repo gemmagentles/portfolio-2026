@@ -52,7 +52,7 @@ front-end developer and designer; explain changes in plain words and check them 
   undoes hand-picked ones: Fraser Valley's Home screen (`home-full.webp`, as on the Work page) and Nueva Gold's
   About, Services and Contact screens (`*-below-hero.webp`: its heroes all look alike, so only Home shows one; each is
   the menu bar then the page below the hero, cut from the `pages/` screenshot); put them back after a re-capture.
-- `node scripts/workflow-mockup.js` draws the home page's "Responsive, accessible and future-proof." picture
+- `node scripts/workflow-mockup.js` draws the home page's "Designing for change." picture
   (`public/images/workflow/devices.webp`): two monitors (WordPress, Chrome DevTools at phone size) and a MacBook (VS
   Code with Claude Code), screens drawn in HTML/CSS around Nueva Gold's captures. `--keep` reuses the screens already
   there (e.g. real screenshots saved as `imac-left.webp`, `imac-right.webp`, `laptop.webp`).
