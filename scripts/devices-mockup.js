@@ -1,5 +1,6 @@
 // Makes the "all devices" mockup for a case study's last 50/50 row: an iMac, a MacBook, an iPad and an iPhone,
-// overlapping like LNDMRK's hand-made one (public/images/work/lndmrk/devices.webp), each showing the client's site.
+// overlapping like the hand-made original for LNDMRK (public/images/work/lndmrk/devices.webp, no longer shown), each
+// showing the client's site.
 // Used by scripts/capture-pages.js (npm run capture) after it has taken the screenshots.
 //
 // The devices are drawn in HTML and CSS (dark bezels, silver stand and base, soft shadows) and filled with the
@@ -7,7 +8,8 @@
 // - the iMac shows the top of the home page (01-...webp), the MacBook the top of the next page (02-...webp, or the
 //   home page again if there's only one)
 // - the iPad shows tablet-portrait.webp (the home page on an upright iPad), or tablet.webp if that's missing
-// - the iPhone shows phone.webp
+// - the iPhone shows phone-status.webp (the phone screenshot with an iPhone status bar, scripts/phone-status.js),
+//   or phone.webp if that's missing, like every phone picture on the site
 // The page is rendered in headless Chrome with a see-through background and saved as pages/devices.webp,
 // 1600 x 1246 like LNDMRK's (WebP keeps the transparency, so it sits on any panel colour).
 //
@@ -92,8 +94,9 @@ const template = ({ desktop, laptop, tablet, phone }) => `<!doctype html>
     box-shadow: inset 0 0 0 2px #2e2e2e, 0 28px 45px rgb(0 0 0 / 0.24);
   }
   .iphone .screen { height: 100%; border-radius: 23px; }
+  /* The island sits in phone-status.webp's status bar, level with its time and icons (41 of 780 down the screen). */
   .iphone__island {
-    position: absolute; left: 50%; top: 15px; width: 46px; height: 13px; translate: -50% 0;
+    position: absolute; left: 50%; top: 9px; width: 46px; height: 13px; translate: -50% 0;
     border-radius: 999px; background: #0a0a0a; z-index: 1;
   }
 </style>
@@ -125,7 +128,7 @@ export async function makeDevicesMockup(browser, dir) {
     desktop: pages[0],
     laptop: pages[1] || pages[0],
     tablet: pick('tablet-portrait.webp', 'tablet.webp'),
-    phone: pick('phone.webp'),
+    phone: pick('phone-status.webp', 'phone.webp'),
   };
   if (Object.values(shots).some((file) => !file)) return null;
 
