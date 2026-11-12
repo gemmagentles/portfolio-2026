@@ -9,6 +9,12 @@
   background: var(--header-background-color);
   color: var(--header-text-color);
 
+  // Phones and tablets: a thin line under the bar to define it against the page (and the open menu). An inset shadow,
+  // so it takes no room and nothing moves. From lg up the capsule defines the header instead.
+  @include mq-down(lg) {
+    box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.2);
+  }
+
   // Over a gradient top section (one marked data-header-over: the home hero and the Work page showcase): see-through,
   // and lifted out of the flow so that section starts at the top of the page
   // (each gives itself matching room at the top: pages/_home.scss, pages/_work.scss).
@@ -50,14 +56,22 @@
   }
 }
 
-// Phones and tablets: the links, icons and button drop down under the header. From lg up: the links in a frosted-glass
-// capsule and the icons and button on the right (from "Nav C" in the design).
+// Phones and tablets: the links, icons and button open under the header, filling the rest of the screen with
+// everything centred. From lg up: the links in a frosted-glass capsule and the icons and button on the right (from
+// "Nav C" in the design).
 .site-nav {
   position: absolute;
   inset: 100% 0 auto 0;
   display: grid;
+  align-content: center;
+  justify-items: center;
   gap: var(--space-medium);
   padding: var(--space-medium);
+  text-align: center;
+  // The screen's height below the header. vh first for older browsers; dvh follows a phone's browser bars as they
+  // show and hide, so the menu always reaches the bottom (progressive enhancement).
+  min-height: calc(100vh - #{$header-height});
+  min-height: calc(100dvh - #{$header-height});
   background: var(--header-background-color);
   visibility: hidden;
   opacity: 0;
@@ -75,6 +89,7 @@
     padding: 3px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
 
     a {
@@ -184,7 +199,11 @@
     display: grid;
     grid-template-columns: subgrid;
     align-items: center;
+    align-content: normal;
+    justify-items: normal;
+    min-height: 0;
     padding: 0;
+    text-align: start;
     background: none;
     visibility: visible;
     opacity: 1;
@@ -263,6 +282,7 @@
 // Without JavaScript the toggle can't work, so show the links instead.
 html:not(.js) .site-nav {
   position: static;
+  min-height: 0;
   visibility: visible;
   opacity: 1;
   translate: none;
