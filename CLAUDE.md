@@ -111,6 +111,12 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - **BEM for every class:** `block`, `block__element`, `block--modifier`; states as `is-*` / `has-*`. No Tailwind or
   utility classes. Don't reuse another block's element class in a new component; give it its own.
+- **Progressive enhancement (always):** build so the page works and reads well in every browser, then layer newer
+  CSS and JS on top. When a browser doesn't support something, it should skip it and still look right, never break.
+  Give anything newer a fallback (check it on caniuse.com), and automate fallbacks in the build: browser fallbacks
+  for CSS (Autoprefixer, or Lightning CSS, which does the same and more and is built into Vite) and for JavaScript
+  (Babel, or Vite's legacy plugin), both from one Browserslist list of supported browsers. Not set up on this site yet
+  (see "Open to-dos").
 - **Fonts:** all headings (h1–h3) and the logo Oswald (`--font-heading`); paragraphs, links and lists Inter;
   eyebrows/labels Space Mono. Client brand boards use the client's fonts (Bodoni Moda for LNDMRK, Cormorant for
   Nueva Gold).
@@ -163,13 +169,17 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - Build-time "years of experience" number (currently counted in the browser by `years.js` from 2012) plus a yearly
   rebuild, so search engines see the right number.
-- Replace the placeholder text in [square brackets]: Challenges lists (the case studies, `/work/` cards), case study
-  pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
 - Add `public/images/og-image.png` (1200 x 630), the picture shown when a link to the site is shared on LinkedIn or
   Slack (`partials/head.html` already points to it).
-- Run Lighthouse in Chrome DevTools on each page of the built site (aim for 95+), and tab through every page with the
-  keyboard only.
+- Run Lighthouse on each page of the built site (aim for 95+), and tab through every page with the keyboard only.
+  Lighthouse is a pinned dev dependency now (`npx lighthouse <url>`, with `CHROME_PATH` set to the installed Chrome).
+  The live home page scored about 70 for performance on 2026-11-09 (accessibility 92, best practices and SEO 100):
+  the main fix is smaller pictures (about 715 KB to save, mostly case study covers and phone pictures loaded at full
+  size), then the blocking script time (about 380 ms).
+- Automate browser fallbacks (progressive enhancement, see "Rules and preferences"): a Browserslist list, then
+  Lightning CSS (Vite's `css.transformer`) or Autoprefixer for CSS, and Vite's legacy plugin (Babel) for JS only if
+  older browsers matter. Vet each package first.
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).
 - Contact form emails landing in junk (found 2026-11-08): SPF and DKIM were set up but gemmagentles.dev had no DMARC
   record. In Cloudflare (DNS, by hand): add a TXT record named `_dmarc` with `v=DMARC1; p=none;` (only declares a

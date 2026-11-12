@@ -13,6 +13,18 @@ version number and date.
 
 ### Changed
 
+- Case studies: the copy for all three is written (from an interview with Gemma), replacing every placeholder: a
+  title and intro, the brief and what was delivered, the challenges and how they were solved, and the tools and role
+  for each, plus search descriptions to match. Nueva Gold and Fraser Valley have three challenges each (Fraser
+  Valley's rows are a little taller because of them). The agency is called "my last agency" rather than named.
+  LNDMRK's role says front-end development and WordPress back end instead of "Full stack". The second row is now
+  "The brief" / "What I delivered" (it was "What I achieved" over "This client's goals"), and the box at the end of
+  each case study speaks to employers ("Hiring a front-end developer? Let's build something great.") instead of
+  clients. The template for new case studies has the same headings and box.
+- Home page: the "Responsive, accessible and future-proof" section and the "Test for all" card now say every site is
+  built with progressive enhancement.
+- Development tools: Lighthouse added (pinned) to measure the speed, accessibility and SEO of pages. (No change to
+  the site itself.)
 - Case studies: the "Next case study" band now has "Next case study" as its large heading (a real heading for screen
   readers), with the next client's name smaller underneath.
 - Fraser Valley case study: the carousel's Home screen uses the same full-length screenshot as the Work page.
