@@ -23,6 +23,7 @@ import puppeteer from 'puppeteer-core';
 import { makeBrandBoard } from './brand-board.js';
 import { makeDevicesMockup, WIDTH as MOCKUP_WIDTH, HEIGHT as MOCKUP_HEIGHT, FILE as MOCKUP_FILE } from './devices-mockup.js';
 import { makePhoneStatus } from './phone-status.js';
+import { shrinkImage } from './shrink-image.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe';
@@ -33,8 +34,10 @@ const MAX_HEIGHT = 12000; // very long pages are cut off here (the carousel and 
 // The home page on an iPad (landscape) and a phone, for the 50/50 rows' pictures (sizes in CSS pixels, saved at 2x),
 // and on an upright iPad for the devices mockup only (it has no row of its own, so no partial). The phone's row
 // shows phone-status.webp, the screenshot with a phone status bar and room round the page (scripts/phone-status.js).
+// The iPad's row shows tablet-800.webp, a smoothly scaled-down copy (scripts/shrink-image.js): the row shows it at
+// about 360 wide, and the 2360-wide capture breaks up into pixels when the browser shrinks it that much.
 const DEVICES = [
-  { label: 'an iPad', file: 'tablet.webp', width: 1180, height: 820, partial: 'work-split-tablet\\.html', placeholder: 'tablet\\.svg' },
+  { label: 'an iPad', file: 'tablet.webp', row: 'tablet-800.webp', shrink: 800, width: 1180, height: 820, partial: 'work-split-tablet\\.html', placeholder: 'tablet\\.svg' },
   { label: 'a phone', file: 'phone.webp', row: 'phone-status.webp', width: 390, height: 844, partial: 'work-split-phone\\.html', placeholder: 'mobile\\.svg' },
   { label: 'an upright iPad', file: 'tablet-portrait.webp', width: 820, height: 1180 },
 ];
@@ -183,7 +186,8 @@ export async function capturePages(slug, site) {
         await load(screen, pages[0].url);
         await screen.screenshot({ path: path.join(outDir, device.file), type: 'webp', quality: 80, captureBeyondViewport: false });
         await screen.close();
-        if (device.row) await makePhoneStatus(path.join(outDir, device.file), path.join(outDir, device.row), browser);
+        if (device.shrink) await shrinkImage(path.join(outDir, device.file), path.join(outDir, device.row), device.shrink, browser);
+        else if (device.row) await makePhoneStatus(path.join(outDir, device.file), path.join(outDir, device.row), browser);
         devices.push(device);
         console.log('saved');
       } catch (error) {
@@ -236,16 +240,19 @@ export async function capturePages(slug, site) {
 
   // The iPad and phone pictures, the same way: only over the placeholder or an earlier capture.
   // Its description too, if it's still the [placeholder] one.
-  for (const { partial, placeholder, file, row = file, width, height, label } of devices.filter((device) => device.partial)) {
+  for (const { partial, placeholder, file, row = file, shrink, width, height, label } of devices.filter((device) => device.partial)) {
+    // The row's picture size: the scaled-down copy's (the same shape), or the 2x screenshot's.
+    const rowWidth = shrink || width * 2;
+    const rowHeight = shrink ? Math.round((height * shrink) / width) : height * 2;
     html = html.replace(
       new RegExp(`(<include src="${partial}"[^>]*?)image="/images/work/[^"]*/(?:${placeholder}|pages/${file}|pages/${row})" width="\\d+" height="\\d+"([^>]*?)alt="(\\[[^"]*\\])?`),
       (match, before, between, placeholderAlt) =>
-        `${before}image="/images/work/${slug}/pages/${row}" width="${width * 2}" height="${height * 2}"${between}alt="${placeholderAlt ? `The ${project} home page on ${label}` : ''}`,
+        `${before}image="/images/work/${slug}/pages/${row}" width="${rowWidth}" height="${rowHeight}"${between}alt="${placeholderAlt ? `The ${project} home page on ${label}` : ''}`,
     );
   }
 
-  // The devices mockup in the last row, over the devices.svg placeholder or an earlier capture (a picture you chose,
-  // like LNDMRK's devices.webp, stays), with a description of what's on it.
+  // The devices mockup in the last row, over the devices.svg placeholder or an earlier capture (a picture you chose
+  // yourself, under another name, stays), with a description of what's on it.
   if (mockup) {
     html = html.replace(
       /(<include src="work-split-devices\.html"[^>]*?)image="\/images\/work\/[^"]*\/(?:devices\.svg|pages\/devices\.webp)" width="\d+" height="\d+"([^>]*?)alt="[^"]*"/,
