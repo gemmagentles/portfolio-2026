@@ -98,13 +98,15 @@
       display: none;
     }
 
-    // Half the width of its panel (a little bigger on phones, where the panel is narrower).
+    // Phones: 70% of the panel's width. From md up it's sized from the row height (--row-h) like the phone and iPad,
+    // so the three devices keep the same scale on every case study however tall the text makes a row, and the iMac
+    // stays the biggest of them (about 80% of the row's height), capped so it never fills a narrow panel.
     .work-laptop {
       width: 70%;
       margin: 0;
 
       @include mq(md) {
-        width: 50%;
+        width: min(calc(var(--row-h) * 0.92), 80%);
       }
     }
   }
@@ -135,6 +137,12 @@
     height: calc((100% - clamp(1.5rem, 1rem + 2vw, 3rem)) / 0.8 * 0.8); // 20% smaller than filling the panel
     aspect-ratio: 9 / 19.5;
     translate: -50% 20%;
+
+    // From md up: sized from the fixed row height (--row-h), not the panel's actual height, so a row made taller by
+    // its text doesn't make the phone grow past the iMac and iPad.
+    @include mq(md) {
+      height: calc(var(--row-h) - clamp(1.5rem, 1rem + 2vw, 3rem));
+    }
   }
 
   &__device {
@@ -214,6 +222,11 @@
     container-type: inline-size;
     width: 62%; // 20% smaller than it was (78%)
     aspect-ratio: 1180 / 820;
+
+    // From md up: sized from the row height (--row-h) like the iMac and phone, smaller than the iMac.
+    @include mq(md) {
+      width: min(calc(var(--row-h) * 0.78), 70%);
+    }
   }
 
   &__tablet-device {
