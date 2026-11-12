@@ -4,7 +4,7 @@
     <include
       src="head.html"
       title="Nueva Gold — Case study — Gemma Gentles"
-      description="How I built the Nueva Gold website: project management, the front end and testing, with a CMS the team updates themselves and a contact form for new clients."
+      description="Nueva Gold: a custom WordPress website for an agency serving global brands. I ran the project and built the ACF theme, scoring 97+ on Lighthouse."
     ></include>
   </head>
   <body class="page-work nav-gradient">
@@ -35,11 +35,14 @@
 
           <div class="work-showcase__carousel" data-showcase="scroll" data-reveal>
             <ul class="work-showcase__stage">
+              <!-- Nueva Gold's heroes all look alike, so only Home shows its hero; the other screens start below
+                   it (the menu bar, then the page): the *-below-hero.webp pictures, cut from the pages/ screenshots by
+                   hand. npm run capture puts the full screenshots back, so redo them after a re-capture. -->
               <!-- carousel screens: start -->
               <include src="showcase-screen.html" pos="0" href="#work-split-title" image="/images/work/nueva-gold/pages/01-home.webp" width="1440" height="5482" alt="The Nueva Gold Home page" label="Nueva Gold" name="Home"></include>
-              <include src="showcase-screen.html" pos="1" href="#work-split-title" image="/images/work/nueva-gold/pages/02-about.webp" width="1440" height="3007" alt="The Nueva Gold About page" label="Nueva Gold" name="About"></include>
-              <include src="showcase-screen.html" pos="2" href="#work-split-title" image="/images/work/nueva-gold/pages/03-services.webp" width="1440" height="3230" alt="The Nueva Gold Services page" label="Nueva Gold" name="Services"></include>
-              <include src="showcase-screen.html" pos="-1" href="#work-split-title" image="/images/work/nueva-gold/pages/04-contact.webp" width="1440" height="1807" alt="The Nueva Gold Contact page" label="Nueva Gold" name="Contact"></include>
+              <include src="showcase-screen.html" pos="1" href="#work-split-title" image="/images/work/nueva-gold/about-below-hero.webp" width="1440" height="2250" alt="The Nueva Gold About page, below its hero" label="Nueva Gold" name="About"></include>
+              <include src="showcase-screen.html" pos="2" href="#work-split-title" image="/images/work/nueva-gold/services-below-hero.webp" width="1440" height="2503" alt="The Nueva Gold Services page, below its hero" label="Nueva Gold" name="Services"></include>
+              <include src="showcase-screen.html" pos="-1" href="#work-split-title" image="/images/work/nueva-gold/contact-below-hero.webp" width="1440" height="1152" alt="The Nueva Gold Contact page, below its hero" label="Nueva Gold" name="Contact"></include>
               <!-- carousel screens: end -->
             </ul>
 
@@ -56,22 +59,23 @@
           <div class="work-split__row" data-reveal="late">
             <div class="work-split__text">
               <p class="eyebrow">Case study · Nueva Gold</p>
-              <h2 class="work-split__title" id="work-split-title">[What you built, e.g. WordPress website development]</h2>
-              <p>I managed the project, built the front end and tested it across browsers and devices, giving Nueva Gold a site their team can update themselves through the CMS, with a contact form to bring in new clients.</p>
+              <h2 class="work-split__title" id="work-split-title">A custom WordPress website</h2>
+              <p>Nueva Gold is a marketing agency that acts as an in-house team for global brands. At the last agency I worked for, I ran the project and built its front end and custom WordPress theme with Advanced Custom Fields.</p>
             </div>
             <include src="work-split-laptop.html" href="https://nuevagold.com/" image="/images/work/nueva-gold/pages/01-home.webp" height="5482" address="nuevagold.com" label="The Nueva Gold website on an iMac: visit the live site" priority="auto"></include>
           </div>
 
           <div class="work-split__row" data-reveal="late">
             <div class="work-split__text">
-              <p class="eyebrow">What I achieved</p>
-              <h3 class="work-split__heading">This client's goals</h3>
+              <p class="eyebrow">The brief</p>
+              <h3 class="work-split__heading">What I delivered</h3>
               <ul class="work-split__list">
-                <li>A CMS the team can use to update the site themselves</li>
-                <li>A contact form to bring in new clients</li>
+                <li>A full CMS website: the team can now edit on their own to show prospects their latest work</li>
+                <li>A contact form: a direct route for enquiries that brings in new business</li>
+                <li>Launch-ready: delivered to the original timeline, 97+ Lighthouse performance</li>
               </ul>
             </div>
-            <include src="work-split-phone.html" image="/images/work/nueva-gold/pages/phone.webp" width="780" height="1688" alt="The Nueva Gold home page on a phone"></include>
+            <include src="work-split-phone.html" image="/images/work/nueva-gold/pages/phone-status.webp" width="780" height="1688" alt="The Nueva Gold home page on a phone"></include>
           </div>
 
           <div class="work-split__row" data-reveal="late">
@@ -79,19 +83,20 @@
               <p class="eyebrow">Problem solving</p>
               <h3 class="work-split__heading">The challenges that came</h3>
               <ul class="work-split__list">
-                <li>[A challenge on this project, and how you solved it]</li>
-                <li>[Another challenge, and how you solved it]</li>
+                <li>Empty buttons: many led nowhere, so I mapped every link to agree cuts with client and designer</li>
+                <li>A halved deadline: I onboarded a new developer; earlier pull requests would have saved a rebuild</li>
+                <li>Doubled-up images: I had the CMS match the desktop site, so the alternating 50/50 rows needed CSS to reorder for phones</li>
               </ul>
             </div>
-            <include src="work-split-tablet.html" image="/images/work/nueva-gold/pages/tablet.webp" width="2360" height="1640" alt="The Nueva Gold home page on an iPad"></include>
+            <include src="work-split-tablet.html" image="/images/work/nueva-gold/pages/tablet-800.webp" width="800" height="556" alt="The Nueva Gold home page on an iPad"></include>
           </div>
 
           <div class="work-split__row" data-reveal="late">
             <div class="work-split__text">
               <h3 class="work-split__heading">Built with</h3>
-              <p class="work-split__tags"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span></p>
+              <p class="work-split__tags"><span>HTML</span> <span>SCSS</span> <span>JavaScript</span> <span>WordPress</span> <span>PHP</span> <span>ACF Pro</span> <span>webpack</span></p>
               <h3 class="work-split__heading">My role</h3>
-              <p class="work-split__tags"><span>Project manager</span> <span>Front-end development</span> <span>QA</span></p>
+              <p class="work-split__tags"><span>Front-end development</span> <span>WordPress back end</span> <span>Project management</span> <span>QA and code review</span></p>
             </div>
             <!-- The client's brand guidelines board, made from their live site by npm run capture (scripts/brand-board.js). -->
             <include src="brand-board-nueva-gold.html"></include>
@@ -119,12 +124,12 @@
 
       <include
         src="cta.html"
-        eyebrow="Now booking new projects"
-        title="Your brand"
-        title2="could be"
-        accent="next."
-        ghost="Next"
-        button="Start a project"
+        eyebrow="Hiring a front-end developer?"
+        title="Let's build"
+        title2="something"
+        accent="great."
+        ghost="Hello"
+        button="Get in touch"
         href="/contact/"
         target="_self"
         note=""

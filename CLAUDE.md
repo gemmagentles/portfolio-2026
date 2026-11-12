@@ -32,15 +32,27 @@ front-end developer and designer; explain changes in plain words and check them 
   screenshots every page linked in the live site's header/menus (full length, 1440 wide, WebP, in
   `public/images/work/<slug>/pages/`) plus the home page on an iPad and a phone, then rewrites the case study's
   carousel screens between its `carousel screens` markers and the "1 of N" line, and swaps the iMac, iPad and phone
-  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). It also
+  pictures in when they show placeholders or an earlier capture (pictures chosen by hand are left alone). The phone
+  row gets `pages/phone-status.webp` (`scripts/phone-status.js`: an iPhone status bar, 9:41, signal, wifi and battery,
+  in the header's colour, above the page, with 15px of room round it so the phone's corners cut nothing off);
+  `node scripts/phone-status.js <in> <out>` does the same to a hand-picked phone picture (LNDMRK's
+  `contact-form-mobile-padded.webp`, then smoothly scaled down to 400 wide: its hairline form underlines broke up when
+  the browser shrank the 780-wide picture into the small phone). The iPad row gets `pages/tablet-800.webp`
+  (`scripts/shrink-image.js`: a smoothly scaled-down 800-wide copy, halved in steps, because the 2360-wide capture
+  broke up into pixels when the browser shrank it about 7 times into the iPad); `node scripts/shrink-image.js <in>
+  <out> <width>` does the same to a hand-picked picture (LNDMRK's `services-tablet-800.webp`). The full-size
+  `pages/tablet.webp` and `pages/phone.webp` stay as the sources (the devices mockup uses them too). It also
   writes a brand guidelines board, `partials/brand-board-<slug>.html` (`scripts/brand-board.js`: name, heading font
   from Google Fonts when it's there, main colours, logo and favicon), for the 4th row; a board without the "made by
   npm run capture" note is hand-made and left alone. And it makes the last row's devices mockup,
   `pages/devices.webp` (`scripts/devices-mockup.js`: an iMac, MacBook, upright iPad and iPhone drawn in HTML/CSS
-  like LNDMRK's, filled with the screenshots, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
+  like LNDMRK's, filled with the screenshots, the iPhone with `phone-status.webp`, 1600 x 1246, see-through), swapped in over `devices.svg` or an earlier
   capture only; `node scripts/devices-mockup.js <slug>` remakes just the mockup. The site's own font files are
-  never copied (licensing). Re-run it when the client's site changes.
-- `node scripts/workflow-mockup.js` draws the home page's "Responsive, accessible and future-proof." picture
+  never copied (licensing). Re-run it when the client's site changes. It rewrites every carousel screen, so it
+  undoes hand-picked ones: Fraser Valley's Home screen (`home-full.webp`, as on the Work page) and Nueva Gold's
+  About, Services and Contact screens (`*-below-hero.webp`: its heroes all look alike, so only Home shows one; each is
+  the menu bar then the page below the hero, cut from the `pages/` screenshot); put them back after a re-capture.
+- `node scripts/workflow-mockup.js` draws the home page's "Designing for change." picture
   (`public/images/workflow/devices.webp`): two monitors (WordPress, Chrome DevTools at phone size) and a MacBook (VS
   Code with Claude Code), screens drawn in HTML/CSS around Nueva Gold's captures. `--keep` reuses the screens already
   there (e.g. real screenshots saved as `imac-left.webp`, `imac-right.webp`, `laptop.webp`).
@@ -103,6 +115,12 @@ front-end developer and designer; explain changes in plain words and check them 
 
 - **BEM for every class:** `block`, `block__element`, `block--modifier`; states as `is-*` / `has-*`. No Tailwind or
   utility classes. Don't reuse another block's element class in a new component; give it its own.
+- **Progressive enhancement (always):** build so the page works and reads well in every browser, then layer newer
+  CSS and JS on top. When a browser doesn't support something, it should skip it and still look right, never break.
+  Give anything newer a fallback (check it on caniuse.com), and automate fallbacks in the build: browser fallbacks
+  for CSS (Autoprefixer, or Lightning CSS, which does the same and more and is built into Vite) and for JavaScript
+  (Babel, or Vite's legacy plugin), both from one Browserslist list of supported browsers. Not set up on this site yet
+  (see "Open to-dos").
 - **Fonts:** all headings (h1–h3) and the logo Oswald (`--font-heading`); paragraphs, links and lists Inter;
   eyebrows/labels Space Mono. Client brand boards use the client's fonts (Bodoni Moda for LNDMRK, Cormorant for
   Nueva Gold).
@@ -125,6 +143,20 @@ front-end developer and designer; explain changes in plain words and check them 
   files once the batch is merged.
 - **Screenshots of client sites** are captured from the live sites with headless Chrome and saved as WebP in
   `public/images/work/<client>/` (e.g. `*-full.webp` full-length pages, `services-tablet.webp`).
+- **Pictures shown much smaller than they are** (inside the device mockups, cards, thumbnails): the browser breaks
+  thin lines and small text into pixels when it shrinks a picture more than about 2 times. Save a copy at about 2
+  times its largest size on the page (e.g. 800 wide for the iPad, shown up to about 360), scaled down smoothly by
+  halving in steps (as was done for LNDMRK's phone and the iPads), and check it close up at 1x and 2x pixel
+  density. It also makes the file smaller.
+- **Every phone device picture has a phone status bar** (9:41, signal, wifi and battery above the site's header,
+  `scripts/phone-status.js`), wherever a site is shown in a drawn phone: the case study phone rows, the devices
+  mockup's iPhone, and any new ones. Without it the Dynamic Island sits on the site's logo and the page looks pasted
+  in. Flat screenshots that aren't in a phone (the home page's work grid) and Chrome's phone-size view in the
+  workflow picture (a browser, which shows no status bar) don't get one.
+- **Device mockups share one scale:** in the 50/50 rows the iMac, iPad and phone are all sized from `--row-h` (from
+  md up), never from a row's actual height or one from width and another from height, so they stay the same size on
+  every case study whatever the text does. Keep the order iMac, then iPad, then phone, as real devices are; check it
+  by measuring their screens with `getBoundingClientRect` after any change.
 - **Version control:** Git, pushed to github.com/gemmagentles/portfolio-2026 (public). Commit when Gemma asks
   (clear messages), push when asked. Never make `.bak` copies; Git history replaces them.
 - **Gitflow (always):** `main` only holds released, live-ready code; `develop` is where finished work collects.
@@ -147,15 +179,32 @@ front-end developer and designer; explain changes in plain words and check them 
   `[Unreleased]` (Added / Changed / Fixed / Removed), in plain words about what changed on the site. A release moves
   `[Unreleased]` under `[x.y.z] - YYYY-MM-DD`, bumps `version` in `package.json` to match, and updates the compare
   links at the bottom.
+- **README vs CLAUDE.md:** `README.md` is only about what the project is and how to use it (for a new developer;
+  keep it up to date when commands, files, hosting or rules change). Every to-do goes in "Open to-dos" below, never in
+  the README; delete a to-do once it's done.
 
 ## Open to-dos
 
 - Build-time "years of experience" number (currently counted in the browser by `years.js` from 2012) plus a yearly
   rebuild, so search engines see the right number.
-- Replace the placeholder text in [square brackets]: Challenges lists (the case studies, `/work/` cards), case study
-  pages and the Custom Coded / EDM placeholders on `/work/`.
 - Add `public/resume.pdf` (the header and footer link to it).
+- Add `public/images/og-image.png` (1200 x 630), the picture shown when a link to the site is shared on LinkedIn or
+  Slack (`partials/head.html` already points to it).
+- Run Lighthouse on each page of the built site (aim for 95+), and tab through every page with the keyboard only.
+  Lighthouse is a pinned dev dependency now (`npx lighthouse <url>`, with `CHROME_PATH` set to the installed Chrome).
+  The live home page scored about 70 for performance on 2026-11-09 (accessibility 92, best practices and SEO 100):
+  the main fix is smaller pictures (about 715 KB to save, mostly case study covers and phone pictures loaded at full
+  size), then the blocking script time (about 380 ms).
+- Automate browser fallbacks (progressive enhancement, see "Rules and preferences"): a Browserslist list, then
+  Lightning CSS (Vite's `css.transformer`) or Autoprefixer for CSS, and Vite's legacy plugin (Babel) for JS only if
+  older browsers matter. Vet each package first.
 - Very wide screens: consider capping the full-width 50/50 section (around 1920px).
+- Contact form emails landing in junk (found 2026-11-08): SPF and DKIM were set up but gemmagentles.dev had no DMARC
+  record. In Cloudflare (DNS, by hand): add a TXT record named `_dmarc` with `v=DMARC1; p=none;` (only declares a
+  policy, blocks nothing), mark the junked email "Not spam" and add hi@gemmagentles.dev to Gemma's contacts. Send a
+  test and check Gmail's "Show original" says SPF, DKIM and DMARC PASS. After about two weeks of passes (around
+  2026-11-22), tighten it to `v=DMARC1; p=quarantine;` so fakes of the domain go to junk. Skip a Gmail "Never send to
+  Spam" filter: it would trust anything claiming to be from hi@gemmagentles.dev.
 - Make the contact form quick to set up on another site (agreed 2026-11-03), in this order:
   1. `npm run setup:contact -- <domain>`: a script using a Cloudflare API token (Turnstile, Workers and Email
      Routing permissions) that creates the Turnstile widget for the domain, writes its site key to

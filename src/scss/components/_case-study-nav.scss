@@ -4,8 +4,8 @@
 // (partials/case-study-next.html), with a button to the next case study and an outlined "All work" button back to
 // the Work page.
 
-// "Next case study": a full-width black band: a small label and the next case study's name large, then the two
-// buttons. Phones: name, then the buttons stacked full width. From sm up the buttons sit side by side; from md up
+// "Next case study": a full-width black band: "Next case study" large, the next case study's name under it, then the
+// two buttons. Phones: the text, then the buttons stacked full width. From sm up the buttons sit side by side; from md up
 // they move to the right of the name, lined up at the bottom (like the CTA band).
 .case-next {
   background: var(--black);
@@ -23,20 +23,22 @@
     }
   }
 
-  &__heading {
+  &__text {
     display: grid;
     gap: var(--space-xsmall);
+  }
+
+  &__heading {
     margin: 0;
-  }
-
-  &__label {
-    @include type(label);
-    color: rgb(255 255 255 / 0.6);
-  }
-
-  &__name {
     @include type(title);
-    @include optical-left; // the case study names start with straight-sided capitals (N, F, L)
+    @include optical-left; // starts with a straight-sided capital N
+  }
+
+  // The client's name, under the heading.
+  &__name {
+    margin: 0;
+    @include type(subheading);
+    color: rgb(255 255 255 / 0.75);
   }
 
   &__buttons {

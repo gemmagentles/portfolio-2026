@@ -11,6 +11,49 @@ version number and date.
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-11-11
+
+### Changed
+
+- Header on phones and tablets: a thin line under the bar defines it against the page, and the menu now fills the
+  screen below the header with the links, icons and Résumé button centred. (Desktop is unchanged.)
+- Case studies: the copy for all three is written (from an interview with Gemma), replacing every placeholder: a
+  title and intro, the brief and what was delivered, the challenges and how they were solved, and the tools and role
+  for each, plus search descriptions to match. Nueva Gold and Fraser Valley have three challenges each (Fraser
+  Valley's rows are a little taller because of them). The agency is called "my last agency" rather than named.
+  LNDMRK's role says front-end development and WordPress back end instead of "Full stack". The second row is now
+  "The brief" / "What I delivered" (it was "What I achieved" over "This client's goals"), and the box at the end of
+  each case study speaks to employers ("Hiring a front-end developer? Let's build something great.") instead of
+  clients. The template for new case studies has the same headings and box.
+- Case studies: the iMac, iPad and phone pictures now share one scale, sized from the row height: the iMac is the
+  biggest (it was smaller than the iPad), and every case study shows them at the same size at every screen width
+  (taller rows used to make only the phone grow). The iPad pictures are also sharper: their text and thin lines no
+  longer break up into pixels, and they're about 60% smaller to download. `npm run capture` now makes that sharp
+  copy itself (`scripts/shrink-image.js`, which can also be run on a picture chosen by hand).
+- Case studies: the iPhone in the last row's devices picture now has a phone status bar too, like the phones in the
+  second row, so its Dynamic Island no longer sits on the site's logo. LNDMRK's hand-made devices picture is replaced
+  by one made the same way as the others.
+- Home page: the systems thinking section's heading is now "Designing for change." (it
+  was "Responsive, accessible and future-proof."), and the "Test for all" card says every site is built with
+  progressive enhancement.
+- Development tools: Lighthouse added (pinned) to measure the speed, accessibility and SEO of pages. (No change to
+  the site itself.)
+- Case studies: the "Next case study" band now has "Next case study" as its large heading (a real heading for screen
+  readers), with the next client's name smaller underneath.
+- Fraser Valley case study: the carousel's Home screen uses the same full-length screenshot as the Work page.
+- Fraser Valley and Nueva Gold case studies: WordPress added to "Built with", like LNDMRK (all three are WordPress
+  sites, as the Work page says).
+- Nueva Gold case study: the heroes all looked alike, so only the carousel's Home screen shows one; the others start
+  below it (the site's menu bar, then the page).
+- Case studies: the phone in the second row now shows a phone status bar (time, signal, wifi, battery) above the
+  site's header and a little more room round the page, so nothing is cut off by the phone's corners and the site's
+  menu and buttons sit clear of its edges. LNDMRK's phone (its contact form) is also sharper: the form's thin lines
+  and text no longer break up. New case studies get this automatically: `npm run capture` adds it to the
+  phone picture it takes (`scripts/phone-status.js`, which can also be run on a phone picture chosen by hand).
+- README rewritten for a new developer: how the site is hosted on Cloudflare (and why a plain static host would break
+  the contact form), testing the contact form locally, how the form stops spam, every command, the code rules, Gitflow
+  and how to vet new packages. The to-do list moved out of the README into CLAUDE.md. (No change to the site itself.)
+
 ## [1.4.0] - 2026-11-08
 
 ### Added
@@ -315,7 +358,8 @@ version number and date.
 - HTML partials plugin with tests, SCSS design tokens, and vanilla JS modules on a small Vite starter.
 - `.gitignore` and `.gitattributes` (Unix line endings), published to GitHub as a public repo.
 
-[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.4.0...develop
+[Unreleased]: https://github.com/gemmagentles/portfolio-2026/compare/v1.5.0...develop
+[1.5.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/gemmagentles/portfolio-2026/compare/v1.1.1...v1.2.0
